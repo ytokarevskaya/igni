@@ -9,14 +9,35 @@ import { COLORS, BackLayer, FrontLayer, Title, TextStyled, PulseBtn } from "../s
 
 import fireSrc from "../../images/fire.svg"
 
-function scrollScreen(e) {
+function scrollScreen(e, itemId) {
   const scrollFrame = document.getElementById('about-scroll');
-  const curPos = +scrollFrame.dataset.pos;
-  let newPos = curPos - e.deltaY * 0.5;
-  if (newPos > 0) newPos = 0;
-  if (newPos < -scrollFrame.clientHeight * 0.8) newPos = -scrollFrame.clientHeight * 0.8;
+  const menu = document.getElementById("about-menu");
+
+  let newPos;
+  let targetIndex = 0;
+
+  if (e) {
+    const curPos = +scrollFrame.dataset.pos;
+    newPos = curPos - e.deltaY * 0.5;
+    if (newPos > 0) newPos = 0;
+    if (newPos < -scrollFrame.clientHeight * 0.8) newPos = -scrollFrame.clientHeight * 0.8;
+    for (let i = 0; i < scrollFrame.children.length; i++) {
+      const item = scrollFrame.children[i];
+      if (item.offsetTop < -newPos) {
+        targetIndex = i;
+      }
+    }
+  } else if (itemId !== "undefined") {
+    const targetItem = scrollFrame.children[itemId];
+    targetIndex = itemId;
+    newPos = -targetItem.offsetTop;
+  }
+
   scrollFrame.dataset.pos = newPos;
   scrollFrame.style.transform = "translate3d(0, " + newPos + "px, 0)";
+
+  menu.querySelector(".active").classList.remove("active");
+  menu.children[targetIndex].classList.add("active");
 }
 
 class AboutItem extends React.Component {
@@ -43,7 +64,7 @@ class AboutItem extends React.Component {
 
   render() {
     return (
-      <AboutItemStyled className="transition-05s test" data-id={this.props.id} onMouseEnter={(e) => this.moveBtn(e)} onMouseMove={(e) => this.moveBtn(e)} onMouseLeave={(e) => this.returnBtn(e)}>
+      <AboutItemStyled className="transition-05s item" data-id={this.props.id} onMouseEnter={(e) => this.moveBtn(e)} onMouseMove={(e) => this.moveBtn(e)} onMouseLeave={(e) => this.returnBtn(e)}>
         <Title color={COLORS.BLACK}>{this.props.title}</Title>
         <div dangerouslySetInnerHTML={{__html: documentToHtmlString(this.props.content.json)}} />
         <RedBtn ref={this.redBtn} />
@@ -73,7 +94,7 @@ const RedBtn = styled.div`
 `
 
 const SectionAbout = (props) => (
-  <Section id={props.id} active={props.active} name="section-about" headerStyle="dark">
+  <Section id={props.id} active={props.active} name="section-about" headerStyle="dark" footerStyle="dark">
     <BackLayer bg="#f6f7f9">
       <img src={fireSrc} alt="" style={{"display": "block", "width": "38%", "margin": "13rem auto"}} />
     </BackLayer>
@@ -111,14 +132,20 @@ const SectionAbout = (props) => (
         />
       </AboutScroll>
       <AboutMenu id="about-menu" className="translate-y">
-        <div className="item transition-05s active" data-index="0">Дизайн</div>
-        <div className="item transition-05s" data-index="1">Аналитика</div>
-        <div className="item transition-05s" data-index="2">Performance-маркетинг</div>
-        <div className="item transition-05s" data-index="3">Контент</div>
+        <div className="item transition-05s active" data-id="0" onClick={aboutMenuClick}>Дизайн</div>
+        <div className="item transition-05s" data-id="1" onClick={aboutMenuClick}>Аналитика</div>
+        <div className="item transition-05s" data-id="2" onClick={aboutMenuClick}>Performance-маркетинг</div>
+        <div className="item transition-05s" data-id="3" onClick={aboutMenuClick}>Контент</div>
       </AboutMenu>
     </FrontLayer>
   </Section>
 )
+
+function aboutMenuClick(e) {
+  const target = e.currentTarget;
+  if (target.classList.contains("active")) return;
+  scrollScreen(null, target.dataset.id);
+}
 
 const AboutMenu = styled.aside`
   position: absolute;

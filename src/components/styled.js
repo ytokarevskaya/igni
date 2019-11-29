@@ -3,6 +3,7 @@ import styled from "styled-components"
 const COLORS = {
 	RED: '#de5650',
 	BLACK: '#0a0d19',
+	GREY: '#afb1b8',
 	BG_GREY: '#f6f7f9'
 };
 

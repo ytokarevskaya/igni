@@ -9,7 +9,7 @@ import videoSrcMP4 from "../../video/fire-1080p.mp4"
 import videoSrcWEBM from "../../video/fire-1080p.webm"
 
 const SectionMain = (props) => (
-	<Section id={props.id} active={props.active} name="section-main" headerStyle="white">
+	<Section id={props.id} active={props.active} name="section-main" headerStyle="white" footerStyle="white">
     <BackLayer>
       <BgVideo>
         <video autoPlay={true} className="translate-xy" loop={true}>

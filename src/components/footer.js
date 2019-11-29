@@ -1,28 +1,53 @@
 import React from "react"
 import styled from "styled-components"
 
-import { PulseBtn } from "./styled"
+import { PulseBtn, COLORS } from "./styled"
 
-const Footer = () => (
-	<FooterStyled>
-		<Socials>
-			<a href="" target="_blank" className="icon-linkedin" />
-			<a href="" target="_blank" className="icon-dribbble" />
-			<a href="" target="_blank" className="icon-instagram" />
-			<a href="" target="_blank" className="icon-twitter" />
-			<a href="" target="_blank" className="icon-facebook" />
-		</Socials>
-		<BottomMenu>
-			<MusicBtn>
-				<div className="icon icon-headphones" />
-				<div className="title">Музыка включена</div>
-			</MusicBtn>
-			<PulseBtn>
-				+<span className="text">Удерживайте</span>
-			</PulseBtn>
-		</BottomMenu>
-	</FooterStyled>
-)
+class Footer extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			footerStyle: "white"
+		}
+
+		if (typeof window !== "undefined") window.footerObj = this;
+	}
+
+	render() {
+		return (
+			<FooterStyled className={this.state.footerStyle}>
+				<Socials>
+					<a href="" target="_blank" className="icon-linkedin" />
+					<a href="" target="_blank" className="icon-dribbble" />
+					<a href="" target="_blank" className="icon-instagram" />
+					<a href="" target="_blank" className="icon-twitter" />
+					<a href="" target="_blank" className="icon-facebook" />
+				</Socials>
+				<BottomMenu>
+					<MusicBtn>
+						<div className="icon icon-headphones" />
+						<div className="title">Музыка включена</div>
+					</MusicBtn>
+					<PulseBtn>
+						+<span className="text">Удерживайте</span>
+					</PulseBtn>
+				</BottomMenu>
+			</FooterStyled>
+		)
+	}
+}
+
+const FooterStyled = styled.footer`
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+
+	&.dark {
+		color: ${COLORS.GREY};
+	}
+`
 
 const BottomMenu = styled.div`
 	position: absolute;
@@ -32,6 +57,10 @@ const BottomMenu = styled.div`
 
   ${PulseBtn} {
   	margin-left: 6rem;
+  }
+
+  ${FooterStyled}.dark & {
+  	display: none;
   }
 `
 
@@ -65,13 +94,6 @@ const Socials = styled.div`
 		font-size: 2.2rem;
 		margin: 3.5rem 0 0 0;
 	}
-`
-
-const FooterStyled = styled.footer`
-	position: fixed;
-	left: 0;
-	bottom: 0;
-	width: 100%;
 `
 
 export default Footer

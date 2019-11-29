@@ -26,6 +26,7 @@ class Section extends React.Component {
 
   mouseDownHandler(e) {
     const event = e;
+    if (event.nativeEvent.which !== 1) return;
     this.setState({"onhold": "onhold"});
     const cursorBtn = this.sectionRef.current.querySelector(".cursor-btn");
     cursorBtn.style.left = event.clientX + "px";
@@ -33,7 +34,7 @@ class Section extends React.Component {
     mouseDownTimer = setTimeout(() => {
       if (mouseDownTimer) {
         this.setState({"onhold": ""});
-        this.changeSection();
+        this.nextSection();
       }
       mouseDownTimer = null;
     }, 2000);
@@ -55,23 +56,9 @@ class Section extends React.Component {
     }
   }
 
-  changeSection(id) {
-    let nextSectionId;
-    if (id) {
-
-    } else {
-      nextSectionId = this.id + 1;
-      const nextSection = document.querySelector("section[data-id='" + nextSectionId + "']");
-      const sectionObj = sectionObjects[this.id];
-      if (sectionObjects[nextSectionId]) {
-        sectionObjects[nextSectionId].setState({"active": true});
-        sectionObjects[this.id].setState({"active": false});
-        window.headerObj.setState({"headerStyle": sectionObjects[nextSectionId].props.headerStyle});
-      }
-    }
-    var sideMenu = document.getElementById("side-menu");
-    sideMenu.querySelector(".active").classList.remove("active");
-    sideMenu.querySelector("[data-id='" + nextSectionId + "'").classList.add("active");
+  nextSection() {
+    const nextSectionId = this.id + 1;
+    changeSection(this.id, nextSectionId)
   }
 
   render() {
@@ -84,17 +71,34 @@ class Section extends React.Component {
   }
 }
 
+const changeSection = (curId, newId) => {
+  const nextSection = document.querySelector("section[data-id='" + newId + "']");
+  const sectionObj = sectionObjects[curId];
+  const sideMenu = document.getElementById("side-menu");
+
+  if (sectionObjects[newId]) {
+    sectionObjects[newId].setState({"active": true});
+    sectionObjects[curId].setState({"active": false});
+    window.headerObj.setState({"headerStyle": sectionObjects[newId].props.headerStyle});
+    window.footerObj.setState({"footerStyle": sectionObjects[newId].props.footerStyle});
+    sideMenu.querySelector(".active").classList.remove("active");
+    sideMenu.querySelector("[data-id='" + newId + "'").classList.add("active");
+  }
+}
+
 let mouseDownTimer;
 
 Section.propTypes = {
   id: PropTypes.number,
   headerStyle: PropTypes.string,
+  footerStyle: PropTypes.string,
   name: PropTypes.string
 }
 
 Section.defaultProps = {
   id: 0,
   headerStyle: "white",
+  footerStyle: "white",
   name: ""
 }
 
@@ -151,3 +155,5 @@ const CursorBtn = styled.div`
 `
 
 export default Section
+
+export { changeSection }

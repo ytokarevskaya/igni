@@ -3,6 +3,7 @@ import React from "react"
 import styled from "styled-components"
 
 import { COLORS } from "./styled"
+import { changeSection } from "./section"
 
 import logoWhite from "../images/logo-white.svg"
 import logo from "../images/logo.svg"
@@ -37,13 +38,19 @@ class Header extends React.Component {
           </MenuBtn>
         </MenuFrame>
         <SideMenu id="side-menu" className="translate-y">
-          <div className="item open-slide transition-05s active" data-id="0"><span>Главная</span></div> 
-          <div className="item open-slide transition-05s" data-id="1"><span>Услуги</span></div> 
-          <div className="item open-slide transition-05s" data-id="2"><span>Портфолио</span></div> 
+          <div className="item open-slide transition-05s active" data-id="0" onClick={sideMenuClick}><span>Главная</span></div> 
+          <div className="item open-slide transition-05s" data-id="1" onClick={sideMenuClick}><span>Услуги</span></div> 
+          <div className="item open-slide transition-05s" data-id="2" onClick={sideMenuClick}><span>Портфолио</span></div> 
         </SideMenu>
       </HeaderStyled>
     )
   }
+}
+
+function sideMenuClick(e) {
+  const curId = document.querySelector('#side-menu .active').dataset.id;
+  const newId = e.currentTarget.dataset.id;
+  changeSection(curId, newId);
 }
 
 Header.propTypes = {

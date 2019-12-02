@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
 
-import { SectionStyled, PulseBtn } from "./styled"
+import { SectionStyled, PulseBtn, CursorBtn } from "./styled"
 
 let sectionObjects = {};
 
@@ -102,57 +102,7 @@ Section.defaultProps = {
   name: ""
 }
 
-const CursorBtn = styled.div`
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  width: 3rem;
-  height: 3rem;
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 50%;
-  visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 50;
 
-  &::after {
-    content: '';
-    display: block;
-    border-radius: 50%;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate3d(-50%, -50%, 0);
-  }
-
-  &::before {
-    content: '';
-    display: block;
-    width: 30%;
-    height: 30%;
-    background: #fff;
-    border-radius: 50%;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate3d(-50%, -50%, 0);
-    transition: width 2s linear, height 2s linear;
-  }
-
-  .onhold & {
-    visibility: visible;
-    opacity: 1;
-
-    &::before {
-      width: 100%;
-      height: 100%;
-    }
-
-    &::after {
-      animation: pulse-btn-before 2s ease infinite;
-    }
-  }
-`
 
 export default Section
 

@@ -52,6 +52,7 @@ const FrontLayer = styled.div`
 `
 
 const Title = styled.div`
+	position: relative;
 	font-family: ${props => props.ff || "Bebas"};
 	text-transform: uppercase;
 	text-align: ${props => props.ta || "left"};
@@ -60,6 +61,9 @@ const Title = styled.div`
   line-height: ${props => props.lh || "1"};
   color: ${props => props.color || COLORS.RED};
   width: ${props => props.width || "auto"};
+  ${props => props.lineBottom ? "padding-bottom: 3.3rem;" : ""};
+
+  ${props => props.lineBottom ? "&::before {content: ''; display: block; width: 3.5rem; height: 3px; background: #fff; position: absolute; bottom: 0; left: 0;}" : ""};
 
   .red {
   	color: ${COLORS.RED};
@@ -121,4 +125,62 @@ const PulseBtn = styled.div`
 	}
 `
 
-export { COLORS, ScrollFrame, SectionStyled, BackLayer, FrontLayer, Title, TextStyled, PulseBtn }
+const CursorBtn = styled.div`
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 3rem;
+  height: 3rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 50;
+  margin: -1.5rem;
+
+  &::after {
+    content: '';
+    display: block;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0);
+  }
+
+  &::before {
+    content: '';
+    display: block;
+    width: 30%;
+    height: 30%;
+    background: #fff;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    transition: width 2s linear, height 2s linear;
+  }
+
+  &.visible {
+  	visibility: visible;
+    opacity: 1;
+  }
+
+  .onhold & {
+    visibility: visible;
+    opacity: 1;
+
+    &::before {
+      width: 100%;
+      height: 100%;
+    }
+
+    &::after {
+      animation: pulse-btn-before 2s ease infinite;
+    }
+  }
+`
+
+export { COLORS, ScrollFrame, SectionStyled, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, CursorBtn }

@@ -2,20 +2,34 @@ import PropTypes from "prop-types"
 import React from "react"
 import styled from "styled-components"
 
-import { COLORS } from "./styled"
+import { COLORS, CursorBtn, Title } from "./styled"
 import { changeSection } from "./section"
 
 import logoWhite from "../images/logo-white.svg"
 import logo from "../images/logo.svg"
+import videoSrcMP4 from "../video/fire-1080p.mp4"
+import videoSrcWEBM from "../video/fire-1080p.webm"
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      "headerStyle": "white"
+      "headerStyle": "white",
+      "menuOpened": false
     }
+    this.menuCursor = React.createRef();
 
     if (typeof window !== "undefined") window.headerObj = this;
+  }
+
+  cursorFollow(e) {
+    const cursor = this.menuCursor.current;
+    cursor.style.left = e.pageX + "px";
+    cursor.style.top = e.pageY + "px";
+  }
+
+  menuToggle(e) {
+    this.setState({"menuOpened": !this.state.menuOpened});
   }
 
   render() {
@@ -26,15 +40,57 @@ class Header extends React.Component {
           <img src={logo} className="dark transition-05s" alt="IGNI Logo" />
           <h1>Веб-студия полного цикла</h1>
         </Logo>
+        <MainMenu className={this.state.menuOpened? "opened" : ""} onMouseMove={(e) => this.cursorFollow(e)}>
+          <BgVideo>
+            <video autoPlay={true} className="translate-xy" loop={true}>
+              <source src={videoSrcWEBM} type='video/webm; codecs="vp8, vorbis"' />
+              <source src={videoSrcMP4} type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
+            </video>
+          </BgVideo>
+          <MenuList>
+            <div className="column">
+              <Title color="#fff" fz="5rem" lineBottom>Главная</Title>
+              <div className="menu-link">Услуги</div>
+              <div className="menu-link">Общее портфолио</div>
+              <div className="menu-link">Аналитика</div>
+              <div className="menu-link">Контакты</div>
+            </div>
+            <div className="column">
+              <Title color="#fff" fz="5rem" lineBottom>Дизайн</Title>
+              <div className="menu-link">Порфтолио</div>
+              <div className="menu-link">Статистика</div>
+              <div className="menu-link">Контакты</div>
+            </div>
+            <div className="column">
+              <Title color="#fff" fz="5rem" lineBottom>Контент</Title>
+              <div className="menu-link">Порфтолио</div>
+              <div className="menu-link">Статистика</div>
+              <div className="menu-link">Контакты</div>
+            </div>
+            <div className="column">
+              <Title color="#fff" fz="5rem" lineBottom>Маркетинг</Title>
+              <div className="menu-link">Порфтолио</div>
+              <div className="menu-link">Статистика</div>
+              <div className="menu-link">Контакты</div>
+            </div>
+            <div className="column">
+              <Title color="#fff" fz="5rem" lineBottom>Продакшн</Title>
+              <div className="menu-link">Порфтолио</div>
+              <div className="menu-link">Статистика</div>
+              <div className="menu-link">Контакты</div>
+            </div>
+          </MenuList>
+          <CursorBtn ref={this.menuCursor} className={this.state.menuOpened? "visible" : ""} />
+        </MainMenu>
         <MenuFrame>
           <OrderBtn>
             <div className="icon icon-pen" />
             <div className="title">Оставить заявку</div>
           </OrderBtn>
-          <MenuBtn>
-            <div className="n1 translate-xy" />
-            <div className="n2 translate-xy" />
-            <div className="n3 translate-xy" />
+          <MenuBtn onClick={(e) => this.menuToggle(e)} className={this.state.menuOpened? "opened" : ""}>
+            <div className="n1 translate-xy transition-05s" />
+            <div className="n2 translate-xy transition-05s" />
+            <div className="n3 translate-xy transition-05s" />
           </MenuBtn>
         </MenuFrame>
         <SideMenu id="side-menu" className="translate-y">
@@ -46,6 +102,72 @@ class Header extends React.Component {
     )
   }
 }
+
+const MenuList = styled.div`
+  display: flex;
+  position: absolute;
+  left: 20rem;
+  right: 20rem;
+  top: 55%;
+  transform: translateY(-50%);
+  justify-content: space-between;
+
+  .menu-link {
+    margin: 3rem 0;
+    font-size: 1.6rem;
+    font-weight: 500;
+    padding-left: 3.5rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`
+
+const BgVideo = styled.div`
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+
+  video {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 100%;
+    width: auto;
+    filter: blur(5px) brightness(0.85);
+
+    &::after {
+      content: '';
+      width: 100%;
+      height: 100%;
+      display: block;
+      background: rgba(0, 0, 0, 0.2);
+      position: absolute;
+      left: 0; 
+      top: 0;
+    }
+  }
+`
+
+const MainMenu = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  cursor: none;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 800ms ease;
+
+  &.opened {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: all;
+  }
+`
 
 function sideMenuClick(e) {
   const curId = document.querySelector('#side-menu .active').dataset.id;
@@ -174,6 +296,24 @@ const MenuBtn = styled.div`
 
     &.n3 {
       margin-top: 0.85rem;
+    }
+  }
+
+  &.opened {
+    > div {
+      &.n1 {
+        transform: rotate(45deg);
+        margin: -0.1rem 0 0 -1.1rem;
+      }
+
+      &.n2 {
+        opacity: 0;
+      }
+
+      &.n3 {
+        transform: rotate(-45deg);
+        margin: -0.1rem 0 0 -1.1rem;
+      }
     }
   }
 `

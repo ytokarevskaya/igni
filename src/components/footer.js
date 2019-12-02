@@ -43,6 +43,7 @@ const FooterStyled = styled.footer`
 	left: 0;
 	bottom: 0;
 	width: 100%;
+	z-index: 30;
 
 	&.dark {
 		color: ${COLORS.GREY};

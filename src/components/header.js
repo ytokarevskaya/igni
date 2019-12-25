@@ -49,32 +49,32 @@ class Header extends React.Component {
           </BgVideo>
           <MenuList>
             <div className="column">
-              <Title color="#fff" fz="5rem" lineBottom>Главная</Title>
+              <Title color="#fff" fz="5rem" lineBottom lineWidth="3.5rem">Главная</Title>
               <div className="menu-link">Услуги</div>
               <div className="menu-link">Общее портфолио</div>
               <div className="menu-link">Аналитика</div>
               <div className="menu-link">Контакты</div>
             </div>
             <div className="column">
-              <Title color="#fff" fz="5rem" lineBottom>Дизайн</Title>
+              <Title color="#fff" fz="5rem" lineBottom lineWidth="3.5rem">Дизайн</Title>
               <div className="menu-link">Порфтолио</div>
               <div className="menu-link">Статистика</div>
               <div className="menu-link">Контакты</div>
             </div>
             <div className="column">
-              <Title color="#fff" fz="5rem" lineBottom>Контент</Title>
+              <Title color="#fff" fz="5rem" lineBottom lineWidth="3.5rem">Контент</Title>
               <div className="menu-link">Порфтолио</div>
               <div className="menu-link">Статистика</div>
               <div className="menu-link">Контакты</div>
             </div>
             <div className="column">
-              <Title color="#fff" fz="5rem" lineBottom>Маркетинг</Title>
+              <Title color="#fff" fz="5rem" lineBottom lineWidth="3.5rem">Маркетинг</Title>
               <div className="menu-link">Порфтолио</div>
               <div className="menu-link">Статистика</div>
               <div className="menu-link">Контакты</div>
             </div>
             <div className="column">
-              <Title color="#fff" fz="5rem" lineBottom>Продакшн</Title>
+              <Title color="#fff" fz="5rem" lineBottom lineWidth="3.5rem">Продакшн</Title>
               <div className="menu-link">Порфтолио</div>
               <div className="menu-link">Статистика</div>
               <div className="menu-link">Контакты</div>
@@ -94,9 +94,22 @@ class Header extends React.Component {
           </MenuBtn>
         </MenuFrame>
         <SideMenu id="side-menu" className="translate-y">
-          <div className="item open-slide transition-05s active" data-id="0" onClick={sideMenuClick}><span>Главная</span></div> 
-          <div className="item open-slide transition-05s" data-id="1" onClick={sideMenuClick}><span>Услуги</span></div> 
-          <div className="item open-slide transition-05s" data-id="2" onClick={sideMenuClick}><span>Портфолио</span></div> 
+          <div className="item open-slide active" data-id="0" onClick={sideMenuClick}>
+            <div className="line transition-05s" />
+            <span>Главная</span>
+          </div> 
+          <div className="item open-slide" data-id="1" onClick={sideMenuClick}>
+            <div className="line transition-05s" />
+            <span>Услуги</span>
+          </div> 
+          <div className="item open-slide" data-id="2" onClick={sideMenuClick}>
+            <div className="line transition-05s" />
+            <span>Портфолио</span>
+          </div>
+          <div className="item open-slide" data-id="3" onClick={sideMenuClick}>
+            <div className="line transition-05s" />
+            <span>Контакты</span>
+          </div> 
         </SideMenu>
       </HeaderStyled>
     )
@@ -198,9 +211,7 @@ const SideMenu = styled.aside`
 
   .item {
     position: relative;
-    width: 3px;
-    height: 3px;
-    background: #fff;
+    padding: 0 1rem;
     margin: 1rem 0;
     cursor: pointer;
 
@@ -218,7 +229,9 @@ const SideMenu = styled.aside`
     }
 
     &.active, &:hover {
-      height: 4rem;
+      .line {
+        height: 4rem;
+      }
     }
 
     &:hover {
@@ -229,10 +242,18 @@ const SideMenu = styled.aside`
     }
   }
 
+  .line {
+    width: 3px;
+    height: 3px;
+    background: #fff;
+  }
+
   ${HeaderStyled}.dark & {
     .item {
-      background: ${COLORS.BLACK};
-
+      .line {
+        background: ${COLORS.BLACK};
+      }
+      
       span {
         color: ${COLORS.BLACK};
       }
@@ -314,6 +335,14 @@ const MenuBtn = styled.div`
         transform: rotate(-45deg);
         margin: -0.1rem 0 0 -1.1rem;
       }
+    }
+  }
+
+  ${HeaderStyled}.dark & {
+    background: ${COLORS.BLACK};
+
+    > div {
+      background: #fff;
     }
   }
 `

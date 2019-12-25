@@ -12,6 +12,7 @@ class Section extends React.Component {
     this.id = this.props.id;
     this.children = this.props.children;
     this.sectionRef = React.createRef();
+    this.cursor = React.createRef();
     sectionObjects[this.id] = this;
 
     this.state = {
@@ -28,9 +29,9 @@ class Section extends React.Component {
     const event = e;
     if (event.nativeEvent.which !== 1) return;
     this.setState({"onhold": "onhold"});
-    const cursorBtn = this.sectionRef.current.querySelector(".cursor-btn");
-    cursorBtn.style.left = event.clientX + "px";
-    cursorBtn.style.top = event.clientY + "px";
+    const cursor = this.cursor.current;
+    cursor.style.left = event.clientX + "px";
+    cursor.style.top = event.clientY + "px";
     mouseDownTimer = setTimeout(() => {
       if (mouseDownTimer) {
         this.setState({"onhold": ""});
@@ -48,12 +49,10 @@ class Section extends React.Component {
     this.setState({"onhold": ""});
   }
 
-  mouseMoveHandler(e) {
-    if (this.state.onhold === "onhold") {
-      const cursorBtn = this.sectionRef.current.querySelector(".cursor-btn");
-      cursorBtn.style.left = e.clientX + "px";
-      cursorBtn.style.top = e.clientY + "px";
-    }
+  cursorFollow(e) {
+    const cursor = this.cursor.current;
+    cursor.style.left = e.pageX + "px";
+    cursor.style.top = e.pageY + "px";
   }
 
   nextSection() {
@@ -63,8 +62,8 @@ class Section extends React.Component {
 
   render() {
     return (
-    	<SectionStyled data-id={this.id} ref={this.sectionRef} className={(this.state.active? "active " : "") + this.state.onhold + " " + this.props.name} onMouseDown={(e) => this.mouseDownHandler(e)} onMouseUp={(e) => this.mouseUpHandler(e)} onMouseMove={(e) => this.mouseMoveHandler(e)}>
-        <CursorBtn className="cursor-btn translate-xy" />
+    	<SectionStyled data-id={this.id} ref={this.sectionRef} className={(this.state.active? "active " : "") + this.state.onhold + " " + this.props.name} onMouseDown={(e) => this.mouseDownHandler(e)} onMouseUp={(e) => this.mouseUpHandler(e)} onMouseMove={(e) => this.cursorFollow(e)}>
+        <CursorBtn className={"cursor-btn translate-xy " + this.props.headerStyle} ref={this.cursor} />
     		{this.children}
     	</SectionStyled>
     )

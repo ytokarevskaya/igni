@@ -1,0 +1,277 @@
+import React from "react"
+import styled from "styled-components"
+
+import Section from "../section"
+import { wordEnd } from "../utils"
+
+import { useProjectsData } from "../queries/get-projects-data"
+import ScrollMenu from "../scroll-menu"
+import { COLORS, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, SectionScroll } from "../styled"
+
+
+const SectionPortfolio = (props) => {
+  const { totalCount, edges } = useProjectsData()
+  const projects = {
+    'design': [],
+    'content': [],
+    'marketing': [],
+    'digital': []
+  }
+  edges.map((item) => {
+    const project = item.node;
+    if (project.category.title === 'Дизайн') {
+      projects.design.push(project);
+    } else if (project.category.title === 'Контент') {
+      projects.content.push(project);
+    } else if (project.category.title === 'Маркетинг и реклама') {
+      projects.marketing.push(project);
+    } else if (project.category.title === 'Диджитал продакшн') {
+      projects.digital.push(project);
+    }
+  });
+
+  return (
+  	<Section id={props.id} active={props.active} name="section-portfolio" headerStyle="dark" footerStyle="dark">
+      <FrontLayer bg="#f6f7f9">
+        <PortfolioTitle>
+          <Title fz="5rem" lineBottom lineBg={COLORS.BLACK}>Портфолио <span className="black">IGNI</span></Title>
+        </PortfolioTitle>
+        <SectionScroll id="portfolio-scroll" data-pos="0" className="section-scroll transition-05s" width="60%" pos={["absolute", "40%", "5%", "", ""]}>
+          <PortfolioItem>
+            <div className="header">
+              <Title color={COLORS.BLACK}>Дизайн</Title>
+              <div className="all-projects">
+                <span>Все проекты</span>
+              </div>
+            </div>
+            <p className="count">{projects.design.length} {'проект' + wordEnd(projects.design.length, 'pr')}</p>
+            <PortfolioWorks>
+              {projects.design.map((item) => {
+                return (
+                  <FormattedPortfolioWork project={item} type="design" />
+                )
+              })}
+            </PortfolioWorks>
+          </PortfolioItem>
+          <PortfolioItem>
+            <div className="header">
+              <Title color={COLORS.BLACK}>Контент</Title>
+              <div className="all-projects">
+                <span>Все проекты</span>
+              </div>
+            </div>
+            <p className="count">{projects.content.length} {'проект' + wordEnd(projects.content.length, 'pr')}</p>
+            <PortfolioWorks>
+              {projects.content.map((item) => {
+                return (
+                  <FormattedPortfolioWork project={item} type="content" />
+                )
+              })}
+            </PortfolioWorks>
+          </PortfolioItem>
+          <PortfolioItem>
+            <div className="header">
+              <Title color={COLORS.BLACK}>Маркетинг и реклама</Title>
+              <div className="all-projects">
+                <span>Все проекты</span>
+              </div>
+            </div>
+            <p className="count">{projects.marketing.length} {'проект' + wordEnd(projects.marketing.length, 'pr')}</p>
+            <PortfolioWorks>
+              {projects.marketing.map((item) => {
+                return (
+                  <FormattedPortfolioWork project={item} type="marketing" />
+                )
+              })}
+            </PortfolioWorks>
+          </PortfolioItem>
+          <PortfolioItem>
+            <div className="header">
+              <Title color={COLORS.BLACK}>Диджитал продакшн</Title>
+              <div className="all-projects">
+                <span>Все проекты</span>
+              </div>
+            </div>
+            <p className="count">{projects.digital.length} {'проект' + wordEnd(projects.digital.length, 'pr')}</p>
+            <PortfolioWorks>
+              {projects.digital.map((item) => {
+                return (
+                  <FormattedPortfolioWork project={item} type="digital" />
+                )
+              })}
+            </PortfolioWorks>
+          </PortfolioItem>
+        </SectionScroll>
+        <ScrollMenu scrollId="portfolio-scroll" items={["Дизайн", "Контент", "Маркетинг и реклама", "Диджитал продакшн"]} />
+      </FrontLayer>
+    </Section>
+  )
+}
+
+const FormattedPortfolioWork = (props) => {
+  let logo;
+  if (props.type === "content" || props.type === "marketing") {
+    logo = props.project.logo? <img className="logo is-big is-on-top" src={props.project.logo.file.url} /> : '';
+  } else {
+    logo = props.project.logo? <img className="logo" src={props.project.logo.file.url} /> : '';
+  }
+  return (
+    <PortfolioWork key={props.project.id} bg={props.project.backgroundColor} bgImg={props.project.preview? props.project.preview.file.url : ''} className={"transition-03s" + (props.project.theme? " theme-" + props.project.theme : " theme-Dark")}>
+      <div className="ff-bebas info"><span className="year">{new Date(props.project.date).getFullYear()}</span> {props.project.subcategory}</div>
+      {logo}
+      <div className="title">{props.project.projectTitle}{(props.type === "digital"? <span className="time"> 1 : 15</span> : '')}</div>
+      <div className="description" dangerouslySetInnerHTML={{__html: props.project.projectSubtitle}} /> 
+    </PortfolioWork>
+  )
+}
+
+const PortfolioWork = styled.div`
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-end;
+  width: 32%;
+  height: 55rem;
+  padding: 3rem;
+  background-color: ${props => props.bg || "#fff"};
+  background-image: ${props => "url(" + props.bgImg + ")" || "unset"};
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  box-shadow: 0 4px 10px -5px rgba(55, 59, 68, 0.26);
+
+  .logo {
+    display: block;
+    max-height: 5rem;
+    max-width: 5rem;
+    margin-bottom: 2rem;
+    &.is-big {
+      max-width: 50%;
+    }
+    &.is-on-top {
+      position: absolute;
+      left: 3rem;
+      top: 7rem;
+    }
+  }
+
+  .title {
+    width: 100%;
+    font-size: 2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+
+    .time {
+      float: right;
+    }
+  }
+
+  .description {
+    font-size: 1.6rem;
+    line-height: 1.5;
+
+    hr {
+      background: #fff;
+      margin: 2rem 0;
+    }
+  }
+
+  .info {
+    position: absolute;
+    top: 3rem;
+    left: 3rem;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+
+    .year {
+      margin-right: 2rem;
+    }
+  }
+
+  &:hover {
+    transform: translateY(-1rem);
+  }
+  &.theme-Light {
+    color: ${COLORS.BLACK};
+    .description {
+      hr {
+        background: ${COLORS.LINE_GREY};
+      }
+    }
+  }
+  &.theme-Dark {
+    color: #fff;
+  }
+`
+
+const PortfolioWorks = styled.div`
+  display: flex;
+  margin: 3rem 0;
+  justify-content: space-between;
+`
+
+const PortfolioItem = styled.div`
+  margin-bottom: 6rem;
+
+  .all-projects {
+    display: flex;
+    flex-grow: 1;
+    border-bottom: 1px solid ${COLORS.LINE_GREY};
+    margin: 0 0 0.8rem 3rem;
+    align-items: flex-end;
+    padding-right: 30vw;
+    justify-content: flex-end;
+
+    span {
+      position: relative;
+      color: ${COLORS.BLACK};
+      font-size: 1.6rem;
+      font-weight: 500;
+      padding: 0 3rem 0 10rem;
+      margin-bottom: -0.5em;
+      background: ${COLORS.BG_GREY};
+      cursor: pointer;
+      &::before {
+        content: '+';
+        display: block;
+        width: 4.6rem;
+        height: 4.6rem;
+        border-radius: 50%;
+        background: ${COLORS.RED};
+        color: #fff;
+        font-size: 2.4rem;
+        font-weight: 500;
+        line-height: 4.6rem;
+        text-align: center;
+        position: absolute;
+        left: 3rem;
+        top: 50%;
+        margin-top: -2.3rem;
+      }
+    }
+  }
+
+  .header {
+    display: flex;
+    width: calc(100% + 30vw);
+  }
+
+  .count {
+    font-size: 1.6rem;
+    color: ${COLORS.BLACK};
+  }
+`
+const PortfolioTitle = styled.div`
+  position: absolute;
+  left: 24rem;
+  top: 10rem;
+  z-index: 1;
+
+  ${Title} {
+    position: relative;
+  }
+`
+
+export default SectionPortfolio

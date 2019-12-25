@@ -211,6 +211,10 @@ html{font-family:sans-serif;font-size:10px;-ms-text-size-adjust:100%;-webkit-tex
 .h9rem { height: 9rem; }
 .h10rem { height: 10rem; }
 
+.ff-bebas {
+  font-family: "Bebas", sans-serif;
+}
+
 @keyframes pulse-btn-before {
   0% {
     width: 100%;

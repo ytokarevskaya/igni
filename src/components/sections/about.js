@@ -4,41 +4,11 @@ import { StaticQuery, graphql } from "gatsby"
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 
 import Section from "../section"
+import ScrollMenu from "../scroll-menu"
 
-import { COLORS, BackLayer, FrontLayer, Title, TextStyled, PulseBtn } from "../styled"
+import { COLORS, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, SectionScroll } from "../styled"
 
 import fireSrc from "../../images/fire.svg"
-
-function scrollScreen(e, itemId) {
-  const scrollFrame = document.getElementById('about-scroll');
-  const menu = document.getElementById("about-menu");
-
-  let newPos;
-  let targetIndex = 0;
-
-  if (e) {
-    const curPos = +scrollFrame.dataset.pos;
-    newPos = curPos - e.deltaY * 0.5;
-    if (newPos > 0) newPos = 0;
-    if (newPos < -scrollFrame.clientHeight * 0.8) newPos = -scrollFrame.clientHeight * 0.8;
-    for (let i = 0; i < scrollFrame.children.length; i++) {
-      const item = scrollFrame.children[i];
-      if (item.offsetTop < -newPos) {
-        targetIndex = i;
-      }
-    }
-  } else if (itemId !== "undefined") {
-    const targetItem = scrollFrame.children[itemId];
-    targetIndex = itemId;
-    newPos = -targetItem.offsetTop;
-  }
-
-  scrollFrame.dataset.pos = newPos;
-  scrollFrame.style.transform = "translate3d(0, " + newPos + "px, 0)";
-
-  menu.querySelector(".active").classList.remove("active");
-  menu.children[targetIndex].classList.add("active");
-}
 
 class AboutItem extends React.Component {
   constructor(props) {
@@ -63,8 +33,9 @@ class AboutItem extends React.Component {
   }
 
   render() {
+    {/*<AboutItemStyled className="transition-05s item" data-id={this.props.id} onMouseEnter={(e) => this.moveBtn(e)} onMouseMove={(e) => this.moveBtn(e)} onMouseLeave={(e) => this.returnBtn(e)}>*/}
     return (
-      <AboutItemStyled className="transition-05s item" data-id={this.props.id} onMouseEnter={(e) => this.moveBtn(e)} onMouseMove={(e) => this.moveBtn(e)} onMouseLeave={(e) => this.returnBtn(e)}>
+      <AboutItemStyled className="transition-05s item" data-id={this.props.id}>
         <Title color={COLORS.BLACK}>{this.props.title}</Title>
         <div dangerouslySetInnerHTML={{__html: documentToHtmlString(this.props.content.json)}} />
         <RedBtn ref={this.redBtn} />
@@ -98,12 +69,12 @@ const SectionAbout = (props) => (
     <BackLayer bg="#f6f7f9">
       <img src={fireSrc} alt="" style={{"display": "block", "width": "38%", "margin": "13rem auto"}} />
     </BackLayer>
-    <FrontLayer onWheel={scrollScreen}>
+    <FrontLayer >
       <AboutTitle>
         <Title fz="5rem" color={COLORS.BLACK} width="30rem">Проектируем, разрабатываем, продвигаем – наши <span className="red">услуги</span></Title>
         <TextStyled width="42rem" color={COLORS.BLACK}>Чтобы осветить темное пространство веба новыми проектами, мы собрали команду профессионалов с обширным опытом работы в сфере дизайна, разработки, маркетинга, рекламы и видео производства.</TextStyled>
       </AboutTitle>
-      <AboutScroll id="about-scroll" data-pos="0" className="transition-05s">
+      <SectionScroll id="about-scroll" data-pos="0" className="transition-05s section-scroll">
         <StaticQuery
           query={graphql`
             {
@@ -130,57 +101,11 @@ const SectionAbout = (props) => (
             ))
           )}
         />
-      </AboutScroll>
-      <AboutMenu id="about-menu" className="translate-y">
-        <div className="item transition-05s active" data-id="0" onClick={aboutMenuClick}>Дизайн</div>
-        <div className="item transition-05s" data-id="1" onClick={aboutMenuClick}>Аналитика</div>
-        <div className="item transition-05s" data-id="2" onClick={aboutMenuClick}>Performance-маркетинг</div>
-        <div className="item transition-05s" data-id="3" onClick={aboutMenuClick}>Контент</div>
-      </AboutMenu>
+      </SectionScroll>
+      <ScrollMenu scrollId="about-scroll" items={["Дизайн", "Аналитика", "Performance-маркетинг", "Контент"]} />
     </FrontLayer>
   </Section>
 )
-
-function aboutMenuClick(e) {
-  const target = e.currentTarget;
-  if (target.classList.contains("active")) return;
-  scrollScreen(null, target.dataset.id);
-}
-
-const AboutMenu = styled.aside`
-  position: absolute;
-  top: 70%;
-  left: 24rem;
-  
-  .item {
-    position: relative;
-    font-size: 1.6rem;
-    color: ${COLORS.BLACK};
-    padding: 0 1.7rem;
-    margin: 3rem 0;
-    cursor: pointer;
-
-    &.active, &:hover {
-      color: ${COLORS.RED};
-    }
-
-    &.active {
-      font-weight: 600;
-
-      &::before {
-        content: '';
-        display: block;
-        width: 2px;
-        height: 3.5rem;
-        position: absolute;
-        left: 0;
-        top: 50%;
-        margin-top: -1.75rem;
-        background: ${COLORS.RED};
-      }
-    }
-  }
-`
 
 const AboutItemStyled = styled.div`
   position: relative;
@@ -224,14 +149,6 @@ const AboutItemStyled = styled.div`
       }
     }
   }
-`
-
-const AboutScroll = styled.div`
-  position: absolute;
-  right: 15%;
-  top: 40%;
-  margin-right: 15rem;
-  transform: translate3d(0,0,0);
 `
 
 const AboutTitle = styled.div`

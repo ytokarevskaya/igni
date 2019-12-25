@@ -3,7 +3,9 @@ import styled from "styled-components"
 const COLORS = {
 	RED: '#de5650',
 	BLACK: '#0a0d19',
+  LIGHT_BLACK: '#1f1f22',
 	GREY: '#afb1b8',
+  LINE_GREY: '#979797',
 	BG_GREY: '#f6f7f9'
 };
 
@@ -21,6 +23,7 @@ const SectionStyled = styled.section`
 	transition: all 800ms ease-in-out;
 	visibility: hidden;
 	opacity: 0;
+  cursor: none;
 
 	&.active {
 		position: absolute;
@@ -63,10 +66,14 @@ const Title = styled.div`
   width: ${props => props.width || "auto"};
   ${props => props.lineBottom ? "padding-bottom: 3.3rem;" : ""};
 
-  ${props => props.lineBottom ? "&::before {content: ''; display: block; width: 3.5rem; height: 3px; background: #fff; position: absolute; bottom: 0; left: 0;}" : ""};
+  ${props => props.lineBottom ? "&::before {content: ''; display: block; width: " + (props.lineWidth? props.lineWidth : "7rem") + "; height: 3px; background: " + (props.lineBg? props.lineBg : "#fff") + "; position: absolute; bottom: 0; left: 0;}" : ""};
 
   .red {
   	color: ${COLORS.RED};
+  }
+
+  .black {
+  	color: ${COLORS.BLACK};
   }
 `
 
@@ -133,11 +140,9 @@ const CursorBtn = styled.div`
   height: 3rem;
   background: rgba(255, 255, 255, 0.5);
   border-radius: 50%;
-  visibility: hidden;
-  opacity: 0;
   pointer-events: none;
-  z-index: 50;
-  margin: -1.5rem;
+  z-index: 25;
+  tranform: translate(-50%, -50%);
 
   &::after {
     content: '';
@@ -163,9 +168,11 @@ const CursorBtn = styled.div`
     transition: width 2s linear, height 2s linear;
   }
 
-  &.visible {
-  	visibility: visible;
-    opacity: 1;
+  &.dark {
+    background: rgba(175, 177, 184, 0.3);
+    &::before {
+      background: ${COLORS.GREY};
+    }
   }
 
   .onhold & {
@@ -183,4 +190,15 @@ const CursorBtn = styled.div`
   }
 `
 
-export { COLORS, ScrollFrame, SectionStyled, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, CursorBtn }
+const SectionScroll = styled.div`
+  position: ${props => props.pos? props.pos[0] : "absolute"};
+  top: ${props => props.pos? props.pos[1] : "40%"};
+  right: ${props => props.pos? props.pos[2] : "15%"};
+  bottom: ${props => props.pos? props.pos[3] : "auto"};
+  left: ${props => props.pos? props.pos[4] : "auto"};
+  margin-right: 15rem;
+	width: ${props => props.width || "auto"};
+  transform: translate3d(0,0,0);
+`
+
+export { COLORS, ScrollFrame, SectionStyled, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, CursorBtn, SectionScroll }

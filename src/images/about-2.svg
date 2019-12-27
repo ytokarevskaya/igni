@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="275" height="277" viewBox="0 0 275 277">
+    <defs>
+        <filter id="a" width="120.6%" height="115.3%" x="-10.3%" y="-7.6%" filterUnits="objectBoundingBox">
+            <feOffset dx="3" dy="3" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="7.5"/>
+            <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.146607299 0"/>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    <g fill="none" fill-rule="evenodd" filter="url(#a)" transform="translate(-83 12)">
+        <path fill="#D8D8D8" d="M50-16h97v5H50z"/>
+        <path fill="#DE5650" d="M167-16h97v5h-97z"/>
+        <path fill="#D8D8D8" d="M284-16h97v5h-97zM120-3h76v5h-76z"/>
+        <path fill="#464BB8" d="M216-3h76v5h-76z"/>
+        <path fill="#FFCE8A" d="M312-3h76v5h-76zM95 9h147v5H95z"/>
+        <path fill="#D8D8D8" d="M262 9h147v5H262z"/>
+        <path fill="#DE5650" d="M121 21h41v5h-41z"/>
+        <path fill="#464BB8" d="M324 21h41v5h-41z"/>
+        <path fill="#D8D8D8" d="M182 21h122v5H182z"/>
+        <path fill="#FFCE8A" d="M251 33h151v5H251z"/>
+        <path fill="#464BB8" d="M162 33h69v5h-69z"/>
+        <path fill="#FFCE8A" d="M145 46h119v5H145z"/>
+        <path fill="#DE5650" d="M284 46h119v5H284z"/>
+        <path fill="#D8D8D8" d="M198 58h112v5H198z"/>
+        <path fill="#DE5650" d="M330 58h112v5H330z"/>
+        <path fill="#464BB8" d="M240 70h49v5h-49z"/>
+        <path fill="#D8D8D8" d="M309 70h49v5h-49zM240 82h69v5h-69z"/>
+        <path fill="#464BB8" d="M329 82h69v5h-69z"/>
+        <path fill="#D8D8D8" d="M317 95h85v5h-85z"/>
+        <path fill="#DE5650" d="M212 95h85v5h-85z"/>
+        <g fill="#464BB8">
+            <path d="M256 107h146v5H256z"/>
+        </g>
+        <g fill="#D8D8D8">
+            <path d="M297 119h105v5H297z"/>
+        </g>
+        <g fill="#FFCE8A">
+            <path d="M297 132h105v5H297z"/>
+        </g>
+        <g>
+            <path fill="#D8D8D8" d="M324 144h78v5h-78z"/>
+            <path fill="#DE5650" d="M258 144h46v5h-46z"/>
+        </g>
+        <g fill="#D8D8D8">
+            <path d="M269 156h133v5H269z"/>
+        </g>
+        <g>
+            <path fill="#464BB8" d="M324 168h78v5h-78z"/>
+            <path fill="#FFCE8A" d="M269 168h35v5h-35z"/>
+        </g>
+        <g fill="#D8D8D8">
+            <path d="M304 181h98v5h-98z"/>
+        </g>
+        <g fill="#D8D8D8">
+            <path d="M269 193h35v5h-35z"/>
+        </g>
+        <g>
+            <path fill="#DE5650" d="M304 205h98v5h-98z"/>
+            <path fill="#464BB8" d="M251 205h33v5h-33z"/>
+        </g>
+        <g>
+            <path fill="#FFCE8A" d="M331 217h71v5h-71z"/>
+            <path fill="#D8D8D8" d="M268 217h43v5h-43z"/>
+        </g>
+        <g fill="#D8D8D8">
+            <path d="M284 230h118v5H284z"/>
+        </g>
+        <g fill="#464BB8">
+            <path d="M269 242h62v5h-62z"/>
+        </g>
+    </g>
+</svg>

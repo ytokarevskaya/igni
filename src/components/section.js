@@ -101,8 +101,6 @@ Section.defaultProps = {
   name: ""
 }
 
-
-
 export default Section
 
 export { changeSection }

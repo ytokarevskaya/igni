@@ -35,7 +35,8 @@ class AboutItem extends React.Component {
   render() {
     {/*<AboutItemStyled className="transition-05s item" data-id={this.props.id} onMouseEnter={(e) => this.moveBtn(e)} onMouseMove={(e) => this.moveBtn(e)} onMouseLeave={(e) => this.returnBtn(e)}>*/}
     return (
-      <AboutItemStyled className="transition-05s item" data-id={this.props.id}>
+      <AboutItemStyled className="transition-05s item" data-id={this.props.id} bgImg={this.props.bg}>
+        <div className="bg transition-05s" />
         <Title color={COLORS.BLACK}>{this.props.title}</Title>
         <div dangerouslySetInnerHTML={{__html: documentToHtmlString(this.props.content.json)}} />
         <RedBtn ref={this.redBtn} />
@@ -81,6 +82,11 @@ const SectionAbout = (props) => (
               allContentfulAboutItem {
                 edges {
                   node {
+                    background {
+                      file {
+                        url
+                      }
+                    }
                     id
                     title
                     description {
@@ -97,7 +103,7 @@ const SectionAbout = (props) => (
             }
           }) => (
             edges.map(({ node }) => (
-              <AboutItem key={node.id} id={node.id} title={node.title} content={node.description} />
+              <AboutItem key={node.id} id={node.id} title={node.title} content={node.description} bg={node.background.file.url} />
             ))
           )}
         />
@@ -116,8 +122,28 @@ const AboutItemStyled = styled.div`
   cursor: none;
 
   &:hover {
-    background: #fff;
+    background-color: #fff;
     box-shadow: 0 4px 15px -5px rgba(0, 0, 0, 0.35);
+
+    .bg {
+      opacity: 1;
+    }
+  }
+
+  .bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    background-size: contain;
+    background-position: top right;
+    background-repeat: no-repeat;
+    background-image: ${props => "url(" + props.bgImg + ")" || "unset"};
+    opacity: 0;
+    border-radius: 25px;
   }
 
   ${Title} {

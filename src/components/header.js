@@ -48,32 +48,32 @@ class Header extends React.Component {
             </video>
           </BgVideo>
           <MenuList>
-            <div className="column">
+            <div className="column transition-05s">
               <Title color="#fff" fz="5rem" lineBottom lineWidth="3.5rem">Главная</Title>
               <div className="menu-link">Услуги</div>
               <div className="menu-link">Общее портфолио</div>
               <div className="menu-link">Аналитика</div>
               <div className="menu-link">Контакты</div>
             </div>
-            <div className="column">
+            <div className="column transition-05s">
               <Title color="#fff" fz="5rem" lineBottom lineWidth="3.5rem">Дизайн</Title>
               <div className="menu-link">Порфтолио</div>
               <div className="menu-link">Статистика</div>
               <div className="menu-link">Контакты</div>
             </div>
-            <div className="column">
+            <div className="column transition-05s">
               <Title color="#fff" fz="5rem" lineBottom lineWidth="3.5rem">Контент</Title>
               <div className="menu-link">Порфтолио</div>
               <div className="menu-link">Статистика</div>
               <div className="menu-link">Контакты</div>
             </div>
-            <div className="column">
+            <div className="column transition-05s">
               <Title color="#fff" fz="5rem" lineBottom lineWidth="3.5rem">Маркетинг</Title>
               <div className="menu-link">Порфтолио</div>
               <div className="menu-link">Статистика</div>
               <div className="menu-link">Контакты</div>
             </div>
-            <div className="column">
+            <div className="column transition-05s">
               <Title color="#fff" fz="5rem" lineBottom lineWidth="3.5rem">Продакшн</Title>
               <div className="menu-link">Порфтолио</div>
               <div className="menu-link">Статистика</div>
@@ -125,14 +125,44 @@ const MenuList = styled.div`
   transform: translateY(-50%);
   justify-content: space-between;
 
-  .menu-link {
-    margin: 3rem 0;
-    font-size: 1.6rem;
-    font-weight: 500;
-    padding-left: 3.5rem;
+  .column {
+    opacity: 0.5;
 
     &:hover {
-      text-decoration: underline;
+      opacity: 1;
+    }
+  }
+
+  ${Title} {
+    margin-bottom: 1.8rem;
+  }
+
+  .menu-link {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    padding: 1.5rem 0 1.5rem 2.5rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+    &::before {
+      content: '';
+      display: block;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: #fff;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      margin-top: -1.5px;
+      opacity: 0;
+      transition: opacity 300ms ease;
+    }
+
+    &:hover {
+      &::before {
+        opacity: 1;
+      }
     }
   }
 `
@@ -359,6 +389,7 @@ const Logo = styled.a`
   position: absolute;
   left: 7rem;
   top: 3vh;
+  z-index: 30;
 
   img {
     width: 7rem;

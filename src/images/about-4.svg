@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="274" height="137" viewBox="0 0 274 137">
+    <defs>
+        <filter id="a" width="120.6%" height="116.2%" x="-10.3%" y="-8.1%" filterUnits="objectBoundingBox">
+            <feOffset dx="3" dy="3" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="7.5"/>
+            <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.146607299 0"/>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+        <path id="b" d="M13 0h117l-13 13H0z"/>
+        <path id="d" d="M84 26h117l-13 13H71z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd" filter="url(#a)" transform="translate(-84 12)">
+        <path fill="#464BB8" d="M278 92h58v2h-58zM313 99h58v2h-58zM303 105h22v2h-22zM326 105h2v2h-2zM329 105h2v2h-2z"/>
+        <path fill="#FFCE8A" d="M128 12h96v4h-96zM114 12h12v4h-12zM112 12h1v4h-1zM110 12h1v4h-1zM108 12h1v4h-1zM106 12h1v4h-1zM104 12h1v4h-1zM102 12h1v4h-1zM100 12h1v4h-1zM98 12h1v4h-1zM96 12h1v4h-1zM94 12h1v4h-1zM298 10h117v1H298z"/>
+        <path fill="#464BB8" d="M204 0h117v4H204z"/>
+        <path stroke="#DE5650" d="M199.5 2.5h116v3h-116z"/>
+        <path fill="#FFCE8A" d="M319.114 32H433v4H316z"/>
+        <path fill="#DE5650" d="M257.419 52H336l23.331 28H280.75z"/>
+        <path fill="#DE5650" d="M257.419 52H336l23.331 28H280.75z"/>
+        <path fill="#FFCE8A" d="M338 52h78.581l23.331 28h-78.58z"/>
+        <path fill="#FFCE8A" stroke="#FFF" d="M340.933 51.5h79.882l24.165 29h-79.883l-24.164-29z"/>
+        <path fill="#FFCE8A" stroke="#FFF" d="M345.933 51.5h79.882l24.165 29h-79.883l-24.164-29z"/>
+        <path fill="#DE5650" stroke="#FFF" d="M350.933 51.5h79.882l24.165 29h-79.883l-24.164-29z"/>
+        <path fill="#DE5650" d="M252.815 52h1.766l23.331 28h-1.766zM248.815 52h1.766l23.331 28h-1.766zM245 52h1.766l23.331 28h-1.766zM241 52h1.766l23.331 28h-1.766zM237 52h1.766l23.331 28h-1.766zM233 52h1.766l23.331 28h-1.766zM229 52h1.766l23.331 28h-1.766z"/>
+        <path stroke="#464BB8" d="M198.067 45.5l22.498 27h89.699l-22.498-27h-89.699z"/>
+        <g fill="#464BB8">
+            <path d="M276.695 16h117L382 29H265zM270.6 16h5.095L264 29h-5.096zM264.7 16h3.091l-11.695 13h-3.092zM261.695 16h1.092l-11.695 13H250zM259.695 16h1.092l-11.695 13H248zM257.695 16h1.092l-11.695 13H246zM255.695 16h1.092l-11.695 13H244zM253.695 16h1.092l-11.695 13H242zM251.695 16h1.092l-11.695 13H240zM249.695 16h1.092l-11.695 13H238zM247.695 16h1.092l-11.695 13H236z"/>
+        </g>
+        <g transform="translate(173 23)">
+            <mask id="c" fill="#fff">
+                <use xlink:href="#b"/>
+            </mask>
+            <use fill="#DE5650" xlink:href="#b"/>
+            <g fill="#FFF" mask="url(#c)">
+                <path d="M103.695-7h117L209 6H92zM97.6-7h5.095L91 6h-5.096zM91.7-7h3.091L83.096 6h-3.092zM88.695-7h1.092L78.092 6H77zM86.695-7h1.092L76.092 6H75zM84.695-7h1.092L74.092 6H73zM82.695-7h1.092L72.092 6H71zM80.695-7h1.092L70.092 6H69zM78.695-7h1.092L68.092 6H67zM76.695-7h1.092L66.092 6H65zM74.695-7h1.092L64.092 6H63z"/>
+            </g>
+        </g>
+        <path stroke="#FFCE8A" d="M178.207 26.5l-12 12h115.586l12-12H178.207z"/>
+    </g>
+</svg>

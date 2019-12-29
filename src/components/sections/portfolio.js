@@ -5,7 +5,7 @@ import Section from "../section"
 import { wordEnd } from "../utils"
 
 import { useProjectsData } from "../queries/get-projects-data"
-import ScrollMenu from "../scroll-menu"
+import Scroll from "../scroll"
 import { COLORS, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, SectionScroll } from "../styled"
 
 
@@ -36,7 +36,7 @@ const SectionPortfolio = (props) => {
         <PortfolioTitle>
           <Title fz="5rem" lineBottom lineBg={COLORS.BLACK}>Портфолио <span className="black">IGNI</span></Title>
         </PortfolioTitle>
-        <SectionScroll id="portfolio-scroll" data-pos="0" className="section-scroll transition-05s" width="60%" pos={["absolute", "40%", "5%", "", ""]}>
+        <Scroll width="60%" pos={["absolute", "40%", "5%", "", ""]} menuItems={["Дизайн", "Контент", "Маркетинг и реклама", "Диджитал продакшн"]}>
           <PortfolioItem>
             <div className="header">
               <Title color={COLORS.BLACK}>Дизайн</Title>
@@ -101,8 +101,7 @@ const SectionPortfolio = (props) => {
               })}
             </PortfolioWorks>
           </PortfolioItem>
-        </SectionScroll>
-        <ScrollMenu scrollId="portfolio-scroll" items={["Дизайн", "Контент", "Маркетинг и реклама", "Диджитал продакшн"]} />
+        </Scroll>
       </FrontLayer>
     </Section>
   )

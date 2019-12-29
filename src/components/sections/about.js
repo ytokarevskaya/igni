@@ -1,10 +1,10 @@
 import React from "react"
 import styled from "styled-components"
 import { StaticQuery, graphql } from "gatsby"
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
 
 import Section from "../section"
-import ScrollMenu from "../scroll-menu"
+import Scroll from "../scroll"
 
 import { COLORS, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, SectionScroll } from "../styled"
 
@@ -38,7 +38,9 @@ class AboutItem extends React.Component {
       <AboutItemStyled className="transition-05s item" data-id={this.props.id} bgImg={this.props.bg}>
         <div className="bg transition-05s" />
         <Title color={COLORS.BLACK}>{this.props.title}</Title>
-        <div dangerouslySetInnerHTML={{__html: documentToHtmlString(this.props.content.json)}} />
+        <div>
+          <TextStyled color={COLORS.BLACK} lh="1.15" className="is-ul-red" dangerouslySetInnerHTML={{__html: documentToHtmlString(this.props.content? this.props.content.json : "")}} />
+        </div>
         <RedBtn ref={this.redBtn} />
       </AboutItemStyled>
     )
@@ -75,7 +77,7 @@ const SectionAbout = (props) => (
         <Title fz="5rem" color={COLORS.BLACK} width="30rem">Проектируем, разрабатываем, продвигаем – наши <span className="red">услуги</span></Title>
         <TextStyled width="42rem" color={COLORS.BLACK}>Чтобы осветить темное пространство веба новыми проектами, мы собрали команду профессионалов с обширным опытом работы в сфере дизайна, разработки, маркетинга, рекламы и видео производства.</TextStyled>
       </AboutTitle>
-      <SectionScroll id="about-scroll" data-pos="0" className="transition-05s section-scroll">
+      <Scroll width="auto" pos={["absolute", "40%", "15%", "", ""]} menuItems={["Дизайн", "Аналитика", "Performance-маркетинг", "Контент"]}>
         <StaticQuery
           query={graphql`
             {
@@ -107,8 +109,7 @@ const SectionAbout = (props) => (
             ))
           )}
         />
-      </SectionScroll>
-      <ScrollMenu scrollId="about-scroll" items={["Дизайн", "Аналитика", "Performance-маркетинг", "Контент"]} />
+      </Scroll>
     </FrontLayer>
   </Section>
 )
@@ -149,31 +150,6 @@ const AboutItemStyled = styled.div`
   ${Title} {
     font-size: 2.6rem;
     margin-bottom: 4rem;
-  }
-
-  ul {
-    font-size: 1.5rem;
-    list-style: none;
-    margin-left: 0;
-
-    li {
-      position: relative;
-      padding-left: 2rem;
-      margin: 2.5rem 0;
-
-      &::before {
-        content: '';
-        display: block;
-        width: 0.7rem;
-        height: 0.7rem;
-        background: ${COLORS.RED};
-        position: absolute;
-        left: 0;
-        top: 50%;
-        margin-top: -0.35rem;
-        transform: rotate(45deg);
-      }
-    }
   }
 `
 

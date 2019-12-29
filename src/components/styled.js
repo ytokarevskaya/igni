@@ -3,9 +3,11 @@ import styled from "styled-components"
 const COLORS = {
 	RED: '#de5650',
 	BLACK: '#0a0d19',
+	BLACK_30: 'rgba(0, 0, 0, 0.3)',
   LIGHT_BLACK: '#1f1f22',
 	GREY: '#afb1b8',
   LINE_GREY: '#979797',
+  LINE_GREY_20: 'rgba(151, 151, 151, 0.2)',
 	BG_GREY: '#f6f7f9'
 };
 
@@ -64,7 +66,9 @@ const Title = styled.div`
   line-height: ${props => props.lh || "1"};
   color: ${props => props.color || COLORS.RED};
   width: ${props => props.width || "auto"};
+  margin: ${props => props.margin || "0"};
   ${props => props.lineBottom ? "padding-bottom: 3.3rem;" : ""};
+  ${props => props.outline? "text-shadow: 1px 0 0px #000, 0 1px 0px #000, -1px 0 0px #000, 0 -1px 0px #000" : ""};
 
   ${props => props.lineBottom ? "&::before {content: ''; display: block; width: " + (props.lineWidth? props.lineWidth : "7rem") + "; height: 3px; background: " + (props.lineBg? props.lineBg : "#fff") + "; position: absolute; bottom: 0; left: 0;}" : ""};
 
@@ -75,6 +79,14 @@ const Title = styled.div`
   .black {
   	color: ${COLORS.BLACK};
   }
+
+  small {
+  	font-size: 50%;
+  }
+
+  .no-outline {
+  	text-shadow: none;
+  }
 `
 
 const TextStyled = styled.div`
@@ -82,10 +94,50 @@ const TextStyled = styled.div`
   font-weight: 500;
   font-stretch: normal;
   font-style: normal;
-  line-height: 1.5;
+  line-height: ${props => props.lh || "1.5"};
   letter-spacing: 0.37px;
   color: ${props => props.color || "#ffffff"};
   width: ${props => props.width || "auto"};
+  margin: ${props => props.margin || "0"};
+
+  .red {
+  	color: ${COLORS.RED};
+  }
+
+  .black {
+  	color: ${COLORS.BLACK};
+  }
+
+  &.is-ul-red {
+		ul {
+	    list-style: none;
+	    margin-left: 0;
+
+	    li {
+	      position: relative;
+	      padding-left: 2rem;
+	      margin: 2.5rem 0;
+
+	      &::before {
+	        content: '';
+	        display: block;
+	        width: 0.7rem;
+	        height: 0.7rem;
+	        background: ${COLORS.RED};
+	        position: absolute;
+	        left: 0;
+	        top: 50%;
+	        margin-top: -0.35rem;
+	        transform: rotate(45deg);
+	      }
+	    }
+	  }
+  }
+
+  &.is-in-two-columns {
+  	column-count: 2;
+  	column-gap: 3em;
+  }
 `
 
 const PulseBtn = styled.div`

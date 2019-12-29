@@ -21,8 +21,12 @@ class Section extends React.Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (typeof window === "undefined") return;
+    if (this.id === 0) {
+      window.headerObj.setState({"headerStyle": this.props.headerStyle});
+      window.footerObj.setState({"footerStyle": this.props.footerStyle});
+    }
   }
 
   mouseDownHandler(e) {

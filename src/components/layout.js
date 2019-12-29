@@ -31,7 +31,7 @@ class ContentLayout extends React.Component {
   }
 }
 
-const Layout = ({ children }) => {
+const Layout = ({ page, children }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -44,7 +44,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata.title} />
+      <Header siteTitle={data.site.siteMetadata.title} page={page} />
       <ContentLayout content={children} />
       <Footer />
       {/*<footer>

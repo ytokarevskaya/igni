@@ -215,6 +215,10 @@ html{font-family:sans-serif;font-size:10px;-ms-text-size-adjust:100%;-webkit-tex
   font-family: "Bebas", sans-serif;
 }
 
+.tt-uppercase {
+  text-transform: uppercase;
+}
+
 @keyframes pulse-btn-before {
   0% {
     width: 100%;

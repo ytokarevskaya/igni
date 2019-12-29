@@ -93,24 +93,26 @@ class Header extends React.Component {
             <div className="n3 translate-xy transition-05s" />
           </MenuBtn>
         </MenuFrame>
-        <SideMenu id="side-menu" className="translate-y">
-          <div className="item open-slide active" data-id="0" onClick={sideMenuClick}>
-            <div className="line transition-05s" />
-            <span>Главная</span>
-          </div> 
-          <div className="item open-slide" data-id="1" onClick={sideMenuClick}>
-            <div className="line transition-05s" />
-            <span>Услуги</span>
-          </div> 
-          <div className="item open-slide" data-id="2" onClick={sideMenuClick}>
-            <div className="line transition-05s" />
-            <span>Портфолио</span>
-          </div>
-          <div className="item open-slide" data-id="3" onClick={sideMenuClick}>
-            <div className="line transition-05s" />
-            <span>Контакты</span>
-          </div> 
-        </SideMenu>
+        {this.props.page === "home"?
+          <SideMenu id="side-menu" className="translate-y">
+            <div className="item open-slide active" data-id="0" onClick={sideMenuClick}>
+              <div className="line transition-05s" />
+              <span>Главная</span>
+            </div> 
+            <div className="item open-slide" data-id="1" onClick={sideMenuClick}>
+              <div className="line transition-05s" />
+              <span>Услуги</span>
+            </div> 
+            <div className="item open-slide" data-id="2" onClick={sideMenuClick}>
+              <div className="line transition-05s" />
+              <span>Портфолио</span>
+            </div>
+            <div className="item open-slide" data-id="3" onClick={sideMenuClick}>
+              <div className="line transition-05s" />
+              <span>Контакты</span>
+            </div> 
+          </SideMenu>
+        : ""}
       </HeaderStyled>
     )
   }

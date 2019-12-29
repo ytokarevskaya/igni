@@ -1,5 +1,4 @@
 import React from "react"
-import styled from "styled-components"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -8,10 +7,10 @@ import SectionAbout from "../components/sections/about"
 import SectionPortfolio from "../components/sections/portfolio"
 import SectionContacts from "../components/sections/contacts"
 
-import { COLORS, ScrollFrame, SectionStyled, BackLayer, FrontLayer, Title, TextStyled } from "../components/styled"
+import { ScrollFrame } from "../components/styled"
 
 const IndexPage = () => (
-  <Layout>
+  <Layout page="home">
     <SEO title="IGNI | Веб-студия полного цикла" />
     <ScrollFrame>
       <SectionMain id={0} active={true} />
@@ -23,4 +22,3 @@ const IndexPage = () => (
 )
 
 export default IndexPage
-

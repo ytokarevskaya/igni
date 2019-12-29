@@ -10,6 +10,9 @@ export const useProjectsData = () => {
             node {
               backgroundColor
               date
+              description {
+                json
+              }
               id
               logo {
                 file {

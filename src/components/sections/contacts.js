@@ -34,6 +34,7 @@ const SectionContacts = (props) => (
 	      			<input type="text" name="name" autoComplete="off" />
 	      		</InputFrame>
 	      		<InputFrame width="15%">
+	      			<label>Телефон</label>
 	      			<input type="text" name="phone" autoComplete="off" />
 	      		</InputFrame>
 	      		<InputFrame width="26%">

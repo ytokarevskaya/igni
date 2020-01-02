@@ -46,7 +46,7 @@ const Layout = ({ page, children }) => {
     <>
       <Header siteTitle={data.site.siteMetadata.title} page={page} />
       <ContentLayout content={children} />
-      <Footer />
+      <Footer page={page} />
       {/*<footer>
         © {new Date().getFullYear()}, Built with
         {` `}

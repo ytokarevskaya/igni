@@ -2,6 +2,7 @@ import styled from "styled-components"
 
 const COLORS = {
 	RED: '#de5650',
+	RED_HOVER: '#a73b37',
 	BLACK: '#0a0d19',
 	BLACK_30: 'rgba(0, 0, 0, 0.3)',
   LIGHT_BLACK: '#1f1f22',
@@ -242,6 +243,18 @@ const CursorBtn = styled.div`
   }
 `
 
+const RedButton = styled.div`
+	display: ${props => props.display || "inline-block"};
+	background: ${COLORS.RED};
+	color: #fff;
+	font-size: 1.6rem;
+	padding: ${props => props.padding || "1.2rem 2.4rem"};
+	transition: background 300ms ease;
+	&:hover {
+		background: ${COLORS.RED_HOVER};
+	}
+`
+
 const SectionScroll = styled.div`
   position: ${props => props.pos? props.pos[0] : "absolute"};
   top: ${props => props.pos? props.pos[1] : "40%"};
@@ -253,4 +266,107 @@ const SectionScroll = styled.div`
   transform: translate3d(0,0,0);
 `
 
-export { COLORS, ScrollFrame, SectionStyled, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, CursorBtn, SectionScroll }
+const InfoBlocks = styled.div`
+	display: flex;
+	margin: 7rem 0;
+
+	.block {
+		width: ${props => props.itemsCount? 100/props.itemsCount + "%" : "auto"};
+		padding: 1rem 8rem;
+		border-left: 1px solid ${COLORS.LINE_GREY};
+		&:last-child {
+			border-right: 1px solid ${COLORS.LINE_GREY};
+		}
+
+		.icon {
+			height: 4rem;
+    	margin-bottom: 2.5rem;
+		}
+	}
+`
+
+const ContentPart = styled.div`
+	padding: ${props => props.padding || "10rem 24rem"};
+	background: ${props => props.bg || COLORS.BG_GREY};
+	color: ${props => props.color || COLORS.BLACK};
+	display: ${props => props.flex? "flex" : "block"};
+`
+
+const ContentColumn = styled.div`
+	width: ${props => props.width || "auto"};
+	padding: ${props => props.padding || "0"};
+`
+
+const InputFrame = styled.div`
+	position: relative;
+	width: ${props => props.width || "auto"};
+	height: ${props => props.height || "auto"};
+
+	input, textarea {
+		font-size: 1.6rem;
+  	font-weight: 600;
+  	color: #fff;
+		width: 100%;
+		padding: 1.8rem 0;
+		border: none;
+		border-bottom: 1px solid #fff;
+		background: unset;
+		margin: 0 0 1.5rem 0;
+		&:focus {
+			outline: none;
+		}
+	}
+
+	input {
+		padding-right: 12rem;
+	}
+
+	textarea {
+		resize: vertical;
+    height: 5.5rem;
+    min-height: 5.5rem;
+    max-height: 15rem;
+    overflow: hidden;
+	}
+
+	label {
+		font-size: 1.6rem;
+  	font-weight: 300;
+		position: absolute;
+		right: 1rem;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+`
+
+const FormStyled = styled.div`
+	background: ${COLORS.LIGHT_BLACK};
+	padding: 7rem 11rem;
+
+	.form-inputs {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+
+	.form-bottom {
+		display: flex;
+		justify-content: flex-end;
+		margin-top: 6rem;
+	}
+
+	.submit-button {
+		font-size: 1.6rem;
+  	font-weight: 600;
+  	color: #fff;
+  	padding: 1.2rem 2.2rem;
+  	background: ${COLORS.RED};
+  	border: none;
+  	cursor: none;
+  	&:hover {
+
+  	}
+	}
+`
+
+export { COLORS, ScrollFrame, SectionStyled, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, CursorBtn, SectionScroll, ContentPart, InfoBlocks, InputFrame, FormStyled, ContentColumn, RedButton }

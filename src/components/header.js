@@ -5,6 +5,7 @@ import styled from "styled-components"
 import { COLORS, CursorBtn, Title } from "./styled"
 import { changeSection } from "./section"
 
+import logoLight from "../images/logo-light.svg"
 import logoWhite from "../images/logo-white.svg"
 import logo from "../images/logo.svg"
 import videoSrcMP4 from "../video/fire-1080p.mp4"
@@ -33,11 +34,16 @@ class Header extends React.Component {
   }
 
   render() {
+    let logoSrc = logo;
+    if (this.state.headerStyle === "white") {
+      logoSrc = logoWhite;
+    } else if (this.state.headerStyle === "light") {
+      logoSrc = logoLight;
+    } 
     return (
       <HeaderStyled className={this.state.headerStyle}>
         <Logo href="/">
-          <img src={logoWhite} className="white transition-05s" alt="IGNI Logo" />
-          <img src={logo} className="dark transition-05s" alt="IGNI Logo" />
+          <img src={logoSrc} className="transition-05s" alt="IGNI Logo" />
           <h1>Веб-студия полного цикла</h1>
         </Logo>
         <MainMenu className={this.state.menuOpened? "opened" : ""} onMouseMove={(e) => this.cursorFollow(e)}>
@@ -206,6 +212,7 @@ const MainMenu = styled.div`
   opacity: 0;
   pointer-events: none;
   transition: all 800ms ease;
+  background: ${COLORS.BG_GREY};
 
   &.opened {
     visibility: visible;

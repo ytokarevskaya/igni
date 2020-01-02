@@ -4,11 +4,18 @@ export const useProjectsData = () => {
   const { allContentfulProject } = useStaticQuery(
     graphql`
       query {
-        allContentfulProject {
+        allContentfulProject(sort: {fields: date, order: DESC}) {
           totalCount
           edges {
             node {
               backgroundColor
+              backgroundImg {
+                file {
+                  url
+                }
+              }
+              backgroundMode
+              backgroundSize
               date
               description {
                 json

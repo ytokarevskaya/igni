@@ -16,7 +16,7 @@ class Footer extends React.Component {
 
 	render() {
 		return (
-			<FooterStyled className={this.state.footerStyle}>
+			<FooterStyled className={this.state.footerStyle + " page-" + this.props.page}>
 				<Socials>
 					<a href="" target="_blank" className="icon-linkedin" />
 					<a href="" target="_blank" className="icon-dribbble" />
@@ -60,7 +60,8 @@ const BottomMenu = styled.div`
   	margin-left: 6rem;
   }
 
-  ${FooterStyled}.dark & {
+  ${FooterStyled}.dark &,
+  ${FooterStyled}.page-portfolio-design & {
   	display: none;
   }
 `

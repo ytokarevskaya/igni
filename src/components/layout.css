@@ -100,6 +100,16 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Bebas';
+    src: 
+        url('../fonts/BebasNeue-Thin.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/BebasNeue-Thin.woff') format('woff'),
+        url('../fonts/BebasNeue-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
 /* END fonts */
 
 /* icons */
@@ -136,6 +146,7 @@
 .icon-download:before{content:'\0049';}
 .icon-attach:before{content:'\004a';}
 .icon-filter:before{content:'\004b';}
+.icon-arrow-bold:before{content:'\004c';}
 
 /* END icons */
 

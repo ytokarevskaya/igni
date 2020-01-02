@@ -8,9 +8,13 @@ import Scroll from "../../components/scroll"
 
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
 import { useProjectsData } from "../../components/queries/get-projects-data"
-import { ScrollFrame, SectionScroll, COLORS, Title, TextStyled, FrontLayer } from "../../components/styled"
+import { ScrollFrame, SectionScroll, COLORS, Title, TextStyled, FrontLayer, InfoBlocks } from "../../components/styled"
 
-const PortfolioPage = () => {
+import teamIcon from "../../images/team.svg"
+import baloonIcon from "../../images/air-balloon.svg"
+import arrowDown from "../../images/arrow-down-black.png"
+
+const PortfolioContentPage = () => {
 	const { edges } = useProjectsData();
 	const projects = [];
 	const projectsBlog = [];
@@ -35,8 +39,9 @@ const PortfolioPage = () => {
 			        <PortfolioSlogan>
 			        	<Title fz="8rem" outline color="#fff"><span className="black no-outline">Посетитель</span> попадает на ваш сайт <span className="black no-outline">в поисках</span> конкретного <span className="black no-outline">решения.</span> Емкие <span className="black no-outline">заголовки и</span> интересное <span className="black no-outline">наполнение</span> с учетом SEO <span className="red no-outline">определяют полезность</span> вашего <span className="red no-outline">предложения</span>, а новые источники трафика, например, корпоративный блог, <span className="black no-outline">привлекают новых лидов.</span></Title>
 			        </PortfolioSlogan>
+			        <ArrowDown src={arrowDown} className="translate-y" />
 			        <Title color={COLORS.BLACK} margin="7rem 0">Статистика</Title>
-			        <InfoBlocks>
+			        <InfoBlocks itemsCount={5}>
 			        	<div className="block">
 			        		<Title margin="0 0 2.5rem 0">+280 <small>%</small></Title>
 			        		<TextStyled color={COLORS.BLACK}>Количество лидов</TextStyled>
@@ -50,11 +55,11 @@ const PortfolioPage = () => {
 			        		<TextStyled color={COLORS.BLACK}>Глубина просмотра</TextStyled>
 			        	</div>
 			        	<div className="block">
-			        		<Title margin="0 0 2.5rem 0">+280 <small>%</small></Title>
+			        		<img className="icon" alt="" src={teamIcon} />
 			        		<TextStyled color={COLORS.BLACK}>Новые источники трафика</TextStyled>
 			        	</div>
 			        	<div className="block">
-			        		<Title margin="0 0 2.5rem 0">+280 <small>%</small></Title>
+			        		<img className="icon" alt="" src={baloonIcon} />
 			        		<TextStyled color={COLORS.BLACK}>Увеличение доверия к бренду</TextStyled>
 			        	</div>
 			        </InfoBlocks>
@@ -105,6 +110,13 @@ const PortfolioContent = (props) => (
 	  	: ""}
   </PortfolioContentStyled>
 )
+
+const ArrowDown = styled.img`
+	position: absolute;
+	left: 0;
+	top: 70%;
+	height: 9rem;
+`
 
 const PortfolioContentStyled = styled.article`
 	color: ${COLORS.BLACK};
@@ -188,23 +200,10 @@ const PortfolioContentStyled = styled.article`
 	}
 `
 
-const InfoBlocks = styled.div`
-	display: flex;
-	margin: 7rem 0;
-
-	.block {
-		padding: 1rem 9rem;
-		border-left: 1px solid ${COLORS.LINE_GREY};
-		&:last-child {
-			border-right: 1px solid ${COLORS.LINE_GREY};
-		}
-	}
-`
-
 const PortfolioSlogan = styled.div`
 	margin: 20rem 0 10rem 0;
 	padding: 0 33rem;
 	line-height: 1.13;
 `
 
-export default PortfolioPage
+export default PortfolioContentPage

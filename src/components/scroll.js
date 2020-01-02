@@ -9,6 +9,7 @@ class Scroll extends React.Component {
 		super(props);
 		this.menu = React.createRef();
 		this.frame = React.createRef();
+		this.overflowLimit = +this.props.overflowLimit;
 	}
 
 	itemClick(e) {
@@ -29,7 +30,7 @@ class Scroll extends React.Component {
 			const curPos = +scrollFrame.dataset.pos;
 			newPos = curPos - e.deltaY * 0.5;
 			if (newPos > 0) newPos = 0;
-			if (newPos < -scrollContent.clientHeight * 0.8) newPos = -scrollContent.clientHeight * 0.8;
+			if (newPos < -scrollContent.clientHeight * this.overflowLimit) newPos = -scrollContent.clientHeight * this.overflowLimit;
 			for (let i = 0; i < scrollContent.children.length; i++) {
 			  const item = scrollContent.children[i];
 			  if (item.offsetTop < -newPos) {
@@ -80,13 +81,15 @@ class Scroll extends React.Component {
 Scroll.propTypes = {
   menuItems: PropTypes.array,
   width: PropTypes.string,
-  pos: PropTypes.array
+  pos: PropTypes.array,
+  overflowLimit: PropTypes.number
 }
 
 Scroll.defaultProps = {
   menuItems: [],
   width: "100%",
-  pos: ["absolute", "0", "0", "0", "0"]
+  pos: ["absolute", "0", "0", "0", "0"],
+  overflowLimit: 0.8
 }
 
 const SectionScrollMenu = styled.aside`

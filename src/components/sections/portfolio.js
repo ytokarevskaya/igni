@@ -40,32 +40,36 @@ const SectionPortfolio = (props) => {
           <PortfolioItem>
             <div className="header">
               <Title color={COLORS.BLACK}>Дизайн</Title>
-              <div className="all-projects">
+              <a className="all-projects" href="/portfolio/design">
                 <span>Все проекты</span>
-              </div>
+              </a>
             </div>
             <p className="count">{projects.design.length} {'проект' + wordEnd(projects.design.length, 'pr')}</p>
             <PortfolioWorks>
-              {projects.design.map((item) => {
-                return (
-                  <FormattedPortfolioWork project={item} type="design" />
-                )
+              {projects.design.map((item, index) => {
+                if (index < 3) {
+                  return (
+                    <FormattedPortfolioWork project={item} type="design" />
+                  )
+                }
               })}
             </PortfolioWorks>
           </PortfolioItem>
           <PortfolioItem>
             <div className="header">
               <Title color={COLORS.BLACK}>Контент</Title>
-              <div className="all-projects">
+              <a className="all-projects" href="/portfolio/content">
                 <span>Все проекты</span>
-              </div>
+              </a>
             </div>
             <p className="count">{projects.content.length} {'проект' + wordEnd(projects.content.length, 'pr')}</p>
             <PortfolioWorks>
-              {projects.content.map((item) => {
-                return (
-                  <FormattedPortfolioWork project={item} type="content" />
-                )
+              {projects.content.map((item, index) => {
+                if (index < 3) {
+                  return (
+                    <FormattedPortfolioWork project={item} type="content" />
+                  )
+                }
               })}
             </PortfolioWorks>
           </PortfolioItem>
@@ -78,10 +82,12 @@ const SectionPortfolio = (props) => {
             </div>
             <p className="count">{projects.marketing.length} {'проект' + wordEnd(projects.marketing.length, 'pr')}</p>
             <PortfolioWorks>
-              {projects.marketing.map((item) => {
-                return (
-                  <FormattedPortfolioWork project={item} type="marketing" />
-                )
+              {projects.marketing.map((item, index) => {
+                if (index < 3) {
+                  return (
+                    <FormattedPortfolioWork project={item} type="marketing" />
+                  )
+                }
               })}
             </PortfolioWorks>
           </PortfolioItem>
@@ -94,10 +100,12 @@ const SectionPortfolio = (props) => {
             </div>
             <p className="count">{projects.digital.length} {'проект' + wordEnd(projects.digital.length, 'pr')}</p>
             <PortfolioWorks>
-              {projects.digital.map((item) => {
-                return (
-                  <FormattedPortfolioWork project={item} type="digital" />
-                )
+              {projects.digital.map((item, index) => {
+                if (index < 3) {
+                  return (
+                    <FormattedPortfolioWork project={item} type="digital" />
+                  )
+                }
               })}
             </PortfolioWorks>
           </PortfolioItem>

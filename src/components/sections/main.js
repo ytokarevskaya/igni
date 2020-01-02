@@ -9,7 +9,7 @@ import videoSrcMP4 from "../../video/fire-1080p.mp4"
 import videoSrcWEBM from "../../video/fire-1080p.webm"
 
 const SectionMain = (props) => (
-	<Section id={props.id} active={props.active} name="section-main" headerStyle="white" footerStyle="white" unload={unloadAnimate}>
+	<Section id={props.id} active={props.active} name="section-main" headerStyle="light" footerStyle="white" unload={unloadAnimate}>
     <BackLayer>
       <BgVideo>
         <video autoPlay={true} className="translate-xy" loop={true}>
@@ -28,7 +28,7 @@ const SectionMain = (props) => (
         <TextStyled width="43rem">
           <p>Главная задача команды igni — обеспечить эффективное взаимодействие клиента и бизнеса в вебе. Чтобы достичь максимальных показателей, мы предлагаем не только маркетинговое сопровождение, но и конкретные действия по улучшению продукта.</p>
         </TextStyled>
-        <PortfolioBtn className="transition-05s unload-fadeOut">
+        <PortfolioBtn className="transition-05s unload-fadeOut" href="/portfolio">
           <div className="icon icon-fire transition-05s" />
           <div className="title transition-05s">Портфолио</div>
         </PortfolioBtn>
@@ -42,7 +42,8 @@ function unloadAnimate(section) {
 
 }
 
-const PortfolioBtn = styled.div`
+const PortfolioBtn = styled.a`
+  display: block;
   position: relative;
   left: -20rem;
   width: 15rem;

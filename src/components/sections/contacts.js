@@ -2,8 +2,9 @@ import React from "react"
 import styled from "styled-components"
 
 import Section from "../section"
+import Form from "../form"
 
-import { COLORS, BackLayer, FrontLayer, Title, TextStyled, PulseBtn } from "../styled"
+import { COLORS, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, InputFrame } from "../styled"
 
 const SectionContacts = (props) => (
 	<Section id={props.id} active={props.active} name="section-conatcts" headerStyle="dark" footerStyle="dark">
@@ -27,7 +28,7 @@ const SectionContacts = (props) => (
       		<div className="requisites">Реквизиты</div>
       		<a href="" className="price icon-download">Описание услуг и прайс-лист</a>
       	</ContactsLinks>
-      	<form>
+      	<Form action="" title="request" checkbox={false}>
       		<div className="form-inputs">
 	      		<InputFrame width="26%">
 	      			<label>Имя</label>
@@ -52,7 +53,7 @@ const SectionContacts = (props) => (
       		<div className="form-bottom">
       			<button className="submit-button transition-03s" type="submit">Отправить бриф</button>
       		</div>
-      	</form>
+      	</Form>
       </ContactsForm>
     </FrontLayer>
   </Section>
@@ -114,80 +115,11 @@ const ContactsBlock = styled.div`
 	}
 `
 
-const InputFrame = styled.div`
-	position: relative;
-	width: ${props => props.width || "auto"};
-	height: ${props => props.height || "auto"};
-
-	input, textarea {
-		font-size: 1.6rem;
-  	font-weight: 600;
-  	color: #fff;
-		width: 100%;
-		padding: 1.8rem 0;
-		border: none;
-		border-bottom: 1px solid #fff;
-		background: unset;
-		margin: 0 0 1.5rem 0;
-		&:focus {
-			outline: none;
-		}
-	}
-
-	input {
-		padding-right: 12rem;
-	}
-
-	textarea {
-		resize: vertical;
-    height: 5.5rem;
-    min-height: 5.5rem;
-    max-height: 15rem;
-    overflow: hidden;
-	}
-
-	label {
-		font-size: 1.6rem;
-  	font-weight: 300;
-		position: absolute;
-		right: 1rem;
-		top: 50%;
-		transform: translateY(-50%);
-	}
-`
-
 const ContactsForm = styled.div`
 	position: absolute;
 	bottom: 0;
 	left: 24rem;
 	right: 0;
-	background: ${COLORS.LIGHT_BLACK};
-	padding: 7rem 11rem;
-
-	.form-inputs {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
-	}
-
-	.form-bottom {
-		display: flex;
-		justify-content: flex-end;
-		margin-top: 6rem;
-	}
-
-	.submit-button {
-		font-size: 1.6rem;
-  	font-weight: 600;
-  	color: #fff;
-  	padding: 1.2rem 2.2rem;
-  	background: ${COLORS.RED};
-  	border: none;
-  	cursor: none;
-  	&:hover {
-
-  	}
-	}
 `
 
 const ContactsTitle = styled.div`

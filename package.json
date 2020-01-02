@@ -6,6 +6,7 @@
   "author": "Yulia Tokarevskaya <hello@yt-sites.ru>",
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^13.4.0",
+    "babel-plugin-styled-components": "^1.10.6",
     "contentful": "^7.10.0",
     "dotenv": "^8.2.0",
     "gatsby": "^2.17.11",
@@ -14,6 +15,7 @@
     "gatsby-plugin-offline": "^3.0.19",
     "gatsby-plugin-react-helmet": "^3.1.14",
     "gatsby-plugin-sharp": "^2.2.37",
+    "gatsby-plugin-styled-components": "^3.1.16",
     "gatsby-source-contentful": "^2.0.41",
     "gatsby-source-filesystem": "^2.1.36",
     "gatsby-transformer-sharp": "^2.3.3",

@@ -16,6 +16,10 @@ export const useProjectsData = () => {
               }
               backgroundMode
               backgroundSize
+              category {
+                slug
+                title
+              }
               date
               description {
                 json
@@ -33,10 +37,8 @@ export const useProjectsData = () => {
               }
               projectSubtitle
               projectTitle
+              slug
               subcategory
-              category {
-                title
-              }
               theme
             }
           }

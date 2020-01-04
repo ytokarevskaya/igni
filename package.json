@@ -5,6 +5,7 @@
   "version": "0.0.1",
   "author": "Yulia Tokarevskaya <hello@yt-sites.ru>",
   "dependencies": {
+    "@contentful/gatsby-transformer-contentful-richtext": "^13.1.0",
     "@contentful/rich-text-html-renderer": "^13.4.0",
     "babel-plugin-styled-components": "^1.10.6",
     "contentful": "^7.10.0",
@@ -17,7 +18,7 @@
     "gatsby-plugin-sharp": "^2.2.37",
     "gatsby-plugin-styled-components": "^3.1.16",
     "gatsby-source-contentful": "^2.0.41",
-    "gatsby-source-filesystem": "^2.1.36",
+    "gatsby-source-filesystem": "^2.1.43",
     "gatsby-transformer-sharp": "^2.3.3",
     "js-cookie": "^2.2.1",
     "prop-types": "^15.7.2",

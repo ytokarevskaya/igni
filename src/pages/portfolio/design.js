@@ -6,6 +6,7 @@ import SEO from "../../components/seo"
 import Section from "../../components/section"
 import Scroll from "../../components/scroll"
 import Form from "../../components/form"
+import ProjectCover from "../../components/project-cover"
 
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
 import { useProjectsData } from "../../components/queries/get-projects-data"
@@ -33,7 +34,7 @@ const PortfolioDesignPage = (props) => {
 			<ScrollFrame>
 				<Section id={0} active={true} name="section-portfolio" headerStyle="white" footerStyle="white">
 					<FrontLayer bg={COLORS.LIGHT_BLACK}>
-						<Scroll width="100%" pos={["absolute", "0", "0", "0", "0"]}>
+						<Scroll overflowLimit="1" width="100%" pos={["absolute", "0", "0", "0", "0"]}>
 		          <ProjectsCarousel>
 		          	{projects.map((item, index) => {
 	                return (
@@ -196,137 +197,15 @@ class Project extends React.Component {
 
   render() {
   	return (
-  		<ProjectStyled data-index={this.props.index} className={"portfolio-item" + (this.state.active? " is-active" : "") + (this.state.next? " is-next" : "")} bg={this.props.project.backgroundColor} bgImg={this.props.project.backgroundImg? this.props.project.backgroundImg.file.url : ""} bgSize={this.props.project.backgroundMode === "Contain"? this.props.project.backgroundSize : ""}>
-  			{this.props.index > 0?
-  				<div onClick={this.prevSlide} className="back-btn icon-arrow-bold translate-y" />
-  			: ""}
-  			<ProjectInfo>
-  				<div className="project-year ff-bebas">{new Date(this.props.project.date).getFullYear()}</div>
-  				<Title className="project-title" margin="3rem 0" color="#fff">{this.props.project.projectTitle}</Title>
-  				<TextStyled className="project-subtitle">{this.props.project.projectSubtitle}</TextStyled>
-  				<div className="project-subcategory ff-bebas">{this.props.project.subcategory}</div>
-  			</ProjectInfo>
-  			<ProjectNextInfo>
-  				<div className="project-year ff-bebas">{new Date(this.props.project.date).getFullYear()}</div>
-  				<div className="project-next icon-arrow-bold" onClick={this.nextSlide} />
-  				<div className="project-subcategory ff-bebas">{this.props.project.subcategory}</div>
-  			</ProjectNextInfo>
-  			<div className="project-title-bottom ff-bebas">{this.props.project.projectTitle}</div>
-  		</ProjectStyled>
+  		<ProjectCover index={this.props.index} project={this.props.project} state={this.state} prevSlide={this.prevSlide} nextSlide={this.nextSlide} />
   	)
   }
 }
-
-const ProjectInfo = styled.div`
-	position: absolute;
-	left: 24rem;
-	top: 40%;
-	width: 35rem;
-
-	.project-year, .project-subcategory {
-		font-size: 1.7rem;
-	}
-	.project-year {
-		margin-bottom: 7rem;
-	}
-	.project-subcategory {
-		margin-top: 7rem;
-	}
-`
-
-const ProjectNextInfo = styled(ProjectInfo)`
-	position: absolute;
-	left: 4.5rem;
-	top: 4.5rem;
-	bottom: 4.5rem;
-	width: 20rem;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-
-	.project-year, .project-subcategory {
-		margin: 0;
-	}
-
-	.project-next {
-		font-size: 3rem;
-		transform: rotate(180deg);
-		text-align: right;
-	}
-`
 
 const ProjectsCarousel = styled.div`
 	width: 100%;
 	height: 100vh;
 	position: relative;
-`
-
-const ProjectStyled = styled.div`
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	left: 100%;
-	top: 50%;
-	background-color: ${props => props.bg || "#fff"};
-	background-image: ${props => props.bgImg? "url(" + props.bgImg + ")" : "unset"};
-	background-size: ${props => props.bgSize? props.bgSize : "cover"};
-	background-repeat: no-repeat;
-	background-position: center center;
-	opacity: 0;
-	visibility: hidden;
-	pointer-events: none;
-	transition: all 1000ms ease;
-	transform: translate3d(0, -50%, 0);
-
-	&.is-active, &.is-next {
-		opacity: 1;
-		visibility: visible;
-		pointer-events: all;
-	}
-
-	&.is-active {
-		transform: translate3d(-100%, -50%, 0);
-		${ProjectNextInfo}, .project-title-bottom {
-    	opacity: 0;
-    }
-	}
-
-	&.is-next {
-		width: 50%;
-    height: 50%;
-    transform: translate3d(-35rem, -50%, 0);
-    transition: all 1000ms ease 1000ms;
-
-    ${ProjectInfo}, .back-btn {
-    	opacity: 0;
-    }
-    ${ProjectNextInfo} {
-    	opacity: 1;
-    }
-	}
-
-	.project-title-bottom {
-		font-size: 5rem;
-  	font-weight: 100;
-  	text-transform: uppercase;
-  	position: absolute;
-  	top: 100%;
-  	left: 0;
-  	width: 30rem;
-  	margin-top: 5.5rem;
-	}
-
-	.back-btn {
-		font-size: 1.7rem;
-		color: ${COLORS.RED};
-		background: #fff;
-		border-top-right-radius: 4px;
-		border-bottom-right-radius: 4px;
-		position: absolute;
-		left: 0;
-		top: 50%;
-		padding: 1.8rem 2.5rem;
-	}
 `
 
 export default PortfolioDesignPage

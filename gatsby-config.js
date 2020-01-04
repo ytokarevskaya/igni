@@ -2,6 +2,8 @@ if (process.env.NODE_ENV === "development") {
   require("dotenv").config();
 }
 
+const { BLOCKS, MARKS, INLINES } = require('@contentful/rich-text-types')
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby Default Starter`,
@@ -37,6 +39,20 @@ module.exports = {
       options: {
         spaceId: 'iqzj3v996p76',
         accessToken: 'iRy8cHoyp4PbkUs0_MhZOciOE8Gd_R1fthRn1diqBYE',
+      },
+    },
+    {
+      resolve: '@contentful/gatsby-transformer-contentful-richtext',
+      options: {
+        renderOptions: {
+          renderNode: {
+            [BLOCKS.EMBEDDED_ASSET]: node => {
+              return `<img class='custom-asset' src="${
+                node.data.target.fields.file['en-US'].url
+              }"/>`
+            },
+          }
+        },
       },
     }
   ],

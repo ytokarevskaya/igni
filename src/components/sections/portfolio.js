@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import { Link } from "gatsby"
 
 import Section from "../section"
 import { wordEnd } from "../utils"
@@ -36,13 +37,13 @@ const SectionPortfolio = (props) => {
         <PortfolioTitle>
           <Title fz="5rem" lineBottom lineBg={COLORS.BLACK}>Портфолио <span className="black">IGNI</span></Title>
         </PortfolioTitle>
-        <Scroll width="60%" pos={["absolute", "40%", "5%", "", ""]} menuItems={["Дизайн", "Контент", "Маркетинг и реклама", "Диджитал продакшн"]}>
+        <Scroll width="60%" overflowLimit="1.5" pos={["absolute", "40%", "5%", "", ""]} menuItems={["Дизайн", "Контент", "Маркетинг и реклама", "Диджитал продакшн"]}>
           <PortfolioItem>
             <div className="header">
               <Title color={COLORS.BLACK}>Дизайн</Title>
-              <a className="all-projects" href="/portfolio/design">
+              <Link className="all-projects" to="/portfolio/design">
                 <span>Все проекты</span>
-              </a>
+              </Link>
             </div>
             <p className="count">{projects.design.length} {'проект' + wordEnd(projects.design.length, 'pr')}</p>
             <PortfolioWorks>
@@ -58,9 +59,9 @@ const SectionPortfolio = (props) => {
           <PortfolioItem>
             <div className="header">
               <Title color={COLORS.BLACK}>Контент</Title>
-              <a className="all-projects" href="/portfolio/content">
+              <Link className="all-projects" to="/portfolio/content">
                 <span>Все проекты</span>
-              </a>
+              </Link>
             </div>
             <p className="count">{projects.content.length} {'проект' + wordEnd(projects.content.length, 'pr')}</p>
             <PortfolioWorks>
@@ -76,9 +77,9 @@ const SectionPortfolio = (props) => {
           <PortfolioItem>
             <div className="header">
               <Title color={COLORS.BLACK}>Маркетинг и реклама</Title>
-              <div className="all-projects">
+              <Link className="all-projects" to="/portfolio/marketing">
                 <span>Все проекты</span>
-              </div>
+              </Link>
             </div>
             <p className="count">{projects.marketing.length} {'проект' + wordEnd(projects.marketing.length, 'pr')}</p>
             <PortfolioWorks>
@@ -94,9 +95,9 @@ const SectionPortfolio = (props) => {
           <PortfolioItem>
             <div className="header">
               <Title color={COLORS.BLACK}>Диджитал продакшн</Title>
-              <div className="all-projects">
+              <Link className="all-projects" to="/portfolio/digital">
                 <span>Все проекты</span>
-              </div>
+              </Link>
             </div>
             <p className="count">{projects.digital.length} {'проект' + wordEnd(projects.digital.length, 'pr')}</p>
             <PortfolioWorks>
@@ -123,7 +124,7 @@ const FormattedPortfolioWork = (props) => {
     logo = props.project.logo? <img className="logo" src={props.project.logo.file.url} /> : '';
   }
   return (
-    <PortfolioWork key={props.project.id} bg={props.project.backgroundColor} bgImg={props.project.preview? props.project.preview.file.url : ''} className={"transition-03s" + (props.project.theme? " theme-" + props.project.theme : " theme-Dark")}>
+    <PortfolioWork href={"/portfolio/" + props.project.category.slug + "/" + props.project.slug} key={props.project.id} bg={props.project.backgroundColor} bgImg={props.project.preview? props.project.preview.file.url : ''} className={"transition-03s" + (props.project.theme? " theme-" + props.project.theme : " theme-Dark")}>
       <div className="ff-bebas info"><span className="year">{new Date(props.project.date).getFullYear()}</span> {props.project.subcategory}</div>
       {logo}
       <div className="title">{props.project.projectTitle}{(props.type === "digital"? <span className="time"> 1 : 15</span> : '')}</div>
@@ -132,7 +133,7 @@ const FormattedPortfolioWork = (props) => {
   )
 }
 
-const PortfolioWork = styled.div`
+const PortfolioWork = styled.a`
   position: relative;
   display: flex;
   flex-wrap: wrap;

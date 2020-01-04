@@ -1,10 +1,11 @@
 import React from "react"
 import styled from "styled-components"
-import { StaticQuery, graphql } from "gatsby"
+import { Link, StaticQuery, graphql } from "gatsby"
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
 
 import Section from "../section"
 import Scroll from "../scroll"
+import { useCategoriesData } from "../queries/get-categories-data"
 
 import { COLORS, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, SectionScroll } from "../styled"
 
@@ -35,14 +36,16 @@ class AboutItem extends React.Component {
   render() {
     {/*<AboutItemStyled className="transition-05s item" data-id={this.props.id} onMouseEnter={(e) => this.moveBtn(e)} onMouseMove={(e) => this.moveBtn(e)} onMouseLeave={(e) => this.returnBtn(e)}>*/}
     return (
-      <AboutItemStyled className="transition-05s item" data-id={this.props.id} bgImg={this.props.bg}>
-        <div className="bg transition-05s" />
-        <Title color={COLORS.BLACK}>{this.props.title}</Title>
-        <div>
-          <TextStyled color={COLORS.BLACK} lh="1.15" className="is-ul-red" dangerouslySetInnerHTML={{__html: documentToHtmlString(this.props.content? this.props.content.json : "")}} />
-        </div>
-        <RedBtn ref={this.redBtn} />
-      </AboutItemStyled>
+      <Link to={"/portfolio/" + this.props.slug}>
+        <AboutItemStyled className="transition-05s item" data-id={this.props.id} bgImg={this.props.bg}>
+          <div className="bg transition-05s" />
+          <Title color={COLORS.BLACK}>{this.props.title}</Title>
+          <div>
+            <TextStyled color={COLORS.BLACK} lh="1.15" className="is-ul-red" dangerouslySetInnerHTML={{__html: documentToHtmlString(this.props.content? this.props.content.json : "")}} />
+          </div>
+          <RedBtn ref={this.redBtn} />
+        </AboutItemStyled>
+      </Link>
     )
   }
 }
@@ -67,52 +70,38 @@ const RedBtn = styled.div`
   }
 `
 
-const SectionAbout = (props) => (
-  <Section id={props.id} active={props.active} name="section-about" headerStyle="dark" footerStyle="dark">
-    <BackLayer bg="#f6f7f9">
-      <img src={fireSrc} alt="" style={{"display": "block", "width": "38%", "margin": "13rem auto"}} />
-    </BackLayer>
-    <FrontLayer >
-      <AboutTitle>
-        <Title fz="5rem" color={COLORS.BLACK} width="30rem">Проектируем, разрабатываем, продвигаем – наши <span className="red">услуги</span></Title>
-        <TextStyled width="42rem" color={COLORS.BLACK}>Чтобы осветить темное пространство веба новыми проектами, мы собрали команду профессионалов с обширным опытом работы в сфере дизайна, разработки, маркетинга, рекламы и видео производства.</TextStyled>
-      </AboutTitle>
-      <Scroll width="auto" pos={["absolute", "40%", "15%", "", ""]} menuItems={["Дизайн", "Аналитика", "Performance-маркетинг", "Контент"]}>
-        <StaticQuery
-          query={graphql`
-            {
-              allContentfulAboutItem {
-                edges {
-                  node {
-                    background {
-                      file {
-                        url
-                      }
-                    }
-                    id
-                    title
-                    description {
-                      json
-                    }
-                  }
-                }
-              }
-            }
-          `}
-          render={({
-            allContentfulAboutItem: {
-              edges
-            }
-          }) => (
-            edges.map(({ node }) => (
-              <AboutItem key={node.id} id={node.id} title={node.title} content={node.description} bg={node.background.file.url} />
+const SectionAbout = (props) => {
+  const { edges } = useCategoriesData()
+  const categories = [];
+  const categoriesTitles = [];
+
+  edges.map((item) => {
+    const category = item.node;
+    categories.push(category);
+    categoriesTitles.push(category.title);
+  });
+
+  return (
+    <Section id={props.id} active={props.active} name="section-about" headerStyle="dark" footerStyle="dark">
+      <BackLayer bg="#f6f7f9">
+        <img src={fireSrc} alt="" style={{"display": "block", "width": "38%", "margin": "13rem auto"}} />
+      </BackLayer>
+      <FrontLayer >
+        <AboutTitle>
+          <Title fz="5rem" color={COLORS.BLACK} width="30rem">Проектируем, разрабатываем, продвигаем – наши <span className="red">услуги</span></Title>
+          <TextStyled width="42rem" color={COLORS.BLACK}>Чтобы осветить темное пространство веба новыми проектами, мы собрали команду профессионалов с обширным опытом работы в сфере дизайна, разработки, маркетинга, рекламы и видео производства.</TextStyled>
+        </AboutTitle>
+        <Scroll overflowLimit="2.3" width="auto" pos={["absolute", "40%", "15%", "", ""]} menuItems={categoriesTitles}>
+          {categories.map((node) => (
+              <AboutItem key={node.id} id={node.id} title={node.title} content={node.description} bg={node.background.file.url} slug={node.slug} />
             ))
-          )}
-        />
-      </Scroll>
-    </FrontLayer>
-  </Section>
-)
+          }
+          />
+        </Scroll>
+      </FrontLayer>
+    </Section>
+  )
+}
 
 const AboutItemStyled = styled.div`
   position: relative;

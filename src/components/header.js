@@ -1,6 +1,7 @@
 import PropTypes from "prop-types"
 import React from "react"
 import styled from "styled-components"
+import { Link } from "gatsby"
 
 import { COLORS, CursorBtn, Title } from "./styled"
 import { changeSection } from "./section"
@@ -42,10 +43,12 @@ class Header extends React.Component {
     } 
     return (
       <HeaderStyled className={this.state.headerStyle}>
-        <Logo href="/">
-          <img src={logoSrc} className="transition-05s" alt="IGNI Logo" />
-          <h1>Веб-студия полного цикла</h1>
-        </Logo>
+        <Link to="/">
+          <Logo>
+            <img src={logoSrc} className="transition-05s" alt="IGNI Logo" />
+            <h1>Веб-студия полного цикла</h1>
+          </Logo>
+        </Link>
         <MainMenu className={this.state.menuOpened? "opened" : ""} onMouseMove={(e) => this.cursorFollow(e)}>
           <BgVideo>
             <video autoPlay={true} className="translate-xy" loop={true}>
@@ -393,7 +396,7 @@ const MenuFrame = styled.div`
   display: flex;
 `
 
-const Logo = styled.a`
+const Logo = styled.div`
   display: block;
   position: absolute;
   left: 7rem;

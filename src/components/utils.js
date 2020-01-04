@@ -19,4 +19,10 @@ function wordEnd(num, type) {
     }
 }
 
-export { wordEnd }
+function getURLParameter(name, searchLine){
+    const search = searchLine || window.location.search || window.location.hash;
+    const uri = (new RegExp('(\\?|&)' + name + '=' + '(.+?)(&|$)').exec(search)||["",null])[2];
+    return uri && decodeURI(uri);
+}
+
+export { wordEnd, getURLParameter }

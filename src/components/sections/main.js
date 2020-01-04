@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import { Link } from "gatsby"
 
 import Section from "../section"
 
@@ -28,11 +29,13 @@ const SectionMain = (props) => (
         <TextStyled width="43rem">
           <p>Главная задача команды igni — обеспечить эффективное взаимодействие клиента и бизнеса в вебе. Чтобы достичь максимальных показателей, мы предлагаем не только маркетинговое сопровождение, но и конкретные действия по улучшению продукта.</p>
         </TextStyled>
-        <PortfolioBtn className="transition-05s unload-fadeOut" href="/portfolio">
-          <div className="icon icon-fire transition-05s" />
-          <div className="title transition-05s">Портфолио</div>
-        </PortfolioBtn>
-        <PulseBtn>+</PulseBtn>
+        <Link to="/portfolio">
+          <PortfolioBtn className="transition-05s unload-fadeOut" href="/portfolio">
+            <div className="icon icon-fire transition-05s" />
+            <div className="title transition-05s">Портфолио</div>
+          </PortfolioBtn>
+        </Link>
+        {/*<PulseBtn>+</PulseBtn>*/}
       </HomeSubtitle>
     </FrontLayer>
   </Section>
@@ -42,8 +45,7 @@ function unloadAnimate(section) {
 
 }
 
-const PortfolioBtn = styled.a`
-  display: block;
+const PortfolioBtn = styled.div`
   position: relative;
   left: -20rem;
   width: 15rem;

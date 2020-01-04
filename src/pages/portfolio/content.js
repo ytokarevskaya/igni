@@ -33,7 +33,7 @@ const PortfolioContentPage = () => {
 			<ScrollFrame>
 				<Section id={0} active={true} name="section-portfolio" headerStyle="dark" footerStyle="dark">
 					<FrontLayer bg="#f6f7f9">
-						<Scroll width="auto" pos={["absolute", "10rem", "0", "0", "24rem"]}>
+						<Scroll overflowLimit="1" width="auto" pos={["absolute", "10rem", "0", "0", "24rem"]}>
 		          <Title fz="5rem" color={COLORS.RED} lineBottom lineBg={COLORS.BLACK}>Контент-маркетинг</Title>
 		          <TextStyled color={COLORS.BLACK} width="18rem" margin="3.5rem 0">Позвольте клиенту найти то, что он ищет</TextStyled>
 			        <PortfolioSlogan>

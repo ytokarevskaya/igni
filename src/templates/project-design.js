@@ -52,6 +52,7 @@ export const query = graphql`
       }
       projectSubtitle
       projectTitle
+      slug
       subcategory
       category {
       	slug
@@ -96,7 +97,6 @@ const ProjectPage = ({ data }) => {
 	  }
 	};
 
-	const ProjectContentRow = styled.div``
 	return (
 	  <Layout page="project">
 	    <SEO title="IGNI | Веб-студия полного цикла" />
@@ -109,7 +109,7 @@ const ProjectPage = ({ data }) => {
 			          <TextStyled color="#fff" width="18rem" margin="3.5rem 0">сделайте первое впечатление клиента незабываемым</TextStyled>
 		          </CategoryTitle>
 			      	<ProjectCover index={0} project={project} />
-			      	<ContentPart bg="transparent" padding="10rem 25%">
+			      	<ContentPart bg="transparent" padding="10rem 20%">
 			      		<ProjectContent theme={project.theme}>
 			      			<div dangerouslySetInnerHTML={{__html: project.description? documentToHtmlString(project.description.json, renderOptions) : ""}} />
 			      			{/*<ProjectContentRow>
@@ -119,6 +119,35 @@ const ProjectPage = ({ data }) => {
 			      					})
 			      				: ""
 			      			</ProjectContentRow>*/}
+			      			{project.slug === "xena-exchange"?
+			      				<ProjectContentRow>
+			      					<ProjectContentColumn width="50%">
+			      						<img src="https://images.ctfassets.net/iqzj3v996p76/6xAJbEHwXedLxNjOxHZFOJ/d0f9e15824e6213e355442fcbe1398e8/02_-_iPhone_XS_Front.png" alt="" />
+			      					</ProjectContentColumn>
+			      					<ProjectContentColumn width="50%">
+			      						<h2>О проекте</h2>
+			      						<p>Xena Exchange – высокотехнологичная платформа для торговли криптовалютными активами, которой требовался стильный и лаконичный дизайн.</p>
+			      						<p>В рамках сотрудничества с Xena Exchange мы успешно провели редизайн основного сайта, личного кабинета и терминала биржи, оформили корпоративный блог и социальные сети, а также запустили несколько промо-кампаний.</p>
+			      					</ProjectContentColumn>
+			      					<ProjectContentColumn width="50%">
+			      						<h2>Главная страница</h2>
+			      						<img src="https://images.ctfassets.net/iqzj3v996p76/15pRkSED7qgChKY2YJr0Ww/ce01470fdd3c8edf36306ed06bf2af0e/B_2.png" alt="" />
+			      						<img src="https://images.ctfassets.net/iqzj3v996p76/3rLBe0b0bZ329tQIfLkb9c/0cfa9a2d5bcae7685e2ca9043fff316c/B_2_Copy_2.png" alt="" />
+			      					</ProjectContentColumn>
+			      					<ProjectContentColumn width="50%">
+			      						<div className="h5rem" />
+			      						<img src="https://images.ctfassets.net/iqzj3v996p76/6oQrVMh7rjfCdNmwbSwg4g/5384a0152384e92da9fa3da485c8365b/B_2_Copy.png" alt="" />
+			      						<img src="https://images.ctfassets.net/iqzj3v996p76/WVikWAizoFcZcflRrYq6H/803fd5b284977ea6b15fe2c53ac0bdad/B_2_Copy_3.png" alt="" />
+			      					</ProjectContentColumn>
+			      					<ProjectContentColumn width="50%">
+			      						<h2>Обзор котировок</h2>
+			      						<img src="https://images.ctfassets.net/iqzj3v996p76/162UWLduPxFeWPjBH6mybM/c10bd2b046408655263a744f2686f7fa/B_2_Copy_4.png" alt="" />
+			      					</ProjectContentColumn>
+			      					<ProjectContentColumn width="50%">
+			      						<img src="https://images.ctfassets.net/iqzj3v996p76/1j8d4dbvgtGLGPjdhx42IU/eed05f80bf79f4e967fa08839ad5b50c/01_-_iPhone_XS_Front.png" alt="" />
+			      					</ProjectContentColumn>
+			      				</ProjectContentRow>
+			      			: ""}
 			      			<Title className="thankyou" color="#fff" width="24rem">Благодарим <br/>за внимание</Title>
 			      		</ProjectContent>
 			      	</ContentPart>
@@ -301,9 +330,14 @@ const CategoryTitle = styled.div`
 	left: 24rem;
 	z-index: 1;
 `
+
+const ProjectContentRow = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+`
+
 const ProjectContentColumn = styled.div`
-	display: inline-block;
-	vertical-align: top;
+	flex-grow: 0;
 	width: ${props => props.width || "100%"};
 	padding: 3rem;
 `;

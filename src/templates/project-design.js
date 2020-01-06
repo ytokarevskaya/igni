@@ -74,7 +74,6 @@ const ProjectPage = ({ data }) => {
 	    projects.push(node);
 	  }
 	});
-	debugger;
 
 	const renderOptions = {
 	  renderNode: {

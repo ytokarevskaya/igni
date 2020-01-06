@@ -5,10 +5,11 @@ import Layout from "../../components/layout"
 import SEO from "../../components/seo"
 import Section from "../../components/section"
 import Scroll from "../../components/scroll"
+import Form from "../../components/form"
 
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
 import { useProjectsData } from "../../components/queries/get-projects-data"
-import { ScrollFrame, SectionScroll, COLORS, Title, TextStyled, FrontLayer, InfoBlocks } from "../../components/styled"
+import { ScrollFrame, SectionScroll, COLORS, Title, TextStyled, FrontLayer, InfoBlocks, InputFrame, ContentPart } from "../../components/styled"
 
 import teamIcon from "../../images/team.svg"
 import baloonIcon from "../../images/air-balloon.svg"
@@ -33,7 +34,7 @@ const PortfolioContentPage = () => {
 			<ScrollFrame>
 				<Section id={0} active={true} name="section-portfolio" headerStyle="dark" footerStyle="dark">
 					<FrontLayer bg="#f6f7f9">
-						<Scroll overflowLimit="1" width="auto" pos={["absolute", "10rem", "0", "0", "24rem"]}>
+						<Scroll overflowLimit={1} width="auto" pos={["absolute", "10rem", "0", "0", "24rem"]}>
 		          <Title fz="5rem" color={COLORS.RED} lineBottom lineBg={COLORS.BLACK}>Контент-маркетинг</Title>
 		          <TextStyled color={COLORS.BLACK} width="18rem" margin="3.5rem 0">Позвольте клиенту найти то, что он ищет</TextStyled>
 			        <PortfolioSlogan>
@@ -76,6 +77,34 @@ const PortfolioContentPage = () => {
                   <PortfolioContent key={item.id} project={item} type="blog" last={index + 1 === projectsBlog.length} />
                 )
               })}
+              <ContentPart padding="0 0 8rem 24rem">
+		          	<Form action="" title="request" checkbox={false}>
+				      		<div className="form-inputs">
+					      		<InputFrame width="26%">
+					      			<label>Имя</label>
+					      			<input type="text" name="name" autoComplete="off" />
+					      		</InputFrame>
+					      		<InputFrame width="15%">
+					      			<label>Телефон</label>
+					      			<input type="text" name="phone" autoComplete="off" />
+					      		</InputFrame>
+					      		<InputFrame width="26%">
+					      			<label>E-mail</label>
+					      			<input type="email" name="email" autoComplete="off" />
+					      		</InputFrame>
+					      		<InputFrame width="26%">
+					      			<label>Компания</label>
+					      			<input type="text" name="company" autoComplete="off" />
+					      		</InputFrame>
+					      		<InputFrame width="100%">
+					      			<textarea placeholder="Задача"></textarea>
+					      		</InputFrame>
+				      		</div>
+				      		<div className="form-bottom">
+				      			<button className="submit-button transition-03s" type="submit">Отправить бриф</button>
+				      		</div>
+				      	</Form>
+		          </ContentPart>
 		        </Scroll>
 					</FrontLayer>
 				</Section>

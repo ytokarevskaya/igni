@@ -7,6 +7,8 @@ import Section from "../../components/section"
 import Scroll from "../../components/scroll"
 import Form from "../../components/form"
 import ProjectCover from "../../components/project-cover"
+import Slider from "rc-slider"
+import "rc-slider/assets/index.css";
 
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
 import { useProjectsData } from "../../components/queries/get-projects-data"
@@ -34,7 +36,7 @@ const PortfolioDesignPage = (props) => {
 			<ScrollFrame>
 				<Section id={0} active={true} name="section-portfolio" headerStyle="white" footerStyle="white">
 					<FrontLayer bg={COLORS.LIGHT_BLACK}>
-						<Scroll overflowLimit="1" width="100%" pos={["absolute", "0", "0", "0", "0"]}>
+						<Scroll overflowLimit={1} width="100%" pos={["absolute", "0", "0", "0", "0"]}>
 		          <ProjectsCarousel>
 		          	{projects.map((item, index) => {
 	                return (
@@ -42,6 +44,9 @@ const PortfolioDesignPage = (props) => {
 	                )
 	              })}
 	              <ArrowDown src={arrowDown} className="translate-y" />
+	              {/*<ProjectsSlider className="translate-x">
+							    <Slider />
+							  </ProjectsSlider>*/}
 		          </ProjectsCarousel>
 							<PortfolioDesignTitle>
 			          <Title fz="5rem" color="#fff" lineBottom lineBg="#fff">Дизайн</Title>
@@ -142,6 +147,13 @@ const PortfolioDesignPage = (props) => {
 		</Layout>
 	)
 }
+
+const ProjectsSlider = styled.div`
+	position: absolute;
+	bottom: 2.5rem;
+	left: 50%;
+	width: 40%;
+`
 
 const ArrowDown = styled.img`
 	position: absolute;

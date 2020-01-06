@@ -43,12 +43,12 @@ class Header extends React.Component {
     } 
     return (
       <HeaderStyled className={this.state.headerStyle}>
-        <Link to="/">
+        <a href="/">
           <Logo>
             <img src={logoSrc} className="transition-05s" alt="IGNI Logo" />
             <h1>Веб-студия полного цикла</h1>
           </Logo>
-        </Link>
+        </a>
         <MainMenu className={this.state.menuOpened? "opened" : ""} onMouseMove={(e) => this.cursorFollow(e)}>
           <BgVideo>
             <video autoPlay={true} className="translate-xy" loop={true}>
@@ -59,32 +59,32 @@ class Header extends React.Component {
           <MenuList>
             <div className="column transition-05s">
               <Title color="#fff" fz="5rem" lineBottom lineWidth="3.5rem">Главная</Title>
-              <div className="menu-link">Услуги</div>
-              <div className="menu-link">Общее портфолио</div>
-              <div className="menu-link">Аналитика</div>
-              <div className="menu-link">Контакты</div>
+              <a className="menu-link" href="/?active=1">Услуги</a>
+              <a className="menu-link" href="/?active=2">Общее портфолио</a>
+              <a className="menu-link">Аналитика</a>
+              <a className="menu-link" href="/?active=3">Контакты</a>
             </div>
             <div className="column transition-05s">
               <Title color="#fff" fz="5rem" lineBottom lineWidth="3.5rem">Дизайн</Title>
-              <div className="menu-link">Порфтолио</div>
+              <a className="menu-link" href="/portfolio/design">Портфолио</a>
               <div className="menu-link">Статистика</div>
               <div className="menu-link">Контакты</div>
             </div>
             <div className="column transition-05s">
               <Title color="#fff" fz="5rem" lineBottom lineWidth="3.5rem">Контент</Title>
-              <div className="menu-link">Порфтолио</div>
+              <a className="menu-link" href="/portfolio/content">Портфолио</a>
               <div className="menu-link">Статистика</div>
               <div className="menu-link">Контакты</div>
             </div>
             <div className="column transition-05s">
               <Title color="#fff" fz="5rem" lineBottom lineWidth="3.5rem">Маркетинг</Title>
-              <div className="menu-link">Порфтолио</div>
+              <a className="menu-link" href="/portfolio/marketing">Портфолио</a>
               <div className="menu-link">Статистика</div>
               <div className="menu-link">Контакты</div>
             </div>
             <div className="column transition-05s">
               <Title color="#fff" fz="5rem" lineBottom lineWidth="3.5rem">Продакшн</Title>
-              <div className="menu-link">Порфтолио</div>
+              <a className="menu-link" href="/portfolio/digital">Портфолио</a>
               <div className="menu-link">Статистика</div>
               <div className="menu-link">Контакты</div>
             </div>

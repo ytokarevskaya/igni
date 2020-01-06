@@ -74,11 +74,11 @@ const ProjectPage = ({ data }) => {
 	    projects.push(node);
 	  }
 	});
+	debugger;
 
 	const renderOptions = {
 	  renderNode: {
 	    [BLOCKS.EMBEDDED_ASSET]: node => {
-	    	// debugger;
 	    	if (!node.data.target.fields) return;
         return `<img src="${node.data.target.fields.file["en-US"].url}" alt="" />`
       },

@@ -34,11 +34,11 @@ const SectionPortfolio = (props) => {
   return (
   	<Section id={props.id} active={props.active} name="section-portfolio" headerStyle="dark" footerStyle="dark">
       <FrontLayer bg="#f6f7f9">
-        <PortfolioTitle>
+        <PortfolioTitle className="load-ani unload-ani" data-loaddelay={0} data-unloaddelay={0}>
           <Title fz="5rem" lineBottom lineBg={COLORS.BLACK}>Портфолио <span className="black">IGNI</span></Title>
         </PortfolioTitle>
         <Scroll width="60%" overflowLimit="1.5" pos={["absolute", "40%", "5%", "", ""]} menuItems={["Дизайн", "Контент", "Маркетинг и реклама", "Диджитал продакшн"]}>
-          <PortfolioItem>
+          <PortfolioItem className="load-ani unload-ani" data-loaddelay={0} data-unloaddelay={400}>
             <div className="header">
               <Title color={COLORS.BLACK}>Дизайн</Title>
               <Link className="all-projects" to="/portfolio/design">
@@ -50,13 +50,13 @@ const SectionPortfolio = (props) => {
               {projects.design.map((item, index) => {
                 if (index < 3) {
                   return (
-                    <FormattedPortfolioWork project={item} type="design" />
+                    <FormattedPortfolioWork index={index} project={item} type="design" />
                   )
                 }
               })}
             </PortfolioWorks>
           </PortfolioItem>
-          <PortfolioItem>
+          <PortfolioItem className="load-ani unload-ani" data-loaddelay={0} data-unloaddelay={400}>
             <div className="header">
               <Title color={COLORS.BLACK}>Контент</Title>
               <Link className="all-projects" to="/portfolio/content">
@@ -68,13 +68,13 @@ const SectionPortfolio = (props) => {
               {projects.content.map((item, index) => {
                 if (index < 3) {
                   return (
-                    <FormattedPortfolioWork project={item} type="content" />
+                    <FormattedPortfolioWork index={index} project={item} type="content" />
                   )
                 }
               })}
             </PortfolioWorks>
           </PortfolioItem>
-          <PortfolioItem>
+          <PortfolioItem className="load-ani unload-ani" data-loaddelay={0} data-unloaddelay={400}>
             <div className="header">
               <Title color={COLORS.BLACK}>Маркетинг и реклама</Title>
               <Link className="all-projects" to="/portfolio/marketing">
@@ -86,13 +86,13 @@ const SectionPortfolio = (props) => {
               {projects.marketing.map((item, index) => {
                 if (index < 3) {
                   return (
-                    <FormattedPortfolioWork project={item} type="marketing" />
+                    <FormattedPortfolioWork index={index} project={item} type="marketing" />
                   )
                 }
               })}
             </PortfolioWorks>
           </PortfolioItem>
-          <PortfolioItem>
+          <PortfolioItem className="load-ani unload-ani" data-loaddelay={0} data-unloaddelay={400}>
             <div className="header">
               <Title color={COLORS.BLACK}>Диджитал продакшн</Title>
               <Link className="all-projects" to="/portfolio/digital">
@@ -104,7 +104,7 @@ const SectionPortfolio = (props) => {
               {projects.digital.map((item, index) => {
                 if (index < 3) {
                   return (
-                    <FormattedPortfolioWork project={item} type="digital" />
+                    <FormattedPortfolioWork index={index} project={item} type="digital" />
                   )
                 }
               })}
@@ -124,7 +124,7 @@ const FormattedPortfolioWork = (props) => {
     logo = props.project.logo? <img className="logo" src={props.project.logo.file.url} /> : '';
   }
   return (
-    <PortfolioWork href={"/portfolio/" + props.project.category.slug + "/" + props.project.slug} key={props.project.id} bg={props.project.backgroundColor} bgImg={props.project.preview? props.project.preview.file.url : ''} className={"transition-03s" + (props.project.theme? " theme-" + props.project.theme : " theme-Dark")}>
+    <PortfolioWork href={"/portfolio/" + props.project.category.slug + "/" + props.project.slug} key={props.project.id} bg={props.project.backgroundColor} bgImg={props.project.preview? props.project.preview.file.url : ''} className={"transition-03s load-ani unload-ani" + (props.project.theme? " theme-" + props.project.theme : " theme-Dark")} data-loaddelay={props.index * 200 + 800} data-unloaddelay={props.index * 200 + 800}>
       <div className="ff-bebas info"><span className="year">{new Date(props.project.date).getFullYear()}</span> {props.project.subcategory}</div>
       {logo}
       <div className="title">{props.project.projectTitle}{(props.type === "digital"? <span className="time"> 1 : 15</span> : '')}</div>
@@ -148,6 +148,27 @@ const PortfolioWork = styled.a`
   background-repeat: no-repeat;
   cursor: pointer;
   box-shadow: 0 4px 10px -5px rgba(55, 59, 68, 0.26);
+
+  &.theme-Light {
+    color: ${COLORS.BLACK};
+    .description {
+      hr {
+        background: ${COLORS.LINE_GREY};
+      }
+    }
+  }
+  &.theme-Dark {
+    color: #fff;
+  }
+  &.load-ani, &.unload-ani.unloaded {
+    transform: translateY(-3rem);
+  }
+  &.load-ani.loaded {
+    transform: translateY(0);
+  }
+  &:hover {
+    transform: translateY(-1rem)!important;
+  }
 
   .logo {
     display: block;
@@ -196,21 +217,6 @@ const PortfolioWork = styled.a`
     .year {
       margin-right: 2rem;
     }
-  }
-
-  &:hover {
-    transform: translateY(-1rem);
-  }
-  &.theme-Light {
-    color: ${COLORS.BLACK};
-    .description {
-      hr {
-        background: ${COLORS.LINE_GREY};
-      }
-    }
-  }
-  &.theme-Dark {
-    color: #fff;
   }
 `
 

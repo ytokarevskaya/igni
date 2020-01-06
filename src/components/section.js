@@ -23,9 +23,12 @@ class Section extends React.Component {
 
   componentDidMount() {
     if (typeof window === "undefined") return;
-    if (this.id === 0) {
-      window.headerObj.setState({"headerStyle": this.props.headerStyle});
-      window.footerObj.setState({"footerStyle": this.props.footerStyle});
+    if (this.props.active) {
+      window.headerObj.setState({"headerStyle": sectionObjects[this.id].props.headerStyle});
+      window.footerObj.setState({"footerStyle": sectionObjects[this.id].props.footerStyle});
+      animateLoad(this.sectionRef.current);
+      // window.headerObj.setState({"headerStyle": this.props.headerStyle});
+      // window.footerObj.setState({"footerStyle": this.props.footerStyle});
     }
   }
 
@@ -79,10 +82,8 @@ const changeSection = (curId, newId) => {
   const nextSection = document.querySelector("section[data-id='" + newId + "']");
   const sectionObj = sectionObjects[curId];
   const sideMenu = document.getElementById("side-menu");
-
   if (sectionObjects[newId]) {
-    animateUnload(curSection);
-    setTimeout(() => {
+    animateUnload(curSection, () => {
       sectionObjects[newId].setState({"active": true});
       sectionObjects[curId].setState({"active": false});
       window.headerObj.setState({"headerStyle": sectionObjects[newId].props.headerStyle});
@@ -94,32 +95,39 @@ const changeSection = (curId, newId) => {
       setTimeout(() => {
         animateLoad(nextSection);
       }, 1000);
-    }, 1500);
+    });
   }
 }
 
 const animateLoad = (section) => {
   section.querySelectorAll(".load-ani").forEach(element => {
     const delay = +element.dataset.loaddelay || 500;
-    section.querySelectorAll(".unload-ani").forEach(element => {
-      element.classList.remove("unloaded");
-    });
     setTimeout(() => {
       element.classList.add("loaded");
     }, delay);
   })
 }
 
-const animateUnload = (section) => {
-  section.querySelectorAll(".unload-ani").forEach(element => {
-    const delay = +element.dataset.unloaddelay || 500;
-    setTimeout(() => {
-      element.classList.add("unloaded");
-      section.querySelectorAll(".load-ani").forEach(element => {
-        element.classList.remove("loaded");
-      });
-    }, delay);
-  })
+const animateUnload = (section, callback) => {
+  const unloadElements = section.querySelectorAll(".unload-ani");
+  if (unloadElements.length) {
+    unloadElements.forEach((element, index) => {
+      const delay = +element.dataset.unloaddelay || 500;
+      setTimeout(() => {
+        element.classList.add("unloaded");
+        if (index + 1 === unloadElements.length) {
+          setTimeout(() => {
+            callback();
+            unloadElements.forEach(el => {
+              el.classList.remove("unloaded");
+            });
+          }, 1000);
+        }
+      }, delay);
+    })
+  } else {
+    callback();
+  }
 }
 
 let mouseDownTimer;

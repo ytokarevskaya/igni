@@ -27,6 +27,7 @@ const SectionStyled = styled.section`
 	visibility: hidden;
 	opacity: 0;
   cursor: none;
+  pointer-events: none;
 
 	&.active {
 		position: absolute;
@@ -34,6 +35,7 @@ const SectionStyled = styled.section`
 		left: 0;
 		visibility: visible;
 		opacity: 1;
+		pointer-events: all;
 	}
 
 	&.onhold {

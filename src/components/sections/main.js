@@ -20,12 +20,12 @@ const SectionMain = (props) => (
       </BgVideo>
     </BackLayer>
     <FrontLayer bg="linear-gradient(155deg,rgba(255,255,255,0.5) 22%,rgba(0, 0, 0, 0.1) 58%),linear-gradient(to bottom,rgba(42,35,42,0.15),rgba(42,35,42,0.15))">
-      <HomeTitle className="translate-x unload-ani" data-unloadDelay="800">
+      <HomeTitle className="translate-x unload-ani" data-unloaddelay="800">
         <Title fz="20rem" className="n1" lh="0.5">IGNI</Title>
         <Title fz="2.4rem" color="#fff" width="12rem" ta="right" className="n2">Освещая темное пространство веба</Title>
         <Title color="#fff" width="36rem" className="n3">Комплексные услуги по созданию и продвижению сайтов</Title>
       </HomeTitle>
-      <HomeSubtitle className="unload-ani" data-unloadDelay="300">
+      <HomeSubtitle className="unload-ani" data-unloaddelay="300">
         <TextStyled width="43rem">
           <p>Главная задача команды igni — обеспечить эффективное взаимодействие клиента и бизнеса в вебе. Чтобы достичь максимальных показателей, мы предлагаем не только маркетинговое сопровождение, но и конкретные действия по улучшению продукта.</p>
         </TextStyled>

@@ -20,6 +20,7 @@ function wordEnd(num, type) {
 }
 
 function getURLParameter(name, searchLine){
+    if (typeof window === "undefined") return;
     const search = searchLine || window.location.search || window.location.hash;
     const uri = (new RegExp('(\\?|&)' + name + '=' + '(.+?)(&|$)').exec(search)||["",null])[2];
     return uri && decodeURI(uri);

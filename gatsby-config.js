@@ -41,19 +41,5 @@ module.exports = {
         accessToken: 'iRy8cHoyp4PbkUs0_MhZOciOE8Gd_R1fthRn1diqBYE',
       },
     },
-    {
-      resolve: '@contentful/gatsby-transformer-contentful-richtext',
-      options: {
-        renderOptions: {
-          renderNode: {
-            [BLOCKS.EMBEDDED_ASSET]: node => {
-              return `<img class='custom-asset' src="${
-                node.data.target.fields.file['en-US'].url
-              }"/>`
-            },
-          }
-        },
-      },
-    }
   ],
 }

@@ -37,7 +37,7 @@ class AboutItem extends React.Component {
     {/*<AboutItemStyled className="transition-05s item" data-id={this.props.id} onMouseEnter={(e) => this.moveBtn(e)} onMouseMove={(e) => this.moveBtn(e)} onMouseLeave={(e) => this.returnBtn(e)}>*/}
     return (
       <Link to={"/portfolio/" + this.props.slug}>
-        <AboutItemStyled className="transition-05s item" data-id={this.props.id} bgImg={this.props.bg}>
+        <AboutItemStyled className="transition-05s load-ani item" data-id={this.props.id} bgImg={this.props.bg} data-loadDelay={800}>
           <div className="bg transition-05s" />
           <Title color={COLORS.BLACK}>{this.props.title}</Title>
           <div>
@@ -84,14 +84,14 @@ const SectionAbout = (props) => {
   return (
     <Section id={props.id} active={props.active} name="section-about" headerStyle="dark" footerStyle="dark">
       <BackLayer bg="#f6f7f9">
-        <img src={fireSrc} alt="" style={{"display": "block", "width": "38%", "margin": "13rem auto"}} />
+        <img src={fireSrc} alt="" style={{"display": "block", "width": "38%", "margin": "13rem auto"}} className="load-ani" data-loadDelay={0} />
       </BackLayer>
-      <FrontLayer >
-        <AboutTitle>
+      <FrontLayer>
+        <AboutTitle className="load-ani" data-loadDelay={400}>
           <Title fz="5rem" color={COLORS.BLACK} width="30rem">Проектируем, разрабатываем, продвигаем – наши <span className="red">услуги</span></Title>
           <TextStyled width="42rem" color={COLORS.BLACK}>Чтобы осветить темное пространство веба новыми проектами, мы собрали команду профессионалов с обширным опытом работы в сфере дизайна, разработки, маркетинга, рекламы и видео производства.</TextStyled>
         </AboutTitle>
-        <Scroll overflowLimit="2.3" width="auto" pos={["absolute", "40%", "15%", "", ""]} menuItems={categoriesTitles}>
+        <Scroll overflowLimit={2.3} width="auto" pos={["absolute", "40%", "15%", "", ""]} menuItems={categoriesTitles}>
           {categories.map((node) => (
               <AboutItem key={node.id} id={node.id} title={node.title} content={node.description} bg={node.background.file.url} slug={node.slug} />
             ))

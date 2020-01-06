@@ -147,6 +147,7 @@
 .icon-attach:before{content:'\004a';}
 .icon-filter:before{content:'\004b';}
 .icon-arrow-bold:before{content:'\004c';}
+.icon-play:before{content:'\004d';}
 
 /* END icons */
 
@@ -228,6 +229,27 @@ html{font-family:sans-serif;font-size:10px;-ms-text-size-adjust:100%;-webkit-tex
 
 .tt-uppercase {
   text-transform: uppercase;
+}
+
+.unload-ani, .load-ani {
+  transition: all 800ms ease;
+}
+
+.unload-ani.unloaded {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.load-ani {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.load-ani.loaded {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
 }
 
 @keyframes pulse-btn-before {

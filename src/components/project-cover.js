@@ -7,7 +7,8 @@ import { COLORS, Title, TextStyled } from "./styled"
 const ProjectCover = (props) => {
 	const isCarousel = props.prevSlide && props.nextSlide;
 	return (
-		<ProjectStyled data-index={props.index} className={"portfolio-item" + (props.state.active? " is-active" : "") + (props.state.next? " is-next" : "")} bg={props.project.backgroundColor} bgImg={props.project.backgroundImg? props.project.backgroundImg.file.url : ""} bgSize={props.project.backgroundMode === "Contain"? props.project.backgroundSize : ""} static={!isCarousel}>
+		<ProjectStyled data-index={props.index} className={"portfolio-item" + (props.state.active? " is-active" : "") + (props.state.next? " is-next" : "")} bg={props.project.backgroundColor} bgImg={props.project.backgroundImg? props.project.backgroundImg.file.url : ""} bgSize={props.project.backgroundMode === "Contain"? props.project.backgroundSize : ""} static={!isCarousel} category={props.project.category.slug}>
+			<a className="full-link div_100" href={"/portfolio/" + props.project.category.slug + "/" + props.project.slug} />
 			{isCarousel && props.index > 0?
 				<div onClick={props.prevSlide} className="back-btn icon-arrow-bold translate-y" />
 			: ""}
@@ -90,7 +91,7 @@ const ProjectStyled = styled.div`
 	height: 100vh;
 	left: ${props => props.static? "auto" : "100%"};
 	top: ${props => props.static? "auto" : "50%"};
-	background-color: ${props => props.bg || "#fff"};
+	background-color: ${props => props.bg || "transparent"};
 	background-image: ${props => props.bgImg? "url(" + props.bgImg + ")" : "unset"};
 	background-size: ${props => props.bgSize? props.bgSize : "cover"};
 	background-repeat: no-repeat;
@@ -105,10 +106,12 @@ const ProjectStyled = styled.div`
 		opacity: 1;
 		visibility: visible;
 		pointer-events: all;
+		${props => props.category === "digital"? "&::before {content: '';display: block;width: 100%;height: 100%;background: rgba(0, 0, 0, 0.4);position: absolute;left: 0;top: 0;pointer-events: none;}" : ""}
 	}
 
 	&.is-active {
 		transform: ${props => props.static? "none" : "translate3d(-100%, -50%, 0)"};
+
 		${ProjectNextInfo}, .project-title-bottom {
     	opacity: 0;
     }
@@ -117,6 +120,7 @@ const ProjectStyled = styled.div`
 	&.is-next {
 		width: 50%;
     height: 50%;
+    background-color: ${props => props.bg || COLORS.BLACK};
     transform: translate3d(-35rem, -50%, 0);
     transition: all 1000ms ease 1000ms;
 
@@ -125,6 +129,9 @@ const ProjectStyled = styled.div`
     }
     ${ProjectNextInfo} {
     	opacity: 1;
+    }
+    .full-link {
+    	display: none;
     }
 	}
 

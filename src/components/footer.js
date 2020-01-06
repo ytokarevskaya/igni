@@ -61,7 +61,9 @@ const BottomMenu = styled.div`
   }
 
   ${FooterStyled}.dark &,
-  ${FooterStyled}.page-portfolio-design & {
+  ${FooterStyled}.page-portfolio-design &,
+  ${FooterStyled}.page-portfolio-digital &,
+  ${FooterStyled}.page-project & {
   	display: none;
   }
 `

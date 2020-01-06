@@ -23,7 +23,7 @@ const SectionStyled = styled.section`
 	position: relative;
 	width: 100%;
 	height: 100vh;
-	transition: all 800ms ease-in-out;
+	transition: all 1000ms ease-in-out;
 	visibility: hidden;
 	opacity: 0;
   cursor: none;
@@ -369,4 +369,17 @@ const FormStyled = styled.div`
 	}
 `
 
-export { COLORS, ScrollFrame, SectionStyled, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, CursorBtn, SectionScroll, ContentPart, InfoBlocks, InputFrame, FormStyled, ContentColumn, RedButton }
+const PortfolioBackBtn = styled.div`
+	font-size: 1.7rem;
+	color: ${props => props.transparent? "#fff" : COLORS.RED};
+	background: ${props => props.transparent? "rgba(246, 247, 249, 0.1)" : "#fff"};
+	border: ${props => props.transparent? "solid 1px #cbd0d9" : "unset"};
+	border-top-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+	position: absolute;
+	left: -1px;
+	top: 50%;
+	padding: 1.8rem 2.5rem;
+`
+
+export { COLORS, ScrollFrame, SectionStyled, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, CursorBtn, SectionScroll, ContentPart, InfoBlocks, InputFrame, FormStyled, ContentColumn, RedButton, PortfolioBackBtn }

@@ -11,6 +11,10 @@ import ProjectCover from "../components/project-cover"
 
 import { getURLParameter } from "../components/utils"
 import { useProjectsData } from "../components/queries/get-projects-data"
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
+import RichText from '@madebyconnor/rich-text-to-jsx'
+import { BLOCKS } from "@contentful/rich-text-types"
 import { COLORS, ScrollFrame, FrontLayer, ContentPart, ContentColumn, Title, TextStyled, InputFrame } from "../components/styled"
 
 export const query = graphql`
@@ -26,8 +30,13 @@ export const query = graphql`
       backgroundSize
       date
       description {
-        childContentfulRichText {
-          html
+        json
+      }
+      descriptionBlocks {
+        title
+        width
+        content {
+          json
         }
       }
       id
@@ -66,6 +75,29 @@ const ProjectPage = ({ data }) => {
 	  }
 	});
 
+	const renderOptions = {
+	  renderNode: {
+	    [BLOCKS.EMBEDDED_ASSET]: node => {
+	    	// debugger;
+	    	if (!node.data.target.fields) return;
+        return `<img src="${node.data.target.fields.file["en-US"].url}" alt="" />`
+      },
+	  }
+	};
+
+	const Image = ({ file, title, className }) => (
+	  <img src={file.url} alt={title} />
+	);
+
+	const overrides = {
+	  [BLOCKS.EMBEDDED_ENTRY]: {
+	    image: {
+	      component: Image
+	    }
+	  }
+	};
+
+	const ProjectContentRow = styled.div``
 	return (
 	  <Layout page="project">
 	    <SEO title="IGNI | Веб-студия полного цикла" />
@@ -80,7 +112,14 @@ const ProjectPage = ({ data }) => {
 			      	<ProjectCover index={0} project={project} />
 			      	<ContentPart bg="transparent" padding="10rem 25%">
 			      		<ProjectContent theme={project.theme}>
-			      			<div dangerouslySetInnerHTML={{__html: project.description? project.description.childContentfulRichText.html : ""}} />
+			      			<div dangerouslySetInnerHTML={{__html: project.description? documentToHtmlString(project.description.json, renderOptions) : ""}} />
+			      			{/*<ProjectContentRow>
+			      				project.descriptionBlocks?
+			      					project.descriptionBlocks.map(node => {
+			      						return (<div className="column"><RichText richText={node.content.json} overrides={overrides} /></div>)
+			      					})
+			      				: ""
+			      			</ProjectContentRow>*/}
 			      			<Title className="thankyou" color="#fff" width="24rem">Благодарим <br/>за внимание</Title>
 			      		</ProjectContent>
 			      	</ContentPart>
@@ -263,10 +302,17 @@ const CategoryTitle = styled.div`
 	left: 24rem;
 	z-index: 1;
 `
+const ProjectContentColumn = styled.div`
+	display: inline-block;
+	vertical-align: top;
+	width: ${props => props.width || "100%"};
+	padding: 3rem;
+`;
 
 const ProjectContent = styled.div`
 	position: relative;
 	font-size: 1.6rem;
+	line-height: 1.5;
 	color: ${props => props.theme === "Dark"? "#fff" : COLORS.BLACK};
 
 	h1, h2, h3, h4, h5, h6 {
@@ -275,7 +321,7 @@ const ProjectContent = styled.div`
 		text-transform: uppercase;
 	}
 
-	h2 {
+	h1, h2 {
 		font-size: 5rem;
 	}
 
@@ -303,6 +349,16 @@ const ProjectContent = styled.div`
 		left: 100%;
 		bottom: 0;
 		margin-left: 3rem;
+	}
+
+	.column {
+		display: inline-block;
+		vertical-align: top;
+		padding: 3rem;
+	}
+
+	img {
+		margin: 1.8rem 0;
 	}
 `
 

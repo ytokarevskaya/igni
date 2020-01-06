@@ -75,18 +75,51 @@ class Section extends React.Component {
 }
 
 const changeSection = (curId, newId) => {
+  const curSection = document.querySelector("section[data-id='" + curId + "']");
   const nextSection = document.querySelector("section[data-id='" + newId + "']");
   const sectionObj = sectionObjects[curId];
   const sideMenu = document.getElementById("side-menu");
 
   if (sectionObjects[newId]) {
-    sectionObjects[newId].setState({"active": true});
-    sectionObjects[curId].setState({"active": false});
-    window.headerObj.setState({"headerStyle": sectionObjects[newId].props.headerStyle});
-    window.footerObj.setState({"footerStyle": sectionObjects[newId].props.footerStyle});
-    sideMenu.querySelector(".active").classList.remove("active");
-    sideMenu.querySelector("[data-id='" + newId + "'").classList.add("active");
+    animateUnload(curSection);
+    setTimeout(() => {
+      sectionObjects[newId].setState({"active": true});
+      sectionObjects[curId].setState({"active": false});
+      window.headerObj.setState({"headerStyle": sectionObjects[newId].props.headerStyle});
+      window.footerObj.setState({"footerStyle": sectionObjects[newId].props.footerStyle});
+      if (sideMenu) {
+        sideMenu.querySelector(".active").classList.remove("active");
+        sideMenu.querySelector("[data-id='" + newId + "'").classList.add("active");
+      }
+      setTimeout(() => {
+        animateLoad(nextSection);
+      }, 1000);
+    }, 1500);
   }
+}
+
+const animateLoad = (section) => {
+  section.querySelectorAll(".load-ani").forEach(element => {
+    const delay = +element.dataset.loaddelay || 500;
+    section.querySelectorAll(".unload-ani").forEach(element => {
+      element.classList.remove("unloaded");
+    });
+    setTimeout(() => {
+      element.classList.add("loaded");
+    }, delay);
+  })
+}
+
+const animateUnload = (section) => {
+  section.querySelectorAll(".unload-ani").forEach(element => {
+    const delay = +element.dataset.unloaddelay || 500;
+    setTimeout(() => {
+      element.classList.add("unloaded");
+      section.querySelectorAll(".load-ani").forEach(element => {
+        element.classList.remove("loaded");
+      });
+    }, delay);
+  })
 }
 
 let mouseDownTimer;

@@ -13,28 +13,29 @@ import { useProjectsData } from "../../components/queries/get-projects-data"
 import { ScrollFrame, SectionScroll, COLORS, Title, TextStyled, FrontLayer, ContentPart, InfoBlocks, ContentColumn, InputFrame, RedButton } from "../../components/styled"
 
 import arrowDown from "../../images/arrow-down-white.png"
-
+import teamIcon from "../../images/team.svg"
+import baloonIcon from "../../images/air-balloon.svg"
 
 const projects = [];
 const projectRefs = [];
 
-const PortfolioDesignPage = (props) => {
+const PortfolioDigitalPage = (props) => {
 	const { edges } = useProjectsData();
 
 	edges.map((item) => {
     const project = item.node;
-    if (project.category.slug === "design") {
+    if (project.category.slug === "digital") {
       projects.push(project);
     }
   });
 
 	return (
-		<Layout page="portfolio-design">
+		<Layout page="portfolio-digital">
 			<SEO title="IGNI | Портфолио" />
 			<ScrollFrame>
 				<Section id={0} active={true} name="section-portfolio" headerStyle="white" footerStyle="white">
 					<FrontLayer bg={COLORS.LIGHT_BLACK}>
-						<Scroll overflowLimit="1" width="100%" pos={["absolute", "0", "0", "0", "0"]}>
+						<Scroll overflowLimit={1} width="100%" pos={["absolute", "0", "0", "0", "0"]}>
 		          <ProjectsCarousel>
 		          	{projects.map((item, index) => {
 	                return (
@@ -44,60 +45,34 @@ const PortfolioDesignPage = (props) => {
 	              <ArrowDown src={arrowDown} className="translate-y" />
 		          </ProjectsCarousel>
 							<PortfolioDesignTitle>
-			          <Title fz="5rem" color="#fff" lineBottom lineBg="#fff">Дизайн</Title>
-			          <TextStyled color="#fff" width="18rem" margin="3.5rem 0">сделайте первое впечатление клиента незабываемым</TextStyled>
+			          <Title fz="5rem" color="#fff" lineBottom lineBg="#fff" width="25rem">Фото и видео продакшн</Title>
+			          <TextStyled color="#fff" width="18rem" margin="3.5rem 0">Визуализируйте ваш бизнес</TextStyled>
 		          </PortfolioDesignTitle>
 		          <ContentPart>
 		          	<Title color={COLORS.BLACK}>Статистика</Title>
 		          	<InfoBlocks itemsCount={5}>
 				        	<div className="block">
-				        		<Title margin="0 0 2.5rem 0">+150 <small>%</small></Title>
+				        		<Title margin="0 0 2.5rem 0">+15 <small>%</small></Title>
 				        		<TextStyled color={COLORS.BLACK}>Количество лидов</TextStyled>
 				        	</div>
 				        	<div className="block">
-				        		<Title margin="0 0 2.5rem 0">+120 <small>%</small></Title>
+				        		<Title margin="0 0 2.5rem 0">+130 <small>%</small></Title>
 				        		<TextStyled color={COLORS.BLACK}>Длина сессии</TextStyled>
 				        	</div>
 				        	<div className="block">
-				        		<Title margin="0 0 2.5rem 0">+65 <small>%</small></Title>
-				        		<TextStyled color={COLORS.BLACK}>Посещаемость</TextStyled>
+				        		<Title margin="0 0 2.5rem 0">+80 <small>%</small></Title>
+				        		<TextStyled color={COLORS.BLACK}>Охват наиболее релевантной аудитории</TextStyled>
 				        	</div>
 				        	<div className="block">
-				        		<Title margin="0 0 2.5rem 0">+40 <small>%</small></Title>
-				        		<TextStyled color={COLORS.BLACK}>Глубина просмотра</TextStyled>
+				        		<img className="icon" alt="" src={teamIcon} />
+				        		<TextStyled color={COLORS.BLACK}>Новые источники трафика</TextStyled>
 				        	</div>
 				        	<div className="block">
-				        		<Title margin="0 0 2.5rem 0">-50 <small>%</small></Title>
-				        		<TextStyled color={COLORS.BLACK}>Количество отказов</TextStyled>
+				        		<img className="icon" alt="" src={baloonIcon} />
+				        		<TextStyled color={COLORS.BLACK}>Увеличение доверия к бренду</TextStyled>
 				        	</div>
 				        </InfoBlocks>
-		          </ContentPart>
-		          <ContentPart bg={COLORS.LIGHT_BLACK} color="#fff" flex>
-		          	<ContentColumn width="30%">
-		          		<Title color="#fff" lineBottom lineBg="#fff">Приступим к работе над вашим проектом?</Title>
-		          	</ContentColumn>
-		          	<ContentColumn width="70%">
-		          		<Form action="" title="request" checkbox={false}>
-					      		<div className="form-inputs">
-						      		<InputFrame width="35%">
-						      			<label>Имя</label>
-						      			<input type="text" name="name" autoComplete="off" />
-						      		</InputFrame>
-						      		<InputFrame width="35%">
-						      			<label>Телефон</label>
-						      			<input type="text" name="phone" autoComplete="off" />
-						      		</InputFrame>
-					      			<button className="submit-button transition-03s" type="submit">Отправить бриф</button>
-					      		</div>
-					      	</Form>
-		          	</ContentColumn>
-		          </ContentPart>
-		          <ContentPart>
-		          	<ContentColumn width="30%">
-		          		<Title color={COLORS.BLACK} lineBottom lineBg={COLORS.BLACK}>Почему дизайн имеет значение?</Title>
-		          		<TextStyled color={COLORS.BLACK} margin="3.5rem 0">В нашем блоге вы найдете серию статей, посвященных веб-дизайну. Вы узнаете, зачем делать редизайн, какие сайты дают наибольшую конверсию, какие тренды сейчас наиболее актуальны и многое другое</TextStyled>
-		          		<RedButton>В блог</RedButton>
-		          	</ContentColumn>
+				        <TextStyled color={COLORS.BLACK}><span className="red">*</span> Средние показатели на основании существующих кейсов</TextStyled>
 		          </ContentPart>
 		          <ContentPart flex>
 		          	<ContentColumn padding="0 6rem 0 0" width="45rem">
@@ -208,4 +183,4 @@ const ProjectsCarousel = styled.div`
 	position: relative;
 `
 
-export default PortfolioDesignPage
+export default PortfolioDigitalPage

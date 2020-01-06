@@ -25,10 +25,14 @@ exports.createPages = async ({ actions: { createPage }, graphql }) => {
     }
   `)
   results.data.allContentfulProject.edges.forEach((edge, index) => {
-	    const project = edge.node
+	    const project = edge.node;
+	    let template = "project-design";
+	    if (project.category.slug === "digital") {
+	    	template = "project-digital";
+	    }
 	    createPage({
 	      path: `/portfolio/${project.category.slug}/${project.slug}/`,
-	      component: path.resolve("./src/templates/project.js"),
+	      component: path.resolve("./src/templates/" + template + ".js"),
 	      context: {
 	        id: project.id,
 	      },

@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 
 import Section from "../section"
-import Form from "../form"
+import RequestForm from "../forms/request-form"
 
 import { COLORS, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, InputFrame } from "../styled"
 
@@ -28,32 +28,7 @@ const SectionContacts = (props) => (
       		<div className="requisites">Реквизиты</div>
       		<a href="" className="price icon-download">Описание услуг и прайс-лист</a>
       	</ContactsLinks>
-      	<Form action="" title="request" checkbox={false}>
-      		<div className="form-inputs">
-	      		<InputFrame width="26%">
-	      			<label>Имя</label>
-	      			<input type="text" name="name" autoComplete="off" />
-	      		</InputFrame>
-	      		<InputFrame width="15%">
-	      			<label>Телефон</label>
-	      			<input type="text" name="phone" autoComplete="off" />
-	      		</InputFrame>
-	      		<InputFrame width="26%">
-	      			<label>E-mail</label>
-	      			<input type="email" name="email" autoComplete="off" />
-	      		</InputFrame>
-	      		<InputFrame width="26%">
-	      			<label>Компания</label>
-	      			<input type="text" name="company" autoComplete="off" />
-	      		</InputFrame>
-	      		<InputFrame width="100%">
-	      			<textarea placeholder="Задача"></textarea>
-	      		</InputFrame>
-      		</div>
-      		<div className="form-bottom">
-      			<button className="submit-button transition-03s" type="submit">Отправить бриф</button>
-      		</div>
-      	</Form>
+      	<RequestForm />
       </ContactsForm>
     </FrontLayer>
   </Section>

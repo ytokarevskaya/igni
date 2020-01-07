@@ -148,6 +148,7 @@ const PortfolioWork = styled.a`
   background-repeat: no-repeat;
   cursor: pointer;
   box-shadow: 0 4px 10px -5px rgba(55, 59, 68, 0.26);
+  transition-delay: 0ms!important;
 
   &.theme-Light {
     color: ${COLORS.BLACK};

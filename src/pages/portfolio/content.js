@@ -5,11 +5,11 @@ import Layout from "../../components/layout"
 import SEO from "../../components/seo"
 import Section from "../../components/section"
 import Scroll from "../../components/scroll"
-import Form from "../../components/form"
+import RequestForm from "../../components/forms/request-form"
 
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
 import { useProjectsData } from "../../components/queries/get-projects-data"
-import { ScrollFrame, SectionScroll, COLORS, Title, TextStyled, FrontLayer, InfoBlocks, InputFrame, ContentPart } from "../../components/styled"
+import { ScrollFrame, SectionScroll, COLORS, Title, TextStyled, FrontLayer, InfoBlocks, ContentPart } from "../../components/styled"
 
 import teamIcon from "../../images/team.svg"
 import baloonIcon from "../../images/air-balloon.svg"
@@ -78,32 +78,7 @@ const PortfolioContentPage = () => {
                 )
               })}
               <ContentPart padding="0 0 8rem 24rem">
-		          	<Form action="" title="request" checkbox={false}>
-				      		<div className="form-inputs">
-					      		<InputFrame width="26%">
-					      			<label>Имя</label>
-					      			<input type="text" name="name" autoComplete="off" />
-					      		</InputFrame>
-					      		<InputFrame width="15%">
-					      			<label>Телефон</label>
-					      			<input type="text" name="phone" autoComplete="off" />
-					      		</InputFrame>
-					      		<InputFrame width="26%">
-					      			<label>E-mail</label>
-					      			<input type="email" name="email" autoComplete="off" />
-					      		</InputFrame>
-					      		<InputFrame width="26%">
-					      			<label>Компания</label>
-					      			<input type="text" name="company" autoComplete="off" />
-					      		</InputFrame>
-					      		<InputFrame width="100%">
-					      			<textarea placeholder="Задача"></textarea>
-					      		</InputFrame>
-				      		</div>
-				      		<div className="form-bottom">
-				      			<button className="submit-button transition-03s" type="submit">Отправить бриф</button>
-				      		</div>
-				      	</Form>
+		          	<RequestForm />
 		          </ContentPart>
 		        </Scroll>
 					</FrontLayer>

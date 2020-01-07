@@ -5,14 +5,15 @@ import Layout from "../../components/layout"
 import SEO from "../../components/seo"
 import Section from "../../components/section"
 import Scroll from "../../components/scroll"
-import Form from "../../components/form"
+import RequestForm from "../../components/forms/request-form"
+import CallbackForm from "../../components/forms/callback-form"
 import ProjectCover from "../../components/project-cover"
 import Slider from "rc-slider"
 import "rc-slider/assets/index.css";
 
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
 import { useProjectsData } from "../../components/queries/get-projects-data"
-import { ScrollFrame, SectionScroll, COLORS, Title, TextStyled, FrontLayer, ContentPart, InfoBlocks, ContentColumn, InputFrame, RedButton } from "../../components/styled"
+import { ScrollFrame, SectionScroll, COLORS, Title, TextStyled, FrontLayer, ContentPart, InfoBlocks, ContentColumn, RedButton } from "../../components/styled"
 
 import arrowDown from "../../images/arrow-down-white.png"
 
@@ -82,19 +83,7 @@ const PortfolioDesignPage = (props) => {
 		          		<Title color="#fff" lineBottom lineBg="#fff">Приступим к работе над вашим проектом?</Title>
 		          	</ContentColumn>
 		          	<ContentColumn width="70%">
-		          		<Form action="" title="request" checkbox={false}>
-					      		<div className="form-inputs">
-						      		<InputFrame width="35%">
-						      			<label>Имя</label>
-						      			<input type="text" name="name" autoComplete="off" />
-						      		</InputFrame>
-						      		<InputFrame width="35%">
-						      			<label>Телефон</label>
-						      			<input type="text" name="phone" autoComplete="off" />
-						      		</InputFrame>
-					      			<button className="submit-button transition-03s" type="submit">Отправить бриф</button>
-					      		</div>
-					      	</Form>
+		          		<CallbackForm />
 		          	</ContentColumn>
 		          </ContentPart>
 		          <ContentPart>
@@ -113,32 +102,7 @@ const PortfolioDesignPage = (props) => {
 		          	</ContentColumn>
 		          </ContentPart>
 		          <ContentPart padding="0 0 0 24rem">
-		          	<Form action="" title="request" checkbox={false}>
-				      		<div className="form-inputs">
-					      		<InputFrame width="26%">
-					      			<label>Имя</label>
-					      			<input type="text" name="name" autoComplete="off" />
-					      		</InputFrame>
-					      		<InputFrame width="15%">
-					      			<label>Телефон</label>
-					      			<input type="text" name="phone" autoComplete="off" />
-					      		</InputFrame>
-					      		<InputFrame width="26%">
-					      			<label>E-mail</label>
-					      			<input type="email" name="email" autoComplete="off" />
-					      		</InputFrame>
-					      		<InputFrame width="26%">
-					      			<label>Компания</label>
-					      			<input type="text" name="company" autoComplete="off" />
-					      		</InputFrame>
-					      		<InputFrame width="100%">
-					      			<textarea placeholder="Задача"></textarea>
-					      		</InputFrame>
-				      		</div>
-				      		<div className="form-bottom">
-				      			<button className="submit-button transition-03s" type="submit">Отправить бриф</button>
-				      		</div>
-				      	</Form>
+		          	<RequestForm />
 		          </ContentPart>
 		        </Scroll>
 					</FrontLayer>

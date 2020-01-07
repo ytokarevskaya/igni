@@ -314,8 +314,13 @@ const InputFrame = styled.div`
 		border-bottom: 1px solid #fff;
 		background: unset;
 		margin: 0 0 1.5rem 0;
+
 		&:focus {
 			outline: none;
+		}
+		&.error {
+			border-bottom-color: ${COLORS.RED};
+			color: ${COLORS.RED};
 		}
 	}
 
@@ -332,6 +337,7 @@ const InputFrame = styled.div`
 	}
 
 	label {
+		color: #fff;
 		font-size: 1.6rem;
   	font-weight: 300;
 		position: absolute;
@@ -341,7 +347,7 @@ const InputFrame = styled.div`
 	}
 `
 
-const FormStyled = styled.div`
+const FormStyled = styled.form`
 	background: ${COLORS.LIGHT_BLACK};
 	padding: 7rem 11rem;
 
@@ -365,9 +371,19 @@ const FormStyled = styled.div`
   	background: ${COLORS.RED};
   	border: none;
   	cursor: none;
+  	flex-grow: 0;
+    height: 5rem;
+    transition: background 500ms ease;
   	&:hover {
-
+			background: ${COLORS.RED_HOVER};
   	}
+		&:focus {
+			outline: none;
+		}
+		&.disabled {
+			pointer-events: none;
+			opacity: 0.6;
+		}
 	}
 `
 

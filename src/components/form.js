@@ -1,11 +1,17 @@
 import React from "react"
+import axios from "axios";
 import PropTypes from "prop-types"
 import styled from "styled-components"
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie"
 
 import { FormStyled } from "./styled"
 
 let formObj;
+const Airtable = require("airtable");
+Airtable.configure({
+  endpointUrl: "https://api.airtable.com",
+  apiKey: "keyBDRbcPmGThAqVj"
+});
 
 class Form extends React.Component {
   constructor({props, children}) {
@@ -22,7 +28,7 @@ class Form extends React.Component {
 
   render() {
     return (
-      <FormStyled action={this.props.action} accept-charset="utf-8" method="post" ref={this.formRef} data-label={this.props.gaLabel} data-title={this.props.title}>
+      <FormStyled action={this.props.action} accept-charset="utf-8" method="post" ref={this.formRef} data-label={this.props.gaLabel} data-title={this.props.title} onSubmit={formSubmit}>
         {/*<Inputs items={this.props.children} labels={this.props.labels} />*/}
         {this.props.children}
         {this.props.checkbox?
@@ -64,7 +70,7 @@ function formInit(ref) {
 
 function inputChange(e) {
   const input = e.currentTarget;
-  validateInput(input.parentElement);
+  validateInput(input);
 }
 
 // function Inputs(props) {
@@ -82,20 +88,39 @@ function inputChange(e) {
 
 function formSubmit(e) {
   e.preventDefault();
-  const btn = e.currentTarget;
+  const form = e.currentTarget;
+  const btn = form.querySelector(".submit-button");
   if (btn.classList.contains("disabled")) return;
-  const form = e.currentTarget.parentElement;
   const validated = validateForm(form);
   if (validated) {
-    // if (form.dataset.title !== "daccs") {
-      formReset(form);
-      btn.classList.add("disabled");
-    // }
+    if (form.dataset.title === "callback") {
+      const base = Airtable.base("appTq4eodkVDyFlNv");
+      base("Table 1").create({
+        "Name": form.querySelector(".name_input").value,
+        "Phone": form.querySelector(".phone_input").value
+      }, (err, record) => {
+        if (err) {
+          return;
+        }
+      });
+    } else if (form.dataset.title === "request") {
+      const base = Airtable.base("appTq4eodkVDyFlNv");
+      base("Table 1").create({
+        "Name": form.querySelector(".name_input").value,
+        "Phone": form.querySelector(".phone_input").value
+      }, (err, record) => {
+        if (err) {
+          return;
+        }
+      });
+    }
+    formReset(form);
+    btn.classList.add("disabled");
   }
 }
 
 function validateForm(form) {
-  const fields = form.querySelectorAll(".field");
+  const fields = form.querySelectorAll("input, textarea");
   const check = form.querySelector(".checkbox");
   let validated = true;
 
@@ -114,7 +139,7 @@ function validateForm(form) {
 function formReset(form) {
   form.reset();
 
-  const fields = form.querySelectorAll(".field");
+  const fields = form.querySelectorAll("input, textarea");
   fields.forEach((item) => {
     item.classList.remove("validated", "error");
   });
@@ -122,18 +147,17 @@ function formReset(form) {
   if (form.querySelector(".checkbox")) form.querySelector(".checkbox").classList.remove("active");
 }
 
-function validateInput(field) {
-  const input = field.children[0];
+function validateInput(input) {
   const value = input.value;
   let validated = true;
-  field.classList.remove("error", "validated");
+  input.classList.remove("error", "validated");
   if ((input.classList.contains("required") && value === "") ||
     (input.classList.contains("email_input") && (isEmailSent(value) || (!/\S+@\S+\.\S+/.test(value) && !/@\S+/.test(value)))) ||
     (input.classList.contains("phone_input") && !/^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/.test(value))) {
     validated = false;
-    field.classList.add("error");
+    input.classList.add("error");
   } else {
-    field.classList.add("validated");
+    input.classList.add("validated");
   }
   return validated;
 }

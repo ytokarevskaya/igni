@@ -8,7 +8,11 @@ const ProjectCover = (props) => {
 	const isCarousel = props.prevSlide && props.nextSlide;
 	return (
 		<ProjectStyled data-index={props.index} className={"portfolio-item" + (props.state.active? " is-active" : "") + (props.state.next? " is-next" : "")} bg={props.project.backgroundColor} bgImg={props.project.backgroundImg? props.project.backgroundImg.file.url : ""} bgSize={props.project.backgroundMode === "Contain"? props.project.backgroundSize : ""} static={!isCarousel} category={props.project.category.slug}>
-			<a className="full-link div_100" href={"/portfolio/" + props.project.category.slug + "/" + props.project.slug} />
+			{props.project.category.slug === "digital"?
+				<a className="full-video-link div_100" href={"/portfolio/" + props.project.category.slug + "/" + props.project.slug} />
+			:
+				<a className="full-project-link div_100" href={"/portfolio/" + props.project.category.slug + "/" + props.project.slug} />
+			}
 			{isCarousel && props.index > 0?
 				<div onClick={props.prevSlide} className="back-btn icon-arrow-bold translate-y" />
 			: ""}
@@ -130,9 +134,13 @@ const ProjectStyled = styled.div`
     ${ProjectNextInfo} {
     	opacity: 1;
     }
-    .full-link {
+    .full-project-link, .full-video-link {
     	display: none;
     }
+	}
+
+	.full-project-link, .full-video-link {
+		cursor: none;
 	}
 
 	.project-title-bottom {

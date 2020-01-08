@@ -17,7 +17,8 @@ class Section extends React.Component {
 
     this.state = {
       "active": this.props.active,
-      "onhold": ""
+      "onhold": "",
+      "cursorStyle": ""
     }
   }
 
@@ -58,6 +59,13 @@ class Section extends React.Component {
 
   cursorFollow(e) {
     const cursor = this.cursor.current;
+    if (e.target.classList.contains("full-project-link")) {
+      this.setState({"cursorStyle": "cursor-plus"});
+    } else if (e.target.classList.contains("full-video-link")) {
+      this.setState({"cursorStyle": "cursor-play icon-play"});
+    } else {
+      this.setState({"cursorStyle": ""});
+    }
     cursor.style.left = e.pageX + "px";
     cursor.style.top = e.pageY + "px";
   }
@@ -70,7 +78,9 @@ class Section extends React.Component {
   render() {
     return (
     	<SectionStyled data-id={this.id} ref={this.sectionRef} className={(this.state.active? "active " : "") + this.state.onhold + " " + this.props.name} onMouseDown={(e) => this.mouseDownHandler(e)} onMouseUp={(e) => this.mouseUpHandler(e)} onMouseMove={(e) => this.cursorFollow(e)}>
-        <CursorBtn className={"cursor-btn translate-xy " + this.props.headerStyle} ref={this.cursor} />
+        {this.props.noCursor? "" : 
+          <CursorBtn className={"cursor-btn translate-xy " + this.props.headerStyle + " " + this.state.cursorStyle} ref={this.cursor} />
+        }
     		{this.children}
     	</SectionStyled>
     )
@@ -136,14 +146,16 @@ Section.propTypes = {
   id: PropTypes.number,
   headerStyle: PropTypes.string,
   footerStyle: PropTypes.string,
-  name: PropTypes.string
+  name: PropTypes.string,
+  noCursor: PropTypes.bool
 }
 
 Section.defaultProps = {
   id: 0,
   headerStyle: "white",
   footerStyle: "white",
-  name: ""
+  name: "",
+  noCursor: false
 }
 
 export default Section

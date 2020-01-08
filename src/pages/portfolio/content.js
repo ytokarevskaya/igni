@@ -6,10 +6,11 @@ import SEO from "../../components/seo"
 import Section from "../../components/section"
 import Scroll from "../../components/scroll"
 import RequestForm from "../../components/forms/request-form"
+import CallbackForm from "../../components/forms/callback-form"
 
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
 import { useProjectsData } from "../../components/queries/get-projects-data"
-import { ScrollFrame, SectionScroll, COLORS, Title, TextStyled, FrontLayer, InfoBlocks, ContentPart } from "../../components/styled"
+import { ScrollFrame, SectionScroll, COLORS, Title, TextStyled, FrontLayer, InfoBlocks, ContentPart, ContentColumn } from "../../components/styled"
 
 import teamIcon from "../../images/team.svg"
 import baloonIcon from "../../images/air-balloon.svg"
@@ -34,50 +35,66 @@ const PortfolioContentPage = () => {
 			<ScrollFrame>
 				<Section id={0} active={true} name="section-portfolio" headerStyle="dark" footerStyle="dark">
 					<FrontLayer bg="#f6f7f9">
-						<Scroll overflowLimit={1} width="auto" pos={["absolute", "10rem", "0", "0", "24rem"]}>
-		          <Title fz="5rem" color={COLORS.RED} lineBottom lineBg={COLORS.BLACK}>Контент-маркетинг</Title>
-		          <TextStyled color={COLORS.BLACK} width="18rem" margin="3.5rem 0">Позвольте клиенту найти то, что он ищет</TextStyled>
-			        <PortfolioSlogan>
-			        	<Title fz="8rem" outline color="#fff"><span className="black no-outline">Посетитель</span> попадает на ваш сайт <span className="black no-outline">в поисках</span> конкретного <span className="black no-outline">решения.</span> Емкие <span className="black no-outline">заголовки и</span> интересное <span className="black no-outline">наполнение</span> с учетом SEO <span className="red no-outline">определяют полезность</span> вашего <span className="red no-outline">предложения</span>, а новые источники трафика, например, корпоративный блог, <span className="black no-outline">привлекают новых лидов.</span></Title>
-			        </PortfolioSlogan>
-			        <ArrowDown src={arrowDown} className="translate-y" />
-			        <Title color={COLORS.BLACK} margin="7rem 0">Статистика</Title>
-			        <InfoBlocks itemsCount={5}>
-			        	<div className="block">
-			        		<Title margin="0 0 2.5rem 0">+280 <small>%</small></Title>
-			        		<TextStyled color={COLORS.BLACK}>Количество лидов</TextStyled>
-			        	</div>
-			        	<div className="block">
-			        		<Title margin="0 0 2.5rem 0">+145 <small>%</small></Title>
-			        		<TextStyled color={COLORS.BLACK}>Длина сессии</TextStyled>
-			        	</div>
-			        	<div className="block">
-			        		<Title margin="0 0 2.5rem 0">+60 <small>%</small></Title>
-			        		<TextStyled color={COLORS.BLACK}>Глубина просмотра</TextStyled>
-			        	</div>
-			        	<div className="block">
-			        		<img className="icon" alt="" src={teamIcon} />
-			        		<TextStyled color={COLORS.BLACK}>Новые источники трафика</TextStyled>
-			        	</div>
-			        	<div className="block">
-			        		<img className="icon" alt="" src={baloonIcon} />
-			        		<TextStyled color={COLORS.BLACK}>Увеличение доверия к бренду</TextStyled>
-			        	</div>
-			        </InfoBlocks>
-			        <TextStyled color={COLORS.BLACK}><span className="red">*</span> Средние показатели на основании существующих кейсов</TextStyled>
-			        <Title color={COLORS.BLACK} margin="7rem 0">Портфолио</Title>
-			        {projects.map((item, index) => {
-                return (
-                  <PortfolioContent key={item.id} project={item} type="all" last={index + 1 === projects.length} />
-                )
-              })}
-              <Title fz="5rem" color={COLORS.BLACK} lineBottom lineBg={COLORS.BLACK}>Ведение личного <br/>блога</Title>
-              {projectsBlog.map((item, index) => {
-                return (
-                  <PortfolioContent key={item.id} project={item} type="blog" last={index + 1 === projectsBlog.length} />
-                )
-              })}
-              <ContentPart padding="0 0 8rem 24rem">
+						<Scroll overflowLimit={1} width="auto" pos={["absolute", "0", "0", "0", "0"]} margin="0">
+							<ContentPart bg="transparent">
+			          <Title fz="5rem" color={COLORS.RED} lineBottom lineBg={COLORS.BLACK}>Контент-маркетинг</Title>
+			          <TextStyled color={COLORS.BLACK} width="18rem" margin="3.5rem 0">Позвольте клиенту найти то, что он ищет</TextStyled>
+				        <PortfolioSlogan>
+				        	<Title fz="8rem" outline color="#fff"><span className="black no-outline">Посетитель</span> попадает на ваш сайт <span className="black no-outline">в поисках</span> конкретного <span className="black no-outline">решения.</span> Емкие <span className="black no-outline">заголовки и</span> интересное <span className="black no-outline">наполнение</span> с учетом SEO <span className="red no-outline">определяют полезность</span> вашего <span className="red no-outline">предложения</span>, а новые источники трафика, например, корпоративный блог, <span className="black no-outline">привлекают новых лидов.</span></Title>
+				        </PortfolioSlogan>
+				        <ArrowDown src={arrowDown} className="translate-y" />
+			        </ContentPart>
+			        <ContentPart bg="transparent">
+				        <Title color={COLORS.BLACK} margin="7rem 0">Статистика</Title>
+				        <InfoBlocks itemsCount={5}>
+				        	<div className="block">
+				        		<Title margin="0 0 2.5rem 0">+280 <small>%</small></Title>
+				        		<TextStyled color={COLORS.BLACK}>Количество лидов</TextStyled>
+				        	</div>
+				        	<div className="block">
+				        		<Title margin="0 0 2.5rem 0">+145 <small>%</small></Title>
+				        		<TextStyled color={COLORS.BLACK}>Длина сессии</TextStyled>
+				        	</div>
+				        	<div className="block">
+				        		<Title margin="0 0 2.5rem 0">+60 <small>%</small></Title>
+				        		<TextStyled color={COLORS.BLACK}>Глубина просмотра</TextStyled>
+				        	</div>
+				        	<div className="block">
+				        		<img className="icon" alt="" src={teamIcon} />
+				        		<TextStyled color={COLORS.BLACK}>Новые источники трафика</TextStyled>
+				        	</div>
+				        	<div className="block">
+				        		<img className="icon" alt="" src={baloonIcon} />
+				        		<TextStyled color={COLORS.BLACK}>Увеличение доверия к бренду</TextStyled>
+				        	</div>
+				        </InfoBlocks>
+				        <TextStyled color={COLORS.BLACK}><span className="red">*</span> Средние показатели на основании существующих кейсов</TextStyled>
+			        </ContentPart>
+			        <ContentPart bg="transparent">
+				        <Title color={COLORS.BLACK} margin="7rem 0">Портфолио</Title>
+				        {projects.map((item, index) => {
+	                return (
+	                  <PortfolioContent key={item.id} project={item} type="all" last={index + 1 === projects.length} />
+	                )
+	              })}
+              </ContentPart>
+              <ContentPart bg={COLORS.LIGHT_BLACK} color="#fff" flex>
+		          	<ContentColumn width="30%">
+		          		<Title color="#fff" lineBottom lineBg="#fff">Приступим к работе над вашим проектом?</Title>
+		          	</ContentColumn>
+		          	<ContentColumn width="70%">
+		          		<CallbackForm />
+		          	</ContentColumn>
+		          </ContentPart>
+		          <ContentPart bg="transparent">
+	              <Title fz="5rem" color={COLORS.BLACK} lineBottom lineBg={COLORS.BLACK}>Ведение личного <br/>блога</Title>
+	              {projectsBlog.map((item, index) => {
+	                return (
+	                  <PortfolioContent key={item.id} project={item} type="blog" last={index + 1 === projectsBlog.length} />
+	                )
+	              })}
+              </ContentPart>
+              <ContentPart padding="0 0 0 24rem">
 		          	<RequestForm />
 		          </ContentPart>
 		        </Scroll>
@@ -117,7 +134,7 @@ const PortfolioContent = (props) => (
 
 const ArrowDown = styled.img`
 	position: absolute;
-	left: 0;
+	left: 20rem;
 	top: 70%;
 	height: 9rem;
 `
@@ -206,7 +223,7 @@ const PortfolioContentStyled = styled.article`
 
 const PortfolioSlogan = styled.div`
 	margin: 20rem 0 10rem 0;
-	padding: 0 33rem;
+	padding: 0 27rem;
 	line-height: 1.13;
 `
 

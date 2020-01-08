@@ -21,9 +21,9 @@ const SectionMain = (props) => (
     </BackLayer>
     <FrontLayer bg="linear-gradient(155deg,rgba(255,255,255,0.5) 22%,rgba(0, 0, 0, 0.1) 58%),linear-gradient(to bottom,rgba(42,35,42,0.15),rgba(42,35,42,0.15))">
       <HomeTitle className="translate-x unload-ani" data-unloaddelay="800">
-        <Title fz="20rem" className="n1" lh="0.5">IGNI</Title>
-        <Title fz="2.4rem" color="#fff" width="12rem" ta="right" className="n2">Освещая темное пространство веба</Title>
-        <Title color="#fff" width="36rem" className="n3">Комплексные услуги по созданию и продвижению сайтов</Title>
+        <Title fz="20rem" mFz="10rem" mColor="#fff" className="n1" lh="0.5">IGNI</Title>
+        <Title fz="2.4rem" mFz="1.8rem" mColor="#fff" color="#fff" width="12rem" ta="right" mTa="right" className="n2">Освещая темное пространство веба</Title>
+        <Title color="#fff" mFz="2.5rem" mColor="#fff" width="36rem" className="n3">Комплексные услуги по созданию и продвижению сайтов</Title>
       </HomeTitle>
       <HomeSubtitle className="unload-ani" data-unloaddelay="300">
         <TextStyled width="43rem">
@@ -43,12 +43,9 @@ const SectionMain = (props) => (
 
 const PortfolioBtn = styled.div`
   position: relative;
-  left: -20rem;
-  width: 15rem;
-  height: 30rem;
   background: ${COLORS.RED};
   border: 2px solid ${COLORS.RED};
-  padding: 3rem;
+  padding: 1.3rem 3rem;
   cursor: pointer;
 
   .icon {
@@ -79,6 +76,13 @@ const PortfolioBtn = styled.div`
   &:hover {
     border-color: #fff;
     background-color: rgba(255, 255, 255, 0.3);
+  }
+
+  @media screen and (min-width: 1280px) and (pointer: fine) {
+    left: -20rem;
+    width: 15rem;
+    height: 30rem;
+    padding: 3rem;
   }
 `
 
@@ -113,25 +117,40 @@ const HomeTitle = styled.div`
   top: 0;
   left: 50%;
   width: 2px;
-  height: 50%;
+  height: 70%;
   background: #fff;
 
   .n1 {
     position: absolute;
-    right: 5rem;
-    bottom: 28.5rem;
+    right: 1.8rem;
+    bottom: 22.5rem;
   }
 
   .n2 {
     position: absolute;
-    right: 5rem;
-    bottom: 9.3rem;
+    right: 1.8rem;
+    bottom: 11.5rem;
   }
 
   .n3 {
     position: absolute;
-    left: 5rem;
+    left: 1.8rem;
     bottom: -0.7rem;
+  }
+
+  @media screen and (min-width: 1280px) and (pointer: fine) {
+    height: 50%;
+    .n1 {
+      right: 5rem;
+      bottom: 28.5rem;
+    }
+    .n2 {
+      right: 5rem;
+      bottom: 9.3rem;
+    }
+    .n3 {
+      left: 5rem;
+    }
   }
 `
 

@@ -16,30 +16,36 @@ const ScrollFrame = styled.main`
 	position: relative;
 	width: 100%;
 	height: 100vh;
-	overflow: hidden;
+	overflow: auto;
+	@media screen and (min-width: 1280px) and (pointer: fine) {
+		overflow: hidden;
+	}
 `
 
 const SectionStyled = styled.section`
 	position: relative;
 	width: 100%;
-	height: 100vh;
-	transition: all 1000ms ease-in-out;
-	visibility: hidden;
-	opacity: 0;
-  cursor: none;
-  pointer-events: none;
 
-	&.active {
-		position: absolute;
-		top: 0;
-		left: 0;
-		visibility: visible;
-		opacity: 1;
-		pointer-events: all;
-	}
+	@media screen and (min-width: 1280px) and (pointer: fine) {
+		height: 100vh;
+		transition: all 1000ms ease-in-out;
+		visibility: hidden;
+		opacity: 0;
+	  pointer-events: none;
+  	cursor: none;
 
-	&.onhold {
-		cursor: none;
+		&.onhold {
+			cursor: none;
+		}
+
+		&.active {
+			position: absolute;
+			top: 0;
+			left: 0;
+			visibility: visible;
+			opacity: 1;
+			pointer-events: all;
+		}
 	}
 `
 
@@ -63,13 +69,13 @@ const Title = styled.div`
 	position: relative;
 	font-family: ${props => props.ff || "Bebas"};
 	text-transform: uppercase;
-	text-align: ${props => props.ta || "left"};
-	font-size: ${props => props.fz || "5rem"};
+	text-align: ${props => props.mTa || "left"};
+	font-size: ${props => props.mFz || "5rem"};
   font-weight: bold;
   line-height: ${props => props.lh || "1"};
-  color: ${props => props.color || COLORS.RED};
-  width: ${props => props.width || "auto"};
-  margin: ${props => props.margin || "0"};
+  color: ${props => props.mColor || COLORS.RED};
+  width: ${props => props.mWwidth || "auto"};
+  margin: ${props => props.mMargin || "0"};
   ${props => props.lineBottom ? "padding-bottom: 3.3rem;" : ""};
   ${props => props.outline? "text-shadow: 1px 0 0px #000, 0 1px 0px #000, -1px 0 0px #000, 0 -1px 0px #000" : ""};
 
@@ -89,6 +95,14 @@ const Title = styled.div`
 
   .no-outline {
   	text-shadow: none;
+  }
+
+  @media screen and (min-width: 1280px) and (pointer: fine) {
+  	color: ${props => props.color || COLORS.RED};
+		font-size: ${props => props.fz || "5rem"};
+  	text-align: ${props => props.ta || "left"};
+  	width: ${props => props.width || "auto"};
+  	margin: ${props => props.margin || "0"};
   }
 `
 
@@ -188,61 +202,95 @@ const PulseBtn = styled.div`
 `
 
 const CursorBtn = styled.div`
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  width: 3rem;
-  height: 3rem;
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 25;
-  tranform: translate(-50%, -50%);
+	@media screen and (min-width: 1280px) and (pointer: fine) {
+	  position: fixed;
+	  left: 50%;
+	  top: 50%;
+	  width: 3rem;
+	  height: 3rem;
+	  background: rgba(255, 255, 255, 0.5);
+	  border-radius: 50%;
+	  pointer-events: none;
+	  z-index: 25;
+	  tranform: translate(-50%, -50%);
 
-  &::after {
-    content: '';
-    display: block;
-    border-radius: 50%;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate3d(-50%, -50%, 0);
-  }
+	  &::after {
+	    content: '';
+	    display: block;
+	    border-radius: 50%;
+	    position: absolute;
+	    left: 50%;
+	    top: 50%;
+	    transform: translate3d(-50%, -50%, 0);
+	  }
 
-  &::before {
-    content: '';
-    display: block;
-    width: 30%;
-    height: 30%;
-    background: #fff;
-    border-radius: 50%;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate3d(-50%, -50%, 0);
-    transition: width 2s linear, height 2s linear;
-  }
+	  &::before {
+	    content: '';
+	    display: block;
+	    width: 30%;
+	    height: 30%;
+	    background: #fff;
+	    border-radius: 50%;
+	    position: absolute;
+	    left: 50%;
+	    top: 50%;
+	    transform: translate3d(-50%, -50%, 0);
+	    transition: width 2s linear, height 2s linear;
+	  }
 
-  &.dark {
-    background: rgba(175, 177, 184, 0.3);
-    &::before {
-      background: ${COLORS.GREY};
-    }
-  }
+	  &.dark {
+	    background: rgba(175, 177, 184, 0.3);
+	    &::before {
+	      background: ${COLORS.GREY};
+	    }
+	  }
 
-  .onhold & {
-    visibility: visible;
-    opacity: 1;
+	  &.cursor-plus {
+	  	&::before {
+	  		content: '+';
+	  		color: ${COLORS.RED};
+	  		font-size: 1.8rem;
+		    font-weight: bold;
+		    text-align: center;
+		    line-height: 100%;
+		    width: 60%;
+		    height: 60%;
+		    transition: width 500ms linear, height 500ms linear;
+	  	}
+	  }
 
-    &::before {
-      width: 100%;
-      height: 100%;
-    }
+	  &.cursor-play {
+	  	border: 1px solid #fff;
 
-    &::after {
-      animation: pulse-btn-before 2s ease infinite;
-    }
-  }
+	  	&::before {
+	  		color: #fff;
+	  		font-size: 1rem;
+        line-height: normal;
+		    position: absolute;
+		    left: 50%;
+		    top: 50%;
+		    margin -0.5em -0.45em;
+		    width: 0;
+		    height: 0;
+		    transition: width 500ms linear, height 500ms linear;
+	  	}
+	  }
+
+	  .onhold & {
+	    visibility: visible;
+	    opacity: 1;
+
+	    &::before {
+	    	font-size: 0;
+	      width: 100%;
+	      height: 100%;
+	    }
+
+	    &::after {
+	      animation: pulse-btn-before 2s ease infinite;
+	    }
+	  }
+	}
 `
 
 const RedButton = styled.div`
@@ -263,7 +311,7 @@ const SectionScroll = styled.div`
   right: ${props => props.pos? props.pos[2] : "15%"};
   bottom: ${props => props.pos? props.pos[3] : "auto"};
   left: ${props => props.pos? props.pos[4] : "auto"};
-  margin-right: 15rem;
+  margin: ${props => props.margin || "0 15rem 0 0"};
 	width: ${props => props.width || "auto"};
   transform: translate3d(0,0,0);
 `
@@ -288,10 +336,15 @@ const InfoBlocks = styled.div`
 `
 
 const ContentPart = styled.div`
-	padding: ${props => props.padding || "10rem 24rem"};
+	padding: ${props => props.mPadding || "2rem"};
 	background: ${props => props.bg || COLORS.BG_GREY};
 	color: ${props => props.color || COLORS.BLACK};
-	display: ${props => props.flex? "flex" : "block"};
+	display: ${props => props.mFlex? "flex" : "block"};
+
+	@media screen and (min-width: 1280px) and (pointer: fine) {
+		padding: ${props => props.padding || "10rem 24rem"};
+		display: ${props => props.flex? "flex" : "block"};
+	}
 `
 
 const ContentColumn = styled.div`

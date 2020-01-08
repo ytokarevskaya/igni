@@ -31,13 +31,13 @@ const DigitalPage = ({ data }) => {
 	  <Layout page="project">
 	    <SEO title="IGNI | Веб-студия полного цикла" />
 	    <ScrollFrame>
-		    <Section id={0} active={true} name="section-project" headerStyle="white" footerStyle="white">
+		    <Section id={0} active={true} name="section-project" headerStyle="white" footerStyle="white" noCursor>
 		    	<FrontLayer bg={COLORS.BLACK}>
 		    		<VideoEmbed>
 		    			<iframe src={project.videoLink + "?autoplay=1&color=ffffff&title=0&byline=0&portrait=0"} style={{"position": "absolute", "top":0, "left": 0, "width": "100%", "height": "100%"}} frameBorder="0" allow="autoplay; fullscreen" allowFullScreen></iframe>
 		    			<script src="https://player.vimeo.com/api/player.js"></script>
 		    		</VideoEmbed>
-		    		<Link to="/portfolio/digital"><PortfolioBackBtn transparent className="icon-arrow-bold translate-y" /></Link>
+		    		<a href="/portfolio/digital"><PortfolioBackBtn transparent className="icon-arrow-bold translate-y" /></a>
 		    	</FrontLayer>
 		    </Section>
 		  </ScrollFrame>

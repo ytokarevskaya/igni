@@ -24,7 +24,7 @@ class Footer extends React.Component {
 					<a href="" target="_blank" className="icon-twitter" />
 					<a href="" target="_blank" className="icon-facebook" />
 				</Socials>
-				<BottomMenu>
+				<BottomMenu className="mobile-hidden">
 					<MusicBtn>
 						<div className="icon icon-headphones" />
 						<div className="title">Музыка включена</div>
@@ -40,13 +40,21 @@ class Footer extends React.Component {
 
 const FooterStyled = styled.footer`
 	position: fixed;
-	left: 0;
-	bottom: 0;
-	width: 100%;
+	top: 5rem;
+	right: 0;
+	width: 5rem;
 	z-index: 30;
 
 	&.dark {
 		color: ${COLORS.GREY};
+	}
+
+	@media screen and (min-width: 1280px) and (pointer: fine) {
+		right: auto;
+		top: auto;
+		left: 0;
+		bottom: 0;
+		width: 100%;
 	}
 `
 
@@ -89,14 +97,23 @@ const MusicBtn = styled.div`
 `
 
 const Socials = styled.div`
-	position: absolute;
-	left: 7rem;
-  bottom: 6vh;
+	text-align: center;
 
 	a {
+		font-size: 1.3rem;
+    margin: 2.5rem 0 0 0;
 		display: block;
-		font-size: 2.2rem;
-		margin: 3.5rem 0 0 0;
+	}
+
+	@media screen and (min-width: 1280px) and (pointer: fine) {
+		position: absolute;
+		left: 7rem;
+	  bottom: 6vh;
+
+	  a {
+			font-size: 2.2rem;
+			margin: 3.5rem 0 0 0;
+	  }
 	}
 `
 

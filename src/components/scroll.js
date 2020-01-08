@@ -68,7 +68,7 @@ class Scroll extends React.Component {
 			}
 	    return (
 	    	<React.Fragment>
-			    <SectionScroll ref={this.frame} data-pos="0" className="section-scroll transition-05s" width={this.props.width} pos={this.props.pos} onWheel={(e) => this.scrollScreen(e)}>
+			    <SectionScroll ref={this.frame} data-pos="0" className="section-scroll transition-05s" width={this.props.width} pos={this.props.pos} margin={this.props.margin} onWheel={(e) => this.scrollScreen(e)}>
 			    	<div className="scroll-content">
 			    		{this.props.children}
 			    	</div>
@@ -82,6 +82,7 @@ class Scroll extends React.Component {
 Scroll.propTypes = {
   menuItems: PropTypes.array,
   width: PropTypes.string,
+  margin: PropTypes.string,
   pos: PropTypes.array,
   overflowLimit: PropTypes.number
 }

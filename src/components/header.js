@@ -92,7 +92,7 @@ class Header extends React.Component {
           <CursorBtn ref={this.menuCursor} className={this.state.menuOpened? "visible" : ""} />
         </MainMenu>
         <MenuFrame>
-          <OrderBtn>
+          <OrderBtn href="/?active=3">
             <div className="icon icon-pen" />
             <div className="title">Оставить заявку</div>
           </OrderBtn>
@@ -103,7 +103,7 @@ class Header extends React.Component {
           </MenuBtn>
         </MenuFrame>
         {this.props.page === "home"?
-          <SideMenu id="side-menu" className="translate-y">
+          <SideMenu id="side-menu" className="translate-y mobile-hidden">
             <div className="item open-slide active" data-id="0" onClick={sideMenuClick}>
               <div className="line transition-05s" />
               <span>Главная</span>
@@ -303,12 +303,13 @@ const SideMenu = styled.aside`
   }
 `
 
-const OrderBtn = styled.div`
+const OrderBtn = styled.a`
   position: relative;
   height: 10rem;
   background: #de5650;
   cursor: pointer;
   padding: 3rem;
+  display: block;
 
   .icon {
     position: relative;
@@ -340,25 +341,25 @@ const OrderBtn = styled.div`
 
 const MenuBtn = styled.div`
   position: relative;
-  width: 10rem;
-  height: 10rem;
+  width: 5rem;
+  height: 5rem;
   background: #fff;
   cursor: pointer;
 
   > div {
-    width: 2.3rem;
-    height: 0.25rem;
+    width: 1.2rem;
+    height: 0.15rem;
     background: rgba(151, 151, 151, 0.6);
     position: absolute;
     left: 50%;
     top: 50%;
 
     &.n1 {
-      margin-top: -0.9rem;
+      margin-top: -0.4rem;
     }
 
     &.n3 {
-      margin-top: 0.85rem;
+      margin-top: 0.4rem;
     }
   }
 
@@ -387,6 +388,23 @@ const MenuBtn = styled.div`
       background: #fff;
     }
   }
+
+  @media screen and (min-width: 1280px) and (pointer: fine) {
+    width: 10rem;
+    height: 10rem;
+
+    > div {
+      width: 2.3rem;
+      height: 0.25rem;
+      &.n1 {
+        margin-top: -0.9rem;
+      }
+
+      &.n3 {
+        margin-top: 0.85rem;
+      }
+    }
+  }
 `
 
 const MenuFrame = styled.div`
@@ -399,12 +417,12 @@ const MenuFrame = styled.div`
 const Logo = styled.div`
   display: block;
   position: absolute;
-  left: 7rem;
-  top: 3vh;
+  left: 2rem;
+  top: 2rem;
   z-index: 30;
 
   img {
-    width: 7rem;
+    width: 4rem;
     height: auto;
     max-width: unset;
   }
@@ -450,10 +468,19 @@ const Logo = styled.div`
     }
   }
 
-  ${HeaderStyled}.scetion-main & {
+  ${HeaderStyled}.section-main & {
     h1 {
       opacity: 1;
       visibility: visible;
+    }
+  }
+
+  @media screen and (min-width: 1280px) and (pointer: fine) {
+    left: 7rem;
+    top: 3vh;
+
+    img {
+      width: 7rem;
     }
   }
 `

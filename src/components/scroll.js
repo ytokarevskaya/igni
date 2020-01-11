@@ -28,9 +28,11 @@ class Scroll extends React.Component {
 
 		if (e) {
 			const curPos = +scrollFrame.dataset.pos;
-			newPos = curPos - e.deltaY * 0.5;
-			if (newPos > 0) newPos = 0;
+			const delta = e.deltaY > 0? 1 : -1;
+			newPos = curPos - delta * 60;
+			console.log(newPos);
 			// debugger;
+			if (newPos > 0) newPos = 0;
 			if (newPos <= -(scrollContent.clientHeight - window.innerHeight) * this.overflowLimit) newPos = -(scrollContent.clientHeight - window.innerHeight) * this.overflowLimit;
 			for (let i = 0; i < scrollContent.children.length; i++) {
 			  const item = scrollContent.children[i];
@@ -68,7 +70,7 @@ class Scroll extends React.Component {
 			}
 	    return (
 	    	<React.Fragment>
-			    <SectionScroll ref={this.frame} data-pos="0" className="section-scroll transition-05s" width={this.props.width} pos={this.props.pos} margin={this.props.margin} onWheel={(e) => this.scrollScreen(e)}>
+			    <SectionScroll ref={this.frame} data-pos="0" className="section-scroll" width={this.props.width} pos={this.props.pos} margin={this.props.margin} onWheel={(e) => this.scrollScreen(e)}>
 			    	<div className="scroll-content">
 			    		{this.props.children}
 			    	</div>

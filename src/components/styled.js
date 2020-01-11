@@ -314,6 +314,8 @@ const SectionScroll = styled.div`
   margin: ${props => props.margin || "0 15rem 0 0"};
 	width: ${props => props.width || "auto"};
   transform: translate3d(0,0,0);
+  transform-style: preserve-3d;
+  transition: transform 300ms linear;
 `
 
 const InfoBlocks = styled.div`

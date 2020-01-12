@@ -12,7 +12,7 @@ import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
 import { useProjectsData } from "../../components/queries/get-projects-data"
 import { ScrollFrame, SectionScroll, COLORS, Title, TextStyled, FrontLayer, ContentPart, InfoBlocks, ContentColumn, RedButton } from "../../components/styled"
 
-import arrowDown from "../../images/arrow-down-white.png"
+import arrowDown from "../../images/arrow-down-white.svg"
 import teamIcon from "../../images/team.svg"
 import baloonIcon from "../../images/air-balloon.svg"
 

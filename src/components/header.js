@@ -306,7 +306,7 @@ const SideMenu = styled.aside`
 const OrderBtn = styled.a`
   position: relative;
   height: 10rem;
-  background: #de5650;
+  background: ${COLORS.RED};
   cursor: pointer;
   padding: 3rem;
   display: block;
@@ -317,7 +317,7 @@ const OrderBtn = styled.a`
     height: 3.8rem;
     border-radius: 50%;
     background: #fff;
-    color: #de5650;
+    color: ${COLORS.RED};
     font-size: 1.5rem;
     display: inline-block;
     vertical-align: middle;

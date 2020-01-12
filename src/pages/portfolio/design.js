@@ -15,7 +15,7 @@ import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
 import { useProjectsData } from "../../components/queries/get-projects-data"
 import { ScrollFrame, SectionScroll, COLORS, Title, TextStyled, FrontLayer, ContentPart, InfoBlocks, ContentColumn, RedButton } from "../../components/styled"
 
-import arrowDown from "../../images/arrow-down-white.png"
+import arrowDown from "../../images/arrow-down-white.svg"
 
 
 const projects = [];
@@ -50,7 +50,7 @@ const PortfolioDesignPage = (props) => {
 							  </ProjectsSlider>*/}
 		          </ProjectsCarousel>
 							<PortfolioDesignTitle>
-			          <Title fz="5rem" color="#fff" lineBottom lineBg="#fff">Дизайн</Title>
+			          <Title fz="5rem" color="#fff" lineBottom lineBg="#fff" lineWidth="3.3rem">Дизайн</Title>
 			          <TextStyled color="#fff" width="18rem" margin="3.5rem 0">сделайте первое впечатление клиента незабываемым</TextStyled>
 		          </PortfolioDesignTitle>
 		          <ContentPart>

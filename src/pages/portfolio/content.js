@@ -14,7 +14,7 @@ import { ScrollFrame, SectionScroll, COLORS, Title, TextStyled, FrontLayer, Info
 
 import teamIcon from "../../images/team.svg"
 import baloonIcon from "../../images/air-balloon.svg"
-import arrowDown from "../../images/arrow-down-black.png"
+import arrowDown from "../../images/arrow-down-black.svg"
 
 const PortfolioContentPage = () => {
 	const { edges } = useProjectsData();
@@ -142,7 +142,7 @@ const ArrowDown = styled.img`
 const PortfolioContentStyled = styled.article`
 	color: ${COLORS.BLACK};
 	padding: 10rem 0;
-	border-bottom: 1px solid ${COLORS.LINE_GREY_20};
+	border-bottom: 1px solid ${COLORS.BLACK};
 
 	&.last {
 		border-bottom: none;

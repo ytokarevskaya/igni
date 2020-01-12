@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 const COLORS = {
-	RED: '#de5650',
+	RED: '#d11e1e',
 	RED_HOVER: '#a73b37',
 	BLACK: '#0a0d19',
 	BLACK_30: 'rgba(0, 0, 0, 0.3)',
@@ -300,6 +300,7 @@ const RedButton = styled.div`
 	font-size: 1.6rem;
 	padding: ${props => props.padding || "1.2rem 2.4rem"};
 	transition: background 300ms ease;
+	border-radius: 2px;
 	&:hover {
 		background: ${COLORS.RED_HOVER};
 	}
@@ -369,7 +370,6 @@ const InputFrame = styled.div`
 		border-bottom: 1px solid #fff;
 		background: unset;
 		margin: 0 0 1.5rem 0;
-
 		&:focus {
 			outline: none;
 		}
@@ -381,6 +381,9 @@ const InputFrame = styled.div`
 
 	input {
 		padding-right: 12rem;
+		&::placeholder {
+			font-size: 0;
+		}
 	}
 
 	textarea {
@@ -396,9 +399,18 @@ const InputFrame = styled.div`
 		font-size: 1.6rem;
   	font-weight: 300;
 		position: absolute;
-		right: 1rem;
-		top: 50%;
+		left: 0;
+		right: 100%;
+    top: calc(50% - 0.75rem);
+    text-align: right;
+    white-space: nowrap;
 		transform: translateY(-50%);
+		transition: right 500ms ease;
+		pointer-events: none;
+
+		&.is-focus {
+			right: 0;
+		}
 	}
 `
 
@@ -429,6 +441,8 @@ const FormStyled = styled.form`
   	flex-grow: 0;
     height: 5rem;
     transition: background 500ms ease;
+    border-radius: 2px;
+
   	&:hover {
 			background: ${COLORS.RED_HOVER};
   	}

@@ -65,12 +65,27 @@ function formInit(ref) {
   for (let i = 0; i < inputs.length; i += 1) {
     inputs[i].onchange = inputChange;
     inputs[i].onkeyup = inputChange;
+    inputs[i].onfocus = inputFocus;
+    inputs[i].onblur = inputBlur;
   }
 }
 
 function inputChange(e) {
   const input = e.currentTarget;
   validateInput(input);
+}
+
+function inputFocus(e) {
+  const inputFrame = e.currentTarget.parentElement;
+  inputFrame.querySelector("label").classList.add("is-focus");
+}
+
+function inputBlur(e) {
+  const input = e.currentTarget;
+  const inputFrame = input.parentElement;
+  if (!input.value) {
+    inputFrame.querySelector("label").classList.remove("is-focus");
+  }
 }
 
 // function Inputs(props) {

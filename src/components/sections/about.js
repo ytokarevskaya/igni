@@ -6,10 +6,69 @@ import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
 import Section from "../section"
 import Scroll from "../scroll"
 import { useCategoriesData } from "../queries/get-categories-data"
+import { applyStyles } from "../scroll-controller"
 
-import { COLORS, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, SectionScroll } from "../styled"
+import { COLORS, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, SectionScroll, PlusBtn } from "../styled"
 
 import fireSrc from "../../images/fire.svg"
+
+const onLoadStyles = {
+  ".scrollController-title" : {
+    "opacity" : "1",
+    "transform": "translateY(0)"
+  },
+  ".scrollController-cards" : {
+    "opacity" : "1",
+    "transform": "translateY(0)"
+  } 
+}
+
+function onSectionLoad(section) {
+  setTimeout(() => {
+    applyStyles(section, onLoadStyles);
+  }, 500);
+}
+
+function onSectionUnload(section) {
+  section.style.transform = "translateY(-100%)";
+  section.style.opacity = "0";
+  setTimeout(() => {
+    section.style.transform = "translateY(0)";
+    section.style.opacity = "1";
+  }, 5000);
+}
+
+const SectionAbout = (props) => {
+  const { edges } = useCategoriesData()
+  const categories = [];
+  const categoriesTitles = [];
+
+  edges.map((item) => {
+    const category = item.node;
+    categories.push(category);
+    categoriesTitles.push(category.title);
+  });
+
+  return (
+    <Section id={props.id} active={props.active} name="section-about" headerStyle="white" footerStyle="white" onLoad={onSectionLoad} onUnload={onSectionUnload}>
+      <FrontLayer>
+        <AboutTitleSmall fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Наши услуги</AboutTitleSmall>
+        <AboutTitle className="scrollController-title">
+          <Title fz="5rem" color="#fff" width="30rem" lineBottom>Проектируем, разрабатываем, продвигаем</Title>
+          <TextStyled width="42rem" color="#fff" margin="3.5rem 0 0 0">Чтобы осветить темное пространство веба новыми проектами, мы собрали команду профессионалов с обширным опытом работы в сфере дизайна, разработки, маркетинга, рекламы и видео производства.</TextStyled>
+        </AboutTitle>
+        <Scroll overflowLimit={1} width="auto" pos={["absolute", "40%", "15%", "", ""]}>
+          <AboutItems className="scrollController-cards">
+          {categories.map((node) => (
+              <AboutItem key={node.id} id={node.id} title={node.title} content={node.description} bg={node.background.file.url} slug={node.slug} />
+            ))
+          }
+          </AboutItems>
+        </Scroll>
+      </FrontLayer>
+    </Section>
+  )
+}
 
 class AboutItem extends React.Component {
   constructor(props) {
@@ -36,88 +95,53 @@ class AboutItem extends React.Component {
   render() {
     {/*<AboutItemStyled className="transition-05s item" data-id={this.props.id} onMouseEnter={(e) => this.moveBtn(e)} onMouseMove={(e) => this.moveBtn(e)} onMouseLeave={(e) => this.returnBtn(e)}>*/}
     return (
-      <Link to={"/portfolio/" + this.props.slug}>
-        <AboutItemStyled className="transition-05s load-ani unload-ani item" data-id={this.props.id} bgImg={this.props.bg} data-loaddelay={1400} data-unloaddelay={400}>
+      <a href={"/portfolio/" + this.props.slug}>
+        <AboutItemStyled className="transition-05s item" data-id={this.props.id} bgImg={this.props.bg}>
           <div className="bg transition-05s" />
           <Title color={COLORS.BLACK}>{this.props.title}</Title>
           <div>
             <TextStyled color={COLORS.BLACK} lh="1.15" className="is-ul-red" dangerouslySetInnerHTML={{__html: documentToHtmlString(this.props.content? this.props.content.json : "")}} />
           </div>
-          <RedBtn ref={this.redBtn} />
+          <PlusBtn ref={this.redBtn} />
         </AboutItemStyled>
-      </Link>
+      </a>
     )
   }
 }
 
-const RedBtn = styled.div`
-  width: 2.3rem;
-  height: 2.3rem;
-  border-radius: 50%;
-  background: ${COLORS.RED};
-  position: absolute;
-  left: 3.5rem;
-  bottom: 3.5rem;
-
-  &::before {
-    content: '+';
-    color: #fff;
-    font-size: 1.6rem;
-    display: block;
-    width: 100%;
-    line-height: 2.3rem;
-    text-align: center;
-  }
+const AboutTitleSmall = styled(Title)`
+  opacity: 0;
+  transform: translateY(8%);
 `
 
-const SectionAbout = (props) => {
-  const { edges } = useCategoriesData()
-  const categories = [];
-  const categoriesTitles = [];
+const AboutItems = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: flex-start;
+  opacity: 0;
+  transform: translateY(8%);
 
-  edges.map((item) => {
-    const category = item.node;
-    categories.push(category);
-    categoriesTitles.push(category.title);
-  });
-
-  return (
-    <Section id={props.id} active={props.active} name="section-about" headerStyle="dark" footerStyle="dark">
-      <BackLayer bg="#f6f7f9">
-        <img src={fireSrc} alt="" style={{"display": "block", "width": "38%", "margin": "13rem auto"}} className="load-ani unload-ani" data-loaddelay={200}  data-unloaddelay={1000} />
-      </BackLayer>
-      <FrontLayer>
-        <AboutTitle className="load-ani unload-ani" data-loaddelay={800}  data-unloaddelay={0}>
-          <Title fz="5rem" color={COLORS.BLACK} width="30rem">Проектируем, разрабатываем, продвигаем – наши <span className="red">услуги</span></Title>
-          <TextStyled width="42rem" color={COLORS.BLACK}>Чтобы осветить темное пространство веба новыми проектами, мы собрали команду профессионалов с обширным опытом работы в сфере дизайна, разработки, маркетинга, рекламы и видео производства.</TextStyled>
-        </AboutTitle>
-        <Scroll overflowLimit={2.3} width="auto" pos={["absolute", "40%", "15%", "", ""]} menuItems={categoriesTitles}>
-          {categories.map((node) => (
-              <AboutItem key={node.id} id={node.id} title={node.title} content={node.description} bg={node.background.file.url} slug={node.slug} />
-            ))
-          }
-          />
-        </Scroll>
-      </FrontLayer>
-    </Section>
-  )
-}
+  > * {
+    position: relative;
+    height: calc(100% - 5rem);
+    &:nth-child(even) {
+      top: 20rem;
+    }
+  }
+`
 
 const AboutItemStyled = styled.div`
   position: relative;
   color: ${COLORS.BLACK};
   width: 30rem;
+  height: 100%;
   padding: 3.5rem 3.5rem 7rem 3.5rem;
-  border-radius: 25px;
+  margin: 0 5rem 5rem 0;
+  border-radius: 3px;
   cursor: none;
 
   &:hover {
-    background-color: #fff;
     box-shadow: 0 4px 15px -5px rgba(0, 0, 0, 0.35);
-
-    .bg {
-      opacity: 1;
-    }
   }
 
   .bg {
@@ -128,45 +152,33 @@ const AboutItemStyled = styled.div`
     height: 100%;
     pointer-events: none;
     z-index: 0;
+    background-color: #fff;
     background-size: contain;
     background-position: top right;
     background-repeat: no-repeat;
     background-image: ${props => "url(" + props.bgImg + ")" || "unset"};
-    opacity: 0;
-    border-radius: 25px;
+    border-radius: 3px;
   }
 
   ${Title} {
     font-size: 2.6rem;
     margin-bottom: 4rem;
   }
+
+  ${PlusBtn} {
+    position: absolute;
+    left: 3.5rem;
+    bottom: 3.5rem;
+  }
 `
 
 const AboutTitle = styled.div`
   position: absolute;
-  left: 24rem;
-  top: 10rem;
+  left: 20rem;
+  top: 45%;
   z-index: 1;
-
-  ${Title} {
-    position: relative;
-    padding-bottom: 4rem;
-
-    &::before {
-      content: '';
-      display: block;
-      width: 7rem;
-      height: 5px;
-      background: ${COLORS.BLACK};
-      position: absolute;
-      left: 0;
-      bottom: 0;
-    }
-  }
-
-  ${TextStyled} {
-    padding-top: 4rem;
-  }
+  opacity: 0;
+  transform: translateY(8%);
 `
 
 export default SectionAbout

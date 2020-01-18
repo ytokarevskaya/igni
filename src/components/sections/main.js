@@ -3,43 +3,136 @@ import styled from "styled-components"
 import { Link } from "gatsby"
 
 import Section from "../section"
+import { applyStyles } from "../scroll-controller"
 
-import { COLORS, BackLayer, FrontLayer, Title, TextStyled, PulseBtn } from "../styled"
+import { COLORS, BackLayer, FrontLayer, Title, TextStyled, PlusBtn, RedButton } from "../styled"
 
-import videoSrcMP4 from "../../video/fire-1080p.mp4"
-import videoSrcWEBM from "../../video/fire-1080p.webm"
+const scrollControllerElements = {
+  0 : {
+    ".scrollController-title" : {
+      "opacity" : "1"
+    } 
+  }
+}
+
+const unloadStyles = {
+  ".scrollController-title" : {
+    "opacity" : "0"
+  } 
+}
+
+const loadStyles = {
+  ".scrollController-title" : {
+    "opacity" : "1"
+  } 
+}
+
+const onSectionUnload = (section) => {
+  const video = document.getElementById("bg-video");
+  video.pause();
+  video.parentElement.classList.add("is-blurred");
+  applyStyles(section, unloadStyles);
+}
+
+const onSectionLoad = (section) => {
+  applyStyles(section, loadStyles);
+  const video = document.getElementById("bg-video");
+  video.play();
+  video.parentElement.classList.remove("is-blurred");
+}
 
 const SectionMain = (props) => (
-	<Section id={props.id} active={props.active} name="section-main" headerStyle="light" footerStyle="white">
-    <BackLayer>
-      <BgVideo>
-        <video autoPlay={true} className="translate-xy" loop={true}>
-          <source src={videoSrcWEBM} type='video/webm; codecs="vp8, vorbis"' />
-          <source src={videoSrcMP4} type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
-        </video>
-      </BgVideo>
-    </BackLayer>
-    <FrontLayer bg="linear-gradient(155deg,rgba(255,255,255,0.5) 22%,rgba(0, 0, 0, 0.1) 58%),linear-gradient(to bottom,rgba(42,35,42,0.15),rgba(42,35,42,0.15))">
-      <HomeTitle className="translate-x unload-ani" data-unloaddelay="800">
-        <Title fz="20rem" mFz="10rem" mColor="#fff" className="n1" lh="0.5">IGNI</Title>
-        <Title fz="2.4rem" mFz="1.8rem" mColor="#fff" color="#fff" width="12rem" ta="right" mTa="right" className="n2">Освещая темное пространство веба</Title>
-        <Title color="#fff" mFz="2.5rem" mColor="#fff" width="36rem" className="n3">Комплексные услуги по созданию и продвижению сайтов</Title>
-      </HomeTitle>
-      <HomeSubtitle className="unload-ani" data-unloaddelay="300">
-        <TextStyled width="43rem">
-          <p>Главная задача команды igni — обеспечить эффективное взаимодействие клиента и бизнеса в вебе. Чтобы достичь максимальных показателей, мы предлагаем не только маркетинговое сопровождение, но и конкретные действия по улучшению продукта.</p>
-        </TextStyled>
-        <Link to="/portfolio">
-          <PortfolioBtn className="transition-05s" href="/portfolio">
-            <div className="icon icon-fire transition-05s" />
-            <div className="title transition-05s">Портфолио</div>
-          </PortfolioBtn>
-        </Link>
-        {/*<PulseBtn>+</PulseBtn>*/}
-      </HomeSubtitle>
-    </FrontLayer>
+	<Section id={props.id} active={props.active} name="section-main" headerStyle="white" footerStyle="white" onLoad={onSectionLoad} onUnload={onSectionUnload} scrollControllerElements={scrollControllerElements}>
+    <Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Освещая темное пространство веба</Title>
+    <Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="12rem" pos={["absolute", "55%", "", "", "20rem"]} margin="-12rem 0 0 0" className="scrollController-title">Веб-студия полного цикла</Title>
+    <Title fz="45rem" mFz="10rem" color="#fff" mColor="#fff" className="scrollController-title" lh="0.5" pos={["absolute", "55%", "", "", "18rem"]}>IGNI</Title>
+      {/*<Link to="/portfolio">
+        <PortfolioBtn className="transition-05s" href="/portfolio">
+          <div className="icon icon-fire transition-05s" />
+          <div className="title transition-05s">Портфолио</div>
+        </PortfolioBtn>
+      </Link>
+      <PulseBtn>+</PulseBtn>*/}
+    <HomeTitlePopup />
   </Section>
 )
+
+class HomeTitlePopup extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      "active": false
+    }
+  }
+
+  openPopup() {
+    this.setState({"active": true});
+  }
+
+  closePopup() {
+    this.setState({"active": false});
+  }
+
+  render() {
+    return(
+      <React.Fragment>
+        <HomeTitle className={"scrollController-title" + (this.state.active? " hidden" : "")}>
+          <Title fz="5rem" width="40rem" color="#fff" margin="0 0 5rem 0">Комплексные <br/>услуги по созданию <br/>и продвижению <br/>сайтов</Title>
+          <PlusBtn size="3.7rem" onClick={(e) => this.openPopup(e)} />
+        </HomeTitle>
+        <HomeTitlePopupStyled className={"transition-05s translate-x" + (this.state.active? " active" : "")}>
+          <div className="content">
+            <Title fz="5rem" color="#fff" margin="0 0 3.5rem 0" lineBottom>Комплексные услуги по созданию и продвижению сайтов</Title>
+            <TextStyled>
+              <p>Главная задача команды igni — обеспечить эффективное взаимодействие клиента и бизнеса в вебе. Чтобы достичь максимальных показателей, мы предлагаем не только маркетинговое сопровождение, но и конкретные действия по улучшению продукта.</p>
+            </TextStyled>
+            <div className="content-bottom">
+              <PlusBtn size="3.7rem" onClick={(e) => this.closePopup(e)} />
+              <a href="/portfolio/"><RedButton>Портфолио</RedButton></a>
+            </div>
+          </div>
+        </HomeTitlePopupStyled>
+      </React.Fragment>
+    )
+  }
+}
+
+const HomeTitlePopupStyled = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 25vw;
+  background: rgba(5, 11, 31, 0.25);
+  padding: 0 8rem;
+  z-index: 5;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+  }
+
+  .content-bottom {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6rem;
+  }
+
+  ${PlusBtn} {
+    transform: rotate(45deg);
+    &::before {
+      font-size: 2.8rem;
+      font-weight: 200;
+    }
+  }
+`
 
 const PortfolioBtn = styled.div`
   position: relative;
@@ -86,85 +179,14 @@ const PortfolioBtn = styled.div`
   }
 `
 
-const HomeSubtitle = styled.div`
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  margin: 10rem 0 0 20rem;
-  width: 2px;
-  height: 15rem;
-  background: #fff;
-
-  ${TextStyled} {
-    position: absolute;
-    left: 5rem;
-    top: 0;
-
-    p {
-      margin: 0;
-    }
-  }
-
-  ${PulseBtn} {
-    position: absolute;
-    bottom: -7rem;
-    right: -55rem;
-  }
-`
-
 const HomeTitle = styled.div`
   position: absolute;
-  top: 0;
-  left: 50%;
-  width: 2px;
-  height: 70%;
-  background: #fff;
+  top: 55%;
+  left: 55%;
+  margin-top: -4.5rem;
 
-  .n1 {
-    position: absolute;
-    right: 1.8rem;
-    bottom: 22.5rem;
-  }
-
-  .n2 {
-    position: absolute;
-    right: 1.8rem;
-    bottom: 11.5rem;
-  }
-
-  .n3 {
-    position: absolute;
-    left: 1.8rem;
-    bottom: -0.7rem;
-  }
-
-  @media screen and (min-width: 1280px) and (pointer: fine) {
-    height: 50%;
-    .n1 {
-      right: 5rem;
-      bottom: 28.5rem;
-    }
-    .n2 {
-      right: 5rem;
-      bottom: 9.3rem;
-    }
-    .n3 {
-      left: 5rem;
-    }
-  }
-`
-
-const BgVideo = styled.div`
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-
-  video {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    height: 100%;
-    width: auto;
+  &.hidden {
+    opacity: 0!important;
   }
 `
 

@@ -25,15 +25,19 @@ class Scroll extends React.Component {
 
 		let newPos;
 		let targetIndex = 0;
-
+		// debugger;
 		if (e) {
 			const curPos = +scrollFrame.dataset.pos;
 			const delta = e.deltaY > 0? 1 : -1;
 			newPos = curPos - delta * 60;
-			console.log(newPos);
-			// debugger;
+			let maxPos;
+			if (scrollContent.clientHeight > window.innerHeight) {
+				maxPos = (scrollContent.clientHeight - window.innerHeight) * this.overflowLimit;
+			} else {
+				maxPos = scrollContent.clientHeight * this.overflowLimit;
+			}
 			if (newPos > 0) newPos = 0;
-			if (newPos <= -(scrollContent.clientHeight - window.innerHeight) * this.overflowLimit) newPos = -(scrollContent.clientHeight - window.innerHeight) * this.overflowLimit;
+			if (newPos <= -maxPos) newPos = -maxPos;
 			for (let i = 0; i < scrollContent.children.length; i++) {
 			  const item = scrollContent.children[i];
 			  if (item.offsetTop < -newPos) {

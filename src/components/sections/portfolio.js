@@ -3,12 +3,41 @@ import styled from "styled-components"
 import { Link } from "gatsby"
 
 import Section from "../section"
-import { wordEnd } from "../utils"
+import Scroll from "../scroll"
 
 import { useProjectsData } from "../queries/get-projects-data"
-import Scroll from "../scroll"
+import { applyStyles } from "../scroll-controller"
+import { wordEnd } from "../utils"
 import { COLORS, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, SectionScroll } from "../styled"
 
+import mountainImg from "../../images/mountain.jpg"
+
+const onLoadStyles = {
+  ".scrollController-title": {
+    "opacity": "1"
+  },
+  ".scrollController-menu": {
+    "opacity": "1",
+    "transitionDelay": "600ms"
+  }
+}
+
+function onSectionLoad(section) {
+  section.style.transform = "translateY(0)";
+  section.style.opacity = "1";
+  setTimeout(() => {
+    applyStyles(section, onLoadStyles);
+  }, 1200);
+}
+
+function onSectionUnload(section) {
+  section.style.transform = "translateY(-100%)";
+  section.style.opacity = "0";
+  setTimeout(() => {
+    section.style.transform = "translateY(0)";
+    section.style.opacity = "1";
+  }, 5000);
+}
 
 const SectionPortfolio = (props) => {
   const { totalCount, edges } = useProjectsData()
@@ -32,221 +61,170 @@ const SectionPortfolio = (props) => {
   });
 
   return (
-  	<Section id={props.id} active={props.active} name="section-portfolio" headerStyle="dark" footerStyle="dark">
-      <FrontLayer bg="#f6f7f9">
-        <PortfolioTitle className="load-ani unload-ani" data-loaddelay={0} data-unloaddelay={0}>
-          <Title fz="5rem" lineBottom lineBg={COLORS.BLACK}>Портфолио <span className="black">IGNI</span></Title>
-        </PortfolioTitle>
-        <Scroll width="60%" overflowLimit="1.5" pos={["absolute", "40%", "5%", "", ""]} menuItems={["Дизайн", "Контент", "Маркетинг и реклама", "Диджитал продакшн"]}>
-          <PortfolioItem className="load-ani unload-ani" data-loaddelay={0} data-unloaddelay={400}>
-            <div className="header">
-              <Title color={COLORS.BLACK}>Дизайн</Title>
-              <Link className="all-projects" to="/portfolio/design">
-                <span>Все проекты</span>
-              </Link>
-            </div>
-            <p className="count">{projects.design.length} {'проект' + wordEnd(projects.design.length, 'pr')}</p>
-            <PortfolioWorks>
-              {projects.design.map((item, index) => {
-                if (index < 3) {
-                  return (
-                    <FormattedPortfolioWork index={index} project={item} type="design" />
-                  )
-                }
-              })}
-            </PortfolioWorks>
-          </PortfolioItem>
-          <PortfolioItem className="load-ani unload-ani" data-loaddelay={0} data-unloaddelay={400}>
-            <div className="header">
-              <Title color={COLORS.BLACK}>Контент</Title>
-              <Link className="all-projects" to="/portfolio/content">
-                <span>Все проекты</span>
-              </Link>
-            </div>
-            <p className="count">{projects.content.length} {'проект' + wordEnd(projects.content.length, 'pr')}</p>
-            <PortfolioWorks>
-              {projects.content.map((item, index) => {
-                if (index < 3) {
-                  return (
-                    <FormattedPortfolioWork index={index} project={item} type="content" />
-                  )
-                }
-              })}
-            </PortfolioWorks>
-          </PortfolioItem>
-          <PortfolioItem className="load-ani unload-ani" data-loaddelay={0} data-unloaddelay={400}>
-            <div className="header">
-              <Title color={COLORS.BLACK}>Маркетинг и реклама</Title>
-              <Link className="all-projects" to="/portfolio/marketing">
-                <span>Все проекты</span>
-              </Link>
-            </div>
-            <p className="count">{projects.marketing.length} {'проект' + wordEnd(projects.marketing.length, 'pr')}</p>
-            <PortfolioWorks>
-              {projects.marketing.map((item, index) => {
-                if (index < 3) {
-                  return (
-                    <FormattedPortfolioWork index={index} project={item} type="marketing" />
-                  )
-                }
-              })}
-            </PortfolioWorks>
-          </PortfolioItem>
-          <PortfolioItem className="load-ani unload-ani" data-loaddelay={0} data-unloaddelay={400}>
-            <div className="header">
-              <Title color={COLORS.BLACK}>Диджитал продакшн</Title>
-              <Link className="all-projects" to="/portfolio/digital">
-                <span>Все проекты</span>
-              </Link>
-            </div>
-            <p className="count">{projects.digital.length} {'проект' + wordEnd(projects.digital.length, 'pr')}</p>
-            <PortfolioWorks>
-              {projects.digital.map((item, index) => {
-                if (index < 3) {
-                  return (
-                    <FormattedPortfolioWork index={index} project={item} type="digital" />
-                  )
-                }
-              })}
-            </PortfolioWorks>
-          </PortfolioItem>
-        </Scroll>
+  	<Section id={props.id} active={props.active} name="section-portfolio" headerStyle="white" footerStyle="white" onLoad={onSectionLoad} onUnload={onSectionUnload}>
+      <FrontLayer>
+        <PortfolioTitleSmall fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Нашe портфолио</PortfolioTitleSmall>
+        <PortfolioCarouselMenu id="portfolio-carousel-menu" items={["Дизайн", "Контент", "Маркетинг и реклама", "Диджитал продакшн"]} />
+        <PortfolioCarousel id="portfolio-carousel" className="transition-05s scrollController-carousel">
+          <div className="carousel-content">
+            <PortfolioItem className="load-ani unload-ani carousel-item active" data-loaddelay={0} data-unloaddelay={400}>
+              <p className="count transition-05s"><strong className="ff-bebas">{projects.design.length}</strong> {'проект' + wordEnd(projects.design.length, 'pr')}</p>
+              <div className="header">
+                <Title color="#fff">Дизайн</Title>
+                <a className="all-projects" href="/portfolio/design"><span>Перейти</span></a>
+              </div>
+              <div className="image" />
+            </PortfolioItem>
+            <PortfolioItem className="load-ani unload-ani carousel-item" data-loaddelay={0} data-unloaddelay={400}>
+              <p className="count transition-05s"><strong className="ff-bebas">{projects.content.length}</strong> {'проект' + wordEnd(projects.content.length, 'pr')}</p>
+              <div className="header">
+                <Title color="#fff">Контент</Title>
+                <a className="all-projects" href="/portfolio/design"><span>Перейти</span></a>
+              </div>
+              <div className="image" />
+            </PortfolioItem>
+            <PortfolioItem className="load-ani unload-ani carousel-item" data-loaddelay={0} data-unloaddelay={400}>
+              <p className="count transition-05s"><strong className="ff-bebas">{projects.marketing.length}</strong> {'проект' + wordEnd(projects.marketing.length, 'pr')}</p>
+              <div className="header">
+                <Title color="#fff">Маркетинг и реклама</Title>
+                <a className="all-projects" href="/portfolio/design"><span>Перейти</span></a>
+              </div>
+              <div className="image" />
+            </PortfolioItem>
+            <PortfolioItem className="load-ani unload-ani carousel-item" data-loaddelay={0} data-unloaddelay={400}>
+              <p className="count transition-05s"><strong className="ff-bebas">{projects.digital.length}</strong> {'проект' + wordEnd(projects.digital.length, 'pr')}</p>
+              <div className="header">
+                <Title color="#fff">Диджитал продакшн</Title>
+                <a className="all-projects" href="/portfolio/design"><span>Перейти</span></a>
+              </div>
+              <div className="image" />
+            </PortfolioItem>
+          </div>
+        </PortfolioCarousel>
       </FrontLayer>
     </Section>
   )
 }
 
-const FormattedPortfolioWork = (props) => {
-  let logo;
-  if (props.type === "content" || props.type === "marketing") {
-    logo = props.project.logo? <img className="logo is-big is-on-top" src={props.project.logo.file.url} /> : '';
-  } else {
-    logo = props.project.logo? <img className="logo" src={props.project.logo.file.url} /> : '';
+const PortfolioCarouselMenu = (props) => (
+  <PortfolioCarouselMenuStyled className="scrollController-menu">
+    {props.items.map((item, index) => {
+      return (
+        <div className={"item" + (index === 0? " active" : "")} data-index={index} onClick={carouselItemClick}>{item}</div>
+      )
+    })}
+    <div onClick={carouselArrowClick} className="arrow arrow-prev icon-prev" />
+    <div onClick={carouselArrowClick} className="arrow arrow-next icon-next" />
+  </PortfolioCarouselMenuStyled>
+)
+
+function carouselArrowClick(e) {
+  const arrow = e.target;
+  const menuFrame = arrow.parentElement;
+  const curItem = menuFrame.querySelector(".active");
+  const dir = (arrow.classList.contains("arrow-prev")? -1 : 1);
+  let nextItem;
+  if (dir === 1) {
+    nextItem = curItem.nextElementSibling;
+  } else if (dir === -1) {
+    nextItem = curItem.previousElementSibling;
   }
-  return (
-    <PortfolioWork href={"/portfolio/" + props.project.category.slug + "/" + props.project.slug} key={props.project.id} bg={props.project.backgroundColor} bgImg={props.project.preview? props.project.preview.file.url : ''} className={"transition-03s load-ani unload-ani" + (props.project.theme? " theme-" + props.project.theme : " theme-Dark")} data-loaddelay={props.index * 200 + 800} data-unloaddelay={props.index * 200 + 800}>
-      <div className="ff-bebas info"><span className="year">{new Date(props.project.date).getFullYear()}</span> {props.project.subcategory}</div>
-      {logo}
-      <div className="title">{props.project.projectTitle}{(props.type === "digital"? <span className="time"> 1 : 15</span> : '')}</div>
-      <div className="description" dangerouslySetInnerHTML={{__html: props.project.projectSubtitle}} /> 
-    </PortfolioWork>
-  )
+  if (nextItem) {
+    curItem.classList.remove("active");
+    nextItem.classList.add("active");
+    moveCarousel(+nextItem.dataset.index);
+  }
 }
 
-const PortfolioWork = styled.a`
-  position: relative;
+function carouselItemClick(e) {
+  const target = e.target;
+  const menuFrame = target.parentElement;
+  menuFrame.querySelector(".active").classList.remove("active");
+  target.classList.add("active");
+  moveCarousel(+target.dataset.index);
+}
+
+function moveCarousel(index) {
+  const carousel = document.getElementById("portfolio-carousel");
+  const carouselContent = carousel.querySelector(".carousel-content");
+  const curItem = carousel.querySelector(".active");
+  const nextItem = carousel.querySelectorAll(".carousel-item")[index];
+  carouselContent.style.transform = "translateX(-" + nextItem.offsetLeft + "px)";
+  curItem.classList.remove("active");
+  nextItem.classList.add("active");
+}
+
+const PortfolioTitleSmall = styled(Title)`
+  opacity: 0;
+`
+
+const PortfolioCarouselMenuStyled = styled.aside`
+  position: absolute;
+  top: 25rem;
+  left: 40%;
   display: flex;
-  flex-wrap: wrap;
-  align-content: flex-end;
-  width: 32%;
-  height: 55rem;
-  padding: 3rem;
-  background-color: ${props => props.bg || "#fff"};
-  background-image: ${props => "url(" + props.bgImg + ")" || "unset"};
-  background-size: cover;
-  background-position: top center;
-  background-repeat: no-repeat;
-  cursor: pointer;
-  box-shadow: 0 4px 10px -5px rgba(55, 59, 68, 0.26);
-  transition-delay: 0ms!important;
+  align-items: flex-end;
+  opacity: 0;
 
-  &.theme-Light {
-    color: ${COLORS.BLACK};
-    .description {
-      hr {
-        background: ${COLORS.LINE_GREY};
-      }
-    }
-  }
-  &.theme-Dark {
-    color: #fff;
-  }
-  &.load-ani, &.unload-ani.unloaded {
-    transform: translateY(-3rem);
-  }
-  &.load-ani.loaded {
-    transform: translateY(0);
-  }
-  &:hover {
-    transform: translateY(-1rem)!important;
-  }
-
-  .logo {
-    display: block;
-    max-height: 5rem;
-    max-width: 5rem;
-    margin-bottom: 2rem;
-    &.is-big {
-      max-width: 50%;
-    }
-    &.is-on-top {
-      position: absolute;
-      left: 3rem;
-      top: 7rem;
-    }
-  }
-
-  .title {
-    width: 100%;
-    font-size: 2rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-
-    .time {
-      float: right;
-    }
-  }
-
-  .description {
+  .item {
     font-size: 1.6rem;
-    line-height: 1.5;
-
-    hr {
-      background: #fff;
-      margin: 2rem 0;
+    font-weight: 500;
+    margin-right: 4.5rem;
+    padding-bottom: 1.6rem;
+    &.active {
+      border-bottom: 1px solid #fff;
     }
   }
 
-  .info {
-    position: absolute;
-    top: 3rem;
-    left: 3rem;
-    text-transform: uppercase;
-    font-size: 1.5rem;
-
-    .year {
-      margin-right: 2rem;
+  .arrow {
+    position: relative;
+    margin: 0 1.2rem;
+    width: 3.8rem;
+    height: 3.8rem;
+    border-radius: 50%;
+    background: ${COLORS.WHITE_20};
+    &::before {
+      font-size: 1.1rem;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin: -0.5em;
     }
   }
 `
 
-const PortfolioWorks = styled.div`
-  display: flex;
-  margin: 3rem 0;
-  justify-content: space-between;
+const PortfolioCarousel = styled.div`
+  position: absolute;
+  left: 15rem;
+  right: 0;
+  top: 40%;
+  padding-left: 5rem;
+  white-space: nowrap;
+  overflow: hidden;
+
+  .carousel-content {
+    height: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    // align-items: flex-end;
+    transition: transform 1000ms ease;
+  }
 `
 
 const PortfolioItem = styled.div`
-  margin-bottom: 6rem;
+  display: inline-block;
+  vertical-align: bottom;
+  margin-right: 10vw;
 
   .all-projects {
-    display: flex;
-    flex-grow: 1;
-    border-bottom: 1px solid ${COLORS.LINE_GREY};
-    margin: 0 0 0.8rem 3rem;
-    align-items: flex-end;
-    padding-right: 30vw;
-    justify-content: flex-end;
-
+    padding-bottom: 1.4rem;
     span {
       position: relative;
-      color: ${COLORS.BLACK};
+      color: #fff;
       font-size: 1.6rem;
       font-weight: 500;
       padding: 0 3rem 0 10rem;
       margin-bottom: -0.5em;
-      background: ${COLORS.BG_GREY};
       cursor: pointer;
       &::before {
         content: '+';
@@ -254,7 +232,7 @@ const PortfolioItem = styled.div`
         width: 4.6rem;
         height: 4.6rem;
         border-radius: 50%;
-        background: ${COLORS.RED};
+        background: rgba(255, 255, 255, 0.2);
         color: #fff;
         font-size: 2.4rem;
         font-weight: 500;
@@ -264,18 +242,58 @@ const PortfolioItem = styled.div`
         left: 3rem;
         top: 50%;
         margin-top: -2.3rem;
+        transition: all 500ms ease;
+      }
+    }
+    &:hover {
+      span::before {
+        background: ${COLORS.RED};
       }
     }
   }
 
   .header {
     display: flex;
-    width: calc(100% + 30vw);
+    justify-content: space-between;
+    align-items: flex-end;
+
+    ${Title} {
+      font-size: 5rem;
+      transition: font-size 500ms ease;
+    }
   }
 
   .count {
     font-size: 1.6rem;
-    color: ${COLORS.BLACK};
+    color: #fff;
+    text-transform: uppercase;
+    opacity: 0;
+
+    strong {
+      font-size: 3.5rem;
+      margin-right: 1rem;
+    }
+  }
+
+  .image {
+    width: 65vw;
+    height: 30vw;
+    margin: 10rem 0 0 -3rem;
+    background-image: url(${mountainImg});
+    background-size: cover;
+    background-position: center center;
+  }
+
+  &.active {
+    .header {
+      ${Title} {
+        font-size: 15rem;
+      }
+    }
+
+    .count {
+      opacity: 1;
+    }
   }
 `
 const PortfolioTitle = styled.div`

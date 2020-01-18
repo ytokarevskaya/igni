@@ -28,7 +28,7 @@ class Form extends React.Component {
 
   render() {
     return (
-      <FormStyled action={this.props.action} accept-charset="utf-8" method="post" ref={this.formRef} data-label={this.props.gaLabel} data-title={this.props.title} onSubmit={formSubmit}>
+      <FormStyled action={this.props.action} accept-charset="utf-8" method="post" ref={this.formRef} data-label={this.props.gaLabel} data-title={this.props.title} onSubmit={formSubmit} className={this.props.theme}>
         {/*<Inputs items={this.props.children} labels={this.props.labels} />*/}
         {this.props.children}
         {this.props.checkbox?
@@ -48,7 +48,8 @@ Form.propTypes = {
   checkbox: PropTypes.bool,
   labels: PropTypes.arrayOf(PropTypes.string),
   title: PropTypes.string,
-  onSend: PropTypes.func
+  onSend: PropTypes.func,
+  theme: PropTypes.string
 }
 
 Form.defaultProps = {

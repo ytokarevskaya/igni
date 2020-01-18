@@ -91,32 +91,33 @@ class Header extends React.Component {
           </MenuList>
           <CursorBtn ref={this.menuCursor} className={this.state.menuOpened? "visible" : ""} />
         </MainMenu>
-        <MenuFrame>
-          <OrderBtn href="/?active=3">
-            <div className="icon icon-pen" />
-            <div className="title">Оставить заявку</div>
-          </OrderBtn>
-          <MenuBtn onClick={(e) => this.menuToggle(e)} className={this.state.menuOpened? "opened" : ""}>
+        <MenuBtn onClick={(e) => this.menuToggle(e)} className={this.state.menuOpened? "opened" : ""}>
+          <div className="burger translate-x">
             <div className="n1 translate-xy transition-05s" />
             <div className="n2 translate-xy transition-05s" />
             <div className="n3 translate-xy transition-05s" />
-          </MenuBtn>
-        </MenuFrame>
+          </div>
+          <div className="title">Меню</div>
+        </MenuBtn>
         {this.props.page === "home"?
-          <SideMenu id="side-menu" className="translate-y mobile-hidden">
-            <div className="item open-slide active" data-id="0" onClick={sideMenuClick}>
+          <SideMenu id="side-menu" className="mobile-hidden">
+            <div className="item active" data-id="0" onClick={sideMenuClick}>
               <div className="line transition-05s" />
               <span>Главная</span>
             </div> 
-            <div className="item open-slide" data-id="1" onClick={sideMenuClick}>
+            <div className="item" data-id="1" onClick={sideMenuClick}>
               <div className="line transition-05s" />
               <span>Услуги</span>
             </div> 
-            <div className="item open-slide" data-id="2" onClick={sideMenuClick}>
+            <div className="item" data-id="2" onClick={sideMenuClick}>
               <div className="line transition-05s" />
               <span>Портфолио</span>
             </div>
-            <div className="item open-slide" data-id="3" onClick={sideMenuClick}>
+            <div className="item" data-id="3" onClick={sideMenuClick}>
+              <div className="line transition-05s" />
+              <span>Оценка сайта</span>
+            </div> 
+            <div className="item" data-id="4" onClick={sideMenuClick}>
               <div className="line transition-05s" />
               <span>Контакты</span>
             </div> 
@@ -249,45 +250,35 @@ const HeaderStyled = styled.header`
 const SideMenu = styled.aside`
   position: fixed;
   right: 7rem;
-  top: 50%;
+  top: 25rem;
 
   .item {
     position: relative;
-    padding: 0 1rem;
-    margin: 1rem 0;
+    padding: 0 2.2rem;
+    margin: 2.6rem 0;
     cursor: pointer;
 
     span {
-      position: absolute;
-      right: 100%;
-      top: 50%;
-      margin-right: 1.5rem;
-      font-size: 1.6rem;;
+      font-size: 1.6rem;
       color: #fff;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 500ms ease;
-      transform: translate(0, -50%);
+    }
+
+    .line {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0.8px;
+      height: 0;
+      background: #fff;
+      transition: height 500ms ease;
     }
 
     &.active, &:hover {
       .line {
-        height: 4rem;
+        height: 4.7rem;
       }
     }
-
-    &:hover {
-      span {
-        opacity: 1;
-        visibility: visible;
-      }
-    }
-  }
-
-  .line {
-    width: 3px;
-    height: 3px;
-    background: #fff;
   }
 
   ${HeaderStyled}.dark & {
@@ -303,68 +294,49 @@ const SideMenu = styled.aside`
   }
 `
 
-const OrderBtn = styled.a`
-  position: relative;
-  height: 10rem;
-  background: ${COLORS.RED};
-  cursor: pointer;
-  padding: 3rem;
-  display: block;
-
-  .icon {
-    position: relative;
-    width: 3.8rem;
-    height: 3.8rem;
-    border-radius: 50%;
-    background: #fff;
-    color: ${COLORS.RED};
-    font-size: 1.5rem;
-    display: inline-block;
-    vertical-align: middle;
-
-    &::before {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      margin: -0.5em;
-    }
-  }
-
-  .title {
-    font-size: 1.6rem;
-    color: #fff;
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 2rem;
-  }
-`
-
 const MenuBtn = styled.div`
-  position: relative;
+  position: absolute;
+  top: 0;
   width: 5rem;
   height: 5rem;
   background: #fff;
   cursor: pointer;
 
-  > div {
-    width: 1.2rem;
-    height: 0.15rem;
-    background: rgba(151, 151, 151, 0.6);
+  .burger {
     position: absolute;
     left: 50%;
-    top: 50%;
+    bottom: 2.6rem;
 
-    &.n1 {
-      margin-top: -0.4rem;
-    }
+    div {
+      width: 1.2rem;
+      height: 0.8px;
+      background: rgba(151, 151, 151, 0.6);
+      position: absolute;
+      left: 50%;
+      top: 50%;
 
-    &.n3 {
-      margin-top: 0.4rem;
+      &.n1 {
+        margin-top: -0.4rem;
+      }
+
+      &.n3 {
+        margin-top: 0.4rem;
+      }
     }
   }
 
+  .title {
+    position: absolute;
+    left: 100%;
+    bottom: 1.3rem;
+    margin-left: 3rem;
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 500;
+  }
+
   &.opened {
-    > div {
+    .burger div {
       &.n1 {
         transform: rotate(45deg);
         margin: -0.1rem 0 0 -1.1rem;
@@ -384,18 +356,18 @@ const MenuBtn = styled.div`
   ${HeaderStyled}.dark & {
     background: ${COLORS.BLACK};
 
-    > div {
+    .burger div {
       background: #fff;
     }
   }
 
   @media screen and (min-width: 1280px) and (pointer: fine) {
-    width: 10rem;
-    height: 10rem;
+    width: 5.5rem;
+    height: 10.5rem;
+    left: 30%;
 
-    > div {
+    .burger div {
       width: 2.3rem;
-      height: 0.25rem;
       &.n1 {
         margin-top: -0.9rem;
       }

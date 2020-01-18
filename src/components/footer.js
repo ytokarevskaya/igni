@@ -29,14 +29,28 @@ class Footer extends React.Component {
 						<div className="icon icon-headphones" />
 						<div className="title">Музыка включена</div>
 					</MusicBtn>
-					<PulseBtn>
+					{/*<PulseBtn>
 						+<span className="text">Удерживайте</span>
-					</PulseBtn>
+					</PulseBtn>*/}
 				</BottomMenu>
+				<ScrollHelp className="translate-x" id="footer-scroll-help">Скролл</ScrollHelp>
+				<OrderBtn href="/?active=4" id="footer-callback-btn">
+          <div className="icon icon-pen" />
+          <div className="title">Оставить заявку</div>
+        </OrderBtn>
 			</FooterStyled>
 		)
 	}
 }
+
+const ScrollHelp = styled.div`
+	color: #fff;
+	font-size: 1.6rem;
+  font-weight: 500;
+  position: absolute;
+  left: 50%;
+  bottom: 6vh;
+`
 
 const FooterStyled = styled.footer`
 	position: fixed;
@@ -115,6 +129,44 @@ const Socials = styled.div`
 			margin: 3.5rem 0 0 0;
 	  }
 	}
+`
+
+const OrderBtn = styled.a`
+  position: absolute;
+  right: 5rem;
+  bottom: -1px;
+  width: 13.5rem;
+  height: 22rem;
+  border: 1px solid #fff;
+  cursor: pointer;
+  padding: 3.5rem 2.5rem;
+  display: block;
+
+  .icon {
+    position: relative;
+    width: 3.8rem;
+    height: 3.8rem;
+    border-radius: 50%;
+    background: ${COLORS.RED};
+    color: #fff;
+    font-size: 1.5rem;
+    border: 1px solid #fff;
+
+    &::before {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin: -0.5em;
+    }
+  }
+
+  .title {
+    font-size: 1.6rem;
+	  font-weight: 600;
+    color: #fff;
+	  line-height: 1.5;
+	  margin-top: 2.5rem;
+  }
 `
 
 export default Footer

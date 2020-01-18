@@ -5,8 +5,11 @@ import { InputFrame } from "../styled"
 import MaskedInput from "react-maskedinput"
 
 class CallbackForm extends React.Component {
-  state = {
-    phone: ''
+  constructor(props) {
+    super(props);
+    this.state = {
+      phone: ''
+    }
   }
 
   _onChange = (e) => {
@@ -15,7 +18,7 @@ class CallbackForm extends React.Component {
 
   render () {
     return (
-    	<Form action="" title="callback" checkbox={false}>
+    	<Form action="" title="callback" checkbox={false} theme={this.props.theme || "dark"}>
         <div className="form-inputs">
           <InputFrame width="35%">
             <label>Имя</label>
@@ -25,7 +28,7 @@ class CallbackForm extends React.Component {
             <label>Телефон</label>
             <MaskedInput className="required phone_input" mask="+7 (111) 111-11-11" type="text" name="phone" autoComplete="off" onChange={this._onChange}/>
           </InputFrame>
-          <button className="submit-button transition-03s" type="submit">Отправить бриф</button>
+          <button className="submit-button transition-03s" type="submit">{this.props.buttonLabel || "Отправить бриф"}</button>
         </div>
       </Form>
     )

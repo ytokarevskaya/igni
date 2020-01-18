@@ -9,30 +9,22 @@ const COLORS = {
 	GREY: '#afb1b8',
   LINE_GREY: '#979797',
   LINE_GREY_20: 'rgba(151, 151, 151, 0.2)',
-	BG_GREY: '#f6f7f9'
+	BG_GREY: '#f6f7f9',
+	WHITE_20: 'rgba(255, 255, 255, 0.2)'
 };
-
-const ScrollFrame = styled.main`
-	position: relative;
-	width: 100%;
-	height: 100vh;
-	overflow: auto;
-	@media screen and (min-width: 1280px) and (pointer: fine) {
-		overflow: hidden;
-	}
-`
 
 const SectionStyled = styled.section`
 	position: relative;
 	width: 100%;
 
 	@media screen and (min-width: 1280px) and (pointer: fine) {
-		height: 100vh;
+		height: ${props => props.height || "100vh"};
 		transition: all 1000ms ease-in-out;
 		visibility: hidden;
 		opacity: 0;
 	  pointer-events: none;
   	cursor: none;
+  	// transform: translateY(100%);
 
 		&.onhold {
 			cursor: none;
@@ -45,6 +37,12 @@ const SectionStyled = styled.section`
 			visibility: visible;
 			opacity: 1;
 			pointer-events: all;
+			// transform: translateY(0);
+		}
+
+		&.section-portfolio, &.section-contacts {
+			opacity: 0;
+			transform: translateY(50%);
 		}
 	}
 `
@@ -66,12 +64,16 @@ const FrontLayer = styled.div`
 `
 
 const Title = styled.div`
-	position: relative;
+	position: ${props => props.pos? props.pos[0] : "relative"};
+  top: ${props => props.pos? props.pos[1] : "auto"};
+  right: ${props => props.pos? props.pos[2] : "auto"};
+  bottom: ${props => props.pos? props.pos[3] : "auto"};
+  left: ${props => props.pos? props.pos[4] : "auto"};
 	font-family: ${props => props.ff || "Bebas"};
 	text-transform: uppercase;
 	text-align: ${props => props.mTa || "left"};
 	font-size: ${props => props.mFz || "5rem"};
-  font-weight: bold;
+  font-weight: ${props => props.fw || "bold"};
   line-height: ${props => props.lh || "1"};
   color: ${props => props.mColor || COLORS.RED};
   width: ${props => props.mWwidth || "auto"};
@@ -199,6 +201,26 @@ const PulseBtn = styled.div`
 	  color: #fff;
 	  margin: 0 0 0 2.4rem;
 	}
+`
+
+const PlusBtn = styled.div`
+	width: ${props => props.size || "2.3rem"};
+  height: ${props => props.size || "2.3rem"};
+  border-radius: 50%;
+  background: ${props => props.bg || COLORS.RED};
+  transition: background 500ms ease;
+  &::before {
+    content: '+';
+    color: #fff;
+    font-size: 1.6rem;
+    display: block;
+    width: 100%;
+    line-height: ${props => props.size || "2.3rem"};
+    text-align: center;
+  }
+  &:hover {
+  	background: ${COLORS.RED_HOVER};
+  }
 `
 
 const CursorBtn = styled.div`
@@ -454,6 +476,10 @@ const FormStyled = styled.form`
 			opacity: 0.6;
 		}
 	}
+
+	&.light {
+		background: ${COLORS.WHITE_20};
+	}
 `
 
 const PortfolioBackBtn = styled.div`
@@ -469,4 +495,4 @@ const PortfolioBackBtn = styled.div`
 	padding: 1.8rem 2.5rem;
 `
 
-export { COLORS, ScrollFrame, SectionStyled, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, CursorBtn, SectionScroll, ContentPart, InfoBlocks, InputFrame, FormStyled, ContentColumn, RedButton, PortfolioBackBtn }
+export { COLORS, SectionStyled, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, CursorBtn, PlusBtn, SectionScroll, ContentPart, InfoBlocks, InputFrame, FormStyled, ContentColumn, RedButton, PortfolioBackBtn }

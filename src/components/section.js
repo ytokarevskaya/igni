@@ -3,8 +3,9 @@ import PropTypes from "prop-types"
 import styled from "styled-components"
 
 import { SectionStyled, PulseBtn, CursorBtn } from "./styled"
+import { applyStyles } from "./scroll-controller"
 
-let sectionObjects = {};
+window.sectionObjects = {};
 
 class Section extends React.Component {
 	constructor(props) {
@@ -13,7 +14,8 @@ class Section extends React.Component {
     this.children = this.props.children;
     this.sectionRef = React.createRef();
     this.cursor = React.createRef();
-    sectionObjects[this.id] = this;
+    this.scrollPos = 0;
+    window.sectionObjects[this.id] = this;
 
     this.state = {
       "active": this.props.active,
@@ -22,14 +24,25 @@ class Section extends React.Component {
     }
   }
 
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    if (this.state.active && !prevState.active && typeof this.props.onLoad === "function") {
+      this.props.onLoad(this.sectionRef.current);
+    }
+    return null;
+  }
+
   componentDidMount() {
     if (typeof window === "undefined") return;
+    // const currentSection = window.sectionObjects[this.id];
+    // currentSection.top = currentSection.sectionRef.current.offsetTop;
+    // currentSection.bottom = currentSection.top + currentSection.sectionRef.current.offsetHeight;
+    if (this.props.scrollControllerElements && this.props.scrollControllerElements[0]) {
+      applyStyles(this.sectionRef.current, this.props.scrollControllerElements[0]);
+    }
     if (this.props.active) {
-      window.headerObj.setState({"headerStyle": sectionObjects[this.id].props.headerStyle});
-      window.footerObj.setState({"footerStyle": sectionObjects[this.id].props.footerStyle});
+      window.headerObj.setState({"headerStyle": this.props.headerStyle});
+      window.footerObj.setState({"footerStyle": this.props.footerStyle});
       animateLoad(this.sectionRef.current);
-      // window.headerObj.setState({"headerStyle": this.props.headerStyle});
-      // window.footerObj.setState({"footerStyle": this.props.footerStyle});
     }
   }
 
@@ -77,7 +90,7 @@ class Section extends React.Component {
 
   render() {
     return (
-    	<SectionStyled data-id={this.id} ref={this.sectionRef} className={(this.state.active? "active " : "") + this.state.onhold + " " + this.props.name} onMouseDown={(e) => this.mouseDownHandler(e)} onMouseUp={(e) => this.mouseUpHandler(e)} onMouseMove={(e) => this.cursorFollow(e)}>
+    	<SectionStyled data-id={this.id} ref={this.sectionRef} className={"site-section" + (this.state.active? " active" : "") + this.state.onhold + " " + this.props.name} onMouseMove={(e) => this.cursorFollow(e)}>
         {this.props.noCursor? "" : 
           <CursorBtn className={"cursor-btn translate-xy " + this.props.headerStyle + " " + this.state.cursorStyle} ref={this.cursor} />
         }
@@ -87,25 +100,27 @@ class Section extends React.Component {
   }
 }
 
-const changeSection = (curId, newId) => {
+const changeSection = (curId, newId, callback) => {
   const curSection = document.querySelector("section[data-id='" + curId + "']");
   const nextSection = document.querySelector("section[data-id='" + newId + "']");
-  const sectionObj = sectionObjects[curId];
+  const sectionObj = window.sectionObjects[curId];
   const sideMenu = document.getElementById("side-menu");
-  if (sectionObjects[newId]) {
-    animateUnload(curSection, () => {
-      sectionObjects[newId].setState({"active": true});
-      sectionObjects[curId].setState({"active": false});
-      window.headerObj.setState({"headerStyle": sectionObjects[newId].props.headerStyle});
-      window.footerObj.setState({"footerStyle": sectionObjects[newId].props.footerStyle});
+  if (window.sectionObjects[newId]) {
+    const unloadFunc = window.sectionObjects[curId].props.onUnload;
+    if (unloadFunc && typeof unloadFunc === "function") unloadFunc(curSection);
+    setTimeout(() => {
+      window.sectionObjects[newId].setState({"active": true});
+      window.sectionObjects[curId].setState({"active": false});
+      window.headerObj.setState({"headerStyle": window.sectionObjects[newId].props.headerStyle});
+      window.footerObj.setState({"footerStyle": window.sectionObjects[newId].props.footerStyle});
       if (sideMenu) {
         sideMenu.querySelector(".active").classList.remove("active");
         sideMenu.querySelector("[data-id='" + newId + "'").classList.add("active");
       }
       setTimeout(() => {
-        animateLoad(nextSection);
+        if (typeof callback === "function") callback();
       }, 1000);
-    });
+    }, 1000);
   }
 }
 
@@ -147,7 +162,10 @@ Section.propTypes = {
   headerStyle: PropTypes.string,
   footerStyle: PropTypes.string,
   name: PropTypes.string,
-  noCursor: PropTypes.bool
+  noCursor: PropTypes.bool,
+  scrollControllerElements: PropTypes.object,
+  onLoad: PropTypes.func,
+  onUnload: PropTypes.func
 }
 
 Section.defaultProps = {
@@ -155,9 +173,10 @@ Section.defaultProps = {
   headerStyle: "white",
   footerStyle: "white",
   name: "",
-  noCursor: false
+  noCursor: false,
+  scrollControllerElements: null
 }
 
 export default Section
 
-export { changeSection }
+export { changeSection, animateLoad }

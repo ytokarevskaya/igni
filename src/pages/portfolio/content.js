@@ -10,7 +10,7 @@ import CallbackForm from "../../components/forms/callback-form"
 
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
 import { useProjectsData } from "../../components/queries/get-projects-data"
-import { ScrollFrame, SectionScroll, COLORS, Title, TextStyled, FrontLayer, InfoBlocks, ContentPart, ContentColumn } from "../../components/styled"
+import { SectionScroll, COLORS, Title, TextStyled, FrontLayer, InfoBlocks, ContentPart, ContentColumn } from "../../components/styled"
 
 import teamIcon from "../../images/team.svg"
 import baloonIcon from "../../images/air-balloon.svg"
@@ -32,7 +32,6 @@ const PortfolioContentPage = () => {
 	return (
 		<Layout page="portfolio-content">
 			<SEO title="IGNI | Портфолио" />
-			<ScrollFrame>
 				<Section id={0} active={true} name="section-portfolio" headerStyle="dark" footerStyle="dark">
 					<FrontLayer bg="#f6f7f9">
 						<Scroll overflowLimit={1} width="auto" pos={["absolute", "0", "0", "0", "0"]} margin="0">
@@ -100,7 +99,6 @@ const PortfolioContentPage = () => {
 		        </Scroll>
 					</FrontLayer>
 				</Section>
-			</ScrollFrame>
 		</Layout>
 	)
 }

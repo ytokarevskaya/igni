@@ -10,7 +10,7 @@ import ProjectCover from "../../components/project-cover"
 
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
 import { useProjectsData } from "../../components/queries/get-projects-data"
-import { ScrollFrame, SectionScroll, COLORS, Title, TextStyled, FrontLayer, ContentPart, InfoBlocks, ContentColumn, RedButton } from "../../components/styled"
+import { SectionScroll, COLORS, Title, TextStyled, FrontLayer, ContentPart, InfoBlocks, ContentColumn, RedButton } from "../../components/styled"
 
 import arrowDown from "../../images/arrow-down-white.svg"
 import teamIcon from "../../images/team.svg"
@@ -32,63 +32,61 @@ const PortfolioDigitalPage = (props) => {
 	return (
 		<Layout page="portfolio-digital">
 			<SEO title="IGNI | Портфолио" />
-			<ScrollFrame>
-				<Section id={0} active={true} name="section-portfolio" headerStyle="white" footerStyle="white">
-					<FrontLayer bg={COLORS.LIGHT_BLACK}>
-						<Scroll overflowLimit={1} width="100%" pos={["absolute", "0", "0", "0", "0"]}>
-		          <ProjectsCarousel>
-		          	{projects.map((item, index) => {
-	                return (
-	                  <Project key={item.id} index={index} project={item} />
-	                )
-	              })}
-	              <ArrowDown src={arrowDown} className="translate-y" />
-		          </ProjectsCarousel>
-							<PortfolioDesignTitle>
-			          <Title fz="5rem" color="#fff" lineBottom lineBg="#fff" width="25rem">Фото и видео продакшн</Title>
-			          <TextStyled color="#fff" width="18rem" margin="3.5rem 0">Визуализируйте ваш бизнес</TextStyled>
-		          </PortfolioDesignTitle>
-		          <ContentPart>
-		          	<Title color={COLORS.BLACK}>Статистика</Title>
-		          	<InfoBlocks itemsCount={5}>
-				        	<div className="block">
-				        		<Title margin="0 0 2.5rem 0">+15 <small>%</small></Title>
-				        		<TextStyled color={COLORS.BLACK}>Количество лидов</TextStyled>
-				        	</div>
-				        	<div className="block">
-				        		<Title margin="0 0 2.5rem 0">+130 <small>%</small></Title>
-				        		<TextStyled color={COLORS.BLACK}>Длина сессии</TextStyled>
-				        	</div>
-				        	<div className="block">
-				        		<Title margin="0 0 2.5rem 0">+80 <small>%</small></Title>
-				        		<TextStyled color={COLORS.BLACK}>Охват наиболее релевантной аудитории</TextStyled>
-				        	</div>
-				        	<div className="block">
-				        		<img className="icon" alt="" src={teamIcon} />
-				        		<TextStyled color={COLORS.BLACK}>Новые источники трафика</TextStyled>
-				        	</div>
-				        	<div className="block">
-				        		<img className="icon" alt="" src={baloonIcon} />
-				        		<TextStyled color={COLORS.BLACK}>Увеличение доверия к бренду</TextStyled>
-				        	</div>
-				        </InfoBlocks>
-				        <TextStyled color={COLORS.BLACK}><span className="red">*</span> Средние показатели на основании существующих кейсов</TextStyled>
-		          </ContentPart>
-		          <ContentPart flex>
-		          	<ContentColumn padding="0 6rem 0 0" width="45rem">
-		          		<Title color={COLORS.BLACK} lineBottom lineBg={COLORS.BLACK}>Приступим к работе над вашим проектом?</Title>
-		          	</ContentColumn>
-		          	<ContentColumn width="35rem">
-		          		<TextStyled color={COLORS.BLACK}>Заполните бриф — расскажите о вашем бизнесе, задачах и сроках — и мы свяжемся с вами для дальнейшего обсуждения сотрудничества. </TextStyled>
-		          	</ContentColumn>
-		          </ContentPart>
-		          <ContentPart padding="0 0 0 24rem">
-		          	<RequestForm />
-		          </ContentPart>
-		        </Scroll>
-					</FrontLayer>
-				</Section>
-			</ScrollFrame>
+			<Section id={0} active={true} name="section-portfolio" headerStyle="white" footerStyle="white">
+				<FrontLayer bg={COLORS.LIGHT_BLACK}>
+					<Scroll overflowLimit={1} width="100%" pos={["absolute", "0", "0", "0", "0"]}>
+	          <ProjectsCarousel>
+	          	{projects.map((item, index) => {
+                return (
+                  <Project key={item.id} index={index} project={item} />
+                )
+              })}
+              <ArrowDown src={arrowDown} className="translate-y" />
+	          </ProjectsCarousel>
+						<PortfolioDesignTitle>
+		          <Title fz="5rem" color="#fff" lineBottom lineBg="#fff" width="25rem">Фото и видео продакшн</Title>
+		          <TextStyled color="#fff" width="18rem" margin="3.5rem 0">Визуализируйте ваш бизнес</TextStyled>
+	          </PortfolioDesignTitle>
+	          <ContentPart>
+	          	<Title color={COLORS.BLACK}>Статистика</Title>
+	          	<InfoBlocks itemsCount={5}>
+			        	<div className="block">
+			        		<Title margin="0 0 2.5rem 0">+15 <small>%</small></Title>
+			        		<TextStyled color={COLORS.BLACK}>Количество лидов</TextStyled>
+			        	</div>
+			        	<div className="block">
+			        		<Title margin="0 0 2.5rem 0">+130 <small>%</small></Title>
+			        		<TextStyled color={COLORS.BLACK}>Длина сессии</TextStyled>
+			        	</div>
+			        	<div className="block">
+			        		<Title margin="0 0 2.5rem 0">+80 <small>%</small></Title>
+			        		<TextStyled color={COLORS.BLACK}>Охват наиболее релевантной аудитории</TextStyled>
+			        	</div>
+			        	<div className="block">
+			        		<img className="icon" alt="" src={teamIcon} />
+			        		<TextStyled color={COLORS.BLACK}>Новые источники трафика</TextStyled>
+			        	</div>
+			        	<div className="block">
+			        		<img className="icon" alt="" src={baloonIcon} />
+			        		<TextStyled color={COLORS.BLACK}>Увеличение доверия к бренду</TextStyled>
+			        	</div>
+			        </InfoBlocks>
+			        <TextStyled color={COLORS.BLACK}><span className="red">*</span> Средние показатели на основании существующих кейсов</TextStyled>
+	          </ContentPart>
+	          <ContentPart flex>
+	          	<ContentColumn padding="0 6rem 0 0" width="45rem">
+	          		<Title color={COLORS.BLACK} lineBottom lineBg={COLORS.BLACK}>Приступим к работе над вашим проектом?</Title>
+	          	</ContentColumn>
+	          	<ContentColumn width="35rem">
+	          		<TextStyled color={COLORS.BLACK}>Заполните бриф — расскажите о вашем бизнесе, задачах и сроках — и мы свяжемся с вами для дальнейшего обсуждения сотрудничества. </TextStyled>
+	          	</ContentColumn>
+	          </ContentPart>
+	          <ContentPart padding="0 0 0 24rem">
+	          	<RequestForm />
+	          </ContentPart>
+	        </Scroll>
+				</FrontLayer>
+			</Section>
 		</Layout>
 	)
 }

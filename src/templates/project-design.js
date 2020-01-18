@@ -12,10 +12,8 @@ import ProjectCover from "../components/project-cover"
 import { getURLParameter } from "../components/utils"
 import { useProjectsData } from "../components/queries/get-projects-data"
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
-import RichText from '@madebyconnor/rich-text-to-jsx'
 import { BLOCKS } from "@contentful/rich-text-types"
-import { COLORS, ScrollFrame, FrontLayer, ContentPart, ContentColumn, Title, TextStyled } from "../components/styled"
+import { COLORS, FrontLayer, ContentPart, ContentColumn, Title, TextStyled } from "../components/styled"
 
 export const query = graphql`
   query($id: String!) {
@@ -100,7 +98,6 @@ const ProjectPage = ({ data }) => {
 	return (
 	  <Layout page="project">
 	    <SEO title="IGNI | Веб-студия полного цикла" />
-	    <ScrollFrame>
 		    <Section id={0} active={true} name="section-project" headerStyle="white" footerStyle="white">
 		    	<FrontLayer bg={project.backgroundColor}>
 			    	<Scroll overflowLimit={1} width="100%" pos={["absolute", "0", "0", "0", "0"]}>
@@ -168,7 +165,6 @@ const ProjectPage = ({ data }) => {
 			      </Scroll>
 		      </FrontLayer>
 	      </Section>
-	    </ScrollFrame>
 	  </Layout>
 	)
 }

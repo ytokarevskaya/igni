@@ -39,6 +39,7 @@ class ScrollController extends React.Component {
 	}
 
 	scrollController(e) {
+		if (typeof window === "undefined") return;
 		if (this.state.scrollBlocked) return;
 		const scrollFrame = this.frame.current;
 		const activeSection = scrollFrame.querySelector(".site-section.active");

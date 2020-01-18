@@ -5,7 +5,7 @@ import styled from "styled-components"
 import { SectionStyled, PulseBtn, CursorBtn } from "./styled"
 import { applyStyles } from "./scroll-controller"
 
-window.sectionObjects = {};
+if (typeof window !== "undefined") window.sectionObjects = {};
 
 class Section extends React.Component {
 	constructor(props) {
@@ -15,7 +15,7 @@ class Section extends React.Component {
     this.sectionRef = React.createRef();
     this.cursor = React.createRef();
     this.scrollPos = 0;
-    window.sectionObjects[this.id] = this;
+    if (typeof window !== "undefined") window.sectionObjects[this.id] = this;
 
     this.state = {
       "active": this.props.active,

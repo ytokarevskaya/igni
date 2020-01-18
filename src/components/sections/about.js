@@ -23,15 +23,27 @@ const onLoadStyles = {
   } 
 }
 
+const onUnoadStyles = {
+  ".scrollController-title" : {
+    "opacity" : "0",
+    "transform": "translateY(8%)"
+  },
+  ".scrollController-cards" : {
+    "opacity" : "0",
+    "transform": "translateY(8%)"
+  } 
+}
+
 function onSectionLoad(section) {
   setTimeout(() => {
     applyStyles(section, onLoadStyles);
-  }, 500);
+  }, 1000);
 }
 
 function onSectionUnload(section) {
   section.style.transform = "translateY(-100%)";
   section.style.opacity = "0";
+  applyStyles(onUnoadStyles);
   setTimeout(() => {
     section.style.transform = "translateY(0)";
     section.style.opacity = "1";
@@ -52,9 +64,9 @@ const SectionAbout = (props) => {
   return (
     <Section id={props.id} active={props.active} name="section-about" headerStyle="white" footerStyle="white" onLoad={onSectionLoad} onUnload={onSectionUnload}>
       <FrontLayer>
-        <AboutTitleSmall fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Наши услуги</AboutTitleSmall>
+        <h2><AboutTitleSmall fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Наши услуги</AboutTitleSmall></h2>
         <AboutTitle className="scrollController-title">
-          <Title fz="5rem" color="#fff" width="30rem" lineBottom>Проектируем, разрабатываем, продвигаем</Title>
+          <h3><Title fz="5rem" color="#fff" width="30rem" lineBottom>Проектируем, разрабатываем, продвигаем</Title></h3>
           <TextStyled width="42rem" color="#fff" margin="3.5rem 0 0 0">Чтобы осветить темное пространство веба новыми проектами, мы собрали команду профессионалов с обширным опытом работы в сфере дизайна, разработки, маркетинга, рекламы и видео производства.</TextStyled>
         </AboutTitle>
         <Scroll overflowLimit={1} width="auto" pos={["absolute", "40%", "15%", "", ""]}>
@@ -98,7 +110,7 @@ class AboutItem extends React.Component {
       <a href={"/portfolio/" + this.props.slug}>
         <AboutItemStyled className="transition-05s item" data-id={this.props.id} bgImg={this.props.bg}>
           <div className="bg transition-05s" />
-          <Title color={COLORS.BLACK}>{this.props.title}</Title>
+          <h3><Title color={COLORS.BLACK}>{this.props.title}</Title></h3>
           <div>
             <TextStyled color={COLORS.BLACK} lh="1.15" className="is-ul-red" dangerouslySetInnerHTML={{__html: documentToHtmlString(this.props.content? this.props.content.json : "")}} />
           </div>

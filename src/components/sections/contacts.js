@@ -16,6 +16,15 @@ const onLoadStyles = {
   }
 }
 
+const onUnloadStyles = {
+  ".scrollController-title": {
+    "opacity": "0"
+  },
+  ".scrollController-block": {
+    "opacity": "0"
+  }
+}
+
 function onSectionLoad(section) {
   section.style.transform = "translateY(0)";
   section.style.opacity = "1";
@@ -26,12 +35,20 @@ function onSectionLoad(section) {
   document.getElementById("footer-callback-btn").classList.add("is-hidden");
 }
 
+function onSectionUnload(section) {
+  // setTimeout(() => {
+    applyStyles(section, onUnloadStyles);
+  // }, 600);
+  document.getElementById("footer-scroll-help").classList.remove("is-hidden");
+  document.getElementById("footer-callback-btn").classList.remove("is-hidden");
+}
+
 const SectionContacts = (props) => (
-	<Section id={props.id} active={props.active} name="section-contacts" headerStyle="white" footerStyle="white" onLoad={onSectionLoad}>
+	<Section id={props.id} active={props.active} name="section-contacts" headerStyle="white" footerStyle="white" onLoad={onSectionLoad} onUnload={onSectionUnload}>
     <FrontLayer>
-    	<ContactsTitleSmall fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Контакты</ContactsTitleSmall>
+    	<h2><ContactsTitleSmall fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Контакты</ContactsTitleSmall></h2>
       <ContactsTitle>
-        <Title fz="5rem" color="#fff" width="40rem" margin="0 0 3.5rem 0" lineBottom>Приступим к работе над вашим проектом?</Title>
+        <h3><Title fz="5rem" color="#fff" width="40rem" margin="0 0 3.5rem 0" lineBottom>Приступим к работе над вашим проектом?</Title></h3>
         <TextStyled width="42rem" color="#fff">Заполните бриф: расскажите о вашем бизнесе, задачах и сроках — и мы свяжемся с вами для обсуждения дальнейшего сотрудничества.</TextStyled>
       </ContactsTitle>
       <ContactsBlocks>

@@ -44,7 +44,7 @@ const onSectionLoad = (section) => {
 const SectionMain = (props) => (
 	<Section id={props.id} active={props.active} name="section-main" headerStyle="white" footerStyle="white" onLoad={onSectionLoad} onUnload={onSectionUnload} scrollControllerElements={scrollControllerElements}>
     <Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Освещая темное пространство веба</Title>
-    <Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="12rem" pos={["absolute", "55%", "", "", "20rem"]} margin="-12rem 0 0 0" className="scrollController-title">Веб-студия полного цикла</Title>
+    <h1><Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="12rem" pos={["absolute", "55%", "", "", "20rem"]} margin="-12rem 0 0 0" className="scrollController-title">Веб-студия полного цикла</Title></h1>
     <Title fz="45rem" mFz="10rem" color="#fff" mColor="#fff" className="scrollController-title" lh="0.5" pos={["absolute", "55%", "", "", "18rem"]}>IGNI</Title>
       {/*<Link to="/portfolio">
         <PortfolioBtn className="transition-05s" href="/portfolio">
@@ -77,7 +77,7 @@ class HomeTitlePopup extends React.Component {
     return(
       <React.Fragment>
         <HomeTitle className={"scrollController-title" + (this.state.active? " hidden" : "")}>
-          <Title fz="5rem" width="40rem" color="#fff" margin="0 0 5rem 0">Комплексные <br/>услуги по созданию <br/>и продвижению <br/>сайтов</Title>
+          <h2><Title fz="5rem" width="40rem" color="#fff" margin="0 0 5rem 0">Комплексные <br/>услуги по созданию <br/>и продвижению <br/>сайтов</Title></h2>
           <PlusBtn size="3.7rem" onClick={(e) => this.openPopup(e)} />
         </HomeTitle>
         <HomeTitlePopupStyled className={"transition-05s translate-x" + (this.state.active? " active" : "")}>

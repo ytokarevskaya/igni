@@ -63,14 +63,14 @@ const SectionPortfolio = (props) => {
   return (
   	<Section id={props.id} active={props.active} name="section-portfolio" headerStyle="white" footerStyle="white" onLoad={onSectionLoad} onUnload={onSectionUnload}>
       <FrontLayer>
-        <PortfolioTitleSmall fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Нашe портфолио</PortfolioTitleSmall>
+        <h2><PortfolioTitleSmall fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Нашe портфолио</PortfolioTitleSmall></h2>
         <PortfolioCarouselMenu id="portfolio-carousel-menu" items={["Дизайн", "Контент", "Маркетинг и реклама", "Диджитал продакшн"]} />
         <PortfolioCarousel id="portfolio-carousel" className="transition-05s scrollController-carousel">
           <div className="carousel-content">
             <PortfolioItem className="load-ani unload-ani carousel-item active" data-loaddelay={0} data-unloaddelay={400}>
               <p className="count transition-05s"><strong className="ff-bebas">{projects.design.length}</strong> {'проект' + wordEnd(projects.design.length, 'pr')}</p>
               <div className="header">
-                <Title color="#fff">Дизайн</Title>
+                <h3><Title color="#fff">Дизайн</Title></h3>
                 <a className="all-projects" href="/portfolio/design"><span>Перейти</span></a>
               </div>
               <div className="image" />
@@ -78,7 +78,7 @@ const SectionPortfolio = (props) => {
             <PortfolioItem className="load-ani unload-ani carousel-item" data-loaddelay={0} data-unloaddelay={400}>
               <p className="count transition-05s"><strong className="ff-bebas">{projects.content.length}</strong> {'проект' + wordEnd(projects.content.length, 'pr')}</p>
               <div className="header">
-                <Title color="#fff">Контент</Title>
+                <h3><Title color="#fff">Контент</Title></h3>
                 <a className="all-projects" href="/portfolio/design"><span>Перейти</span></a>
               </div>
               <div className="image" />
@@ -86,7 +86,7 @@ const SectionPortfolio = (props) => {
             <PortfolioItem className="load-ani unload-ani carousel-item" data-loaddelay={0} data-unloaddelay={400}>
               <p className="count transition-05s"><strong className="ff-bebas">{projects.marketing.length}</strong> {'проект' + wordEnd(projects.marketing.length, 'pr')}</p>
               <div className="header">
-                <Title color="#fff">Маркетинг и реклама</Title>
+                <h3><Title color="#fff">Маркетинг и реклама</Title></h3>
                 <a className="all-projects" href="/portfolio/design"><span>Перейти</span></a>
               </div>
               <div className="image" />
@@ -94,7 +94,7 @@ const SectionPortfolio = (props) => {
             <PortfolioItem className="load-ani unload-ani carousel-item" data-loaddelay={0} data-unloaddelay={400}>
               <p className="count transition-05s"><strong className="ff-bebas">{projects.digital.length}</strong> {'проект' + wordEnd(projects.digital.length, 'pr')}</p>
               <div className="header">
-                <Title color="#fff">Диджитал продакшн</Title>
+                <h3><Title color="#fff">Диджитал продакшн</Title></h3>
                 <a className="all-projects" href="/portfolio/design"><span>Перейти</span></a>
               </div>
               <div className="image" />

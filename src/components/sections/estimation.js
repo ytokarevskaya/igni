@@ -45,7 +45,7 @@ const scrollControllerElements = {
     },
     ".scrollController-form": {
     	"bottom": "20rem",
-    	"transitionDelay": "1500ms",
+    	"transitionDelay": "1000ms",
     	"transitionDuration": "1000ms"
     }
   }
@@ -69,9 +69,9 @@ function onSectionUnload(section) {
 const SectionEstimation = (props) => (
 	<Section id={props.id} active={props.active} name="section-estimation" headerStyle="white" footerStyle="white" onLoad={onSectionLoad} scrollControllerElements={scrollControllerElements} onUnload={onSectionUnload}>
     <FrontLayer>
-    	<EstimationTitleSmall fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Наше предложение</EstimationTitleSmall>
+    	<h2><EstimationTitleSmall fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Наше предложение</EstimationTitleSmall></h2>
       <EstimationTitle className="scrollController-title">
-        <Title fz="5rem" color="#fff" width="40rem" margin="0 0 3.5rem 0" lineBottom>Получите бесплатную оценку вашего сайта от команды igni</Title>
+        <h3><Title fz="5rem" color="#fff" width="40rem" margin="0 0 3.5rem 0" lineBottom>Получите бесплатную оценку вашего сайта от команды igni</Title></h3>
         <TextStyled width="40rem" color="#fff">Перед началом сотрудничества мы бесплатно проведем краткий маркетинговый аудит вашего бизнеса и предложим комплекс мер по увеличению конверсии.</TextStyled>
       </EstimationTitle>
       <EstimationDetails className="scrollController-details">

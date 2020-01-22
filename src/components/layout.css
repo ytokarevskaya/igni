@@ -237,14 +237,6 @@ html{font-family:sans-serif;font-size:10px;-ms-text-size-adjust:100%;-webkit-tex
   text-transform: uppercase;
 }
 
-.skrollable {
-  -webkit-transition: all 700ms linear;
-  -moz-transition: all 700ms linear;
-  -ms-transition: all 700ms linear;
-  -o-transition: all 700ms linear;
-  transition: all 700ms linear;
-}
-
 /*.unload-ani, .load-ani {
   transition: all 800ms ease;
 }

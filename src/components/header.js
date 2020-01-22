@@ -216,6 +216,7 @@ const MainMenu = styled.div`
   pointer-events: none;
   transition: all 800ms ease;
   background: ${COLORS.BG_GREY};
+  z-index: 1;
 
   &.opened {
     visibility: visible;
@@ -228,7 +229,7 @@ function sideMenuClick(e) {
   const menu = document.getElementById("side-menu");
   const targetId = e.currentTarget.dataset.id;
   const targetSection = document.querySelector("section[data-id='" + targetId + "']");
-  
+
   menu.querySelector(".active").classList.remove("active");
   menu.children[targetId].classList.add("active");
   targetSection.scrollIntoView({behavior: "smooth", block: "end"});
@@ -304,6 +305,7 @@ const MenuBtn = styled.div`
   height: 5rem;
   background: #fff;
   cursor: pointer;
+  z-index: 1;
 
   .burger {
     position: absolute;

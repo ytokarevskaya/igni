@@ -125,7 +125,7 @@ const EstimationCallbackFrame = styled.div`
 const EstimationDetails = styled.div`
 	position: absolute;
 	left: 60rem;
-	bottom: 0;
+	bottom: 6rem;
   margin-left: 6vw;
 	width: 48rem;
 	background: ${COLORS.LIGHT_BLACK};

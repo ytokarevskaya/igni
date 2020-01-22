@@ -26,7 +26,7 @@ const SectionAbout = (props) => {
 
   const parallaxData_title = [
     {
-      start: typeof window === "undefined" ? 0 : window.innerHeight * 0.3,
+      start: typeof window === "undefined" ? 0 : window.innerHeight * 0.1,
       end: typeof window === "undefined" ? 0 : window.innerHeight * 1,
       properties: [
         {
@@ -85,7 +85,7 @@ const SectionAbout = (props) => {
     <Section id={props.id} active={props.active} name="section-about" headerStyle="white" footerStyle="white">
       <FrontLayer>
         <Plx className="parallax-element" parallaxData={parallaxData_title} animateWhenNotInViewport={true}>
-          <h2><AboutTitleSmall fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Наши услуги</AboutTitleSmall></h2>
+          <h2><Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "15rem", "", "", "20rem"]} className="scrollController-title">Наши услуги</Title></h2>
           <AboutTitle className="scrollController-title">
             <h3><Title fz="5rem" color="#fff" width="30rem" lineBottom>Проектируем, разрабатываем, продвигаем</Title></h3>
             <TextStyled width="42rem" color="#fff" margin="3.5rem 0 0 0">Чтобы осветить темное пространство веба новыми проектами, мы собрали команду профессионалов с обширным опытом работы в сфере дизайна, разработки, маркетинга, рекламы и видео производства.</TextStyled>
@@ -143,16 +143,12 @@ class AboutItem extends React.Component {
   }
 }
 
-const AboutTitleSmall = styled(Title)`
-  
-`
-
 const AboutItems = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: flex-start;
   position: absolute;
-  top: 40vh;
+  top: 35rem;
   right: 15vw;  
 
   > * {
@@ -169,7 +165,7 @@ const AboutItemStyled = styled.div`
   color: ${COLORS.BLACK};
   width: 30rem;
   height: 100%;
-  padding: 3.5rem 3.5rem 7rem 3.5rem;
+  padding: 5rem 3.5rem 6rem 3.5rem;
   margin: 0 5rem 5rem 0;
   border-radius: 3px;
   cursor: none;
@@ -209,7 +205,7 @@ const AboutItemStyled = styled.div`
 const AboutTitle = styled.div`
   position: absolute;
   left: 20rem;
-  top: 45vh;
+  top: 35rem;
   z-index: 1;
 `
 

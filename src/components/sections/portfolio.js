@@ -48,6 +48,21 @@ const SectionPortfolio = (props) => {
     }
   ]
 
+  const parallaxData_images = [
+    {
+      start: typeof window === "undefined" ? 0 : window.innerHeight * 1.8,
+      end: typeof window === "undefined" ? 0 : window.innerHeight * 2.5,
+      properties: [
+        {
+          startValue: 30,
+          endValue: 20,
+          property: "height",
+          unit: "vw"
+        }
+      ]
+    }
+  ]
+
   const parallaxData_cards = [
     {
       start: typeof window === "undefined" ? 0 : window.innerHeight * 0.8,
@@ -66,23 +81,23 @@ const SectionPortfolio = (props) => {
         }
       ]
     },
-    {
-      start: typeof window === "undefined" ? 0 : window.innerHeight * 2.1,
-      end: typeof window === "undefined" ? 0 : window.innerHeight * 2.6,
-      properties: [
-        {
-          startValue: 1,
-          endValue: 0.5,
-          property: "opacity"
-        },
-        {
-          startValue: 0,
-          endValue: -30,
-          property: "translateY",
-          unit: "vh"
-        }
-      ]
-    }
+    // {
+    //   start: typeof window === "undefined" ? 0 : window.innerHeight * 2.1,
+    //   end: typeof window === "undefined" ? 0 : window.innerHeight * 2.6,
+    //   properties: [
+    //     {
+    //       startValue: 1,
+    //       endValue: 0.5,
+    //       property: "opacity"
+    //     },
+    //     {
+    //       startValue: 0,
+    //       endValue: -10,
+    //       property: "translateY",
+    //       unit: "vh"
+    //     }
+    //   ]
+    // }
   ]
 
   return (
@@ -95,37 +110,37 @@ const SectionPortfolio = (props) => {
         <Plx className="parallax-element" parallaxData={parallaxData_cards} animateWhenNotInViewport={true}>
           <PortfolioCarousel id="portfolio-carousel" className="transition-05s scrollController-carousel">
             <div className="carousel-content">
-              <PortfolioItem className="load-ani unload-ani carousel-item active" data-loaddelay={0} data-unloaddelay={400}>
+              <PortfolioItem className="carousel-item active">
                 <div className="header">
                   <p className="count transition-05s"><strong className="ff-bebas">{projects.design.length}</strong> {'проект' + wordEnd(projects.design.length, 'pr')}</p>
                   <h3><Title color="#fff">Дизайн</Title></h3>
                   <a className="all-projects" href="/portfolio/design"><span>Перейти</span></a>
                 </div>
-                <div className="image" />
+                <Plx className="parallax-element image" parallaxData={parallaxData_images} animateWhenNotInViewport={true} />
               </PortfolioItem>
-              <PortfolioItem className="load-ani unload-ani carousel-item" data-loaddelay={0} data-unloaddelay={400}>
+              <PortfolioItem className="carousel-item">
                 <div className="header">
                   <p className="count transition-05s"><strong className="ff-bebas">{projects.content.length}</strong> {'проект' + wordEnd(projects.content.length, 'pr')}</p>
                   <h3><Title color="#fff">Контент</Title></h3>
                   <a className="all-projects" href="/portfolio/design"><span>Перейти</span></a>
                 </div>
-                <div className="image" />
+                <Plx className="parallax-element image" parallaxData={parallaxData_images} animateWhenNotInViewport={true} />
               </PortfolioItem>
-              <PortfolioItem className="load-ani unload-ani carousel-item" data-loaddelay={0} data-unloaddelay={400}>
+              <PortfolioItem className="carousel-item">
                 <div className="header">
                   <p className="count transition-05s"><strong className="ff-bebas">{projects.marketing.length}</strong> {'проект' + wordEnd(projects.marketing.length, 'pr')}</p>
                   <h3><Title color="#fff">Маркетинг и реклама</Title></h3>
                   <a className="all-projects" href="/portfolio/design"><span>Перейти</span></a>
                 </div>
-                <div className="image" />
+                <Plx className="parallax-element image" parallaxData={parallaxData_images} animateWhenNotInViewport={true} />
               </PortfolioItem>
-              <PortfolioItem className="load-ani unload-ani carousel-item" data-loaddelay={0} data-unloaddelay={400}>
+              <PortfolioItem className="carousel-item">
                 <div className="header">
                   <p className="count transition-05s"><strong className="ff-bebas">{projects.digital.length}</strong> {'проект' + wordEnd(projects.digital.length, 'pr')}</p>
                   <h3><Title color="#fff">Диджитал продакшн</Title></h3>
                   <a className="all-projects" href="/portfolio/design"><span>Перейти</span></a>
                 </div>
-                <div className="image" />
+                <Plx className="parallax-element image" parallaxData={parallaxData_images} animateWhenNotInViewport={true} />
               </PortfolioItem>
             </div>
           </PortfolioCarousel>
@@ -150,19 +165,28 @@ const PortfolioCarouselMenu = (props) => (
 function carouselArrowClick(e) {
   const arrow = e.target;
   const menuFrame = arrow.parentElement;
+  const carouselContent = document.getElementById("portfolio-carousel").querySelector(".carousel-content");
   const curItem = menuFrame.querySelector(".active");
   const dir = (arrow.classList.contains("arrow-prev")? -1 : 1);
   let nextItem;
+  let nextIndex;
   if (dir === 1) {
     nextItem = curItem.nextElementSibling;
   } else if (dir === -1) {
     nextItem = curItem.previousElementSibling;
   }
   if (nextItem && !nextItem.classList.contains("arrow")) {
-    curItem.classList.remove("active");
-    nextItem.classList.add("active");
-    moveCarousel(+nextItem.dataset.index);
+    nextIndex = +nextItem.dataset.index;
+  } else if (dir === 1) {
+    nextIndex = 0;
+    nextItem = menuFrame.children[nextIndex];
+  } else if (dir === -1) {
+    nextIndex = menuFrame.children.length - 3;
+    nextItem = menuFrame.children[nextIndex];
   }
+  curItem.classList.remove("active");
+  nextItem.classList.add("active");
+  moveCarousel(nextIndex);
 }
 
 function carouselItemClick(e) {
@@ -231,7 +255,7 @@ const PortfolioCarousel = styled.div`
     display: flex;
     flex-wrap: nowrap;
     align-items: flex-end;
-    transition: transform 1000ms ease;
+    transition: transform 1200ms ease-in-out;
   }
 `
 

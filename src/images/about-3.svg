@@ -1,64 +1,68 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="318" height="254" viewBox="0 0 318 254">
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="365px" height="503px" viewBox="0 0 365 503" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>маркетинг</title>
+    <desc>Created with Sketch.</desc>
     <defs>
-        <filter id="a" width="120.6%" height="114.6%" x="-10.3%" y="-7.3%" filterUnits="objectBoundingBox">
-            <feOffset dx="3" dy="3" in="SourceAlpha" result="shadowOffsetOuter1"/>
-            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="7.5"/>
-            <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.146607299 0"/>
-            <feMerge>
-                <feMergeNode in="shadowMatrixOuter1"/>
-                <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-        </filter>
+        <path d="M1.45519152e-11,3 L1.45514711e-11,500 C1.4551674e-11,501.656854 1.34314575,503 3,503 L362,503 C363.656854,503 365,501.656854 365,500 L365,3 C365,1.34314575 363.656854,-3.04359188e-16 362,0 L3,0 C1.34314575,3.04359188e-16 1.45517123e-11,1.34314575 1.45519152e-11,3 Z" id="path-1"></path>
     </defs>
-    <g fill="none" fill-rule="evenodd" filter="url(#a)" transform="translate(-39 12)">
-        <path stroke="#FFCE8A" d="M-41.316-63.34c25.248 27.546 150.31 28.97 159.982 87.863 9.672 58.893 50.445-63.18 89.161-28.97 38.717 34.21 43.837 190.738 86.543 126.392s82.374-309.555-32.776-262.678C146.444-93.855-66.564-90.887-41.316-63.34z"/>
-        <path stroke="#464BB8" d="M151.75-66.863c0 48.9 19.025 105 105 105 85.974 0 79.5 69.096 79.5 174 0 4.156-3.263 38 76 38 79.262 0 9-361 4.5-361s-265-4.9-265 44z"/>
-        <path stroke="#DE5650" d="M218.75-58.5c0 50.5 35 82 76 82 64.618 0 49.344 80.25 80.25 80.25"/>
-        <g transform="translate(225.75 -49)">
-            <rect width="10" height="64" fill="#464BB8" rx="1"/>
-            <rect width="10" height="9" y="66" fill="#DE5650" rx="1"/>
-        </g>
-        <g transform="translate(250.75 -49)">
-            <rect width="10" height="39" fill="#464BB8" rx="1"/>
-            <rect width="10" height="39" y="41" fill="#DE5650" rx="1"/>
-        </g>
-        <g transform="translate(275.75 -49)">
-            <rect width="10" height="61" fill="#464BB8" rx="1"/>
-            <rect width="10" height="61" y="63" fill="#DE5650" rx="1"/>
-            <rect width="10" height="21" y="126" fill="#FFCE8A" rx="1"/>
-        </g>
-        <g transform="translate(300.75 -74)">
-            <rect width="10" height="111" fill="#464BB8" rx="1"/>
-            <rect width="10" height="89" y="113" fill="#DE5650" rx="1"/>
-            <rect width="10" height="38" y="204" fill="#FFCE8A" rx="1"/>
-        </g>
-        <g transform="translate(200.75 -88)">
-            <rect width="10" height="111" fill="#464BB8" rx="1"/>
-            <rect width="10" height="8" y="113" fill="#DE5650" rx="1" transform="matrix(1 0 0 -1 0 234)"/>
-            <rect width="10" height="9" x="50" y="121" fill="#FFCE8A" rx="1" transform="matrix(1 0 0 -1 0 251)"/>
-        </g>
-        <g transform="translate(175.75 -126)">
-            <rect width="10" height="21" y="113" fill="#DE5650" rx="1" transform="matrix(1 0 0 -1 0 247)"/>
-            <rect width="10" height="17" y="136" fill="#FFCE8A" rx="1"/>
-        </g>
-        <g transform="translate(150.75 -113)">
-            <rect width="10" height="111" fill="#464BB8" rx="1"/>
-            <rect width="10" height="21" y="113" fill="#DE5650" rx="1" transform="matrix(1 0 0 -1 0 247)"/>
-        </g>
-        <rect width="10" height="38" y="136" fill="#FFCE8A" rx="1" transform="translate(125.75 -151)"/>
-        <g transform="translate(100.75 -126)">
-            <rect width="10" height="10" y="113" fill="#DE5650" rx="1" transform="matrix(1 0 0 -1 0 236)"/>
-            <rect width="10" height="4" y="125" fill="#FFCE8A" rx="1"/>
-        </g>
-        <g transform="translate(75.75 -90)">
-            <rect width="10" height="111" fill="#464BB8" rx="1"/>
-            <rect width="10" height="4" y="113" fill="#DE5650" rx="1" transform="matrix(1 0 0 -1 0 230)"/>
-        </g>
-        <rect width="10" height="21" y="123" fill="#FFCE8A" rx="1" transform="matrix(1 0 0 -1 50.75 133)"/>
-        <g transform="translate(325.75 -32)">
-            <rect width="10" height="111" fill="#464BB8" rx="1"/>
-            <rect width="10" height="29" y="113" fill="#DE5650" rx="1"/>
-            <rect width="10" height="91" y="144" fill="#FFCE8A" rx="1"/>
+    <g id="Page-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="1-copy-29" transform="translate(-935.000000, -557.000000)">
+            <g id="Group-12" transform="translate(935.000000, 89.000000)">
+                <g id="маркетинг" transform="translate(0.000000, 468.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Mask" fill="#FBFBFD" xlink:href="#path-1"></use>
+                    <g id="Group-16" mask="url(#mask-2)">
+                        <g transform="translate(-21.000000, -197.000000)">
+                            <path d="M38.8365057,60.1582392 C54.3365057,94.1582392 172.836506,134.158239 163.836506,193.158239 C154.836506,252.158239 231.336506,148.658239 257.586506,193.158239 C283.836506,237.658239 240.336506,388.107987 300.836506,340.107987 C361.336506,292.107987 474.836506,71.1582392 350.836506,80.1582392 C226.836506,89.1582392 23.3365057,26.1582392 38.8365057,60.1582392 Z" id="Path" stroke="#FFCE8A" transform="translate(222.225757, 199.723345) rotate(-18.000000) translate(-222.225757, -199.723345) "></path>
+                            <path d="M197.749592,120.136549 C197.749592,169.036165 216.775475,225.136549 302.749592,225.136549 C388.72371,225.136549 382.249592,294.233043 382.249592,399.136549 C382.249592,403.29257 378.987429,437.136549 458.249592,437.136549 C537.511756,437.136549 467.249592,76.1365485 462.749592,76.1365485 C458.249592,76.1365485 197.749592,71.2369325 197.749592,120.136549 Z" id="Path-2" stroke="#464BB8"></path>
+                            <path d="M264.749592,128.5 C264.749592,179 299.749592,210.5 340.749592,210.5 C405.368492,210.5 390.094448,290.75 420.999592,290.75" id="Path-3" stroke="#DE5650"></path>
+                            <g id="Group-3" stroke="none" fill-rule="evenodd" transform="translate(271.749592, 138.000000)">
+                                <rect id="Rectangle" fill="#464BB8" x="0" y="0" width="10" height="64" rx="1"></rect>
+                                <rect id="Rectangle-Copy-11" fill="#DE5650" x="0" y="66" width="10" height="9" rx="1"></rect>
+                            </g>
+                            <g id="Group-4" stroke="none" fill-rule="evenodd" transform="translate(296.749592, 138.000000)">
+                                <rect id="Rectangle-Copy-13" fill="#DE5650" x="0" y="41" width="10" height="39" rx="1"></rect>
+                            </g>
+                            <g id="Group-5" stroke="none" fill-rule="evenodd" transform="translate(321.749592, 138.000000)">
+                                <rect id="Rectangle-Copy-14" fill="#464BB8" x="0" y="0" width="10" height="61" rx="1"></rect>
+                                <rect id="Rectangle-Copy-15" fill="#DE5650" x="0" y="63" width="10" height="61" rx="1"></rect>
+                                <rect id="Rectangle-Copy-16" fill="#FFCE8A" x="0" y="126" width="10" height="21" rx="1"></rect>
+                            </g>
+                            <g id="Group-7" stroke="none" fill-rule="evenodd" transform="translate(346.749592, 113.000000)">
+                                <rect id="Rectangle-Copy-17" fill="#464BB8" x="8.8817842e-16" y="0" width="10" height="111" rx="1"></rect>
+                                <rect id="Rectangle-Copy-18" fill="#DE5650" x="8.8817842e-16" y="113" width="10" height="89" rx="1"></rect>
+                                <rect id="Rectangle-Copy-19" fill="#FFCE8A" x="8.8817842e-16" y="204" width="10" height="38" rx="1"></rect>
+                            </g>
+                            <g id="Group-2" stroke="none" fill-rule="evenodd" transform="translate(246.749592, 99.000000)">
+                                <rect id="Rectangle-Copy-23" fill="#464BB8" x="8.8817842e-16" y="0" width="10" height="111" rx="1"></rect>
+                                <rect id="Rectangle-Copy-24" fill="#DE5650" transform="translate(5.000000, 117.000000) scale(1, -1) translate(-5.000000, -117.000000) " x="0" y="113" width="10" height="8" rx="1"></rect>
+                                <rect id="Rectangle-Copy-25" fill="#FFCE8A" transform="translate(55.000000, 125.500000) scale(1, -1) translate(-55.000000, -125.500000) " x="50" y="121" width="10" height="9" rx="1"></rect>
+                            </g>
+                            <g id="Group-2-Copy" stroke="none" fill-rule="evenodd" transform="translate(221.749592, 61.000000)">
+                                <rect id="Rectangle-Copy-25" fill="#FFCE8A" x="0" y="136" width="10" height="17" rx="1"></rect>
+                            </g>
+                            <g id="Group-2-Copy-2" stroke="none" fill-rule="evenodd" transform="translate(196.749592, 74.000000)">
+                                <rect id="Rectangle-Copy-24" fill="#DE5650" transform="translate(5.000000, 123.500000) scale(1, -1) translate(-5.000000, -123.500000) " x="8.8817842e-16" y="113" width="10" height="21" rx="1"></rect>
+                            </g>
+                            <g id="Group-2-Copy-3" stroke="none" fill-rule="evenodd" transform="translate(171.749592, 36.000000)">
+                                <rect id="Rectangle-Copy-25" fill="#FFCE8A" x="8.8817842e-16" y="136" width="10" height="38" rx="1"></rect>
+                            </g>
+                            <g id="Group-2-Copy-5" stroke="none" fill-rule="evenodd" transform="translate(121.749592, 97.000000)">
+                                <rect id="Rectangle-Copy-23" fill="#464BB8" x="8.8817842e-16" y="0" width="10" height="111" rx="1"></rect>
+                                <rect id="Rectangle-Copy-24" fill="#DE5650" transform="translate(5.000000, 115.000000) scale(1, -1) translate(-5.000000, -115.000000) " x="0" y="113" width="10" height="4" rx="1"></rect>
+                            </g>
+                            <g id="Group-8" stroke="none" fill-rule="evenodd" transform="translate(371.749592, 155.000000)">
+                                <rect id="Rectangle-Copy-20" fill="#464BB8" x="8.8817842e-16" y="0" width="10" height="111" rx="1"></rect>
+                                <rect id="Rectangle-Copy-21" fill="#DE5650" x="8.8817842e-16" y="113" width="10" height="29" rx="1"></rect>
+                                <rect id="Rectangle-Copy-22" fill="#FFCE8A" x="8.8817842e-16" y="144" width="10" height="91" rx="1"></rect>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
         </g>
     </g>
 </svg>

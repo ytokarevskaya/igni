@@ -6,7 +6,7 @@ import Plx from "react-plx"
 import Section from "../section"
 import { applyStyles } from "../scroll-controller"
 
-import { COLORS, BackLayer, FrontLayer, Title, TextStyled, PlusBtn, RedButton } from "../styled"
+import { COLORS, FrontLayer, Title, TextStyled, PlusBtn, RedButton } from "../styled"
 
 const onSectionUnload = (section) => {
   const video = document.getElementById("bg-video");
@@ -26,8 +26,8 @@ const onSectionLoad = (section) => {
 const SectionMain = (props) => {
   const parallaxData = [
     {
-      start: "self",
-      duration: typeof window === "undefined" ? 0 : window.innerHeight * 0.5,
+      start: 0,
+      duration: typeof window === "undefined" ? 0 : window.innerHeight * 1,
       properties: [
         {
           startValue: 1,
@@ -40,19 +40,21 @@ const SectionMain = (props) => {
 
   return(
   	<Section id={props.id} active={props.active} name="section-main" headerStyle="white" footerStyle="white">
-      <Plx className="parallax-element" parallaxData={parallaxData} onPlxEnd={onSectionUnload} onPlxStart={onSectionLoad} animateWhenNotInViewport={true}>
-        <Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Освещая темное пространство веба</Title>
-        <h1><Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="12rem" pos={["absolute", "55%", "", "", "20rem"]} margin="-12rem 0 0 0" className="scrollController-title">Веб-студия полного цикла</Title></h1>
-        <Title fz="45rem" mFz="10rem" color="#fff" mColor="#fff" className="scrollController-title" lh="0.5" pos={["absolute", "55%", "", "", "18rem"]}>IGNI</Title>
-        <HomeTitlePopup />
-      </Plx>
-        {/*<Link to="/portfolio">
-          <PortfolioBtn className="transition-05s" href="/portfolio">
-            <div className="icon icon-fire transition-05s" />
-            <div className="title transition-05s">Портфолио</div>
-          </PortfolioBtn>
-        </Link>
-        <PulseBtn>+</PulseBtn>*/}
+      <FrontLayer bg="rgba(120, 136, 145, 0.1)">
+        <Plx className="parallax-element" parallaxData={parallaxData} onPlxEnd={onSectionUnload} onPlxStart={onSectionLoad} animateWhenNotInViewport={true}>
+          <Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Освещая темное пространство веба</Title>
+          <h1><Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="12rem" pos={["absolute", "55vh", "", "", "20rem"]} margin="-12rem 0 0 0" className="scrollController-title">Веб-студия полного цикла</Title></h1>
+          <Title fz="45rem" mFz="10rem" color="#fff" mColor="#fff" className="scrollController-title" lh="0.5" pos={["absolute", "55vh", "", "", "18rem"]}>IGNI</Title>
+          <HomeTitlePopup />
+        </Plx>
+          {/*<Link to="/portfolio">
+            <PortfolioBtn className="transition-05s" href="/portfolio">
+              <div className="icon icon-fire transition-05s" />
+              <div className="title transition-05s">Портфолио</div>
+            </PortfolioBtn>
+          </Link>
+          <PulseBtn>+</PulseBtn>*/}
+      </FrontLayer>
     </Section>
   )
 }

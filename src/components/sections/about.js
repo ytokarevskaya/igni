@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import { Link, StaticQuery, graphql } from "gatsby"
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
+import { Parallax } from "react-skrollr"
 
 import Section from "../section"
 import Scroll from "../scroll"
@@ -62,21 +63,31 @@ const SectionAbout = (props) => {
   });
 
   return (
-    <Section id={props.id} active={props.active} name="section-about" headerStyle="white" footerStyle="white" onLoad={onSectionLoad} onUnload={onSectionUnload}>
+    <Section id={props.id} active={props.active} name="section-about" headerStyle="white" footerStyle="white">
       <FrontLayer>
-        <h2><AboutTitleSmall fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Наши услуги</AboutTitleSmall></h2>
-        <AboutTitle className="scrollController-title">
-          <h3><Title fz="5rem" color="#fff" width="30rem" lineBottom>Проектируем, разрабатываем, продвигаем</Title></h3>
-          <TextStyled width="42rem" color="#fff" margin="3.5rem 0 0 0">Чтобы осветить темное пространство веба новыми проектами, мы собрали команду профессионалов с обширным опытом работы в сфере дизайна, разработки, маркетинга, рекламы и видео производства.</TextStyled>
-        </AboutTitle>
-        <Scroll overflowLimit={1} width="auto" pos={["absolute", "40%", "15%", "", ""]}>
+        <Parallax data={{
+          'data-50p': 'opacity: 0;transform: translateY(20rem);',
+          'data-80p': 'opacity: 1;transform: translateY(0);'
+        }}>
+          <h2><Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Наши услуги</Title></h2>
+          <AboutTitle className="scrollController-title">
+            <h3><Title fz="5rem" color="#fff" width="30rem" lineBottom>Проектируем, разрабатываем, продвигаем</Title></h3>
+            <TextStyled width="42rem" color="#fff" margin="3.5rem 0 0 0">Чтобы осветить темное пространство веба новыми проектами, мы собрали команду профессионалов с обширным опытом работы в сфере дизайна, разработки, маркетинга, рекламы и видео производства.</TextStyled>
+          </AboutTitle>
+        </Parallax>
+        <Parallax data={{
+          'data-70p': 'opacity: 0;transform: translateY(30rem);',
+          'data-90p': 'opacity: 1;transform: translateY(0);',
+          'data-120p': 'opacity: 1;transform: translateY(-15rem);',
+          'data-150p': 'opacity: 0.5;transform: translateY(-30rem);'
+        }}>
           <AboutItems className="scrollController-cards">
           {categories.map((node) => (
               <AboutItem key={node.id} id={node.id} title={node.title} content={node.description} bg={node.background.file.url} slug={node.slug} />
             ))
           }
           </AboutItems>
-        </Scroll>
+        </Parallax>
       </FrontLayer>
     </Section>
   )
@@ -122,16 +133,17 @@ class AboutItem extends React.Component {
 }
 
 const AboutTitleSmall = styled(Title)`
-  opacity: 0;
-  transform: translateY(8%);
+  
 `
 
 const AboutItems = styled.div`
+  position: absolute;
+  top: 20vh;
+  right: 15%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: flex-start;
-  opacity: 0;
-  transform: translateY(8%);
+  
 
   > * {
     position: relative;
@@ -187,10 +199,8 @@ const AboutItemStyled = styled.div`
 const AboutTitle = styled.div`
   position: absolute;
   left: 20rem;
-  top: 45%;
+  top: 45vh;
   z-index: 1;
-  opacity: 0;
-  transform: translateY(8%);
 `
 
 export default SectionAbout

@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
 
-import { SectionStyled, PulseBtn, CursorBtn } from "./styled"
+import { SectionStyled, PulseBtn } from "./styled"
 import { applyStyles } from "./scroll-controller"
 
 if (typeof window !== "undefined") window.sectionObjects = {};
@@ -13,14 +13,12 @@ class Section extends React.Component {
     this.id = this.props.id;
     this.children = this.props.children;
     this.sectionRef = React.createRef();
-    this.cursor = React.createRef();
     this.scrollPos = 0;
     if (typeof window !== "undefined") window.sectionObjects[this.id] = this;
 
     this.state = {
       "active": this.props.active,
-      "onhold": "",
-      "cursorStyle": ""
+      "onhold": ""
     }
   }
 
@@ -46,43 +44,6 @@ class Section extends React.Component {
     }
   }
 
-  mouseDownHandler(e) {
-    const event = e;
-    if (event.nativeEvent.which !== 1) return;
-    this.setState({"onhold": "onhold"});
-    const cursor = this.cursor.current;
-    cursor.style.left = event.clientX + "px";
-    cursor.style.top = event.clientY + "px";
-    mouseDownTimer = setTimeout(() => {
-      if (mouseDownTimer) {
-        this.setState({"onhold": ""});
-        this.nextSection();
-      }
-      mouseDownTimer = null;
-    }, 2000);
-  }
-
-  mouseUpHandler(e) {
-    if (mouseDownTimer) {
-      clearTimeout(mouseDownTimer);
-      mouseDownTimer = null;
-    }
-    this.setState({"onhold": ""});
-  }
-
-  cursorFollow(e) {
-    const cursor = this.cursor.current;
-    if (e.target.classList.contains("full-project-link")) {
-      this.setState({"cursorStyle": "cursor-plus"});
-    } else if (e.target.classList.contains("full-video-link")) {
-      this.setState({"cursorStyle": "cursor-play icon-play"});
-    } else {
-      this.setState({"cursorStyle": ""});
-    }
-    cursor.style.left = e.pageX + "px";
-    cursor.style.top = e.pageY + "px";
-  }
-
   nextSection() {
     const nextSectionId = this.id + 1;
     changeSection(this.id, nextSectionId)
@@ -90,10 +51,7 @@ class Section extends React.Component {
 
   render() {
     return (
-    	<SectionStyled data-id={this.id} ref={this.sectionRef} className={"site-section" + (this.state.active? " active" : "") + this.state.onhold + " " + this.props.name} onMouseMove={(e) => this.cursorFollow(e)}>
-        {this.props.noCursor? "" : 
-          <CursorBtn className={"cursor-btn translate-xy " + this.props.headerStyle + " " + this.state.cursorStyle} ref={this.cursor} />
-        }
+    	<SectionStyled data-id={this.id} ref={this.sectionRef} className={"site-section" + (this.state.active? " active" : "") + " " + this.props.name}>
     		{this.children}
     	</SectionStyled>
     )
@@ -162,7 +120,6 @@ Section.propTypes = {
   headerStyle: PropTypes.string,
   footerStyle: PropTypes.string,
   name: PropTypes.string,
-  noCursor: PropTypes.bool,
   scrollControllerElements: PropTypes.object,
   onLoad: PropTypes.func,
   onUnload: PropTypes.func
@@ -173,7 +130,6 @@ Section.defaultProps = {
   headerStyle: "white",
   footerStyle: "white",
   name: "",
-  noCursor: false,
   scrollControllerElements: null
 }
 

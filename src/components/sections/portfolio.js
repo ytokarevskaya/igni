@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
+import { Parallax } from "react-skrollr"
 
 import Section from "../section"
 import Scroll from "../scroll"
@@ -11,33 +12,6 @@ import { wordEnd } from "../utils"
 import { COLORS, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, SectionScroll } from "../styled"
 
 import mountainImg from "../../images/mountain.jpg"
-
-const onLoadStyles = {
-  ".scrollController-title": {
-    "opacity": "1"
-  },
-  ".scrollController-menu": {
-    "opacity": "1",
-    "transitionDelay": "600ms"
-  }
-}
-
-function onSectionLoad(section) {
-  section.style.transform = "translateY(0)";
-  section.style.opacity = "1";
-  setTimeout(() => {
-    applyStyles(section, onLoadStyles);
-  }, 1200);
-}
-
-function onSectionUnload(section) {
-  section.style.transform = "translateY(-100%)";
-  section.style.opacity = "0";
-  setTimeout(() => {
-    section.style.transform = "translateY(0)";
-    section.style.opacity = "1";
-  }, 5000);
-}
 
 const SectionPortfolio = (props) => {
   const { totalCount, edges } = useProjectsData()
@@ -61,46 +35,57 @@ const SectionPortfolio = (props) => {
   });
 
   return (
-  	<Section id={props.id} active={props.active} name="section-portfolio" headerStyle="white" footerStyle="white" onLoad={onSectionLoad} onUnload={onSectionUnload}>
+  	<Section id={props.id} active={props.active} name="section-portfolio" headerStyle="white" footerStyle="white">
       <FrontLayer>
-        <h2><PortfolioTitleSmall fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Нашe портфолио</PortfolioTitleSmall></h2>
-        <PortfolioCarouselMenu id="portfolio-carousel-menu" items={["Дизайн", "Контент", "Маркетинг и реклама", "Диджитал продакшн"]} />
-        <PortfolioCarousel id="portfolio-carousel" className="transition-05s scrollController-carousel">
-          <div className="carousel-content">
-            <PortfolioItem className="load-ani unload-ani carousel-item active" data-loaddelay={0} data-unloaddelay={400}>
-              <p className="count transition-05s"><strong className="ff-bebas">{projects.design.length}</strong> {'проект' + wordEnd(projects.design.length, 'pr')}</p>
-              <div className="header">
-                <h3><Title color="#fff">Дизайн</Title></h3>
-                <a className="all-projects" href="/portfolio/design"><span>Перейти</span></a>
-              </div>
-              <div className="image" />
-            </PortfolioItem>
-            <PortfolioItem className="load-ani unload-ani carousel-item" data-loaddelay={0} data-unloaddelay={400}>
-              <p className="count transition-05s"><strong className="ff-bebas">{projects.content.length}</strong> {'проект' + wordEnd(projects.content.length, 'pr')}</p>
-              <div className="header">
-                <h3><Title color="#fff">Контент</Title></h3>
-                <a className="all-projects" href="/portfolio/design"><span>Перейти</span></a>
-              </div>
-              <div className="image" />
-            </PortfolioItem>
-            <PortfolioItem className="load-ani unload-ani carousel-item" data-loaddelay={0} data-unloaddelay={400}>
-              <p className="count transition-05s"><strong className="ff-bebas">{projects.marketing.length}</strong> {'проект' + wordEnd(projects.marketing.length, 'pr')}</p>
-              <div className="header">
-                <h3><Title color="#fff">Маркетинг и реклама</Title></h3>
-                <a className="all-projects" href="/portfolio/design"><span>Перейти</span></a>
-              </div>
-              <div className="image" />
-            </PortfolioItem>
-            <PortfolioItem className="load-ani unload-ani carousel-item" data-loaddelay={0} data-unloaddelay={400}>
-              <p className="count transition-05s"><strong className="ff-bebas">{projects.digital.length}</strong> {'проект' + wordEnd(projects.digital.length, 'pr')}</p>
-              <div className="header">
-                <h3><Title color="#fff">Диджитал продакшн</Title></h3>
-                <a className="all-projects" href="/portfolio/design"><span>Перейти</span></a>
-              </div>
-              <div className="image" />
-            </PortfolioItem>
-          </div>
-        </PortfolioCarousel>
+        <Parallax data={{
+          'data-130p': 'opacity: 0;',
+          'data-190p': 'opacity: 1;'
+        }}>
+          <h2><Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Нашe портфолио</Title></h2>
+          <PortfolioCarouselMenu id="portfolio-carousel-menu" items={["Дизайн", "Контент", "Маркетинг и реклама", "Диджитал продакшн"]} />
+        </Parallax>
+        <Parallax data={{
+          'data-130p': 'opacity: 0;transform: translateY(20rem);',
+          'data-170p': 'opacity: 1;transform: translateY(0);',
+          'data-270p': 'opacity: 0.7;transform: translateY(-30rem);'
+        }}>
+          <PortfolioCarousel id="portfolio-carousel" className="transition-05s scrollController-carousel">
+            <div className="carousel-content">
+              <PortfolioItem className="load-ani unload-ani carousel-item active" data-loaddelay={0} data-unloaddelay={400}>
+                <p className="count transition-05s"><strong className="ff-bebas">{projects.design.length}</strong> {'проект' + wordEnd(projects.design.length, 'pr')}</p>
+                <div className="header">
+                  <h3><Title color="#fff">Дизайн</Title></h3>
+                  <a className="all-projects" href="/portfolio/design"><span>Перейти</span></a>
+                </div>
+                <div className="image" />
+              </PortfolioItem>
+              <PortfolioItem className="load-ani unload-ani carousel-item" data-loaddelay={0} data-unloaddelay={400}>
+                <p className="count transition-05s"><strong className="ff-bebas">{projects.content.length}</strong> {'проект' + wordEnd(projects.content.length, 'pr')}</p>
+                <div className="header">
+                  <h3><Title color="#fff">Контент</Title></h3>
+                  <a className="all-projects" href="/portfolio/design"><span>Перейти</span></a>
+                </div>
+                <div className="image" />
+              </PortfolioItem>
+              <PortfolioItem className="load-ani unload-ani carousel-item" data-loaddelay={0} data-unloaddelay={400}>
+                <p className="count transition-05s"><strong className="ff-bebas">{projects.marketing.length}</strong> {'проект' + wordEnd(projects.marketing.length, 'pr')}</p>
+                <div className="header">
+                  <h3><Title color="#fff">Маркетинг и реклама</Title></h3>
+                  <a className="all-projects" href="/portfolio/design"><span>Перейти</span></a>
+                </div>
+                <div className="image" />
+              </PortfolioItem>
+              <PortfolioItem className="load-ani unload-ani carousel-item" data-loaddelay={0} data-unloaddelay={400}>
+                <p className="count transition-05s"><strong className="ff-bebas">{projects.digital.length}</strong> {'проект' + wordEnd(projects.digital.length, 'pr')}</p>
+                <div className="header">
+                  <h3><Title color="#fff">Диджитал продакшн</Title></h3>
+                  <a className="all-projects" href="/portfolio/design"><span>Перейти</span></a>
+                </div>
+                <div className="image" />
+              </PortfolioItem>
+            </div>
+          </PortfolioCarousel>
+        </Parallax>
       </FrontLayer>
     </Section>
   )
@@ -154,17 +139,12 @@ function moveCarousel(index) {
   nextItem.classList.add("active");
 }
 
-const PortfolioTitleSmall = styled(Title)`
-  opacity: 0;
-`
-
 const PortfolioCarouselMenuStyled = styled.aside`
   position: absolute;
   top: 25rem;
   left: 40%;
   display: flex;
   align-items: flex-end;
-  opacity: 0;
 
   .item {
     font-size: 1.6rem;
@@ -197,7 +177,7 @@ const PortfolioCarousel = styled.div`
   position: absolute;
   left: 15rem;
   right: 0;
-  top: 40%;
+  top: 40vh;
   padding-left: 5rem;
   white-space: nowrap;
   overflow: hidden;
@@ -206,7 +186,7 @@ const PortfolioCarousel = styled.div`
     height: 100%;
     display: flex;
     flex-wrap: nowrap;
-    // align-items: flex-end;
+    align-items: flex-end;
     transition: transform 1000ms ease;
   }
 `

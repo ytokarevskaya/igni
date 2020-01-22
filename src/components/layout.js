@@ -1,10 +1,3 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
@@ -12,14 +5,10 @@ import { useStaticQuery, graphql } from "gatsby"
 import Header from "./header"
 import Footer from "./footer"
 import { onWindowResize, onPageLoad } from "./functions"
+import { CursorBtn } from "./styled"
 import "./layout.css"
 
 class ContentLayout extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   componentWillMount() {
     if (typeof window === "undefined") return;
     onPageLoad();
@@ -31,33 +20,51 @@ class ContentLayout extends React.Component {
   }
 }
 
-const Layout = ({ page, children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
+class Layout extends React.Component {
+  constructor(props) {
+    super(props);
+    this.cursor = React.createRef();
+    this.state = {
+      "cursorStyle": this.props.cursorStyle || ""
     }
-  `)
+  }
 
-  return (
-    <>
-      <Header siteTitle={data.site.siteMetadata.title} page={page} />
-      <ContentLayout content={children} />
-      <Footer page={page} />
-      {/*<footer>
-        © {new Date().getFullYear()}, Built with
-        {` `}
-        <a href="https://www.gatsbyjs.org">Gatsby</a>
-      </footer>*/}
-    </>
-  )
+  cursorFollow(e) {
+    const cursor = this.cursor.current;
+    if (e.target.classList.contains("full-project-link")) {
+      this.setState({"cursorStyle": "cursor-plus"});
+    } else if (e.target.classList.contains("full-video-link")) {
+      this.setState({"cursorStyle": "cursor-play icon-play"});
+    } else {
+      this.setState({"cursorStyle": ""});
+    }
+    // debugger;
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
+  }
+
+  render() {
+    return (
+      <main onMouseMove={(e) => this.cursorFollow(e)} style={{"overflow": "hidden"}}>
+        <Header page={this.props.page} />
+        <ContentLayout content={this.props.children} />
+        <Footer page={this.props.page} />
+        {this.props.noCursor? "" : 
+          <CursorBtn className={"cursor-btn translate-xy " + this.state.cursorStyle} ref={this.cursor} />
+        }
+      </main>
+    )
+  }
 }
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
+  cursorStyle: PropTypes.string,
+  noCursor: PropTypes.bool
+}
+
+Layout.defaultProps = {
+  noCursor: false
 }
 
 export default Layout

@@ -3,16 +3,16 @@
 */
 const isMobile = () => {
   const userAgentFlag = (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od|ad)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(navigator.userAgent||navigator.vendor||window.opera));
-  return (userAgentFlag || (document.body.clientWidth < 1280));
+  return (userAgentFlag || (window.innerWidth < 1280));
 }
 
 const isTablet = () => {
-  return window.mobile && document.body.clientWidth >= 768;
+  return window.mobile && window.innerWidth >= 768;
 }
 
 // для больших айпадов - размер крупнее
 const getTabletFont = () => {
-  return window.tablet && document.body.clientWidth > 1280 && document.body.clientWidth < 1367? 18 : 15;
+  return window.tablet && window.innerWidth > 1280 && window.innerWidth < 1367? 18 : 15;
 }
 
 const onWindowResize = () => {
@@ -42,7 +42,7 @@ const onWindowResize = () => {
   Устаналивает font-size для элемента html, чтобы масштабировать все эл-ты с размером в rem-единицах
 */
 const setFontSize = (val) => {
-  const fontVal = val || 5+4*((document.body.clientWidth*document.body.clientHeight)/(1920*1080));
+  const fontVal = val || 5+4*((window.innerWidth*window.innerHeight)/(1920*1080));
   document.getElementsByTagName("html")[0].style.fontSize = fontVal + "px";
 }
 

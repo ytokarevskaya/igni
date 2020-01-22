@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import { Parallax } from "react-skrollr"
 
 import Section from "../section"
 import RequestForm from "../forms/request-form"
@@ -44,40 +45,46 @@ function onSectionUnload(section) {
 }
 
 const SectionContacts = (props) => (
-	<Section id={props.id} active={props.active} name="section-contacts" headerStyle="white" footerStyle="white" onLoad={onSectionLoad} onUnload={onSectionUnload}>
+	<Section id={props.id} active={props.active} name="section-contacts" headerStyle="white" footerStyle="white">
     <FrontLayer>
-    	<h2><ContactsTitleSmall fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Контакты</ContactsTitleSmall></h2>
-      <ContactsTitle>
-        <h3><Title fz="5rem" color="#fff" width="40rem" margin="0 0 3.5rem 0" lineBottom>Приступим к работе над вашим проектом?</Title></h3>
-        <TextStyled width="42rem" color="#fff">Заполните бриф: расскажите о вашем бизнесе, задачах и сроках — и мы свяжемся с вами для обсуждения дальнейшего сотрудничества.</TextStyled>
-      </ContactsTitle>
-      <ContactsBlocks>
-      	<ContactsBlock className="n1 scrollController-block">
-      		<a href="tel:+7 (495) 555 55 55" className="value ff-bebas">+7 (495) 555 55 55</a>
-      		<div className="text">Телефон</div>
-      	</ContactsBlock>
-      	<ContactsBlock className="n2 scrollController-block">
-      		<a href="mailto:info@igni.studio" className="value ff-bebas">info@igni.studio</a>
-      		<div className="text">Почта</div>
-      	</ContactsBlock>
-      	<ContactsBlock className="n3 scrollController-block">
-      		<a href="" className="text price icon-download">Описание услуг <br/>и прайс-лист</a>
-      	</ContactsBlock>
-      </ContactsBlocks>
-      <ContactsForm>
-      	<Copyright>
-      		<p>Реквизиты</p>
-      		<p>ООО «Игни студио»</p>
-      	</Copyright>
-      	<RequestForm theme="light" />
-      </ContactsForm>
+    	<Parallax data={{
+        'data-380p': 'opacity: 0;',
+        'data-400p': 'opacity: 1;',
+      }}>
+	    	<h2><Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Контакты</Title></h2>
+	      <ContactsTitle>
+	        <h3><Title fz="5rem" color="#fff" width="40rem" margin="0 0 3.5rem 0" lineBottom>Приступим к работе над вашим проектом?</Title></h3>
+	        <TextStyled width="42rem" color="#fff">Заполните бриф: расскажите о вашем бизнесе, задачах и сроках — и мы свяжемся с вами для обсуждения дальнейшего сотрудничества.</TextStyled>
+	      </ContactsTitle>
+	      <ContactsBlocks>
+	      	<ContactsBlock className="n1 scrollController-block">
+	      		<a href="tel:+7 (495) 555 55 55" className="value ff-bebas">+7 (495) 555 55 55</a>
+	      		<div className="text">Телефон</div>
+	      	</ContactsBlock>
+	      	<ContactsBlock className="n2 scrollController-block">
+	      		<a href="mailto:info@igni.studio" className="value ff-bebas">info@igni.studio</a>
+	      		<div className="text">Почта</div>
+	      	</ContactsBlock>
+	      	<ContactsBlock className="n3 scrollController-block">
+	      		<a href="" className="text price icon-download">Описание услуг <br/>и прайс-лист</a>
+	      	</ContactsBlock>
+	      </ContactsBlocks>
+	    </Parallax>
+	      <ContactsForm>
+	      	<Copyright>
+	      		<p>Реквизиты</p>
+	      		<p>ООО «Игни студио»</p>
+	      	</Copyright>
+			    <Parallax data={{
+		        'data-320p': 'position: absolute; bottom: 0; opacity: 0;transform: translateY(20rem);',
+		        'data-380p': 'position: absolute; bottom: 0; opacity: 1;transform: translateY(0);',
+		      }}>
+	      		<RequestForm theme="light" />
+      		</Parallax>
+	      </ContactsForm>
     </FrontLayer>
   </Section>
 )
-
-const ContactsTitleSmall = styled(Title)`
-	opacity: 0;
-`
 
 const Copyright = styled.div`
 	position: absolute;
@@ -104,19 +111,6 @@ const ContactsBlocks = styled.div`
 const ContactsBlock = styled.div`
   padding: 0 3.5rem;
   border-left: 1px solid #fff;
-  opacity: 0;
-
-  &.n1 {
-  	transition-delay: 500ms;
-  }
-
-  &.n2 {
-  	transition-delay: 1000ms;
-  }
-
-  &.n3 {
-  	transition-delay: 1500ms;
-  }
 
   &:first-child {
 		border-left: unset;

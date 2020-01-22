@@ -20,29 +20,24 @@ const SectionStyled = styled.section`
 	@media screen and (min-width: 1280px) and (pointer: fine) {
 		height: ${props => props.height || "100vh"};
 		transition: all 1000ms ease-in-out;
-		visibility: hidden;
-		opacity: 0;
-	  pointer-events: none;
   	cursor: none;
-  	// transform: translateY(100%);
 
 		&.onhold {
 			cursor: none;
 		}
 
 		&.active {
-			position: absolute;
-			top: 0;
-			left: 0;
-			visibility: visible;
-			opacity: 1;
-			pointer-events: all;
-			// transform: translateY(0);
+			// position: absolute;
+			// top: 0;
+			// left: 0;
+			// visibility: visible;
+			// opacity: 1;
+			// pointer-events: all;
 		}
 
 		&.section-portfolio, &.section-contacts {
-			opacity: 0;
-			transform: translateY(50%);
+			// opacity: 0;
+			// transform: translateY(50%);
 		}
 	}
 `

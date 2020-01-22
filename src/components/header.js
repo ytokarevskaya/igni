@@ -46,7 +46,6 @@ class Header extends React.Component {
         <a href="/">
           <Logo>
             <img src={logoSrc} className="transition-05s" alt="IGNI Logo" />
-            <h1>Веб-студия полного цикла</h1>
           </Logo>
         </a>
         <MainMenu className={this.state.menuOpened? "opened" : ""} onMouseMove={(e) => this.cursorFollow(e)}>
@@ -399,19 +398,6 @@ const Logo = styled.div`
     max-width: unset;
   }
 
-  h1 {
-    font-family: 'Bebas';
-    font-size: 2.5rem;
-    font-weight: bold;
-    line-height: 1.13;
-    color: #fff;
-    text-transform: uppercase;
-    width: 12rem;
-    margin: 6.5rem 0 0 0;
-    opacity: 0;
-    visibility: hidden;
-  }
-
   ${HeaderStyled}.white & {
     img.white {
       position: relative;
@@ -437,13 +423,6 @@ const Logo = styled.div`
       position: absolute;
       opacity: 0;
       visibility: hidden;
-    }
-  }
-
-  ${HeaderStyled}.section-main & {
-    h1 {
-      opacity: 1;
-      visibility: visible;
     }
   }
 

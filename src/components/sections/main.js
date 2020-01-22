@@ -1,61 +1,50 @@
 import React from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
+import { Parallax } from "react-skrollr"
 
 import Section from "../section"
 import { applyStyles } from "../scroll-controller"
 
 import { COLORS, BackLayer, FrontLayer, Title, TextStyled, PlusBtn, RedButton } from "../styled"
 
-const scrollControllerElements = {
-  0 : {
-    ".scrollController-title" : {
-      "opacity" : "1"
-    } 
-  }
-}
-
-const unloadStyles = {
-  ".scrollController-title" : {
-    "opacity" : "0"
-  } 
-}
-
-const loadStyles = {
-  ".scrollController-title" : {
-    "opacity" : "1"
-  } 
-}
-
 const onSectionUnload = (section) => {
   const video = document.getElementById("bg-video");
   video.pause();
   video.parentElement.classList.add("is-blurred");
-  applyStyles(section, unloadStyles);
+  // applyStyles(section, unloadStyles);
 }
 
 const onSectionLoad = (section) => {
-  applyStyles(section, loadStyles);
+  // applyStyles(section, loadStyles);
   const video = document.getElementById("bg-video");
   video.play();
   video.parentElement.classList.remove("is-blurred");
 }
 
-const SectionMain = (props) => (
-	<Section id={props.id} active={props.active} name="section-main" headerStyle="white" footerStyle="white" onLoad={onSectionLoad} onUnload={onSectionUnload} scrollControllerElements={scrollControllerElements}>
-    <Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Освещая темное пространство веба</Title>
-    <h1><Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="12rem" pos={["absolute", "55%", "", "", "20rem"]} margin="-12rem 0 0 0" className="scrollController-title">Веб-студия полного цикла</Title></h1>
-    <Title fz="45rem" mFz="10rem" color="#fff" mColor="#fff" className="scrollController-title" lh="0.5" pos={["absolute", "55%", "", "", "18rem"]}>IGNI</Title>
-      {/*<Link to="/portfolio">
-        <PortfolioBtn className="transition-05s" href="/portfolio">
-          <div className="icon icon-fire transition-05s" />
-          <div className="title transition-05s">Портфолио</div>
-        </PortfolioBtn>
-      </Link>
-      <PulseBtn>+</PulseBtn>*/}
-    <HomeTitlePopup />
-  </Section>
-)
+
+const SectionMain = (props) => {
+  return(
+  	<Section id={props.id} active={props.active} name="section-main" headerStyle="white" footerStyle="white">
+      <Parallax data={{
+        'data-0': 'opacity: 1;',
+        'data-80p': 'opacity: 0;'
+      }}>
+        <Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Освещая темное пространство веба</Title>
+        <h1><Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="12rem" pos={["absolute", "55%", "", "", "20rem"]} margin="-12rem 0 0 0" className="scrollController-title">Веб-студия полного цикла</Title></h1>
+        <Title fz="45rem" mFz="10rem" color="#fff" mColor="#fff" className="scrollController-title" lh="0.5" pos={["absolute", "55%", "", "", "18rem"]}>IGNI</Title>
+        <HomeTitlePopup />
+      </Parallax>
+        {/*<Link to="/portfolio">
+          <PortfolioBtn className="transition-05s" href="/portfolio">
+            <div className="icon icon-fire transition-05s" />
+            <div className="title transition-05s">Портфолио</div>
+          </PortfolioBtn>
+        </Link>
+        <PulseBtn>+</PulseBtn>*/}
+    </Section>
+  )
+}
 
 class HomeTitlePopup extends React.Component {
   constructor(props) {

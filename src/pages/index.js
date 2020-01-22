@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import { ParallaxProvider } from "react-skrollr"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -18,6 +19,26 @@ import videoSrcWEBM from "../video/fire-1080p.webm"
 
 const activeSection = +getURLParameter("active") || 0;
 
+function scrollController(e) {
+  const video = document.getElementById("bg-video");
+  if (document.documentElement.scrollTop > window.innerHeight * 0.8) {
+    video.pause();
+    video.parentElement.classList.add("is-blurred");
+  } else {
+    const video = document.getElementById("bg-video");
+    video.play();
+    video.parentElement.classList.remove("is-blurred");
+  }
+  // debugger;
+  if (document.documentElement.scrollTop >= document.body.offsetHeight - window.innerHeight * 1.2) {
+    document.getElementById("footer-scroll-help").classList.add("is-hidden");
+    document.getElementById("footer-callback-btn").classList.add("is-hidden");
+  } else {
+    document.getElementById("footer-scroll-help").classList.remove("is-hidden");
+    document.getElementById("footer-callback-btn").classList.remove("is-hidden");
+  }
+}
+
 const IndexPage = () => (
   <Layout page="home">
     <SEO title="IGNI | Веб-студия полного цикла" />
@@ -29,20 +50,24 @@ const IndexPage = () => (
         </video>
       </BgVideo>
     </BackLayer>
-    <FrontLayer bg="linear-gradient(155deg,rgba(255,255,255,0.5) 22%,rgba(0, 0, 0, 0.1) 58%),linear-gradient(to bottom,rgba(42,35,42,0.15),rgba(42,35,42,0.15))">
-	    <ScrollController>
-	      <SectionMain id={0} active={activeSection === 0} />
-	      <SectionAbout id={1} active={activeSection === 1} />
-	      <SectionPortfolio id={2} active={activeSection === 2} />
-	      <SectionEstimation id={3} active={activeSection === 3} />
-	      <SectionContacts id={4} active={activeSection === 4} />
-	    </ScrollController>
-    </FrontLayer>
+    <FrontLayer bg="linear-gradient(155deg,rgba(255,255,255,0.5) 22%,rgba(0, 0, 0, 0.1) 58%),linear-gradient(to bottom,rgba(42,35,42,0.15),rgba(42,35,42,0.15))" onWheel={scrollController}>
+      <ParallaxProvider init={{
+        smoothScrollingDuration: 700,
+        smoothScrolling: false,
+        forceHeight: false
+      }}>
+        <SectionMain id={0} active={activeSection === 0} />
+        <SectionAbout id={1} active={activeSection === 1} />
+        <SectionPortfolio id={2} active={activeSection === 2} />
+        <SectionEstimation id={3} active={activeSection === 3} />
+        <SectionContacts id={4} active={activeSection === 4} />
+      </ParallaxProvider>
+  </FrontLayer>
   </Layout>
 )
 
 const BgVideo = styled.div`
-  position: relative;
+  position: fixed;
   width: 100vw;
   height: 100vh;
 	&::before {

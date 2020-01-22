@@ -1,6 +1,5 @@
 import React from "react"
 import styled from "styled-components"
-import { ParallaxProvider } from "react-skrollr"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -20,15 +19,15 @@ import videoSrcWEBM from "../video/fire-1080p.webm"
 const activeSection = +getURLParameter("active") || 0;
 
 function scrollController(e) {
-  const video = document.getElementById("bg-video");
-  if (document.documentElement.scrollTop > window.innerHeight * 0.8) {
-    video.pause();
-    video.parentElement.classList.add("is-blurred");
-  } else {
-    const video = document.getElementById("bg-video");
-    video.play();
-    video.parentElement.classList.remove("is-blurred");
-  }
+  // const video = document.getElementById("bg-video");
+  // if (document.documentElement.scrollTop > window.innerHeight * 0.8) {
+  //   video.pause();
+  //   video.parentElement.classList.add("is-blurred");
+  // } else {
+  //   const video = document.getElementById("bg-video");
+  //   video.play();
+  //   video.parentElement.classList.remove("is-blurred");
+  // }
   // debugger;
   if (document.documentElement.scrollTop >= document.body.offsetHeight - window.innerHeight * 1.2) {
     document.getElementById("footer-scroll-help").classList.add("is-hidden");
@@ -51,18 +50,13 @@ const IndexPage = () => (
       </BgVideo>
     </BackLayer>
     <FrontLayer bg="linear-gradient(155deg,rgba(255,255,255,0.5) 22%,rgba(0, 0, 0, 0.1) 58%),linear-gradient(to bottom,rgba(42,35,42,0.15),rgba(42,35,42,0.15))" onWheel={scrollController}>
-      <ParallaxProvider init={{
-        smoothScrollingDuration: 700,
-        smoothScrolling: false,
-        forceHeight: false
-      }}>
-        <SectionMain id={0} active={activeSection === 0} />
-        <SectionAbout id={1} active={activeSection === 1} />
-        <SectionPortfolio id={2} active={activeSection === 2} />
-        <SectionEstimation id={3} active={activeSection === 3} />
-        <SectionContacts id={4} active={activeSection === 4} />
-      </ParallaxProvider>
-  </FrontLayer>
+      <SectionMain id={0} active={activeSection === 0} />
+      <SectionAbout id={1} active={activeSection === 1} />
+      <SectionPortfolio id={2} active={activeSection === 2} />
+      <SectionEstimation id={3} active={activeSection === 3} />
+      <SectionContacts id={4} active={activeSection === 4} />
+    </FrontLayer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
   </Layout>
 )
 

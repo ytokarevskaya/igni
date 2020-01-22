@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { Parallax } from "react-skrollr"
+import Plx from "react-plx"
 
 import Section from "../section"
 import RequestForm from "../forms/request-form"
@@ -44,13 +44,44 @@ function onSectionUnload(section) {
   document.getElementById("footer-callback-btn").classList.remove("is-hidden");
 }
 
+const parallaxData_title = [
+  {
+    start: typeof window === "undefined" ? 0 : window.innerHeight * 3.3,
+    end: typeof window === "undefined" ? 0 : window.innerHeight * 3.8,
+    properties: [
+      {
+        startValue: 0,
+        endValue: 1,
+        property: "opacity"
+      }
+    ]
+  }
+]
+
+const parallaxData_form = [
+  {
+    start: typeof window === "undefined" ? 0 : window.innerHeight * 3,
+    end: typeof window === "undefined" ? 0 : window.innerHeight * 4,
+    properties: [
+      {
+        startValue: 0,
+        endValue: 1,
+        property: "opacity"
+      },
+      {
+        startValue: 40,
+        endValue: 0,
+        property: "translateY",
+        unit: "vh"
+      }
+    ]
+  }
+]
+
 const SectionContacts = (props) => (
 	<Section id={props.id} active={props.active} name="section-contacts" headerStyle="white" footerStyle="white">
     <FrontLayer>
-    	<Parallax data={{
-        'data-380p': 'opacity: 0;',
-        'data-400p': 'opacity: 1;',
-      }}>
+    	<Plx className="parallax-element" parallaxData={parallaxData_title} animateWhenNotInViewport={true}>
 	    	<h2><Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Контакты</Title></h2>
 	      <ContactsTitle>
 	        <h3><Title fz="5rem" color="#fff" width="40rem" margin="0 0 3.5rem 0" lineBottom>Приступим к работе над вашим проектом?</Title></h3>
@@ -69,19 +100,16 @@ const SectionContacts = (props) => (
 	      		<a href="" className="text price icon-download">Описание услуг <br/>и прайс-лист</a>
 	      	</ContactsBlock>
 	      </ContactsBlocks>
-	    </Parallax>
+      </Plx>
+      <Plx className="parallax-element" parallaxData={parallaxData_form} animateWhenNotInViewport={true} style={{"position": "absolute", "bottom": 0, "width": "100%"}}>
 	      <ContactsForm>
 	      	<Copyright>
 	      		<p>Реквизиты</p>
 	      		<p>ООО «Игни студио»</p>
 	      	</Copyright>
-			    <Parallax data={{
-		        'data-320p': 'position: absolute; bottom: 0; opacity: 0;transform: translateY(20rem);',
-		        'data-380p': 'position: absolute; bottom: 0; opacity: 1;transform: translateY(0);',
-		      }}>
-	      		<RequestForm theme="light" />
-      		</Parallax>
+	      	<RequestForm theme="light" />
 	      </ContactsForm>
+      </Plx>
     </FrontLayer>
   </Section>
 )
@@ -111,6 +139,18 @@ const ContactsBlocks = styled.div`
 const ContactsBlock = styled.div`
   padding: 0 3.5rem;
   border-left: 1px solid #fff;
+
+  &.n1 {
+  	transition-delay: 500ms;
+  }
+
+  &.n2 {
+  	transition-delay: 1000ms;
+  }
+
+  &.n3 {
+  	transition-delay: 1500ms;
+  }
 
   &:first-child {
 		border-left: unset;

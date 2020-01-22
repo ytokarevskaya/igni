@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
-import { Parallax } from "react-skrollr"
+import Plx from "react-plx"
 
 import Section from "../section"
 import Scroll from "../scroll"
@@ -34,21 +34,65 @@ const SectionPortfolio = (props) => {
     }
   });
 
+  const parallaxData_title = [
+    {
+      start: typeof window === "undefined" ? 0 : window.innerHeight * 1,
+      end: typeof window === "undefined" ? 0 : window.innerHeight * 2,
+      properties: [
+        {
+          startValue: 0,
+          endValue: 1,
+          property: "opacity"
+        }
+      ]
+    }
+  ]
+
+  const parallaxData_cards = [
+    {
+      start: typeof window === "undefined" ? 0 : window.innerHeight * 0.8,
+      end: typeof window === "undefined" ? 0 : window.innerHeight * 2.1,
+      properties: [
+        {
+          startValue: 0,
+          endValue: 1,
+          property: "opacity"
+        },
+        {
+          startValue: 50,
+          endValue: 0,
+          property: "translateY",
+          unit: "vh"
+        }
+      ]
+    },
+    {
+      start: typeof window === "undefined" ? 0 : window.innerHeight * 2.1,
+      end: typeof window === "undefined" ? 0 : window.innerHeight * 2.6,
+      properties: [
+        {
+          startValue: 1,
+          endValue: 0.5,
+          property: "opacity"
+        },
+        {
+          startValue: 0,
+          endValue: -30,
+          property: "translateY",
+          unit: "vh"
+        }
+      ]
+    }
+  ]
+
   return (
   	<Section id={props.id} active={props.active} name="section-portfolio" headerStyle="white" footerStyle="white">
       <FrontLayer>
-        <Parallax data={{
-          'data-130p': 'opacity: 0;',
-          'data-190p': 'opacity: 1;'
-        }}>
-          <h2><Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Нашe портфолио</Title></h2>
+        <Plx className="parallax-element" parallaxData={parallaxData_title} animateWhenNotInViewport={true}>
+          <h2><Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "12rem", "", "", "20rem"]} className="scrollController-title">Нашe портфолио</Title></h2>
           <PortfolioCarouselMenu id="portfolio-carousel-menu" items={["Дизайн", "Контент", "Маркетинг и реклама", "Диджитал продакшн"]} />
-        </Parallax>
-        <Parallax data={{
-          'data-130p': 'opacity: 0;transform: translateY(20rem);',
-          'data-170p': 'opacity: 1;transform: translateY(0);',
-          'data-270p': 'opacity: 0.7;transform: translateY(-30rem);'
-        }}>
+        </Plx>
+        <Plx className="parallax-element" parallaxData={parallaxData_cards} animateWhenNotInViewport={true}>
           <PortfolioCarousel id="portfolio-carousel" className="transition-05s scrollController-carousel">
             <div className="carousel-content">
               <PortfolioItem className="load-ani unload-ani carousel-item active" data-loaddelay={0} data-unloaddelay={400}>
@@ -85,7 +129,7 @@ const SectionPortfolio = (props) => {
               </PortfolioItem>
             </div>
           </PortfolioCarousel>
-        </Parallax>
+        </Plx>
       </FrontLayer>
     </Section>
   )
@@ -141,7 +185,7 @@ function moveCarousel(index) {
 
 const PortfolioCarouselMenuStyled = styled.aside`
   position: absolute;
-  top: 25rem;
+  top: 12rem;
   left: 40%;
   display: flex;
   align-items: flex-end;
@@ -177,7 +221,7 @@ const PortfolioCarousel = styled.div`
   position: absolute;
   left: 15rem;
   right: 0;
-  top: 40vh;
+  top: 25vh;
   padding-left: 5rem;
   white-space: nowrap;
   overflow: hidden;

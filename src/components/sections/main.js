@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
-import { Parallax } from "react-skrollr"
+import Plx from "react-plx"
 
 import Section from "../section"
 import { applyStyles } from "../scroll-controller"
@@ -24,17 +24,28 @@ const onSectionLoad = (section) => {
 
 
 const SectionMain = (props) => {
+  const parallaxData = [
+    {
+      start: "self",
+      duration: typeof window === "undefined" ? 0 : window.innerHeight * 0.5,
+      properties: [
+        {
+          startValue: 1,
+          endValue: 0,
+          property: "opacity"
+        }
+      ]
+    }
+  ]
+
   return(
   	<Section id={props.id} active={props.active} name="section-main" headerStyle="white" footerStyle="white">
-      <Parallax data={{
-        'data-0': 'opacity: 1;',
-        'data-80p': 'opacity: 0;'
-      }}>
+      <Plx className="parallax-element" parallaxData={parallaxData} onPlxEnd={onSectionUnload} onPlxStart={onSectionLoad} animateWhenNotInViewport={true}>
         <Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Освещая темное пространство веба</Title>
         <h1><Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="12rem" pos={["absolute", "55%", "", "", "20rem"]} margin="-12rem 0 0 0" className="scrollController-title">Веб-студия полного цикла</Title></h1>
         <Title fz="45rem" mFz="10rem" color="#fff" mColor="#fff" className="scrollController-title" lh="0.5" pos={["absolute", "55%", "", "", "18rem"]}>IGNI</Title>
         <HomeTitlePopup />
-      </Parallax>
+      </Plx>
         {/*<Link to="/portfolio">
           <PortfolioBtn className="transition-05s" href="/portfolio">
             <div className="icon icon-fire transition-05s" />

@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import { Link, StaticQuery, graphql } from "gatsby"
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
-import { Parallax } from "react-skrollr"
+import Plx from "react-plx"
 
 import Section from "../section"
 import Scroll from "../scroll"
@@ -12,44 +12,6 @@ import { applyStyles } from "../scroll-controller"
 import { COLORS, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, SectionScroll, PlusBtn } from "../styled"
 
 import fireSrc from "../../images/fire.svg"
-
-const onLoadStyles = {
-  ".scrollController-title" : {
-    "opacity" : "1",
-    "transform": "translateY(0)"
-  },
-  ".scrollController-cards" : {
-    "opacity" : "1",
-    "transform": "translateY(0)"
-  } 
-}
-
-const onUnoadStyles = {
-  ".scrollController-title" : {
-    "opacity" : "0",
-    "transform": "translateY(8%)"
-  },
-  ".scrollController-cards" : {
-    "opacity" : "0",
-    "transform": "translateY(8%)"
-  } 
-}
-
-function onSectionLoad(section) {
-  setTimeout(() => {
-    applyStyles(section, onLoadStyles);
-  }, 1000);
-}
-
-function onSectionUnload(section) {
-  section.style.transform = "translateY(-100%)";
-  section.style.opacity = "0";
-  applyStyles(onUnoadStyles);
-  setTimeout(() => {
-    section.style.transform = "translateY(0)";
-    section.style.opacity = "1";
-  }, 5000);
-}
 
 const SectionAbout = (props) => {
   const { edges } = useCategoriesData()
@@ -62,32 +24,81 @@ const SectionAbout = (props) => {
     categoriesTitles.push(category.title);
   });
 
+  const parallaxData_title = [
+    {
+      start: typeof window === "undefined" ? 0 : window.innerHeight * 0.3,
+      end: typeof window === "undefined" ? 0 : window.innerHeight * 1,
+      properties: [
+        {
+          startValue: 0,
+          endValue: 1,
+          property: "opacity"
+        },
+        {
+          startValue: 40,
+          endValue: 0,
+          property: "translateY",
+          unit: "vh"
+        }
+      ]
+    }
+  ]
+
+  const parallaxData_cards = [
+    {
+      start: typeof window === "undefined" ? 0 : window.innerHeight * 0.3,
+      end: typeof window === "undefined" ? 0 : window.innerHeight * 1.2,
+      properties: [
+        {
+          startValue: 0,
+          endValue: 1,
+          property: "opacity"
+        },
+        {
+          startValue: 40,
+          endValue: -20,
+          property: "translateY",
+          unit: "vh"
+        }
+      ]
+    },
+    {
+      start: typeof window === "undefined" ? 0 : window.innerHeight * 1.2,
+      end: typeof window === "undefined" ? 0 : window.innerHeight * 1.6,
+      properties: [
+        {
+          startValue: -20,
+          endValue: -60,
+          property: "translateY",
+          unit: "vh"
+        },
+        {
+          startValue: 1,
+          endValue: 0.75,
+          property: "opacity"
+        }
+      ]
+    }
+  ]
+
   return (
     <Section id={props.id} active={props.active} name="section-about" headerStyle="white" footerStyle="white">
       <FrontLayer>
-        <Parallax data={{
-          'data-50p': 'opacity: 0;transform: translateY(20rem);',
-          'data-80p': 'opacity: 1;transform: translateY(0);'
-        }}>
-          <h2><Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Наши услуги</Title></h2>
+        <Plx className="parallax-element" parallaxData={parallaxData_title} animateWhenNotInViewport={true}>
+          <h2><AboutTitleSmall fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Наши услуги</AboutTitleSmall></h2>
           <AboutTitle className="scrollController-title">
             <h3><Title fz="5rem" color="#fff" width="30rem" lineBottom>Проектируем, разрабатываем, продвигаем</Title></h3>
             <TextStyled width="42rem" color="#fff" margin="3.5rem 0 0 0">Чтобы осветить темное пространство веба новыми проектами, мы собрали команду профессионалов с обширным опытом работы в сфере дизайна, разработки, маркетинга, рекламы и видео производства.</TextStyled>
           </AboutTitle>
-        </Parallax>
-        <Parallax data={{
-          'data-70p': 'opacity: 0;transform: translateY(30rem);',
-          'data-90p': 'opacity: 1;transform: translateY(0);',
-          'data-120p': 'opacity: 1;transform: translateY(-15rem);',
-          'data-150p': 'opacity: 0.5;transform: translateY(-30rem);'
-        }}>
+        </Plx>
+        <Plx className="parallax-element" parallaxData={parallaxData_cards} animateWhenNotInViewport={true}>
           <AboutItems className="scrollController-cards">
           {categories.map((node) => (
               <AboutItem key={node.id} id={node.id} title={node.title} content={node.description} bg={node.background.file.url} slug={node.slug} />
             ))
           }
           </AboutItems>
-        </Parallax>
+        </Plx>
       </FrontLayer>
     </Section>
   )
@@ -137,13 +148,12 @@ const AboutTitleSmall = styled(Title)`
 `
 
 const AboutItems = styled.div`
-  position: absolute;
-  top: 20vh;
-  right: 15%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: flex-start;
-  
+  position: absolute;
+  top: 40vh;
+  right: 15vw;  
 
   > * {
     position: relative;

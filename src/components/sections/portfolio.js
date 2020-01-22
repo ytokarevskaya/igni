@@ -96,32 +96,32 @@ const SectionPortfolio = (props) => {
           <PortfolioCarousel id="portfolio-carousel" className="transition-05s scrollController-carousel">
             <div className="carousel-content">
               <PortfolioItem className="load-ani unload-ani carousel-item active" data-loaddelay={0} data-unloaddelay={400}>
-                <p className="count transition-05s"><strong className="ff-bebas">{projects.design.length}</strong> {'проект' + wordEnd(projects.design.length, 'pr')}</p>
                 <div className="header">
+                  <p className="count transition-05s"><strong className="ff-bebas">{projects.design.length}</strong> {'проект' + wordEnd(projects.design.length, 'pr')}</p>
                   <h3><Title color="#fff">Дизайн</Title></h3>
                   <a className="all-projects" href="/portfolio/design"><span>Перейти</span></a>
                 </div>
                 <div className="image" />
               </PortfolioItem>
               <PortfolioItem className="load-ani unload-ani carousel-item" data-loaddelay={0} data-unloaddelay={400}>
-                <p className="count transition-05s"><strong className="ff-bebas">{projects.content.length}</strong> {'проект' + wordEnd(projects.content.length, 'pr')}</p>
                 <div className="header">
+                  <p className="count transition-05s"><strong className="ff-bebas">{projects.content.length}</strong> {'проект' + wordEnd(projects.content.length, 'pr')}</p>
                   <h3><Title color="#fff">Контент</Title></h3>
                   <a className="all-projects" href="/portfolio/design"><span>Перейти</span></a>
                 </div>
                 <div className="image" />
               </PortfolioItem>
               <PortfolioItem className="load-ani unload-ani carousel-item" data-loaddelay={0} data-unloaddelay={400}>
-                <p className="count transition-05s"><strong className="ff-bebas">{projects.marketing.length}</strong> {'проект' + wordEnd(projects.marketing.length, 'pr')}</p>
                 <div className="header">
+                  <p className="count transition-05s"><strong className="ff-bebas">{projects.marketing.length}</strong> {'проект' + wordEnd(projects.marketing.length, 'pr')}</p>
                   <h3><Title color="#fff">Маркетинг и реклама</Title></h3>
                   <a className="all-projects" href="/portfolio/design"><span>Перейти</span></a>
                 </div>
                 <div className="image" />
               </PortfolioItem>
               <PortfolioItem className="load-ani unload-ani carousel-item" data-loaddelay={0} data-unloaddelay={400}>
-                <p className="count transition-05s"><strong className="ff-bebas">{projects.digital.length}</strong> {'проект' + wordEnd(projects.digital.length, 'pr')}</p>
                 <div className="header">
+                  <p className="count transition-05s"><strong className="ff-bebas">{projects.digital.length}</strong> {'проект' + wordEnd(projects.digital.length, 'pr')}</p>
                   <h3><Title color="#fff">Диджитал продакшн</Title></h3>
                   <a className="all-projects" href="/portfolio/design"><span>Перейти</span></a>
                 </div>
@@ -158,7 +158,7 @@ function carouselArrowClick(e) {
   } else if (dir === -1) {
     nextItem = curItem.previousElementSibling;
   }
-  if (nextItem) {
+  if (nextItem && !nextItem.classList.contains("arrow")) {
     curItem.classList.remove("active");
     nextItem.classList.add("active");
     moveCarousel(+nextItem.dataset.index);
@@ -221,7 +221,7 @@ const PortfolioCarousel = styled.div`
   position: absolute;
   left: 15rem;
   right: 0;
-  top: 25vh;
+  top: 20rem;
   padding-left: 5rem;
   white-space: nowrap;
   overflow: hidden;
@@ -239,6 +239,8 @@ const PortfolioItem = styled.div`
   display: inline-block;
   vertical-align: bottom;
   margin-right: 10vw;
+  position: relative;
+  padding-top: 30rem;
 
   .all-projects {
     padding-bottom: 1.4rem;
@@ -280,10 +282,14 @@ const PortfolioItem = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    flex-wrap: wrap;
+    position: absolute;
+    top: 0;
+    width: 100%;
 
     ${Title} {
       font-size: 5rem;
-      transition: font-size 500ms ease;
+      transition: font-size 1000ms ease;
     }
   }
 
@@ -292,6 +298,7 @@ const PortfolioItem = styled.div`
     color: #fff;
     text-transform: uppercase;
     opacity: 0;
+    width: 100%;
 
     strong {
       font-size: 3.5rem;
@@ -302,7 +309,7 @@ const PortfolioItem = styled.div`
   .image {
     width: 65vw;
     height: 30vw;
-    margin: 10rem 0 0 -3rem;
+    margin: 0 0 0 -3rem;
     background-image: url(${mountainImg});
     background-size: cover;
     background-position: center center;

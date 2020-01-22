@@ -29,10 +29,10 @@ const parallaxData_title = [
 const parallaxData_desc = [
   {
     start: typeof window === "undefined" ? 0 : window.innerHeight * 2,
-    end: typeof window === "undefined" ? 0 : window.innerHeight * 3.4,
+    end: typeof window === "undefined" ? 0 : window.innerHeight * 4,
     properties: [
       {
-        startValue: 35,
+        startValue: 45,
         endValue: 0,
         property: "translateY",
         unit: "vh"

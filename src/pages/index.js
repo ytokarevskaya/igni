@@ -29,12 +29,26 @@ function scrollController(e) {
   //   video.parentElement.classList.remove("is-blurred");
   // }
   // debugger;
-  if (document.documentElement.scrollTop >= document.body.offsetHeight - window.innerHeight * 1.2) {
+  const curPos = document.documentElement.scrollTop;
+  if (curPos >= window.sectionObjects[4].top * 0.8) {
     document.getElementById("footer-scroll-help").classList.add("is-hidden");
     document.getElementById("footer-callback-btn").classList.add("is-hidden");
   } else {
     document.getElementById("footer-scroll-help").classList.remove("is-hidden");
     document.getElementById("footer-callback-btn").classList.remove("is-hidden");
+  }
+  const menu = document.getElementById("side-menu");
+      // debugger;
+  if (menu) {
+    let activeIndex = 0;
+    for (let i = 0; i < 5; i++) {
+      const section = window.sectionObjects[i];
+      if (curPos >= section.top * 0.9 && curPos < section.bottom) {
+        activeIndex = i;
+      }
+    };
+    menu.querySelector(".active").classList.remove("active");
+    menu.children[activeIndex].classList.add("active");
   }
 }
 
@@ -56,7 +70,6 @@ const IndexPage = () => (
       <SectionEstimation id={3} active={activeSection === 3} />
       <SectionContacts id={4} active={activeSection === 4} />
     </FrontLayer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
   </Layout>
 )
 

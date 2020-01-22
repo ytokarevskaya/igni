@@ -225,9 +225,13 @@ const MainMenu = styled.div`
 `
 
 function sideMenuClick(e) {
-  const curId = document.querySelector('#side-menu .active').dataset.id;
-  const newId = e.currentTarget.dataset.id;
-  changeSection(curId, newId);
+  const menu = document.getElementById("side-menu");
+  const targetId = e.currentTarget.dataset.id;
+  const targetSection = document.querySelector("section[data-id='" + targetId + "']");
+  
+  menu.querySelector(".active").classList.remove("active");
+  menu.children[targetId].classList.add("active");
+  targetSection.scrollIntoView({behavior: "smooth", block: "end"});
 }
 
 Header.propTypes = {

@@ -31,9 +31,9 @@ class Section extends React.Component {
 
   componentDidMount() {
     if (typeof window === "undefined") return;
-    // const currentSection = window.sectionObjects[this.id];
-    // currentSection.top = currentSection.sectionRef.current.offsetTop;
-    // currentSection.bottom = currentSection.top + currentSection.sectionRef.current.offsetHeight;
+    const currentSection = window.sectionObjects[this.id];
+    currentSection.top = currentSection.sectionRef.current.offsetTop;
+    currentSection.bottom = currentSection.top + currentSection.sectionRef.current.offsetHeight;
     if (this.props.scrollControllerElements && this.props.scrollControllerElements[0]) {
       applyStyles(this.sectionRef.current, this.props.scrollControllerElements[0]);
     }

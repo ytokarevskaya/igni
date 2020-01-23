@@ -40,8 +40,8 @@ const SectionMain = (props) => {
 
   return(
   	<Section id={props.id} active={props.active} name="section-main" headerStyle="white" footerStyle="white">
-      <FrontLayer bg="rgba(120, 136, 145, 0.1)">
-        <Plx className="parallax-element" parallaxData={parallaxData} onPlxEnd={onSectionUnload} onPlxStart={onSectionLoad} animateWhenNotInViewport={true}>
+      <FrontLayer>
+        <Plx className="parallax-element" parallaxData={parallaxData} animateWhenNotInViewport={true}>
           <Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Освещая темное пространство веба</Title>
           <h1><Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="12rem" pos={["absolute", "55vh", "", "", "20rem"]} margin="-12rem 0 0 0" className="scrollController-title">Веб-студия полного цикла</Title></h1>
           <Title fz="45rem" mFz="10rem" color="#fff" mColor="#fff" className="scrollController-title" lh="0.5" pos={["absolute", "55vh", "", "", "18rem"]}>IGNI</Title>

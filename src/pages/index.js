@@ -19,15 +19,15 @@ import videoSrcWEBM from "../video/fire-1080p.webm"
 const activeSection = +getURLParameter("active") || 0;
 
 function scrollController(e) {
-  // const video = document.getElementById("bg-video");
-  // if (document.documentElement.scrollTop > window.innerHeight * 0.8) {
-  //   video.pause();
-  //   video.parentElement.classList.add("is-blurred");
-  // } else {
-  //   const video = document.getElementById("bg-video");
-  //   video.play();
-  //   video.parentElement.classList.remove("is-blurred");
-  // }
+  const video = document.getElementById("bg-video");
+  if (document.documentElement.scrollTop > window.innerHeight * 0.8) {
+    video.pause();
+    video.parentElement.classList.add("is-blurred");
+  } else {
+    const video = document.getElementById("bg-video");
+    video.play();
+    video.parentElement.classList.remove("is-blurred");
+  }
   // debugger;
   const curPos = document.documentElement.scrollTop;
   if (curPos >= window.sectionObjects[4].top * 0.8) {
@@ -63,7 +63,7 @@ const IndexPage = () => (
         </video>
       </BgVideo>
     </BackLayer>
-    <FrontLayer bg="linear-gradient(155deg,rgba(255,255,255,0.5) 22%,rgba(0, 0, 0, 0.1) 58%),linear-gradient(to bottom,rgba(42,35,42,0.15),rgba(42,35,42,0.15))" onWheel={scrollController}>
+    <FrontLayer bg="rgba(120, 136, 145, 0.1)" onWheel={scrollController}>
       <SectionMain id={0} active={activeSection === 0} />
       <SectionAbout id={1} active={activeSection === 1} />
       <SectionPortfolio id={2} active={activeSection === 2} />

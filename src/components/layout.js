@@ -1,5 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
+import styled from "styled-components"
 import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
@@ -25,8 +26,13 @@ class Layout extends React.Component {
     super(props);
     this.cursor = React.createRef();
     this.state = {
-      "cursorStyle": this.props.cursorStyle || ""
+      "cursorStyle": this.props.cursorStyle || "",
+      "loaded": false
     }
+  }
+
+  componentDidMount() {
+    this.setState({"loaded": true});
   }
 
   cursorFollow(e) {
@@ -45,14 +51,14 @@ class Layout extends React.Component {
 
   render() {
     return (
-      <main onMouseMove={(e) => this.cursorFollow(e)} style={{"overflow": "hidden"}}>
+      <SiteMain onMouseMove={(e) => this.cursorFollow(e)} className={this.state.loaded? "loaded" : ""}>
         <Header page={this.props.page} />
         <ContentLayout content={this.props.children} />
         <Footer page={this.props.page} />
         {this.props.noCursor? "" : 
           <CursorBtn className={"cursor-btn translate-xy " + this.state.cursorStyle} ref={this.cursor} />
         }
-      </main>
+      </SiteMain>
     )
   }
 }
@@ -66,5 +72,20 @@ Layout.propTypes = {
 Layout.defaultProps = {
   noCursor: false
 }
+
+const SiteMain = styled.main`
+  overflow: hidden;
+
+  .load-fadeIn {
+    opacity: 0;
+    transition: opacity 1000ms ease 2000ms;
+  }
+
+  &.loaded {
+    .load-fadeIn {
+      opacity: 1;
+    }
+  }
+`
 
 export default Layout

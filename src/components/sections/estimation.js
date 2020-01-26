@@ -74,7 +74,7 @@ const SectionEstimation = (props) => (
       </Plx>
       <Plx className="parallax-element" parallaxData={parallaxData_form} animateWhenNotInViewport={true} style={{"bottom": 0, "position": "absolute"}}>
         <EstimationCallbackFrame className="scrollController-form">
-        	<Title color="#fff" fz="2.8rem" fw="300" width="25rem">Оставьте свои контактные данные, и мы свяжемся с вами в ближайшее время</Title>
+        	<Title color="#fff" fz="2.8rem" fw="normal" width="25rem">Оставьте свои контактные данные, и мы свяжемся с вами в ближайшее время</Title>
         	<CallbackForm buttonLabel="Готово!" theme="light"/>
         </EstimationCallbackFrame>
       </Plx>

@@ -8,42 +8,6 @@ import RequestForm from "../forms/request-form"
 import { COLORS, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, InputFrame } from "../styled"
 import { applyStyles } from "../scroll-controller"
 
-const onLoadStyles = {
-  ".scrollController-title": {
-    "opacity": "1"
-  },
-  ".scrollController-block": {
-    "opacity": "1"
-  }
-}
-
-const onUnloadStyles = {
-  ".scrollController-title": {
-    "opacity": "0"
-  },
-  ".scrollController-block": {
-    "opacity": "0"
-  }
-}
-
-function onSectionLoad(section) {
-  section.style.transform = "translateY(0)";
-  section.style.opacity = "1";
-  setTimeout(() => {
-    applyStyles(section, onLoadStyles);
-  }, 1200);
-  document.getElementById("footer-scroll-help").classList.add("is-hidden");
-  document.getElementById("footer-callback-btn").classList.add("is-hidden");
-}
-
-function onSectionUnload(section) {
-  // setTimeout(() => {
-    applyStyles(section, onUnloadStyles);
-  // }, 600);
-  document.getElementById("footer-scroll-help").classList.remove("is-hidden");
-  document.getElementById("footer-callback-btn").classList.remove("is-hidden");
-}
-
 const parallaxData_title = [
   {
     start: typeof window === "undefined" ? 0 : window.innerHeight * 3.3,
@@ -140,18 +104,6 @@ const ContactsBlock = styled.div`
   padding: 0 3.5rem;
   border-left: 1px solid #fff;
 
-  &.n1 {
-  	transition-delay: 500ms;
-  }
-
-  &.n2 {
-  	transition-delay: 1000ms;
-  }
-
-  &.n3 {
-  	transition-delay: 1500ms;
-  }
-
   &:first-child {
 		border-left: unset;
   }
@@ -186,6 +138,15 @@ const ContactsBlock = styled.div`
 				line-height: 3.8rem;
 				text-align: center;
 			}
+		}
+	}
+
+	.price {
+		&::before {
+			transition: background 500ms ease;
+		}
+		&:hover::before {
+			background: ${COLORS.RED};
 		}
 	}
 `

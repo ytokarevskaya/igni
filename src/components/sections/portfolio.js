@@ -50,12 +50,12 @@ const SectionPortfolio = (props) => {
 
   const parallaxData_images = [
     {
-      start: typeof window === "undefined" ? 0 : window.innerHeight * 1.8,
-      end: typeof window === "undefined" ? 0 : window.innerHeight * 2.5,
+      start: typeof window === "undefined" ? 0 : window.innerHeight * 1.9,
+      end: typeof window === "undefined" ? 0 : window.innerHeight * 3,
       properties: [
         {
           startValue: 30,
-          endValue: 20,
+          endValue: 0,
           property: "height",
           unit: "vw"
         }
@@ -157,8 +157,8 @@ const PortfolioCarouselMenu = (props) => (
         <div className={"item" + (index === 0? " active" : "")} data-index={index} onClick={carouselItemClick}>{item}</div>
       )
     })}
-    <div onClick={carouselArrowClick} className="arrow arrow-prev icon-prev" />
-    <div onClick={carouselArrowClick} className="arrow arrow-next icon-next" />
+    <div onClick={carouselArrowClick} className="arrow arrow-prev icon-prev transition-05s" />
+    <div onClick={carouselArrowClick} className="arrow arrow-next icon-next transition-05s" />
   </PortfolioCarouselMenuStyled>
 )
 
@@ -238,6 +238,9 @@ const PortfolioCarouselMenuStyled = styled.aside`
       top: 50%;
       margin: -0.5em;
     }
+    &:hover {
+      background: ${COLORS.RED};
+    }
   }
 `
 
@@ -267,7 +270,7 @@ const PortfolioItem = styled.div`
   padding-top: 30rem;
 
   .all-projects {
-    padding-bottom: 1.4rem;
+    padding-bottom: 3.3rem;
     span {
       position: relative;
       color: #fff;
@@ -310,6 +313,7 @@ const PortfolioItem = styled.div`
     position: absolute;
     top: 0;
     width: 100%;
+    min-height: 20.5rem;
 
     ${Title} {
       font-size: 5rem;
@@ -319,6 +323,7 @@ const PortfolioItem = styled.div`
 
   .count {
     font-size: 1.6rem;
+    font-weight: normal;
     color: #fff;
     text-transform: uppercase;
     opacity: 0;

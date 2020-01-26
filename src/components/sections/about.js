@@ -35,7 +35,7 @@ const SectionAbout = (props) => {
           property: "opacity"
         },
         {
-          startValue: 40,
+          startValue: 20,
           endValue: 0,
           property: "translateY",
           unit: "vh"
@@ -47,7 +47,7 @@ const SectionAbout = (props) => {
   const parallaxData_cards = [
     {
       start: typeof window === "undefined" ? 0 : window.innerHeight * 0.3,
-      end: typeof window === "undefined" ? 0 : window.innerHeight * 1.2,
+      end: typeof window === "undefined" ? 0 : window.innerHeight * 1,
       properties: [
         {
           startValue: 0,
@@ -55,7 +55,7 @@ const SectionAbout = (props) => {
           property: "opacity"
         },
         {
-          startValue: 40,
+          startValue: 20,
           endValue: -20,
           property: "translateY",
           unit: "vh"

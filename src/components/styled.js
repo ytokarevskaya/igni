@@ -21,6 +21,7 @@ const SectionStyled = styled.section`
 		height: ${props => props.height || "100vh"};
 		transition: all 1000ms ease-in-out;
   	cursor: none;
+  	border: 1px solid red;
 
 		&.onhold {
 			cursor: none;

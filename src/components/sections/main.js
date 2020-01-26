@@ -40,11 +40,11 @@ const SectionMain = (props) => {
 
   return(
   	<Section id={props.id} active={props.active} name="section-main" headerStyle="white" footerStyle="white">
-      <FrontLayer>
-        <Plx className="parallax-element" parallaxData={parallaxData} animateWhenNotInViewport={true}>
+      <FrontLayer className="load-fadeIn">
+        <Plx className="parallax-element div_100" parallaxData={parallaxData} animateWhenNotInViewport={true}>
           <Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Освещая темное пространство веба</Title>
-          <h1><Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="12rem" pos={["absolute", "55vh", "", "", "20rem"]} margin="-12rem 0 0 0" className="scrollController-title">Веб-студия полного цикла</Title></h1>
-          <Title fz="45rem" mFz="10rem" color="#fff" mColor="#fff" className="scrollController-title" lh="0.5" pos={["absolute", "55vh", "", "", "18rem"]}>IGNI</Title>
+          <Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="12rem" pos={["absolute", "55%", "", "", "20rem"]} margin="-12rem 0 0 0" className="scrollController-title"><h1>Веб-студия полного цикла</h1></Title>
+          <Title fz="45rem" mFz="10rem" color="#fff" mColor="#fff" className="scrollController-title" lh="0.5" pos={["absolute", "55%", "", "", "18rem"]}>IGNI</Title>
           <HomeTitlePopup />
         </Plx>
           {/*<Link to="/portfolio">
@@ -67,64 +67,129 @@ class HomeTitlePopup extends React.Component {
     }
   }
 
-  openPopup() {
-    this.setState({"active": true});
-  }
-
-  closePopup() {
-    this.setState({"active": false});
+  togglePopup() {
+    if (this.state.active) {
+      this.setState({"active": false});
+    } else {
+      this.setState({"active": true});
+    }
   }
 
   render() {
     return(
       <React.Fragment>
-        <HomeTitle className={"scrollController-title" + (this.state.active? " hidden" : "")}>
-          <h2><Title fz="5rem" width="40rem" color="#fff" margin="0 0 5rem 0">Комплексные <br/>услуги по созданию <br/>и продвижению <br/>сайтов</Title></h2>
-          <PlusBtn size="3.7rem" onClick={(e) => this.openPopup(e)} />
-        </HomeTitle>
-        <HomeTitlePopupStyled className={"transition-05s translate-x" + (this.state.active? " active" : "")}>
-          <div className="content">
-            <Title fz="5rem" color="#fff" margin="0 0 3.5rem 0" lineBottom>Комплексные услуги по созданию и продвижению сайтов</Title>
-            <TextStyled>
+        <HomeTitle className={this.state.active? " active" : ""}>
+          <h2><Title fz="5rem" width="40rem" color="#fff" margin="0 0 3.5rem 0" lineBottom lineWidth="0">Комплексные <br/>услуги по созданию <br/>и продвижению <br/>сайтов</Title></h2>
+          <div className="hidden-content">
+            <TextStyled width="40rem">
               <p>Главная задача команды igni — обеспечить эффективное взаимодействие клиента и бизнеса в вебе. Чтобы достичь максимальных показателей, мы предлагаем не только маркетинговое сопровождение, но и конкретные действия по улучшению продукта.</p>
             </TextStyled>
-            <div className="content-bottom">
-              <PlusBtn size="3.7rem" onClick={(e) => this.closePopup(e)} />
-              <a href="/portfolio/"><RedButton>Портфолио</RedButton></a>
-            </div>
+            <a href="/portfolio/"><RedButton>Портфолио</RedButton></a>
           </div>
-        </HomeTitlePopupStyled>
+          <PlusBtn size="3.7rem" className="transition-05s" onClick={(e) => this.togglePopup(e)} />
+        </HomeTitle>
+        <HomeTitlePopupBg className={this.state.active? " active" : ""} />
       </React.Fragment>
     )
   }
 }
 
-const HomeTitlePopupStyled = styled.div`
+const HomeTitle = styled.div`
+  position: absolute;
+  top: 55%;
+  left: 55%;
+  margin-top: -4.5rem;
+  z-index: 6;
+  transition: transform 1000ms ease;
+
+  ${Title} {
+    &::before {
+      transition: width 500ms ease;
+    }
+  }
+
+  ${RedButton} {
+    margin: 3rem 0 4rem 0;
+  }
+
+  .hidden-content {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: all 1500ms ease;
+  }
+
+  &.active {
+    transform: translateY(-50%);
+
+    .hidden-content {
+      max-height: 100rem;
+      opacity: 1;
+    }
+
+    ${Title} {
+      &::before {
+        width: 7rem;
+      }
+    }
+
+    ${PlusBtn} {
+      transform: rotate(-45deg);
+    }
+  }
+`
+
+const HomeTitlePopupBg = styled.div`
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 60%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 25vw;
+  left: 55%;
+  margin-left: -8rem;
+  width: 56rem;
   background: rgba(5, 11, 31, 0.25);
-  padding: 0 8rem;
   z-index: 5;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+  transition: all 800ms ease;
 
   &.active {
     opacity: 1;
     visibility: visible;
     pointer-events: all;
+    transition-delay: 800ms;
+  }
+`
+
+const HomeTitlePopupStyled = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 55%;
+  margin-left: -8rem;
+  width: 56rem;
+  background: rgba(5, 11, 31, 0.25);
+  z-index: 5;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 800ms ease;
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+    transition-delay: 1000ms;
   }
 
-  .content-bottom {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 6rem;
+  .content {
+    position: absolute;
+    top: 55%;
+    left: 0;
+    width: 100%;
+    padding: 0 8rem;
+    transform: translateY(-50%);
+    margin-top: -10rem;
   }
 
   ${PlusBtn} {
@@ -178,17 +243,6 @@ const PortfolioBtn = styled.div`
     width: 15rem;
     height: 30rem;
     padding: 3rem;
-  }
-`
-
-const HomeTitle = styled.div`
-  position: absolute;
-  top: 55%;
-  left: 55%;
-  margin-top: -4.5rem;
-
-  &.hidden {
-    opacity: 0!important;
   }
 `
 

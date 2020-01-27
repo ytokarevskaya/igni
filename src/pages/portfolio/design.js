@@ -50,7 +50,7 @@ const PortfolioDesignPage = (props) => {
 	          </ProjectsCarousel>
 						<PortfolioDesignTitle>
 		          <Title fz="5rem" color="#fff" lineBottom lineBg="#fff" lineWidth="3.3rem">Дизайн</Title>
-		          <TextStyled color="#fff" width="18rem" margin="3.5rem 0">сделайте первое впечатление клиента незабываемым</TextStyled>
+		          <TextStyled color="#fff" width="18rem" margin="3.5rem 0">Сделайте первое впечатление клиента незабываемым</TextStyled>
 	          </PortfolioDesignTitle>
 	          <ContentPart>
 	          	<Title color={COLORS.BLACK}>Статистика</Title>

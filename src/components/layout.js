@@ -33,6 +33,7 @@ class Layout extends React.Component {
 
   componentDidMount() {
     this.setState({"loaded": true});
+    document.body.classList.add(this.props.page);
   }
 
   cursorFollow(e) {

@@ -42,7 +42,7 @@ function checkScroll() {
     let activeIndex = 0;
     for (let i = 0; i < 5; i++) {
       const section = window.sectionObjects[i];
-      if (curPos >= section.top * 0.9 && curPos < section.bottom) {
+      if (section && curPos >= section.top * 0.9 && curPos < section.bottom) {
         activeIndex = i;
       }
     };

@@ -42,8 +42,10 @@ class Section extends React.Component {
     if (this.props.active) {
       window.headerObj.setState({"headerStyle": this.props.headerStyle});
       window.footerObj.setState({"footerStyle": this.props.footerStyle});
-      currentSection.sectionRef.current.scrollIntoView({behavior: "smooth", block: "end"});
-      setTimeout(() => { checkScroll(); }, 500);
+      if (document.body.classList.contains("home")) {
+        currentSection.sectionRef.current.scrollIntoView({behavior: "smooth", block: "end"});
+        setTimeout(() => { checkScroll(); }, 500);
+      }
       if (sectionMenu) {
         sectionMenu.children[this.id].classList.add("active");
       }

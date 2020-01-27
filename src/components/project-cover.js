@@ -2,16 +2,22 @@ import React from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
 
-import { COLORS, Title, TextStyled } from "./styled"
+import { COLORS, Title, TextStyled, BgVideo } from "./styled"
 
 const ProjectCover = (props) => {
 	const isCarousel = props.prevSlide && props.nextSlide;
 	return (
 		<ProjectStyled data-index={props.index} className={"portfolio-item" + (props.state.active? " is-active" : "") + (props.state.next? " is-next" : "")} bg={props.project.backgroundColor} bgImg={props.project.backgroundImg? props.project.backgroundImg.file.url : ""} bgSize={props.project.backgroundMode === "Contain"? props.project.backgroundSize : ""} static={!isCarousel} category={props.project.category.slug}>
-			{props.project.category.slug === "digital"?
-				<a className="full-video-link div_100" href={"/portfolio/" + props.project.category.slug + "/" + props.project.slug} />
-			:
-				<a className="full-project-link div_100" href={"/portfolio/" + props.project.category.slug + "/" + props.project.slug} />
+			{props.project.category.slug === "design"?
+				<a className="full-project-link div_100" href={"/portfolio/" + props.project.category.slug + "/" + props.project.slug} /> : ""
+			}
+			{props.video?
+				<BgVideo>
+	        <video autoPlay={props.index === 0} className="project-video translate-xy" loop={true}>
+	          <source src={props.video} type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
+	        </video>
+	      </BgVideo>
+				: ""
 			}
 			{isCarousel && props.index > 0?
 				<div onClick={props.prevSlide} className="back-btn icon-arrow-bold translate-y" />
@@ -39,7 +45,8 @@ ProjectCover.propTypes = {
   project: PropTypes.object.isRequired,
   state: PropTypes.object,
   prevSlide: PropTypes.func,
-  nextSlide: PropTypes.func
+  nextSlide: PropTypes.func,
+  video: PropTypes.string
 }
 
 ProjectCover.defaultProps = {
@@ -164,6 +171,16 @@ const ProjectStyled = styled.div`
 		left: 0;
 		top: 50%;
 		padding: 1.8rem 2.5rem;
+	}
+
+	${BgVideo} {
+		width: 100%;
+		height: 100%;
+		
+		video {
+			width: 100%;
+			height: auto;
+		}
 	}
 `
 

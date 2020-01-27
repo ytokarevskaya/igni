@@ -270,7 +270,10 @@ const PortfolioItem = styled.div`
   padding-top: 30rem;
 
   .all-projects {
-    padding-bottom: 3.3rem;
+    position: absolute;
+    bottom: 6.3rem;
+    right: 0;
+
     span {
       position: relative;
       color: #fff;

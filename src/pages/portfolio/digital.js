@@ -30,7 +30,7 @@ const PortfolioDigitalPage = (props) => {
   });
 
 	return (
-		<Layout page="portfolio-digital" menuBtnStyle="right-corner" orderBtnStyle="right-corner">
+		<Layout page="portfolio-digital" menuBtnStyle="right-corner" orderBtnStyle="right-corner" cursorStyle="dark">
 			<SEO title="IGNI | Портфолио" />
 			<Section id={0} active={true} name="section-portfolio" headerStyle="white" footerStyle="white">
 				<FrontLayer bg={COLORS.LIGHT_BLACK}>
@@ -44,8 +44,8 @@ const PortfolioDigitalPage = (props) => {
               <ArrowDown src={arrowDown} className="translate-y" />
 	          </ProjectsCarousel>
 						<PortfolioDesignTitle>
-		          <Title fz="5rem" color="#fff" lineBottom lineBg="#fff" width="25rem">Фото и видео продакшн</Title>
-		          <TextStyled color="#fff" width="18rem" margin="3.5rem 0">Визуализируйте ваш бизнес</TextStyled>
+		          <Title fz="5rem" color="#fff" lineBottom lineBg="#fff" lineWidth="3.5rem" width="25rem">Фото и видео продакшн</Title>
+		          <TextStyled color="#fff" width="25rem" margin="3.5rem 0">Визуализируйте ваш бизнес</TextStyled>
 	          </PortfolioDesignTitle>
 	          <ContentPart>
 	          	<Title color={COLORS.BLACK}>Статистика</Title>
@@ -75,7 +75,7 @@ const PortfolioDigitalPage = (props) => {
 	          </ContentPart>
 	          <ContentPart flex>
 	          	<ContentColumn padding="0 6rem 0 0" width="45rem">
-	          		<Title color={COLORS.BLACK} lineBottom lineBg={COLORS.BLACK}>Приступим к работе над вашим проектом?</Title>
+	          		<Title color={COLORS.BLACK} lineBottom lineBg={COLORS.BLACK} lineWidth="3.5rem">Приступим к работе над вашим проектом?</Title>
 	          	</ContentColumn>
 	          	<ContentColumn width="35rem">
 	          		<TextStyled color={COLORS.BLACK}>Заполните бриф: расскажите о вашем бизнесе, задачах и сроках — и мы свяжемся с вами для обсуждения дальнейшего сотрудничества.</TextStyled>
@@ -103,7 +103,7 @@ const ContentPartRequestForm = styled(ContentPart)`
 
 const ArrowDown = styled.img`
 	position: absolute;
-	left: 22rem;
+	left: 23.5rem;
 	bottom: 2.5rem;
 	height: 9rem;
 `
@@ -135,6 +135,7 @@ class Project extends React.Component {
   		if (projectRefs[newIndex + 1]) {
   			projectRefs[newIndex + 1].setState({"next": true});
   		}
+  		handleVideos(curItem, curItem.nextElementSibling);
   	}
   }
 
@@ -150,20 +151,29 @@ class Project extends React.Component {
   		projectRefs[newIndex].setState({"next": false});
   		projectRefs[newIndex].setState({"active": true});
   		projectRefs[curIndex].setState({"next": true});
+  		handleVideos(curItem, curItem.previousElementSibling);
   	}
   }
 
   render() {
   	return (
-  		<ProjectCover index={this.props.index} project={this.props.project} state={this.state} prevSlide={this.prevSlide} nextSlide={this.nextSlide} />
+  		<ProjectCover index={this.props.index} project={this.props.project} state={this.state} prevSlide={this.prevSlide} nextSlide={this.nextSlide} video={this.props.project.videoFile.file.url} />
   	)
   }
+}
+
+function handleVideos(curProject, nextProject) {
+	const curVideo = curProject.querySelector(".project-video");
+	const newVideo = nextProject.querySelector(".project-video");
+	if (curVideo) curVideo.pause();
+	if (newVideo) newVideo.play();
 }
 
 const ProjectsCarousel = styled.div`
 	width: 100%;
 	height: 100vh;
 	position: relative;
+  overflow: hidden;
 `
 
 export default PortfolioDigitalPage

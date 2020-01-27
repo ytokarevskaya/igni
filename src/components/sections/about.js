@@ -93,8 +93,8 @@ const SectionAbout = (props) => {
         </Plx>
         <Plx className="parallax-element" parallaxData={parallaxData_cards} animateWhenNotInViewport={true}>
           <AboutItems className="scrollController-cards">
-          {categories.map((node) => (
-              <AboutItem key={node.id} id={node.id} title={node.title} content={node.description} bg={node.background.file.url} slug={node.slug} />
+          {categories.map((node, index) => (
+              <AboutItem key={node.id} id={index} title={node.title} content={node.description} bg={node.background.file.url} slug={node.slug} />
             ))
           }
           </AboutItems>
@@ -130,7 +130,7 @@ class AboutItem extends React.Component {
     {/*<AboutItemStyled className="transition-05s item" data-id={this.props.id} onMouseEnter={(e) => this.moveBtn(e)} onMouseMove={(e) => this.moveBtn(e)} onMouseLeave={(e) => this.returnBtn(e)}>*/}
     return (
       <a href={"/portfolio/" + this.props.slug}>
-        <AboutItemStyled className="transition-05s item" data-id={this.props.id} bgImg={this.props.bg}>
+        <AboutItemStyled className={"transition-05s item n" + this.props.id} data-id={this.props.id} bgImg={this.props.bg}>
           <div className="bg transition-05s" />
           <h3><Title color={COLORS.BLACK}>{this.props.title}</Title></h3>
           <div>
@@ -197,6 +197,12 @@ const AboutItemStyled = styled.div`
     position: absolute;
     left: 3.5rem;
     bottom: 3.5rem;
+  }
+
+  &.n2 {
+    ${Title} {
+      width: 12rem;
+    }
   }
 `
 

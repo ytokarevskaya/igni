@@ -40,6 +40,11 @@ export const useProjectsData = () => {
               slug
               subcategory
               theme
+              videoFile {
+                file {
+                  url
+                }
+              }
             }
           }
         }

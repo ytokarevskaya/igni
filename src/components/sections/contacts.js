@@ -10,7 +10,7 @@ import { applyStyles } from "../scroll-controller"
 
 const parallaxData_title = [
   {
-    start: typeof window === "undefined" ? 0 : window.innerHeight * 3.3,
+    start: typeof window === "undefined" ? 0 : window.innerHeight * 3,
     end: typeof window === "undefined" ? 0 : window.innerHeight * 3.8,
     properties: [
       {

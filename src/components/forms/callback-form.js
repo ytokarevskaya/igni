@@ -30,7 +30,8 @@ class CallbackForm extends React.Component {
             <MaskedInput className="required phone_input" mask="+7 (111) 111-11-11" type="text" name="phone" autoComplete="off" onChange={this._onChange}/>
           </InputFrame>
           <button className="submit-button transition-03s" type="submit">{this.props.buttonLabel || "Отправить бриф"}</button>
-          <FileInput inputStyle="horizontal icon-square" inputText={<div>Вы можете приложить <strong>готовый бриф</strong></div>} pos={["relative", "5rem", "", "", ""]} />
+          {this.props.noFileInput?
+            "" : <FileInput inputStyle="horizontal icon-square" inputText={<div>Вы можете приложить <strong>готовый бриф</strong></div>} pos={["relative", "5rem", "", "", ""]} />}
         </div>
       </Form>
     )

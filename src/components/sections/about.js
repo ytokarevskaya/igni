@@ -146,14 +146,13 @@ class AboutItem extends React.Component {
 const AboutItems = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  align-items: flex-start;
+  align-items: center;
   position: absolute;
   top: 35rem;
   right: 15vw;  
 
   > * {
     position: relative;
-    height: calc(100% - 5rem);
     &:nth-child(even) {
       top: 20rem;
     }
@@ -164,7 +163,6 @@ const AboutItemStyled = styled.div`
   position: relative;
   color: ${COLORS.BLACK};
   width: 30rem;
-  height: 100%;
   padding: 5rem 3.5rem 6rem 3.5rem;
   margin: 0 5rem 5rem 0;
   border-radius: 3px;

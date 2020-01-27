@@ -32,7 +32,7 @@ const PortfolioDesignPage = (props) => {
   });
 
 	return (
-		<Layout page="portfolio-design">
+		<Layout page="portfolio-design" menuBtnStyle="right-corner" orderBtnStyle="right-corner">
 			<SEO title="IGNI | Портфолио" />
 			<Section id={0} active={true} name="section-portfolio" headerStyle="white" footerStyle="white">
 				<FrontLayer bg={COLORS.LIGHT_BLACK}>
@@ -79,36 +79,46 @@ const PortfolioDesignPage = (props) => {
 	          </ContentPart>
 	          <ContentPart bg={COLORS.LIGHT_BLACK} color="#fff" flex>
 	          	<ContentColumn width="30%">
-	          		<Title color="#fff" lineBottom lineBg="#fff">Приступим к работе над вашим проектом?</Title>
+	          		<Title color="#fff" lineBottom lineBg="#fff" lineWidth="3.5rem">Приступим к работе над вашим проектом?</Title>
 	          	</ContentColumn>
 	          	<ContentColumn width="70%">
-	          		<CallbackForm />
+	          		<CallbackForm noFileInput buttonLabel="Готово!" />
 	          	</ContentColumn>
 	          </ContentPart>
 	          <ContentPart>
 	          	<ContentColumn width="30%">
-	          		<Title color={COLORS.BLACK} lineBottom lineBg={COLORS.BLACK}>Почему дизайн имеет значение?</Title>
-	          		<TextStyled color={COLORS.BLACK} margin="3.5rem 0">В нашем блоге вы найдете серию статей, посвященных веб-дизайну. Вы узнаете, зачем делать редизайн, какие сайты дают наибольшую конверсию, какие тренды сейчас наиболее актуальны и многое другое</TextStyled>
+	          		<Title color={COLORS.BLACK} lineBottom lineBg={COLORS.BLACK} lineWidth="3.5rem">Почему дизайн имеет значение?</Title>
+	          		<TextStyled color={COLORS.BLACK} margin="3.5rem 0">В нашем блоге вы найдете серию статей, посвященных веб-дизайну. Вы узнаете, зачем делать редизайн, какие сайты дают наибольшую конверсию, какие тренды сейчас наиболее актуальны и многое другое.</TextStyled>
 	          		<RedButton>В блог</RedButton>
 	          	</ContentColumn>
 	          </ContentPart>
 	          <ContentPart flex>
 	          	<ContentColumn padding="0 6rem 0 0" width="45rem">
-	          		<Title color={COLORS.BLACK} lineBottom lineBg={COLORS.BLACK}>Приступим к работе над вашим проектом?</Title>
+	          		<Title color={COLORS.BLACK} lineBottom lineBg={COLORS.BLACK} lineWidth="3.5rem">Приступим к работе над вашим проектом?</Title>
 	          	</ContentColumn>
 	          	<ContentColumn width="35rem">
 	          		<TextStyled color={COLORS.BLACK}>Заполните бриф — расскажите о вашем бизнесе, задачах и сроках — и мы свяжемся с вами для дальнейшего обсуждения сотрудничества. </TextStyled>
 	          	</ContentColumn>
 	          </ContentPart>
-	          <ContentPart padding="0 0 0 24rem">
-	          	<RequestForm />
-	          </ContentPart>
+	          <ContentPartRequestForm padding="0 0 0 24rem">
+	          	<RequestForm inputStyle="horizontal icon-square" pos={["relative", "", "", "", ""]} />
+	          </ContentPartRequestForm>
 	        </Scroll>
 				</FrontLayer>
 			</Section>
 		</Layout>
 	)
 }
+
+const ContentPartRequestForm = styled(ContentPart)`
+	.form-bottom {
+		justify-content: space-between;
+	}
+
+	.submit-button {
+		order: 1;
+	}
+`
 
 const ProjectsSlider = styled.div`
 	position: absolute;
@@ -119,7 +129,7 @@ const ProjectsSlider = styled.div`
 
 const ArrowDown = styled.img`
 	position: absolute;
-	left: 22rem;
+	left: 23.5rem;
 	bottom: 2.5rem;
 	height: 9rem;
 `

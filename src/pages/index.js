@@ -17,7 +17,7 @@ import videoSrcWEBM from "../video/fire-1080p.webm"
 
 const activeSection = +getURLParameter("active") || 0;
 
-function scrollController(e) {
+function checkScroll() {
   const video = document.getElementById("bg-video");
   if (document.documentElement.scrollTop > window.innerHeight * 0.8) {
     video.pause();
@@ -62,7 +62,7 @@ const IndexPage = () => (
         </video>
       </BgVideo>
     </BackLayer>
-    <FrontLayer bg="rgba(120, 136, 145, 0.1)" onWheel={scrollController}>
+    <FrontLayer bg="rgba(120, 136, 145, 0.1)" onWheel={checkScroll}>
       <SectionMain id={0} active={activeSection === 0} />
       <SectionAbout id={1} active={activeSection === 1} />
       <SectionPortfolio id={2} active={activeSection === 2} />
@@ -73,3 +73,5 @@ const IndexPage = () => (
 )
 
 export default IndexPage
+
+export { checkScroll }

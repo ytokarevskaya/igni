@@ -14,7 +14,7 @@ import iconIdea from "../../images/idea.svg"
 
 const parallaxData_title = [
   {
-    start: typeof window === "undefined" ? 0 : window.innerHeight * 2.3,
+    start: typeof window === "undefined" ? 0 : window.innerHeight * 2,
     end: typeof window === "undefined" ? 0 : window.innerHeight * 2.8,
     properties: [
       {
@@ -28,12 +28,12 @@ const parallaxData_title = [
 
 const parallaxData_desc = [
   {
-    start: typeof window === "undefined" ? 0 : window.innerHeight * 2,
+    start: typeof window === "undefined" ? 0 : window.innerHeight * 1.9,
     end: typeof window === "undefined" ? 0 : window.innerHeight * 4,
     properties: [
       {
         startValue: 45,
-        endValue: 0,
+        endValue: -10,
         property: "translateY",
         unit: "vh"
       }
@@ -43,11 +43,11 @@ const parallaxData_desc = [
 
 const parallaxData_form = [
   {
-    start: typeof window === "undefined" ? 0 : window.innerHeight * 2.2,
+    start: typeof window === "undefined" ? 0 : window.innerHeight * 2,
     end: typeof window === "undefined" ? 0 : window.innerHeight * 3.1,
     properties: [
       {
-        startValue: 40,
+        startValue: 60,
         endValue: 0,
         property: "translateY",
         unit: "vh"
@@ -66,7 +66,7 @@ const SectionEstimation = (props) => (
 	<Section id={props.id} active={props.active} name="section-estimation" headerStyle="white" footerStyle="white">
     <FrontLayer>
       <Plx className="parallax-element" parallaxData={parallaxData_title} animateWhenNotInViewport={true}>
-      	<Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Наше предложение</Title>
+      	<Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "15rem", "", "", "20rem"]} className="scrollController-title">Наше предложение</Title>
         <EstimationTitle className="scrollController-title">
           <Title fz="5rem" color="#fff" width="40rem" margin="0 0 3.5rem 0" lineBottom>Получите бесплатную оценку вашего сайта от команды igni</Title>
           <TextStyled width="40rem" color="#fff">Перед началом сотрудничества мы бесплатно проведем краткий маркетинговый аудит вашего бизнеса и предложим комплекс мер по увеличению конверсии.</TextStyled>
@@ -75,7 +75,7 @@ const SectionEstimation = (props) => (
       <Plx className="parallax-element" parallaxData={parallaxData_form} animateWhenNotInViewport={true} style={{"bottom": 0, "position": "absolute"}}>
         <EstimationCallbackFrame className="scrollController-form">
         	<Title color="#fff" fz="2.8rem" fw="normal" width="25rem">Оставьте свои контактные данные, и мы свяжемся с вами в ближайшее время</Title>
-        	<CallbackForm buttonLabel="Готово!" theme="light"/>
+        	<CallbackForm buttonLabel="Готово!" theme="light" noFileInput/>
         </EstimationCallbackFrame>
       </Plx>
       <Plx className="parallax-element" parallaxData={parallaxData_desc} animateWhenNotInViewport={true}>
@@ -101,7 +101,7 @@ const SectionEstimation = (props) => (
 const EstimationCallbackFrame = styled.div`
 	position: absolute;
 	left: 60rem;
-	bottom: 12rem;
+	bottom: 7rem;
   margin-left: 6vw;
 
   ${Title} {
@@ -146,7 +146,7 @@ const EstimationDetails = styled.div`
 const EstimationTitle = styled.div`
 	position: absolute;
   left: 20rem;
-  top: 45vh;
+  top: 35rem;
   z-index: 1;
 `
 

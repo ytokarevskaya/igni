@@ -37,12 +37,13 @@ class RequestForm extends React.Component {
 		  			<input className="company_input" type="text" name="company" autoComplete="off" />
 		  		</InputFrame>
 		  		<InputFrame width="100%">
-		  			<textarea className="task_input" placeholder="Задача"></textarea>
+		  			<textarea className="task_input" placeholder="Описание"></textarea>
 		  		</InputFrame>
 				</div>
 				<div className="form-bottom">
-					<button className="submit-button transition-03s" type="submit">Отправить бриф</button>
-					<FileInput inputStyle={this.props.inputStyle} inputText={this.props.inputText} pos={this.props.pos} />
+					<button className="submit-button transition-03s" type="submit">{this.props.buttonLabel || "Оставить заявку"}</button>
+					{this.props.noFileInput? "" : 
+					<FileInput inputStyle={this.props.inputStyle} inputText={this.props.inputText} pos={this.props.pos} />}
 				</div>
 			</Form>
 		)

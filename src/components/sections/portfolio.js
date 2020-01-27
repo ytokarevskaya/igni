@@ -50,8 +50,8 @@ const SectionPortfolio = (props) => {
 
   const parallaxData_images = [
     {
-      start: typeof window === "undefined" ? 0 : window.innerHeight * 1.9,
-      end: typeof window === "undefined" ? 0 : window.innerHeight * 3,
+      start: typeof window === "undefined" ? 0 : window.innerHeight * 2,
+      end: typeof window === "undefined" ? 0 : window.innerHeight * 2.4,
       properties: [
         {
           startValue: 30,
@@ -104,15 +104,15 @@ const SectionPortfolio = (props) => {
   	<Section id={props.id} active={props.active} name="section-portfolio" headerStyle="white" footerStyle="white">
       <FrontLayer>
         <Plx className="parallax-element" parallaxData={parallaxData_title} animateWhenNotInViewport={true}>
-          <h2><Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "12rem", "", "", "20rem"]} className="scrollController-title">Нашe портфолио</Title></h2>
+          <h2><Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "12rem", "", "", "20rem"]}>Нашe портфолио</Title></h2>
           <PortfolioCarouselMenu id="portfolio-carousel-menu" items={["Дизайн", "Контент", "Маркетинг и реклама", "Диджитал продакшн"]} />
         </Plx>
         <Plx className="parallax-element" parallaxData={parallaxData_cards} animateWhenNotInViewport={true}>
-          <PortfolioCarousel id="portfolio-carousel" className="transition-05s scrollController-carousel">
+          <PortfolioCarousel id="portfolio-carousel" className="transition-05s">
             <div className="carousel-content">
               <PortfolioItem className="carousel-item active">
                 <div className="header">
-                  <p className="count transition-05s"><strong className="ff-bebas">{projects.design.length}</strong> {'проект' + wordEnd(projects.design.length, 'pr')}</p>
+                  <p className="count transition-05s ff-bebas"><strong>{projects.design.length}</strong> {'проект' + wordEnd(projects.design.length, 'pr')}</p>
                   <h3><Title color="#fff">Дизайн</Title></h3>
                   <a className="all-projects" href="/portfolio/design"><span>Перейти</span></a>
                 </div>
@@ -120,7 +120,7 @@ const SectionPortfolio = (props) => {
               </PortfolioItem>
               <PortfolioItem className="carousel-item">
                 <div className="header">
-                  <p className="count transition-05s"><strong className="ff-bebas">{projects.content.length}</strong> {'проект' + wordEnd(projects.content.length, 'pr')}</p>
+                  <p className="count transition-05s ff-bebas"><strong>{projects.content.length}</strong> {'проект' + wordEnd(projects.content.length, 'pr')}</p>
                   <h3><Title color="#fff">Контент</Title></h3>
                   <a className="all-projects" href="/portfolio/content"><span>Перейти</span></a>
                 </div>
@@ -128,7 +128,7 @@ const SectionPortfolio = (props) => {
               </PortfolioItem>
               <PortfolioItem className="carousel-item">
                 <div className="header">
-                  <p className="count transition-05s"><strong className="ff-bebas">{projects.marketing.length}</strong> {'проект' + wordEnd(projects.marketing.length, 'pr')}</p>
+                  <p className="count transition-05s ff-bebas"><strong>{projects.marketing.length}</strong> {'проект' + wordEnd(projects.marketing.length, 'pr')}</p>
                   <h3><Title color="#fff">Маркетинг и реклама</Title></h3>
                   <a className="all-projects" href="/portfolio/marketing"><span>Перейти</span></a>
                 </div>
@@ -136,7 +136,7 @@ const SectionPortfolio = (props) => {
               </PortfolioItem>
               <PortfolioItem className="carousel-item">
                 <div className="header">
-                  <p className="count transition-05s"><strong className="ff-bebas">{projects.digital.length}</strong> {'проект' + wordEnd(projects.digital.length, 'pr')}</p>
+                  <p className="count transition-05s ff-bebas"><strong>{projects.digital.length}</strong> {'проект' + wordEnd(projects.digital.length, 'pr')}</p>
                   <h3><Title color="#fff">Диджитал продакшн</Title></h3>
                   <a className="all-projects" href="/portfolio/digital"><span>Перейти</span></a>
                 </div>
@@ -154,7 +154,7 @@ const PortfolioCarouselMenu = (props) => (
   <PortfolioCarouselMenuStyled className="scrollController-menu">
     {props.items.map((item, index) => {
       return (
-        <div className={"item" + (index === 0? " active" : "")} data-index={index} onClick={carouselItemClick}>{item}</div>
+        <div key={index} className={"item" + (index === 0? " active" : "")} data-index={index} onClick={carouselItemClick}>{item}</div>
       )
     })}
     <div onClick={carouselArrowClick} className="arrow arrow-prev icon-prev transition-05s" />

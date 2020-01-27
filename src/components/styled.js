@@ -511,7 +511,7 @@ const BgVideo = styled.div`
 	}
 
   &.is-blurred {
-  	filter: blur(5px);
+  	filter: blur(6px);
   	&::before {
   		background: rgba(5, 11, 31, 0.25);
   	}

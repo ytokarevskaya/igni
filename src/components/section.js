@@ -4,6 +4,7 @@ import styled from "styled-components"
 
 import { SectionStyled, PulseBtn } from "./styled"
 import { applyStyles } from "./scroll-controller"
+import { checkScroll } from "../pages/index"
 
 if (typeof window !== "undefined") window.sectionObjects = {};
 
@@ -42,6 +43,7 @@ class Section extends React.Component {
       window.headerObj.setState({"headerStyle": this.props.headerStyle});
       window.footerObj.setState({"footerStyle": this.props.footerStyle});
       currentSection.sectionRef.current.scrollIntoView({behavior: "smooth", block: "end"});
+      setTimeout(() => { checkScroll(); }, 500);
       if (sectionMenu) {
         sectionMenu.children[this.id].classList.add("active");
       }
@@ -50,7 +52,7 @@ class Section extends React.Component {
 
   nextSection() {
     const nextSectionId = this.id + 1;
-    changeSection(this.id, nextSectionId)
+    changeSection(this.id, nextSectionId);
   }
 
   render() {

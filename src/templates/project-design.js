@@ -96,14 +96,14 @@ const ProjectPage = ({ data }) => {
 	};
 
 	return (
-	  <Layout page="project">
+	  <Layout page="project" menuBtnStyle="right-corner" orderBtnStyle="right-corner">
 	    <SEO title="IGNI | Веб-студия полного цикла" />
 		    <Section id={0} active={true} name="section-project" headerStyle="white" footerStyle="white">
 		    	<FrontLayer bg={project.backgroundColor}>
 			    	<Scroll overflowLimit={1} width="100%" pos={["absolute", "0", "0", "0", "0"]}>
 			    		<CategoryTitle>
-			          <Title fz="5rem" color="#fff" lineBottom lineBg="#fff">Дизайн</Title>
-			          <TextStyled color="#fff" width="18rem" margin="3.5rem 0">сделайте первое впечатление клиента незабываемым</TextStyled>
+			          <Title fz="5rem" color="#fff" lineBottom lineBg="#fff" lineWidth="3.5rem">Дизайн</Title>
+			          <TextStyled color="#fff" width="18rem" margin="3.5rem 0">Сделайте первое впечатление клиента незабываемым</TextStyled>
 		          </CategoryTitle>
 			      	<ProjectCover index={0} project={project} />
 			      	<ContentPart bg="transparent" padding="10rem 20%">
@@ -153,15 +153,15 @@ const ProjectPage = ({ data }) => {
 			      	</ContentPart>
 			      	<ContentPart bg="transparent" flex>
 		          	<ContentColumn padding="0 6rem 0 0" width="45rem">
-		          		<Title color="#fff" lineBottom lineBg="#fff">Приступим к работе над вашим проектом?</Title>
+		          		<Title color="#fff" lineBottom lineBg="#fff" lineWidth="3.5rem">Приступим к работе над вашим проектом?</Title>
 		          	</ContentColumn>
 		          	<ContentColumn width="35rem">
-		          		<TextStyled color="#fff">Заполните бриф — расскажите о вашем бизнесе, задачах и сроках — и мы свяжемся с вами для дальнейшего обсуждения сотрудничества. </TextStyled>
+		          		<TextStyled color="#fff">Заполните бриф: расскажите о вашем бизнесе, задачах и сроках — и мы свяжемся с вами для обсуждения дальнейшего сотрудничества.</TextStyled>
 		          	</ContentColumn>
 		          </ContentPart>
-		          <ContentPart bg="transparent" padding="0 0 0 24rem">
-		          	<RequestForm />
-		          </ContentPart>
+		          <ContentPartRequestForm bg="transparent" padding="0 0 0 24rem">
+		          	<RequestForm inputStyle="horizontal icon-square" pos={["relative", "", "", "", ""]} buttonLabel="Отправить" />
+		          </ContentPartRequestForm>
 			      </Scroll>
 		      </FrontLayer>
 	      </Section>
@@ -172,7 +172,7 @@ const ProjectPage = ({ data }) => {
 const MoreProjects = (props) => {
 	return (
 		<MoreProjectsCarousel id="more-projects-carousel">
-			<div className="carousel-content transition-05s">
+			<div className="carousel-content">
 				{props.projects.map((item, index) => {
 					return (
 						<MoreProjectsCarouselItem key={item.id} className={index === 0? "active transition-05s" : ""} bg={item.backgroundColor} bgImg={item.backgroundImg? item.backgroundImg.file.url : ""} bgSize={item.backgroundMode === "Contain"? item.backgroundSize : ""} theme={item.theme}>
@@ -292,6 +292,7 @@ const MoreProjectsCarousel = styled.div`
 		height: 100%;
 		display: flex;
 		flex-wrap: nowrap;
+		transition: all 1000ms ease;
 	}
 `
 
@@ -336,7 +337,7 @@ const ProjectContent = styled.div`
 	h6 {
 		font-size: 1.9rem;
 		display: inline-block;
-		padding: 5rem 3rem 5rem 0;
+		padding: 7rem 3rem 7rem 0;
 		width: 35%;
 		vertical-align: top;
 	}
@@ -363,6 +364,16 @@ const ProjectContent = styled.div`
 
 	img {
 		margin: 1.8rem 0;
+	}
+`
+
+const ContentPartRequestForm = styled(ContentPart)`
+	.form-bottom {
+		justify-content: space-between;
+	}
+
+	.submit-button {
+		order: 1;
 	}
 `
 

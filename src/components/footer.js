@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 
 import { PulseBtn, COLORS } from "./styled"
+import { checkScroll } from "../pages/index"
 
 class Footer extends React.Component {
 	constructor(props) {
@@ -12,6 +13,16 @@ class Footer extends React.Component {
 		}
 
 		if (typeof window !== "undefined") window.footerObj = this;
+	}
+
+	orderBtnClick(e) {
+		e.preventDefault();
+		if (this.props.page === "home") {
+			window.sectionObjects[4].sectionRef.current.scrollIntoView({behavior: "smooth", block: "end"});
+			setTimeout(() => { checkScroll(); }, 500);
+		} else {
+			document.location.href = e.target.attr.href;
+		}
 	}
 
 	render() {
@@ -33,8 +44,8 @@ class Footer extends React.Component {
 						+<span className="text">Удерживайте</span>
 					</PulseBtn>*/}
 				</BottomMenu>
-				<ScrollHelp className="translate-x" id="footer-scroll-help">Скролл</ScrollHelp>
-				<OrderBtn href="/?active=4" id="footer-callback-btn" className={this.props.orderBtnStyle}>
+				{this.props.page === "home"? <ScrollHelp className="translate-x" id="footer-scroll-help">Скролл</ScrollHelp> : ""}
+				<OrderBtn href="/?active=4" onClick={(e) => this.orderBtnClick(e)} id="footer-callback-btn" className={this.props.orderBtnStyle}>
           <div className="icon icon-pen" />
           <div className="title">Оставить заявку</div>
         </OrderBtn>

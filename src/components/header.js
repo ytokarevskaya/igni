@@ -5,6 +5,7 @@ import { Link } from "gatsby"
 
 import { COLORS, CursorBtn, Title } from "./styled"
 import { changeSection } from "./section"
+import { checkScroll } from "../pages/index"
 
 import logoLight from "../images/logo-light.svg"
 import logoWhite from "../images/logo-white.svg"
@@ -233,6 +234,7 @@ function sideMenuClick(e) {
   menu.querySelector(".active").classList.remove("active");
   menu.children[targetId].classList.add("active");
   targetSection.scrollIntoView({behavior: "smooth", block: "end"});
+  setTimeout(() => { checkScroll(); }, 500);
 }
 
 Header.propTypes = {
@@ -370,6 +372,12 @@ const MenuBtn = styled.div`
     }
   }
 
+  ${HeaderStyled}.white & {
+    .burger div {
+      background: ${COLORS.BLACK};
+    }
+  }
+
   &.right-corner {
     width: 10rem;
     height: 10rem;
@@ -379,10 +387,6 @@ const MenuBtn = styled.div`
     .burger {
       bottom: auto;
       top: 50%;
-
-      div {
-        background: #fff;
-      }
     }
 
     .title {

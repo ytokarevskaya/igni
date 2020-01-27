@@ -30,7 +30,7 @@ const PortfolioDigitalPage = (props) => {
   });
 
 	return (
-		<Layout page="portfolio-digital">
+		<Layout page="portfolio-digital" menuBtnStyle="right-corner" orderBtnStyle="right-corner">
 			<SEO title="IGNI | Портфолио" />
 			<Section id={0} active={true} name="section-portfolio" headerStyle="white" footerStyle="white">
 				<FrontLayer bg={COLORS.LIGHT_BLACK}>
@@ -56,11 +56,11 @@ const PortfolioDigitalPage = (props) => {
 			        	</div>
 			        	<div className="block">
 			        		<Title margin="0 0 2.5rem 0">+130 <small>%</small></Title>
-			        		<TextStyled color={COLORS.BLACK}>Длина сессии</TextStyled>
+			        		<TextStyled color={COLORS.BLACK}>Повышение доверия к бренду</TextStyled>
 			        	</div>
 			        	<div className="block">
 			        		<Title margin="0 0 2.5rem 0">+80 <small>%</small></Title>
-			        		<TextStyled color={COLORS.BLACK}>Охват наиболее релевантной аудитории</TextStyled>
+			        		<TextStyled color={COLORS.BLACK}>Заполненность контент-плана</TextStyled>
 			        	</div>
 			        	<div className="block">
 			        		<img className="icon" alt="" src={teamIcon} />
@@ -78,18 +78,28 @@ const PortfolioDigitalPage = (props) => {
 	          		<Title color={COLORS.BLACK} lineBottom lineBg={COLORS.BLACK}>Приступим к работе над вашим проектом?</Title>
 	          	</ContentColumn>
 	          	<ContentColumn width="35rem">
-	          		<TextStyled color={COLORS.BLACK}>Заполните бриф — расскажите о вашем бизнесе, задачах и сроках — и мы свяжемся с вами для дальнейшего обсуждения сотрудничества. </TextStyled>
+	          		<TextStyled color={COLORS.BLACK}>Заполните бриф: расскажите о вашем бизнесе, задачах и сроках — и мы свяжемся с вами для обсуждения дальнейшего сотрудничества.</TextStyled>
 	          	</ContentColumn>
 	          </ContentPart>
-	          <ContentPart padding="0 0 0 24rem">
-	          	<RequestForm />
-	          </ContentPart>
+	          <ContentPartRequestForm padding="0 0 0 24rem">
+	          	<RequestForm inputStyle="horizontal icon-square" pos={["relative", "", "", "", ""]} />
+	          </ContentPartRequestForm>
 	        </Scroll>
 				</FrontLayer>
 			</Section>
 		</Layout>
 	)
 }
+
+const ContentPartRequestForm = styled(ContentPart)`
+	.form-bottom {
+		justify-content: space-between;
+	}
+
+	.submit-button {
+		order: 1;
+	}
+`
 
 const ArrowDown = styled.img`
 	position: absolute;

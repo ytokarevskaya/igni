@@ -1,8 +1,8 @@
 import React from "react"
-import styled from "styled-components"
 import MaskedInput from "react-maskedinput"
 
 import Form from "../form"
+import FileInput from "../file-input"
 import { COLORS, InputFrame } from "../styled"
 
 class RequestForm extends React.Component {
@@ -42,43 +42,11 @@ class RequestForm extends React.Component {
 				</div>
 				<div className="form-bottom">
 					<button className="submit-button transition-03s" type="submit">Отправить бриф</button>
-					<FileInput />
+					<FileInput inputStyle={this.props.inputStyle} inputText={this.props.inputText} pos={this.props.pos} />
 				</div>
 			</Form>
 		)
 	}
 }
-
-class FileInput extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			"active": false
-		}
-	}
-
-	render() {
-		return (
-			<FileInputCover className="icon-attach">Прикрепить ТЗ</FileInputCover>
-		)
-	}
-}
-
-const FileInputCover = styled.div`
-	position: absolute;
-  right: 2rem;
-  top: 22rem;
-  padding-left: 3.5rem;
-  font-size: 1.5rem;
-	transform: rotate(-90deg);
-	&::before {
-		position: absolute;
-		left: 0;
-		top: 50%;
-		margin-top: -1rem;
-		font-size: 2rem;
-		color: ${COLORS.RED};
-	}
-`
 
 export default RequestForm

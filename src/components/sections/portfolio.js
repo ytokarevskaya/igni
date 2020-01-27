@@ -122,7 +122,7 @@ const SectionPortfolio = (props) => {
                 <div className="header">
                   <p className="count transition-05s"><strong className="ff-bebas">{projects.content.length}</strong> {'проект' + wordEnd(projects.content.length, 'pr')}</p>
                   <h3><Title color="#fff">Контент</Title></h3>
-                  <a className="all-projects" href="/portfolio/design"><span>Перейти</span></a>
+                  <a className="all-projects" href="/portfolio/content"><span>Перейти</span></a>
                 </div>
                 <Plx className="parallax-element image" parallaxData={parallaxData_images} animateWhenNotInViewport={true} />
               </PortfolioItem>
@@ -130,7 +130,7 @@ const SectionPortfolio = (props) => {
                 <div className="header">
                   <p className="count transition-05s"><strong className="ff-bebas">{projects.marketing.length}</strong> {'проект' + wordEnd(projects.marketing.length, 'pr')}</p>
                   <h3><Title color="#fff">Маркетинг и реклама</Title></h3>
-                  <a className="all-projects" href="/portfolio/design"><span>Перейти</span></a>
+                  <a className="all-projects" href="/portfolio/marketing"><span>Перейти</span></a>
                 </div>
                 <Plx className="parallax-element image" parallaxData={parallaxData_images} animateWhenNotInViewport={true} />
               </PortfolioItem>
@@ -138,7 +138,7 @@ const SectionPortfolio = (props) => {
                 <div className="header">
                   <p className="count transition-05s"><strong className="ff-bebas">{projects.digital.length}</strong> {'проект' + wordEnd(projects.digital.length, 'pr')}</p>
                   <h3><Title color="#fff">Диджитал продакшн</Title></h3>
-                  <a className="all-projects" href="/portfolio/design"><span>Перейти</span></a>
+                  <a className="all-projects" href="/portfolio/digital"><span>Перейти</span></a>
                 </div>
                 <Plx className="parallax-element image" parallaxData={parallaxData_images} animateWhenNotInViewport={true} />
               </PortfolioItem>

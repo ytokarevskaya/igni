@@ -12,11 +12,9 @@ const onSectionUnload = (section) => {
   const video = document.getElementById("bg-video");
   video.pause();
   video.parentElement.classList.add("is-blurred");
-  // applyStyles(section, unloadStyles);
 }
 
 const onSectionLoad = (section) => {
-  // applyStyles(section, loadStyles);
   const video = document.getElementById("bg-video");
   video.play();
   video.parentElement.classList.remove("is-blurred");

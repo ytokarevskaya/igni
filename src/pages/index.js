@@ -1,5 +1,4 @@
 import React from "react"
-import styled from "styled-components"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -11,7 +10,7 @@ import SectionContacts from "../components/sections/contacts"
 import ScrollController from "../components/scroll-controller"
 
 import { getURLParameter } from "../components/utils"
-import { BackLayer, FrontLayer } from "../components/styled"
+import { BackLayer, FrontLayer, BgVideo } from "../components/styled"
 
 import videoSrcMP4 from "../video/fire-1080p.mp4"
 import videoSrcWEBM from "../video/fire-1080p.webm"
@@ -28,7 +27,7 @@ function scrollController(e) {
     video.play();
     video.parentElement.classList.remove("is-blurred");
   }
-  // debugger;
+
   const curPos = document.documentElement.scrollTop;
   if (curPos >= window.sectionObjects[4].top * 0.8) {
     document.getElementById("footer-scroll-help").classList.add("is-hidden");
@@ -38,7 +37,7 @@ function scrollController(e) {
     document.getElementById("footer-callback-btn").classList.remove("is-hidden");
   }
   const menu = document.getElementById("side-menu");
-      // debugger;
+
   if (menu) {
     let activeIndex = 0;
     for (let i = 0; i < 5; i++) {
@@ -72,39 +71,5 @@ const IndexPage = () => (
     </FrontLayer>
   </Layout>
 )
-
-const BgVideo = styled.div`
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-	&::before {
-		content: '';
-		display: block;
-		width: 100%;
-		height: 100%;
-		position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 1;
-		background: transparent;
-		transition: background 500ms ease;
-		pointer-events: none;
-	}
-
-  &.is-blurred {
-  	filter: blur(5px);
-  	&::before {
-  		background: rgba(5, 11, 31, 0.25);
-  	}
-  }
-
-  video {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    height: 100%;
-    width: auto;
-  }
-`
 
 export default IndexPage

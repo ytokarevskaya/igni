@@ -21,7 +21,6 @@ const SectionStyled = styled.section`
 		height: ${props => props.height || "100vh"};
 		transition: all 1000ms ease-in-out;
   	cursor: none;
-  	border: 1px solid red;
 
 		&.onhold {
 			cursor: none;
@@ -75,7 +74,7 @@ const Title = styled.div`
   width: ${props => props.mWwidth || "auto"};
   margin: ${props => props.mMargin || "0"};
   ${props => props.lineBottom ? "padding-bottom: 3.3rem;" : ""};
-  ${props => props.outline? "text-shadow: 1px 0 0px #000, 0 1px 0px #000, -1px 0 0px #000, 0 -1px 0px #000" : ""};
+  ${props => props.outline? "text-shadow: 1px 0 0px " + (props.outlineColor || COLORS.BLACK) + ", 0 1px 0px " + (props.outlineColor || COLORS.BLACK) + ", -1px 0 0px " + (props.outlineColor || COLORS.BLACK) + ", 0 -1px 0px " + (props.outlineColor || COLORS.BLACK) : ""};
 
   ${props => props.lineBottom ? "&::before {content: ''; display: block; width: " + (props.lineWidth? props.lineWidth : "7rem") + "; height: 3px; background: " + (props.lineBg? props.lineBg : "#fff") + "; position: absolute; bottom: 0; left: 0;}" : ""};
 
@@ -343,10 +342,10 @@ const InfoBlocks = styled.div`
 
 	.block {
 		width: ${props => props.itemsCount? 100/props.itemsCount + "%" : "auto"};
-		padding: 1rem 8rem;
-		border-left: 1px solid ${COLORS.LINE_GREY};
+		padding: ${props => props.padding || "1rem 8rem"};
+		border-left: 1px solid ${props => props.lineColor || COLORS.LINE_GREY};
 		&:last-child {
-			border-right: 1px solid ${COLORS.LINE_GREY};
+			border-right: 1px solid ${props => props.lineColor || COLORS.LINE_GREY};
 		}
 
 		.icon {
@@ -433,12 +432,14 @@ const InputFrame = styled.div`
 `
 
 const FormStyled = styled.form`
+	position: relative;
 	background: ${COLORS.LIGHT_BLACK};
 	padding: 7rem 11rem;
 
 	.form-inputs {
 		display: flex;
 		flex-wrap: wrap;
+		align-items: center;
 		justify-content: space-between;
 	}
 
@@ -491,4 +492,39 @@ const PortfolioBackBtn = styled.div`
 	padding: 1.8rem 2.5rem;
 `
 
-export { COLORS, SectionStyled, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, CursorBtn, PlusBtn, SectionScroll, ContentPart, InfoBlocks, InputFrame, FormStyled, ContentColumn, RedButton, PortfolioBackBtn }
+const BgVideo = styled.div`
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+	&::before {
+		content: '';
+		display: block;
+		width: 100%;
+		height: 100%;
+		position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+		background: transparent;
+		transition: background 500ms ease;
+		pointer-events: none;
+	}
+
+  &.is-blurred {
+  	filter: blur(5px);
+  	&::before {
+  		background: rgba(5, 11, 31, 0.25);
+  	}
+  }
+
+  video {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 100%;
+    width: auto;
+  }
+`
+
+
+export { COLORS, SectionStyled, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, CursorBtn, PlusBtn, SectionScroll, ContentPart, InfoBlocks, InputFrame, FormStyled, ContentColumn, RedButton, PortfolioBackBtn, BgVideo }

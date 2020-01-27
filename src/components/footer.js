@@ -34,7 +34,7 @@ class Footer extends React.Component {
 					</PulseBtn>*/}
 				</BottomMenu>
 				<ScrollHelp className="translate-x" id="footer-scroll-help">Скролл</ScrollHelp>
-				<OrderBtn href="/?active=4" id="footer-callback-btn">
+				<OrderBtn href="/?active=4" id="footer-callback-btn" className={this.props.orderBtnStyle}>
           <div className="icon icon-pen" />
           <div className="title">Оставить заявку</div>
         </OrderBtn>
@@ -166,6 +166,29 @@ const OrderBtn = styled.a`
     color: #fff;
 	  line-height: 1.5;
 	  margin-top: 2.5rem;
+  }
+
+  &.right-corner {
+  	position: fixed;
+    bottom: auto;
+    top: 0;
+    right: 10rem;
+    border: unset;
+    width: auto;
+    height: 10rem;
+    padding: 0 3.5rem;
+    display: flex;
+    align-items: center;
+    background: ${COLORS.RED};
+
+    .icon {
+    	background: #fff;
+    	color: ${COLORS.RED};
+    }
+
+    .title {
+    	margin: 0 0 0 1.5rem;
+    }
   }
 `
 

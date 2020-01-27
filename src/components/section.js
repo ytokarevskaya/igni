@@ -32,6 +32,7 @@ class Section extends React.Component {
   componentDidMount() {
     if (typeof window === "undefined") return;
     const currentSection = window.sectionObjects[this.id];
+    const sectionMenu = document.getElementById("side-menu");
     currentSection.top = currentSection.sectionRef.current.offsetTop;
     currentSection.bottom = currentSection.top + currentSection.sectionRef.current.offsetHeight;
     if (this.props.scrollControllerElements && this.props.scrollControllerElements[0]) {
@@ -40,7 +41,10 @@ class Section extends React.Component {
     if (this.props.active) {
       window.headerObj.setState({"headerStyle": this.props.headerStyle});
       window.footerObj.setState({"footerStyle": this.props.footerStyle});
-      animateLoad(this.sectionRef.current);
+      currentSection.sectionRef.current.scrollIntoView({behavior: "smooth", block: "end"});
+      if (sectionMenu) {
+        sectionMenu.children[this.id].classList.add("active");
+      }
     }
   }
 

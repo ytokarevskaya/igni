@@ -60,8 +60,8 @@ class Header extends React.Component {
               <Title color="#fff" fz="5rem" lineBottom lineWidth="3.5rem">Главная</Title>
               <a className="menu-link" href="/?active=1">Услуги</a>
               <a className="menu-link" href="/?active=2">Общее портфолио</a>
-              <a className="menu-link">Аналитика</a>
-              <a className="menu-link" href="/?active=3">Контакты</a>
+              <a className="menu-link" href="/?active=3">Аналитика</a>
+              <a className="menu-link" href="/?active=4">Контакты</a>
             </div>
             <div className="column transition-05s">
               <Title color="#fff" fz="5rem" lineBottom lineWidth="3.5rem">Дизайн</Title>
@@ -90,7 +90,7 @@ class Header extends React.Component {
           </MenuList>
           <CursorBtn ref={this.menuCursor} className={this.state.menuOpened? "visible" : ""} />
         </MainMenu>
-        <MenuBtn onClick={(e) => this.menuToggle(e)} className={this.state.menuOpened? "opened" : ""}>
+        <MenuBtn onClick={(e) => this.menuToggle(e)} className={(this.state.menuOpened? "opened" : "") + " " + this.props.menuBtnStyle}>
           <div className="burger translate-x">
             <div className="n1 translate-xy transition-05s" />
             <div className="n2 translate-xy transition-05s" />
@@ -100,7 +100,7 @@ class Header extends React.Component {
         </MenuBtn>
         {this.props.page === "home"?
           <SideMenu id="side-menu" className="mobile-hidden">
-            <div className="item active" data-id="0" onClick={sideMenuClick}>
+            <div className="item" data-id="0" onClick={sideMenuClick}>
               <div className="line transition-05s" />
               <span>Главная</span>
             </div> 
@@ -363,6 +363,30 @@ const MenuBtn = styled.div`
 
     .burger div {
       background: #fff;
+    }
+
+    .title {
+      color: ${COLORS.GREY};
+    }
+  }
+
+  &.right-corner {
+    width: 10rem;
+    height: 10rem;
+    right: 0;
+    left: auto;
+
+    .burger {
+      bottom: auto;
+      top: 50%;
+
+      div {
+        background: #fff;
+      }
+    }
+
+    .title {
+      display: none;
     }
   }
 

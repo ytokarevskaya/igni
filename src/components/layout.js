@@ -42,7 +42,7 @@ class Layout extends React.Component {
     } else if (e.target.classList.contains("full-video-link")) {
       this.setState({"cursorStyle": "cursor-play icon-play"});
     } else {
-      this.setState({"cursorStyle": ""});
+      this.setState({"cursorStyle": this.props.cursorStyle || ""});
     }
     // debugger;
     cursor.style.left = e.clientX + "px";
@@ -52,9 +52,9 @@ class Layout extends React.Component {
   render() {
     return (
       <SiteMain onMouseMove={(e) => this.cursorFollow(e)} className={this.state.loaded? "loaded" : ""}>
-        <Header page={this.props.page} />
+        <Header page={this.props.page} menuBtnStyle={this.props.menuBtnStyle} />
         <ContentLayout content={this.props.children} />
-        <Footer page={this.props.page} />
+        <Footer page={this.props.page} orderBtnStyle={this.props.orderBtnStyle} />
         {this.props.noCursor? "" : 
           <CursorBtn className={"cursor-btn translate-xy " + this.state.cursorStyle} ref={this.cursor} />
         }
@@ -64,13 +64,18 @@ class Layout extends React.Component {
 }
 
 Layout.propTypes = {
+  page: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
   cursorStyle: PropTypes.string,
-  noCursor: PropTypes.bool
+  noCursor: PropTypes.bool,
+  menuBtnStyle: PropTypes.string,
+  orderBtnStyle: PropTypes.string
 }
 
 Layout.defaultProps = {
-  noCursor: false
+  noCursor: false,
+  menuBtnStyle: "",
+  orderBtnStyle: ""
 }
 
 const SiteMain = styled.main`

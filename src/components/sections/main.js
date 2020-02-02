@@ -118,8 +118,8 @@ const HomeTitle = styled.div`
   }
 
   &.active {
-    transform: translateY(-50%);
-    -webkit-transform: translateY(-50%);
+    // transform: translateY(-50%);
+    top: calc(55% - 30rem);
 
     .hidden-content {
       max-height: 100rem;

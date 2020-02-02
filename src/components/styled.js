@@ -205,9 +205,9 @@ const PlusBtn = styled.div`
   //   line-height: ${props => props.size || "2.3rem"};
   //   text-align: center;
   // }
-  &:hover {
-  	background: ${COLORS.RED_HOVER};
-  }
+  // &:hover {
+  // 	background: ${COLORS.RED_HOVER};
+  // }
 `
 
 const CursorBtn = styled.div`

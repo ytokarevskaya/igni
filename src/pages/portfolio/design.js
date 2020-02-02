@@ -13,7 +13,7 @@ import "rc-slider/assets/index.css";
 
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
 import { useProjectsData } from "../../components/queries/get-projects-data"
-import { SectionScroll, COLORS, Title, TextStyled, FrontLayer, ContentPart, InfoBlocks, ContentColumn, RedButton } from "../../components/styled"
+import { SectionScroll, COLORS, Title, TextStyled, FrontLayer, ContentPart, InfoBlocks, ContentColumn, RedButton, PortfolioBackBtn } from "../../components/styled"
 
 import arrowDown from "../../images/arrow-down-white.svg"
 
@@ -32,7 +32,7 @@ const PortfolioDesignPage = (props) => {
   });
 
 	return (
-		<Layout page="portfolio-design" menuBtnStyle="right-corner" orderBtnStyle="right-corner">
+		<Layout page="portfolio-design">
 			<SEO title="IGNI | Портфолио" />
 			<Section id={0} active={true} name="section-portfolio" headerStyle="white" footerStyle="white">
 				<FrontLayer bg={COLORS.LIGHT_BLACK}>
@@ -44,6 +44,7 @@ const PortfolioDesignPage = (props) => {
                 )
               })}
               <ArrowDown src={arrowDown} className="translate-y" />
+							<a href="/"><PortfolioBackBtn className="icon-arrow-bold translate-y" /></a> 
               {/*<ProjectsSlider className="translate-x">
 						    <Slider />
 						  </ProjectsSlider>*/}
@@ -190,6 +191,12 @@ const ProjectsCarousel = styled.div`
 	width: 100%;
 	height: 100vh;
 	position: relative;
+
+	${PortfolioBackBtn} {
+		position: absolute;
+		left: 0;
+		top: 50%;
+	}
 `
 
 export default PortfolioDesignPage

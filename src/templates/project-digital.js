@@ -47,7 +47,7 @@ const DigitalPage = ({ data }) => {
 	    			<iframe src={project.videoLink + "?autoplay=1&color=ffffff&title=0&byline=0&portrait=0"} style={{"position": "absolute", "top":0, "left": 0, "width": "100%", "height": "100%"}} frameBorder="0" allow="autoplay; fullscreen" allowFullScreen></iframe>
 	    			<script src="https://player.vimeo.com/api/player.js"></script>
 	    		</VideoEmbed>*/}
-	    		<a href="/portfolio/digital"><PortfolioBackBtn transparent className="icon-arrow-bold translate-y" /></a>
+	    		<a href="/portfolio/digital"><PortfolioBackBtn transparent className="icon-arrow-bold translate-y" /></a> 
 	    	</FrontLayer>
 	    </Section>
 		</Layout>

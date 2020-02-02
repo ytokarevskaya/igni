@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
 import Plx from "react-plx"
+import Slider from "react-slick"
 
 import Section from "../section"
 import Scroll from "../scroll"
@@ -12,6 +13,75 @@ import { wordEnd } from "../utils"
 import { COLORS, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, SectionScroll } from "../styled"
 
 import mountainImg from "../../images/mountain.jpg"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
+
+
+const parallaxData_title = [
+  {
+    start: typeof window === "undefined" ? 0 : window.innerHeight * 1,
+    end: typeof window === "undefined" ? 0 : window.innerHeight * 2,
+    properties: [
+      {
+        startValue: 0,
+        endValue: 1,
+        property: "opacity"
+      }
+    ]
+  }
+]
+
+const parallaxData_images = [
+  {
+    start: typeof window === "undefined" ? 0 : window.innerHeight * 2,
+    end: typeof window === "undefined" ? 0 : window.innerHeight * 2.4,
+    properties: [
+      {
+        startValue: 30,
+        endValue: 0,
+        property: "height",
+        unit: "vw"
+      }
+    ]
+  }
+]
+
+const parallaxData_cards = [
+  {
+    start: typeof window === "undefined" ? 0 : window.innerHeight * 0.8,
+    end: typeof window === "undefined" ? 0 : window.innerHeight * 2.1,
+    properties: [
+      {
+        startValue: 0,
+        endValue: 1,
+        property: "opacity"
+      },
+      {
+        startValue: 50,
+        endValue: 0,
+        property: "translateY",
+        unit: "vh"
+      }
+    ]
+  },
+  // {
+  //   start: typeof window === "undefined" ? 0 : window.innerHeight * 2.1,
+  //   end: typeof window === "undefined" ? 0 : window.innerHeight * 2.6,
+  //   properties: [
+  //     {
+  //       startValue: 1,
+  //       endValue: 0.5,
+  //       property: "opacity"
+  //     },
+  //     {
+  //       startValue: 0,
+  //       endValue: -10,
+  //       property: "translateY",
+  //       unit: "vh"
+  //     }
+  //   ]
+  // }
+]
 
 const SectionPortfolio = (props) => {
   const { totalCount, edges } = useProjectsData()
@@ -34,85 +104,54 @@ const SectionPortfolio = (props) => {
     }
   });
 
-  const parallaxData_title = [
-    {
-      start: typeof window === "undefined" ? 0 : window.innerHeight * 1,
-      end: typeof window === "undefined" ? 0 : window.innerHeight * 2,
-      properties: [
-        {
-          startValue: 0,
-          endValue: 1,
-          property: "opacity"
-        }
-      ]
-    }
-  ]
-
-  const parallaxData_images = [
-    {
-      start: typeof window === "undefined" ? 0 : window.innerHeight * 2,
-      end: typeof window === "undefined" ? 0 : window.innerHeight * 2.4,
-      properties: [
-        {
-          startValue: 30,
-          endValue: 0,
-          property: "height",
-          unit: "vw"
-        }
-      ]
-    }
-  ]
-
-  const parallaxData_cards = [
-    {
-      start: typeof window === "undefined" ? 0 : window.innerHeight * 0.8,
-      end: typeof window === "undefined" ? 0 : window.innerHeight * 2.1,
-      properties: [
-        {
-          startValue: 0,
-          endValue: 1,
-          property: "opacity"
-        },
-        {
-          startValue: 50,
-          endValue: 0,
-          property: "translateY",
-          unit: "vh"
-        }
-      ]
-    },
-    // {
-    //   start: typeof window === "undefined" ? 0 : window.innerHeight * 2.1,
-    //   end: typeof window === "undefined" ? 0 : window.innerHeight * 2.6,
-    //   properties: [
-    //     {
-    //       startValue: 1,
-    //       endValue: 0.5,
-    //       property: "opacity"
-    //     },
-    //     {
-    //       startValue: 0,
-    //       endValue: -10,
-    //       property: "translateY",
-    //       unit: "vh"
-    //     }
-    //   ]
-    // }
-  ]
 
   return (
   	<Section id={props.id} active={props.active} name="section-portfolio" headerStyle="white" footerStyle="white">
       <FrontLayer>
+        <PortfolioCarousel projects={projects} />
+      </FrontLayer>
+    </Section>
+  )
+}
+
+class PortfolioCarousel extends React.Component {
+  constructor(props) {
+    super(props);
+    this.slickNext = this.slickNext.bind(this);
+    this.slickPrev = this.slickPrev.bind(this);
+    this.settings = {
+      className: "slider variable-width",
+      dots: false,
+      infinite: true,
+      speed: 1200,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      variableWidth: true,
+      afterChange: onSlideChange
+    };
+  }
+
+  slickNext() {
+    this.slider.slickNext();
+  }
+
+  slickPrev() {
+    this.slider.slickPrev();
+  }
+
+  render() {
+    return (
+      <React.Fragment>
         <Plx className="parallax-element" parallaxData={parallaxData_title} animateWhenNotInViewport={true}>
           <h2><Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "12rem", "", "", "20rem"]}>Нашe портфолио</Title></h2>
-          <PortfolioCarouselMenu id="portfolio-carousel-menu" items={["Дизайн", "Контент", "Маркетинг и реклама", "Диджитал продакшн"]} />
+          <PortfolioCarouselMenu id="portfolio-carousel-menu" items={["Дизайн", "Контент", "Маркетинг и реклама", "Диджитал продакшн"]} nextArrowClick={this.slickNext} prevArrowClick={this.slickPrev} />
         </Plx>
         <Plx className="parallax-element" parallaxData={parallaxData_cards} animateWhenNotInViewport={true}>
-          <PortfolioCarousel id="portfolio-carousel" className="transition-05s">
-            <div className="carousel-content">
+          <PortfolioCarouselStyled id="portfolio-carousel" className="transition-05s">
+            <Slider ref={slider => (this.slider = slider)} {...this.settings}>
               <PortfolioItem className="carousel-item active">
                 <div className="header">
-                  <p className="count transition-05s ff-bebas"><strong>{projects.design.length}</strong> {'проект' + wordEnd(projects.design.length, 'pr')}</p>
+                  <p className="count transition-05s ff-bebas"><strong>{this.props.projects.design.length}</strong> {'проект' + wordEnd(this.props.projects.design.length, 'pr')}</p>
                   <h3><Title color="#fff">Дизайн</Title></h3>
                   <a className="all-projects" href="/portfolio/design"><span>Перейти</span></a>
                 </div>
@@ -120,7 +159,7 @@ const SectionPortfolio = (props) => {
               </PortfolioItem>
               <PortfolioItem className="carousel-item">
                 <div className="header">
-                  <p className="count transition-05s ff-bebas"><strong>{projects.content.length}</strong> {'проект' + wordEnd(projects.content.length, 'pr')}</p>
+                  <p className="count transition-05s ff-bebas"><strong>{this.props.projects.content.length}</strong> {'проект' + wordEnd(this.props.projects.content.length, 'pr')}</p>
                   <h3><Title color="#fff">Контент</Title></h3>
                   <a className="all-projects" href="/portfolio/content"><span>Перейти</span></a>
                 </div>
@@ -128,7 +167,7 @@ const SectionPortfolio = (props) => {
               </PortfolioItem>
               <PortfolioItem className="carousel-item">
                 <div className="header">
-                  <p className="count transition-05s ff-bebas"><strong>{projects.marketing.length}</strong> {'проект' + wordEnd(projects.marketing.length, 'pr')}</p>
+                  <p className="count transition-05s ff-bebas"><strong>{this.props.projects.marketing.length}</strong> {'проект' + wordEnd(this.props.projects.marketing.length, 'pr')}</p>
                   <h3><Title color="#fff">Маркетинг и реклама</Title></h3>
                   <a className="all-projects" href="/portfolio/marketing"><span>Перейти</span></a>
                 </div>
@@ -136,31 +175,38 @@ const SectionPortfolio = (props) => {
               </PortfolioItem>
               <PortfolioItem className="carousel-item">
                 <div className="header">
-                  <p className="count transition-05s ff-bebas"><strong>{projects.digital.length}</strong> {'проект' + wordEnd(projects.digital.length, 'pr')}</p>
+                  <p className="count transition-05s ff-bebas"><strong>{this.props.projects.digital.length}</strong> {'проект' + wordEnd(this.props.projects.digital.length, 'pr')}</p>
                   <h3><Title color="#fff">Диджитал продакшн</Title></h3>
                   <a className="all-projects" href="/portfolio/digital"><span>Перейти</span></a>
                 </div>
                 <Plx className="parallax-element image" parallaxData={parallaxData_images} animateWhenNotInViewport={true} />
               </PortfolioItem>
-            </div>
-          </PortfolioCarousel>
+            </Slider>
+          </PortfolioCarouselStyled>
         </Plx>
-      </FrontLayer>
-    </Section>
-  )
+      </React.Fragment>
+    )
+  }
 }
 
 const PortfolioCarouselMenu = (props) => (
-  <PortfolioCarouselMenuStyled className="scrollController-menu">
+  <PortfolioCarouselMenuStyled id="portfolio-carousel-menu">
     {props.items.map((item, index) => {
       return (
         <div key={index} className={"item" + (index === 0? " active" : "")} data-index={index} onClick={carouselItemClick}>{item}</div>
       )
     })}
-    <div onClick={carouselArrowClick} className="arrow arrow-prev icon-prev transition-05s" />
-    <div onClick={carouselArrowClick} className="arrow arrow-next icon-next transition-05s" />
+    <div onClick={props.prevArrowClick} className="arrow arrow-prev icon-prev transition-05s" />
+    <div onClick={props.nextArrowClick} className="arrow arrow-next icon-next transition-05s" />
   </PortfolioCarouselMenuStyled>
 )
+
+function onSlideChange(index) {
+  const menuFrame = document.getElementById("portfolio-carousel-menu");
+  const curItem = menuFrame.querySelector(".active");
+  curItem.classList.remove("active");
+  menuFrame.children[index].classList.add("active");
+}
 
 function carouselArrowClick(e) {
   const arrow = e.target;
@@ -197,14 +243,20 @@ function carouselItemClick(e) {
   moveCarousel(+target.dataset.index);
 }
 
-function moveCarousel(index) {
+function moveCarousel(moveTo) {
   const carousel = document.getElementById("portfolio-carousel");
   const carouselContent = carousel.querySelector(".carousel-content");
   const curItem = carousel.querySelector(".active");
-  const nextItem = carousel.querySelectorAll(".carousel-item")[index];
+  const nextItem = carousel.querySelectorAll(".carousel-item")[moveTo];
+  carouselContent.classList.add("is-animated");
   carouselContent.style.transform = "translateX(-" + nextItem.offsetLeft + "px)";
   curItem.classList.remove("active");
   nextItem.classList.add("active");
+  setTimeout(() => {
+    // const clone = carouselContent.children[0].cloneNode(true);
+    // carouselContent.classList.remove("is-animated");
+    // carouselContent.append(clone);
+  }, 1300);
 }
 
 const PortfolioCarouselMenuStyled = styled.aside`
@@ -219,6 +271,7 @@ const PortfolioCarouselMenuStyled = styled.aside`
     font-weight: 500;
     margin-right: 4.5rem;
     padding-bottom: 1.6rem;
+    border-bottom: 1px solid transparent;
     &.active {
       border-bottom: 1px solid #fff;
     }
@@ -244,35 +297,40 @@ const PortfolioCarouselMenuStyled = styled.aside`
   }
 `
 
-const PortfolioCarousel = styled.div`
+const PortfolioCarouselStyled = styled.div`
   position: absolute;
   left: 15rem;
   right: 0;
   top: 20rem;
   padding-left: 5rem;
-  white-space: nowrap;
-  overflow: hidden;
 
   .carousel-content {
     height: 100%;
     display: flex;
     flex-wrap: nowrap;
     align-items: flex-end;
-    transition: transform 1200ms ease-in-out;
+
+    &.is-animated {
+      transition: transform 1200ms ease-in-out;
+    }
   }
 `
 
 const PortfolioItem = styled.div`
   display: inline-block;
   vertical-align: bottom;
-  margin-right: 10vw;
+  // margin-right: 10vw;
   position: relative;
-  padding-top: 30rem;
+  padding: 30rem 10vw 0 0;
+
+  &:focus {
+    outline: none;
+  }
 
   .all-projects {
     position: absolute;
     bottom: 6.3rem;
-    right: 0;
+    right: 8.6vw;
 
     span {
       position: relative;
@@ -347,7 +405,7 @@ const PortfolioItem = styled.div`
     background-position: center center;
   }
 
-  &.active {
+  .slick-active & {
     .header {
       ${Title} {
         font-size: 15rem;

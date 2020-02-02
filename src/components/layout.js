@@ -1,12 +1,15 @@
 import React from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
+import Lottie from "react-lottie"
 import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
 import Footer from "./footer"
 import { onWindowResize, onPageLoad } from "./functions"
 import { CursorBtn } from "./styled"
+
+import * as preloaderData from "./preloader.json"
 import "./layout.css"
 
 class ContentLayout extends React.Component {
@@ -27,11 +30,14 @@ class Layout extends React.Component {
     this.cursor = React.createRef();
     this.state = {
       "cursorStyle": this.props.cursorStyle || "",
-      "loaded": false
+      "loaded": false,
+      "preloaderShow": true
     }
   }
 
   componentDidMount() {
+    // debugger;
+    console.log(preloaderData);
     this.setState({"loaded": true});
     document.body.classList.add(this.props.page);
   }
@@ -45,14 +51,25 @@ class Layout extends React.Component {
     } else {
       this.setState({"cursorStyle": this.props.cursorStyle || ""});
     }
-    // debugger;
     cursor.style.left = e.clientX + "px";
     cursor.style.top = e.clientY + "px";
   }
 
   render() {
+    const preloaderDefaultOptions = {
+      loop: true,
+      autoplay: true, 
+      animationData: preloaderData.default,
+      rendererSettings: {
+        preserveAspectRatio: "xMidYMid meet"
+      }
+    }
+
     return (
       <SiteMain onMouseMove={(e) => this.cursorFollow(e)} className={this.state.loaded? "loaded" : ""}>
+        <PreloaderCover className={this.state.loaded? "is-page-loaded" : ""}>
+          <Lottie options={preloaderDefaultOptions} isStopped={false} isPaused={false} height="100vh" width="100vw" />
+        </PreloaderCover>
         <Header page={this.props.page} menuBtnStyle={this.props.menuBtnStyle} />
         <ContentLayout content={this.props.children} />
         <Footer page={this.props.page} orderBtnStyle={this.props.orderBtnStyle} />
@@ -78,6 +95,22 @@ Layout.defaultProps = {
   menuBtnStyle: "",
   orderBtnStyle: ""
 }
+
+const PreloaderCover = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #fff;
+  z-index: 200;
+  transition: opacity 800ms ease 2000ms;
+  &.is-page-loaded {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+`
 
 const SiteMain = styled.main`
   overflow: hidden;

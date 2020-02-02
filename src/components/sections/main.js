@@ -40,9 +40,9 @@ const SectionMain = (props) => {
   	<Section id={props.id} active={props.active} name="section-main" headerStyle="white" footerStyle="white">
       <FrontLayer className="load-fadeIn">
         <Plx className="parallax-element div_100" parallaxData={parallaxData} animateWhenNotInViewport={true}>
-          <Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Освещая темное пространство веба</Title>
-          <Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="12rem" pos={["absolute", "55%", "", "", "20rem"]} margin="-12rem 0 0 0" className="scrollController-title"><h1>Веб-студия полного цикла</h1></Title>
-          <Title fz="45rem" mFz="10rem" color="#fff" mColor="#fff" className="scrollController-title" lh="0.5" pos={["absolute", "55%", "", "", "18rem"]}>IGNI</Title>
+          <Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "20rem", "", "", "20rem"]} className="scrollController-title">Освещая темное пространство веба</Title>
+          <Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="12rem" pos={["absolute", "50%", "", "", "20rem"]} margin="-12rem 0 0 0" className="scrollController-title"><h1>Веб-студия полного цикла</h1></Title>
+          <Title fz="45rem" mFz="10rem" color="#fff" mColor="#fff" className="scrollController-title" lh="0.8" pos={["absolute", "50%", "", "", "18rem"]}>IGNI</Title>
           <HomeTitlePopup />
         </Plx>
           {/*<Link to="/portfolio">
@@ -119,6 +119,7 @@ const HomeTitle = styled.div`
 
   &.active {
     transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
 
     .hidden-content {
       max-height: 100rem;

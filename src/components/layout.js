@@ -36,10 +36,11 @@ class Layout extends React.Component {
   }
 
   componentDidMount() {
-    // debugger;
-    console.log(preloaderData);
     this.setState({"loaded": true});
     document.body.classList.add(this.props.page);
+    setTimeout(() => {
+      this.setState({"preloaderShow": false});
+    }, 2000);
   }
 
   cursorFollow(e) {
@@ -67,7 +68,7 @@ class Layout extends React.Component {
 
     return (
       <SiteMain onMouseMove={(e) => this.cursorFollow(e)} className={this.state.loaded? "loaded" : ""}>
-        <PreloaderCover className={this.state.loaded? "is-page-loaded" : ""}>
+        <PreloaderCover className={this.state.preloaderShow? "" : "hidden"}>
           <Lottie options={preloaderDefaultOptions} isStopped={false} isPaused={false} height="100vh" width="100vw" />
         </PreloaderCover>
         <Header page={this.props.page} menuBtnStyle={this.props.menuBtnStyle} />
@@ -97,18 +98,21 @@ Layout.defaultProps = {
 }
 
 const PreloaderCover = styled.div`
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   width: 100vw;
   height: 100vh;
   background: #fff;
   z-index: 200;
-  transition: opacity 800ms ease 2000ms;
-  &.is-page-loaded {
+  transition: all 800ms ease;
+  pointer-events: none;
+  opacity: 1;
+  visibility: visible;
+
+  &.hidden {
     opacity: 0;
     visibility: hidden;
-    pointer-events: none;
   }
 `
 
@@ -117,7 +121,7 @@ const SiteMain = styled.main`
 
   .load-fadeIn {
     opacity: 0;
-    transition: opacity 1000ms ease 2000ms;
+    transition: opacity 1000ms ease 3000ms;
   }
 
   &.loaded {

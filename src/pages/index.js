@@ -18,8 +18,9 @@ import videoSrcWEBM from "../video/fire-1080p.webm"
 const activeSection = +getURLParameter("active") || 0;
 
 function checkScroll() {
+  const scrollTop = document.documentElement.scrollTop || window.pageYOffset; 
   const video = document.getElementById("bg-video");
-  if (document.documentElement.scrollTop > window.innerHeight * 0.8) {
+  if (scrollTop > window.innerHeight * 0.8) {
     video.pause();
     video.parentElement.classList.add("is-blurred");
   } else {
@@ -28,7 +29,7 @@ function checkScroll() {
     video.parentElement.classList.remove("is-blurred");
   }
 
-  const curPos = document.documentElement.scrollTop;
+  const curPos = scrollTop;
   if (curPos >= window.sectionObjects[4].top * 0.8) {
     document.getElementById("footer-scroll-help").classList.add("is-hidden");
     document.getElementById("footer-callback-btn").classList.add("is-hidden");

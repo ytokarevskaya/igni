@@ -98,7 +98,7 @@ const HomeTitle = styled.div`
   left: 55%;
   margin-top: -4.5rem;
   z-index: 6;
-  transition: transform 1000ms ease;
+  transition: all 1000ms ease;
 
   ${Title} {
     &::before {

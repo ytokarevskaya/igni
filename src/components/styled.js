@@ -1,5 +1,7 @@
 import styled from "styled-components"
 
+import redPlus from "../images/red-plus.svg"
+
 const COLORS = {
 	RED: '#d11e1e',
 	RED_HOVER: '#a73b37',
@@ -188,17 +190,21 @@ const PlusBtn = styled.div`
 	width: ${props => props.size || "2.3rem"};
   height: ${props => props.size || "2.3rem"};
   border-radius: 50%;
-  background: ${props => props.bg || COLORS.RED};
+  background-color: ${props => props.bg || "unset"};
+  background-image: ${props => props.bg? "unset" : "url(" + redPlus + ")"};
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
   transition: background 500ms ease;
-  &::before {
-    content: '+';
-    color: #fff;
-    font-size: 1.6rem;
-    display: block;
-    width: 100%;
-    line-height: ${props => props.size || "2.3rem"};
-    text-align: center;
-  }
+  // &::before {
+  //   content: '+';
+  //   color: #fff;
+  //   font-size: 1.6rem;
+  //   display: block;
+  //   width: 100%;
+  //   line-height: ${props => props.size || "2.3rem"};
+  //   text-align: center;
+  // }
   &:hover {
   	background: ${COLORS.RED_HOVER};
   }

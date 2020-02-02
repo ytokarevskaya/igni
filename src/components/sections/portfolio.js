@@ -321,7 +321,7 @@ const PortfolioItem = styled.div`
   vertical-align: bottom;
   // margin-right: 10vw;
   position: relative;
-  padding: 30rem 10vw 0 0;
+  padding: 27rem 10vw 0 0;
 
   &:focus {
     outline: none;

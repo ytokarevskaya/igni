@@ -1,14 +1,14 @@
 import React from "react"
 import PropTypes from "prop-types"
-import styled from "styled-components"
+import styled, { keyframes } from "styled-components"
 
-import { COLORS, Title, TextStyled, BgVideo } from "./styled"
+import { COLORS, Title, TextStyled, BgVideo, PortfolioBackBtn } from "./styled"
 
 const ProjectCover = (props) => {
 	const isCarousel = props.prevSlide && props.nextSlide;
 	return (
-		<ProjectStyled data-index={props.index} className={"portfolio-item" + (props.state.active? " is-active" : "") + (props.state.next? " is-next" : "")} bg={props.project.backgroundColor} bgImg={props.project.backgroundImg? props.project.backgroundImg.file.url : ""} bgSize={props.project.backgroundMode === "Contain"? props.project.backgroundSize : ""} static={!isCarousel} category={props.project.category.slug}>
-			{props.project.category.slug === "design"?
+		<ProjectStyled data-index={props.index} className={"portfolio-item" + (props.state.active? " is-active" : "") + (props.state.loading? " animate-load" : "") + (props.state.unloading? " animate-unload" : "") + (props.state.next? " is-next" : "")} bg={props.project.backgroundColor} bgImg={props.project.backgroundImg? props.project.backgroundImg.file.url : ""} bgSize={props.project.backgroundMode === "Contain"? props.project.backgroundSize : ""} static={!isCarousel} category={props.project.category.slug}>
+			{props.project.category.slug === "design" && isCarousel ?
 				<a className="full-project-link div_100" href={"/portfolio/" + props.project.category.slug + "/" + props.project.slug} /> : ""
 			}
 			{props.video?
@@ -19,10 +19,12 @@ const ProjectCover = (props) => {
 	      </BgVideo>
 				: ""
 			}
-			{isCarousel && props.index > 0?
-				<div onClick={props.prevSlide} className="back-btn icon-arrow-bold translate-y" />
-			: ""}
-			<ProjectInfo>
+			{/*isCarousel && props.index > 0?
+				"" : 
+		  <div onClick={props.prevSlide} className="back-btn icon-arrow-bold translate-y" />
+				<a href="/"><PortfolioBackBtn className="icon-arrow-bold translate-y" /></a>
+			*/}
+			<ProjectInfo className="transition-03s">
 				<div className="project-year ff-bebas">{new Date(props.project.date).getFullYear()}</div>
 				<Title className="project-title" margin="3rem 0" color="#fff">{props.project.projectTitle}</Title>
 				<TextStyled className="project-subtitle">{props.project.projectSubtitle}</TextStyled>
@@ -96,10 +98,63 @@ const ProjectNextInfo = styled(ProjectInfo)`
 	}
 `
 
+const animateUnload = keyframes`
+  0% {
+    opacity: 1;
+		width: 100vw;
+		height: 100vh;
+		left: 0;
+		top: 50%;
+  }
+  40% {
+  	opacity: 1;
+		width: 50%;
+		height: 50%;
+		left: 50%;
+		top: 50%;
+		transform: translate3d(-50%, -50%, 0);
+  }
+  100% {
+  	opacity: 1;
+  	width: 50%;
+		height: 50%;
+		top: 50%;
+    left: -100%;
+    transform: translate3d(-50%, -50%, 0);
+  }
+`
+
+const animateLoad = keyframes`
+  0% {
+  	opacity: 1;
+  	width: 50%;
+		height: 50%;
+		top: 50%;
+    left: 100%;
+    transform: translate3d(-50%, -50%, 0);
+  }
+  40% {
+  	opacity: 1;
+		width: 50%;
+		height: 50%;
+		left: 50%;
+		top: 50%;
+		transform: translate3d(-50%, -50%, 0);
+  }
+  100% {
+    opacity: 1;
+		width: 100vw;
+		height: 100vh;
+		left: 50%;
+		top: 50%;
+		transform: translate3d(-50%, -50%, 0);
+  }
+`
+
 const ProjectStyled = styled.div`
 	position: ${props => props.static? "relative" : "absolute"};
-	width: 100vw;
-	height: 100vh;
+	width: 50%;
+  height: 50%;
 	left: ${props => props.static? "auto" : "100%"};
 	top: ${props => props.static? "auto" : "50%"};
 	background-color: ${props => props.bg || "transparent"};
@@ -113,7 +168,7 @@ const ProjectStyled = styled.div`
 	transition: all 1000ms ease;
 	transform: translate3d(0, -50%, 0);
 
-	&.is-active, &.is-next {
+	&.is-active, &.is-next, &.animate-unload, &.animate-load {
 		opacity: 1;
 		visibility: visible;
 		pointer-events: all;
@@ -121,21 +176,46 @@ const ProjectStyled = styled.div`
 	}
 
 	&.is-active {
-		transform: ${props => props.static? "none" : "translate3d(-100%, -50%, 0)"};
+		width: 100vw;
+		height: 100vh;
+		left: 0;
+		${props => props.static? "transform: none;" : ""}
 
 		${ProjectNextInfo}, .project-title-bottom {
+    	opacity: 0;
+    }
+
+    ${ProjectInfo} {
+    	pointer-events: none;
+    }
+	}
+
+	&.animate-unload {
+		animation: 2.4s ${animateUnload} ease-out forwards;
+
+		${ProjectInfo} {
+    	opacity: 0;
+    }
+	}
+
+	&.animate-load {
+		animation: 2.4s ${animateLoad} ease-out forwards;
+
+		${ProjectInfo} {
     	opacity: 0;
     }
 	}
 
 	&.is-next {
+		left: 100%;
 		width: 50%;
     height: 50%;
     background-color: ${props => props.bg || COLORS.BLACK};
     transform: translate3d(-35rem, -50%, 0);
     transition: all 1000ms ease 1000ms;
+    z-index: 1;
 
-    ${ProjectInfo}, .back-btn {
+    ${ProjectInfo} {
     	opacity: 0;
     }
     ${ProjectNextInfo} {

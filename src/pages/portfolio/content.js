@@ -31,7 +31,8 @@ const PortfolioContentPage = () => {
   });
 
 	return (
-		<Layout page="portfolio-content" menuBtnStyle="right-corner" orderBtnStyle="right-corner" cursorStyle="dark">
+		<Layout page="portfolio-content">
+{/* <Layout page="portfolio-content" menuBtnStyle="right-corner" orderBtnStyle="right-corner" cursorStyle="dark">*/}
 			<SEO title="IGNI | Портфолио" />
 				<Section id={0} active={true} name="section-portfolio" headerStyle="dark" footerStyle="dark">
 					<FrontLayer bg={COLORS.BG_GREY}>
@@ -296,7 +297,7 @@ const PortfolioContentStyled = styled.article`
 		border-top: 1px dashed ${COLORS.LINE_GREY_20};
 		max-height: 50rem;
 		overflow: hidden;
-		transition: all 1000ms ease;
+		transition: all 800ms ease-in-out;
 
 		.title {
 			font-size: 1.6rem;
@@ -324,6 +325,7 @@ const PortfolioContentStyled = styled.article`
 		main {
 			max-height: 0;
 			border: unset;
+			padding: 0;
 		}
 	}
 `

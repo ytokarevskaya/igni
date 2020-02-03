@@ -215,13 +215,13 @@ const CursorBtn = styled.div`
 	  position: fixed;
 	  left: 50%;
 	  top: 50%;
-	  width: 3rem;
-	  height: 3rem;
+	  width: 4rem;
+	  height: 4rem;
 	  background: rgba(255, 255, 255, 0.5);
 	  border-radius: 50%;
+	  border: 1px solid #fff;
 	  pointer-events: none;
 	  z-index: 25;
-	  tranform: translate(-50%, -50%);
 
 	  &::after {
 	    content: '';
@@ -236,15 +236,14 @@ const CursorBtn = styled.div`
 	  &::before {
 	    content: '';
 	    display: block;
-	    width: 30%;
-	    height: 30%;
+	    width: 0.5rem;
+	    height: 0.5rem;
 	    background: #fff;
 	    border-radius: 50%;
 	    position: absolute;
 	    left: 50%;
 	    top: 50%;
 	    transform: translate3d(-50%, -50%, 0);
-	    transition: width 2s linear, height 2s linear;
 	  }
 
 	  &.dark {
@@ -257,14 +256,15 @@ const CursorBtn = styled.div`
 	  &.cursor-plus {
 	  	&::before {
 	  		content: '+';
-	  		color: ${COLORS.RED};
+	  		background: ${COLORS.RED};
+	  		color: ${COLORS.LIGHT_BLACK};
+	  		border: 1px solid #fff;
 	  		font-size: 1.8rem;
-		    font-weight: bold;
+		    font-weight: normal;
 		    text-align: center;
-		    line-height: 100%;
-		    width: 60%;
-		    height: 60%;
-		    transition: width 500ms linear, height 500ms linear;
+		    line-height: 2.3rem;
+		    width: 2.3rem;
+		    height: 2.3rem;
 	  	}
 	  }
 

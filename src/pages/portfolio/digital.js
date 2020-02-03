@@ -35,7 +35,7 @@ const PortfolioDigitalPage = (props) => {
 			<Section id={0} active={true} name="section-portfolio" headerStyle="white" footerStyle="white">
 				<FrontLayer bg={COLORS.LIGHT_BLACK}>
 					<Scroll overflowLimit={1} width="100%" pos={["absolute", "0", "0", "0", "0"]}>
-	          <ProjectsCarousel>
+	          <ProjectsCarousel id="projects-carousel">
 	          	{projects.map((item, index) => {
                 return (
                   <Project key={item.id} index={index} project={item} />
@@ -119,7 +119,9 @@ class Project extends React.Component {
     super(props);
     this.state = {
       "active": this.props.index === 0,
-      "next": this.props.index === 1
+      "next": this.props.index === 1,
+      "loading": 0,
+      "unloading": 0
     }
     projectRefs.push(this);
   }
@@ -157,9 +159,38 @@ class Project extends React.Component {
 
   render() {
   	return (
-  		<ProjectCover index={this.props.index} project={this.props.project} state={this.state} prevSlide={this.prevSlide} nextSlide={this.nextSlide} video={this.props.project.videoFile.file.url} />
+  		<ProjectCover index={this.props.index} project={this.props.project} state={this.state} prevSlide={this.prevSlide} nextSlide={carouselNextSlide} loading={this.state.loading} unloading={this.state.unloading} video={this.props.project.videoFile.file.url} />
   	)
   }
+}
+
+function carouselNextSlide(index) {
+	index = typeof index === "number"? index : null;
+	const carousel = document.getElementById("projects-carousel");
+	const curItem = carousel.querySelector(".portfolio-item.is-active");
+	if (curItem) {
+		const curIndex = +curItem.dataset.index;
+		const nextIndex = index || (projectRefs[curIndex + 1]? curIndex + 1 : 0);
+		const nextItem = carousel.querySelector(".portfolio-item[data-index='" + nextIndex + "'");
+		projectRefs[curIndex].setState({"active": false});
+		projectRefs[curIndex].setState({"unloading" : true});
+		setTimeout(() => {
+			projectRefs[nextIndex].setState({"next": false});
+			projectRefs[nextIndex].setState({"loading": true});
+			// navigationMenuToggle(nextIndex);
+			setTimeout(() => {
+				projectRefs[nextIndex].setState({"loading": false});
+				projectRefs[nextIndex].setState({"active": true});
+				projectRefs[curIndex].setState({"unloading" : false});
+				if (projectRefs[nextIndex + 1]) {
+					projectRefs[nextIndex + 1].setState({"next": true});
+				} else {
+					projectRefs[0].setState({"next": true});
+				}
+				handleVideos(curItem, nextItem);
+			}, 2400)
+		}, 1000);
+	}
 }
 
 function handleVideos(curProject, nextProject) {

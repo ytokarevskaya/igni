@@ -313,6 +313,8 @@ const MenuBtn = styled.div`
     position: absolute;
     left: 50%;
     bottom: 2.6rem;
+    width: 2.3rem;
+    height: 2.3rem;
 
     div {
       width: 1.2rem;

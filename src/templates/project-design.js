@@ -98,78 +98,76 @@ const ProjectPage = ({ data }) => {
 	return (
 	  <Layout page="project">
 	    <SEO title="IGNI | Веб-студия полного цикла" />
-		    <Section id={0} active={true} name="section-project" headerStyle="white" footerStyle="white">
+		    <Section id={0} active={true} name="section-project" headerStyle="white" footerStyle="white" height="auto">
 		    	<FrontLayer bg={project.backgroundColor}>
-			    	<Scroll overflowLimit={1} width="100%" pos={["absolute", "0", "0", "0", "0"]}>
-			    		<CategoryTitle>
-			          <Title fz="5rem" color="#fff" lineBottom lineBg="#fff" lineWidth="3.5rem">Дизайн</Title>
-			          <TextStyled color="#fff" width="18rem" margin="3.5rem 0">Сделайте первое впечатление клиента незабываемым</TextStyled>
-		          </CategoryTitle>
-			      	<ProjectCover index={0} project={project} />
-			      	<a href={"/portfolio/design/?active=" + project.slug}><PortfolioBackBtn className="icon-arrow-bold translate-y" /></a>
-			      	<ContentPart bg="transparent" padding="10rem 20%">
-			      		<ProjectContent theme={project.theme}>
-			      			<div dangerouslySetInnerHTML={{__html: project.description? documentToHtmlString(project.description.json, renderOptions) : ""}} />
-			      			{/*<ProjectContentRow>
-			      				project.descriptionBlocks?
-			      					project.descriptionBlocks.map(node => {
-			      						return (<div className="column"><RichText richText={node.content.json} overrides={overrides} /></div>)
-			      					})
-			      				: ""
-			      			</ProjectContentRow>*/}
-			      			{project.slug === "xena-exchange"?
-			      			<React.Fragment>
-			      				<ProjectContentRow align="center" justify="flex-end">
-			      					<ProjectContentColumn width="45%" padding="0">
-			      						<img src="https://images.ctfassets.net/iqzj3v996p76/6xAJbEHwXedLxNjOxHZFOJ/d0f9e15824e6213e355442fcbe1398e8/02_-_iPhone_XS_Front.png" alt="" />
-			      					</ProjectContentColumn>
-			      					<ProjectContentColumn width="35%">
-			      						<h2>О проекте</h2>
-			      						<p>Xena Exchange – высокотехнологичная платформа для торговли криптовалютными активами, которой требовался стильный и лаконичный дизайн.</p>
-			      						<p>В рамках сотрудничества с Xena Exchange мы успешно провели редизайн основного сайта, личного кабинета и терминала биржи, оформили корпоративный блог и социальные сети, а также запустили несколько промо-кампаний.</p>
-			      					</ProjectContentColumn>
-			      				</ProjectContentRow>
-			      				<ProjectContentRow>
-			      					<ProjectContentColumn width="50%">
-			      						<h2>Главная страница</h2>
-			      						<img src="https://images.ctfassets.net/iqzj3v996p76/15pRkSED7qgChKY2YJr0Ww/ce01470fdd3c8edf36306ed06bf2af0e/B_2.png" alt="" />
-			      						<img src="https://images.ctfassets.net/iqzj3v996p76/3rLBe0b0bZ329tQIfLkb9c/0cfa9a2d5bcae7685e2ca9043fff316c/B_2_Copy_2.png" alt="" />
-			      					</ProjectContentColumn>
-			      					<ProjectContentColumn width="50%">
-			      						<div className="h5rem" />
-			      						<img src="https://images.ctfassets.net/iqzj3v996p76/6oQrVMh7rjfCdNmwbSwg4g/5384a0152384e92da9fa3da485c8365b/B_2_Copy.png" alt="" />
-			      						<img src="https://images.ctfassets.net/iqzj3v996p76/WVikWAizoFcZcflRrYq6H/803fd5b284977ea6b15fe2c53ac0bdad/B_2_Copy_3.png" alt="" />
-			      					</ProjectContentColumn>
-			      				</ProjectContentRow>
-			      				<ProjectContentRow align="center">
-			      					<ProjectContentColumn width="60%">
-			      						<h2>Обзор котировок</h2>
-			      						<img src="https://images.ctfassets.net/iqzj3v996p76/162UWLduPxFeWPjBH6mybM/c10bd2b046408655263a744f2686f7fa/B_2_Copy_4.png" alt="" />
-			      					</ProjectContentColumn>
-			      					<ProjectContentColumn width="40%">
-			      						<img src="https://images.ctfassets.net/iqzj3v996p76/1j8d4dbvgtGLGPjdhx42IU/eed05f80bf79f4e967fa08839ad5b50c/01_-_iPhone_XS_Front.png" alt="" />
-			      					</ProjectContentColumn>
-			      				</ProjectContentRow>
-			      			</React.Fragment>
-			      			: ""}
-			      			<Title className="thankyou" color="#fff" width="24rem">Благодарим <br/>за внимание</Title>
-			      		</ProjectContent>
-			      	</ContentPart>
-			      	<ContentPart bg="transparent" padding="10rem 0 10rem 25%">
-			      		<MoreProjects projects={projects} />
-			      	</ContentPart>
-			      	<ContentPart bg="transparent" flex>
-		          	<ContentColumn padding="0 6rem 0 0" width="45rem">
-		          		<Title color="#fff" lineBottom lineBg="#fff" lineWidth="3.5rem">Приступим к работе над вашим проектом?</Title>
-		          	</ContentColumn>
-		          	<ContentColumn width="35rem">
-		          		<TextStyled color="#fff">Заполните бриф: расскажите о вашем бизнесе, задачах и сроках — и мы свяжемся с вами для обсуждения дальнейшего сотрудничества.</TextStyled>
-		          	</ContentColumn>
-		          </ContentPart>
-		          <ContentPartRequestForm bg="transparent" padding="0 0 0 24rem">
-		          	<RequestForm inputStyle="horizontal icon-square" pos={["relative", "", "", "", ""]} buttonLabel="Отправить" />
-		          </ContentPartRequestForm>
-			      </Scroll>
+		    		{/*<CategoryTitle>
+		          <Title fz="5rem" color="#fff" lineBottom lineBg="#fff" lineWidth="3.5rem">Дизайн</Title>
+		          <TextStyled color="#fff" width="18rem" margin="3.5rem 0">Сделайте первое впечатление клиента незабываемым</TextStyled>
+	          </CategoryTitle>*/}
+		      	<ProjectCover index={0} project={project} />
+		      	<a href={"/portfolio/design/?active=" + project.slug}><PortfolioBackBtn className="icon-arrow-bold translate-y" /></a>
+		      	<ContentPart bg="transparent" padding="10rem 20%">
+		      		<ProjectContent theme={project.theme}>
+		      			<div dangerouslySetInnerHTML={{__html: project.description? documentToHtmlString(project.description.json, renderOptions) : ""}} />
+		      			{/*<ProjectContentRow>
+		      				project.descriptionBlocks?
+		      					project.descriptionBlocks.map(node => {
+		      						return (<div className="column"><RichText richText={node.content.json} overrides={overrides} /></div>)
+		      					})
+		      				: ""
+		      			</ProjectContentRow>*/}
+		      			{project.slug === "xena-exchange"?
+		      			<React.Fragment>
+		      				<ProjectContentRow align="center" justify="flex-end">
+		      					<ProjectContentColumn width="45%" padding="0">
+		      						<img src="https://images.ctfassets.net/iqzj3v996p76/6xAJbEHwXedLxNjOxHZFOJ/d0f9e15824e6213e355442fcbe1398e8/02_-_iPhone_XS_Front.png" alt="" />
+		      					</ProjectContentColumn>
+		      					<ProjectContentColumn width="35%">
+		      						<h2>О проекте</h2>
+		      						<p>Xena Exchange – высокотехнологичная платформа для торговли криптовалютными активами, которой требовался стильный и лаконичный дизайн.</p>
+		      						<p>В рамках сотрудничества с Xena Exchange мы успешно провели редизайн основного сайта, личного кабинета и терминала биржи, оформили корпоративный блог и социальные сети, а также запустили несколько промо-кампаний.</p>
+		      					</ProjectContentColumn>
+		      				</ProjectContentRow>
+		      				<ProjectContentRow>
+		      					<ProjectContentColumn width="50%">
+		      						<h2>Главная страница</h2>
+		      						<img src="https://images.ctfassets.net/iqzj3v996p76/15pRkSED7qgChKY2YJr0Ww/ce01470fdd3c8edf36306ed06bf2af0e/B_2.png" alt="" />
+		      						<img src="https://images.ctfassets.net/iqzj3v996p76/3rLBe0b0bZ329tQIfLkb9c/0cfa9a2d5bcae7685e2ca9043fff316c/B_2_Copy_2.png" alt="" />
+		      					</ProjectContentColumn>
+		      					<ProjectContentColumn width="50%">
+		      						<div className="h5rem" />
+		      						<img src="https://images.ctfassets.net/iqzj3v996p76/6oQrVMh7rjfCdNmwbSwg4g/5384a0152384e92da9fa3da485c8365b/B_2_Copy.png" alt="" />
+		      						<img src="https://images.ctfassets.net/iqzj3v996p76/WVikWAizoFcZcflRrYq6H/803fd5b284977ea6b15fe2c53ac0bdad/B_2_Copy_3.png" alt="" />
+		      					</ProjectContentColumn>
+		      				</ProjectContentRow>
+		      				<ProjectContentRow align="center">
+		      					<ProjectContentColumn width="60%">
+		      						<h2>Обзор котировок</h2>
+		      						<img src="https://images.ctfassets.net/iqzj3v996p76/162UWLduPxFeWPjBH6mybM/c10bd2b046408655263a744f2686f7fa/B_2_Copy_4.png" alt="" />
+		      					</ProjectContentColumn>
+		      					<ProjectContentColumn width="40%">
+		      						<img src="https://images.ctfassets.net/iqzj3v996p76/1j8d4dbvgtGLGPjdhx42IU/eed05f80bf79f4e967fa08839ad5b50c/01_-_iPhone_XS_Front.png" alt="" />
+		      					</ProjectContentColumn>
+		      				</ProjectContentRow>
+		      			</React.Fragment>
+		      			: ""}
+		      			<Title className="thankyou" color="#fff" width="24rem">Благодарим <br/>за внимание</Title>
+		      		</ProjectContent>
+		      	</ContentPart>
+		      	<ContentPart bg="transparent" padding="10rem 0 10rem 25%">
+		      		<MoreProjects projects={projects} />
+		      	</ContentPart>
+		      	<ContentPart bg="transparent" flex>
+	          	<ContentColumn padding="0 6rem 0 0" width="45rem">
+	          		<Title color="#fff" lineBottom lineBg="#fff" lineWidth="3.5rem">Приступим к работе над вашим проектом?</Title>
+	          	</ContentColumn>
+	          	<ContentColumn width="35rem">
+	          		<TextStyled color="#fff">Заполните бриф: расскажите о вашем бизнесе, задачах и сроках — и мы свяжемся с вами для обсуждения дальнейшего сотрудничества.</TextStyled>
+	          	</ContentColumn>
+	          </ContentPart>
+	          <ContentPartRequestForm bg="transparent" padding="0 0 0 24rem">
+	          	<RequestForm inputStyle="horizontal icon-square" pos={["relative", "", "", "", ""]} buttonLabel="Отправить" />
+	          </ContentPartRequestForm>
 		      </FrontLayer>
 	      </Section>
 	  </Layout>

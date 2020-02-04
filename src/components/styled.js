@@ -478,7 +478,7 @@ const PortfolioBackBtn = styled.div`
 	border: ${props => props.transparent? "solid 1px #cbd0d9" : "unset"};
 	border-top-right-radius: 4px;
 	border-bottom-right-radius: 4px;
-	position: absolute;
+	position: fixed;
 	left: -1px;
 	top: 50%;
 	padding: 1.8rem 2.5rem;

@@ -37,9 +37,8 @@ const PortfolioDesignPage = (props) => {
 	return (
 		<Layout page="portfolio-design">
 			<SEO title="IGNI | Портфолио" />
-			<Section id={0} active={true} name="section-portfolio" headerStyle="white" footerStyle="white">
+			<Section id={0} active={true} name="section-portfolio" headerStyle="white" footerStyle="white" height="auto">
 				<FrontLayer bg={COLORS.LIGHT_BLACK}>
-					<Scroll overflowLimit={1} width="100%" pos={["absolute", "0", "0", "0", "0"]}>
 	          <ProjectsCarousel id="projects-carousel">
 	          	{projects.map((item, index) => {
                 return (
@@ -108,7 +107,6 @@ const PortfolioDesignPage = (props) => {
 	          <ContentPartRequestForm padding="0 0 0 24rem">
 	          	<RequestForm inputStyle="horizontal icon-square" pos={["relative", "", "", "", ""]} />
 	          </ContentPartRequestForm>
-	        </Scroll>
 				</FrontLayer>
 			</Section>
 		</Layout>
@@ -254,8 +252,8 @@ function carouselNextSlide(index) {
 				} else {
 					projectRefs[0].setState({"next": true});
 				}
-			}, 2400)
-		}, 1000);
+			}, 1800)
+		}, 900);
 	}
 }
 
@@ -277,8 +275,8 @@ function carouselPrevSlide() {
 				if (projectRefs[curIndex + 1]) {
 					projectRefs[curIndex + 1].setState({"next": false});
 				}
-			}, 2400)
-		}, 1000);
+			}, 1800)
+		}, 900);
 	}
 	// const curItem = document.querySelector(".portfolio-item.is-active");
 	// if (curItem) {
@@ -317,12 +315,6 @@ const ProjectsCarousel = styled.div`
 	width: 100%;
 	height: 100vh;
 	position: relative;
-
-	${PortfolioBackBtn} {
-		position: absolute;
-		left: 0;
-		top: 50%;
-	}
 `
 
 export default PortfolioDesignPage

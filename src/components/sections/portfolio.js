@@ -119,6 +119,7 @@ class PortfolioCarousel extends React.Component {
     super(props);
     this.slickNext = this.slickNext.bind(this);
     this.slickPrev = this.slickPrev.bind(this);
+    this.slickGoToSlide = this.slickGoToSlide.bind(this);
     this.settings = {
       className: "slider variable-width",
       dots: false,
@@ -139,12 +140,16 @@ class PortfolioCarousel extends React.Component {
     this.slider.slickPrev();
   }
 
+  slickGoToSlide(index) {
+    this.slider.slickGoTo(index);
+  }
+
   render() {
     return (
       <React.Fragment>
         <Plx className="parallax-element" parallaxData={parallaxData_title} animateWhenNotInViewport={true}>
           <h2><Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "12rem", "", "", "20rem"]}>Нашe портфолио</Title></h2>
-          <PortfolioCarouselMenu id="portfolio-carousel-menu" items={["Дизайн", "Контент", "Маркетинг и реклама", "Диджитал продакшн"]} nextArrowClick={this.slickNext} prevArrowClick={this.slickPrev} />
+          <PortfolioCarouselMenu id="portfolio-carousel-menu" items={["Дизайн", "Контент", "Маркетинг и реклама", "Диджитал продакшн"]} nextArrowClick={this.slickNext} prevArrowClick={this.slickPrev} gotoSlide={this.slickGoToSlide} />
         </Plx>
         <Plx className="parallax-element" parallaxData={parallaxData_cards} animateWhenNotInViewport={true}>
           <PortfolioCarouselStyled id="portfolio-carousel" className="transition-05s">
@@ -193,7 +198,7 @@ const PortfolioCarouselMenu = (props) => (
   <PortfolioCarouselMenuStyled id="portfolio-carousel-menu">
     {props.items.map((item, index) => {
       return (
-        <div key={index} className={"item" + (index === 0? " active" : "")} data-index={index} onClick={carouselItemClick}>{item}</div>
+        <div key={index} className={"item" + (index === 0? " active" : "")} data-index={index} onClick={(e) => props.gotoSlide(e.target.dataset.index)}>{item}</div>
       )
     })}
     <div onClick={props.prevArrowClick} className="arrow arrow-prev icon-prev transition-05s" />

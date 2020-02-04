@@ -34,110 +34,108 @@ const PortfolioContentPage = () => {
 		<Layout page="portfolio-content">
 {/* <Layout page="portfolio-content" menuBtnStyle="right-corner" orderBtnStyle="right-corner" cursorStyle="dark">*/}
 			<SEO title="IGNI | Портфолио" />
-				<Section id={0} active={true} name="section-portfolio" headerStyle="dark" footerStyle="dark">
+				<Section id={0} active={true} name="section-portfolio" headerStyle="dark" footerStyle="dark" height="auto">
 					<FrontLayer bg={COLORS.BG_GREY}>
-						<Scroll overflowLimit={1} width="auto" pos={["absolute", "0", "0", "0", "0"]} margin="0">
-							<ContentPart bg="transparent" padding="10rem 24rem">
-			          <Title fz="5rem" color={COLORS.RED} lineBottom lineBg={COLORS.BLACK}>Контент-маркетинг</Title>
-			          <TextStyled color={COLORS.BLACK} width="18rem" margin="3.5rem 0">Позвольте клиенту найти то, что он ищет</TextStyled>
-				        <PortfolioSlogan>
-				        	<Title fz="8rem" outline outlineColor={COLORS.GREY} color={COLORS.BG_GREY}><span className="black no-outline">Наша задача – </span>убедить потенциального клиента в том, что ваш продукт решает его проблему. <br/>Мы делаем это с помощью <span className="red no-outline">контента</span></Title>
-				        	{/*<img src={contentText} alt="" />*/}
-				        </PortfolioSlogan>
-			        </ContentPart>
-				      <ArrowDown src={arrowDown} alt="" />
-			        <ContentPart bg="transparent" padding="5rem 24rem">
-				        <Title color={COLORS.BLACK} margin="0 0 7rem 0">Услуги</Title>
-				        <InfoBlocks padding="0 3rem" lineColor={COLORS.GREY}>
-				        	<div className="block" style={{"borderLeft" : "unset", "paddingLeft": 0}}>
-				        		<Title color={COLORS.BLACK} fz="1.7rem">Нейминг</Title>
-				        	</div>
-				        	<div className="block">
-				        		<Title color={COLORS.BLACK} fz="1.7rem">Контент-маркетинг</Title>
-				        	</div>
-				        	<div className="block">
-				        		<Title color={COLORS.BLACK} fz="1.7rem">Наполнение сайта</Title>
-				        	</div>
-				        	<div className="block">
-				        		<Title color={COLORS.BLACK} fz="1.7rem">Ведение корпоративного или авторского блога</Title>
-				        	</div>
-				        	<div className="block">
-				        		<Title color={COLORS.BLACK} fz="1.7rem">SEO-оптимизация</Title>
-				        	</div>
-				        	<div className="block">
-				        		<Title color={COLORS.BLACK} fz="1.7rem">Локализация</Title>
-				        	</div>
-				        	<div className="block">
-				        		<Title color={COLORS.BLACK} fz="1.7rem">Креативы для рекламы</Title>
-				        	</div>
-				        	<div className="block" style={{"borderRight" : "unset"}}>
-				        		<Title color={COLORS.BLACK} fz="1.7rem">Презентационные материалы</Title>
-				        	</div>
-				        </InfoBlocks>
-			        </ContentPart>
-			        <ContentPart bg="transparent" padding="5rem 24rem">
-				        <Title color={COLORS.BLACK} margin="0 0 7rem 0">Статистика</Title>
-				        <InfoBlocks itemsCount={5}>
-				        	<div className="block">
-				        		<Title margin="0 0 2.5rem 0">+280 <small>%</small></Title>
-				        		<TextStyled color={COLORS.BLACK}>Количество лидов</TextStyled>
-				        	</div>
-				        	<div className="block">
-				        		<Title margin="0 0 2.5rem 0">+145 <small>%</small></Title>
-				        		<TextStyled color={COLORS.BLACK}>Длина сессии</TextStyled>
-				        	</div>
-				        	<div className="block">
-				        		<Title margin="0 0 2.5rem 0">+60 <small>%</small></Title>
-				        		<TextStyled color={COLORS.BLACK}>Глубина просмотра</TextStyled>
-				        	</div>
-				        	<div className="block">
-				        		<img className="icon" alt="" src={teamIcon} />
-				        		<TextStyled color={COLORS.BLACK}>Новые источники трафика</TextStyled>
-				        	</div>
-				        	<div className="block">
-				        		<img className="icon" alt="" src={baloonIcon} />
-				        		<TextStyled color={COLORS.BLACK}>Увеличение доверия к бренду</TextStyled>
-				        	</div>
-				        </InfoBlocks>
-				        <TextStyled color={COLORS.BLACK}><span className="red">*</span> Средние показатели на основании существующих кейсов</TextStyled>
-			        </ContentPart>
-			        <ContentPart bg="transparent" padding="5rem 24rem">
-				        <Title color={COLORS.BLACK} margin="0 0 5rem 0">Портфолио</Title>
-				        {projects.map((item, index) => {
-				        	console.log(item);
-	                return (
-	                  <PortfolioContent key={item.id} project={item} type="all" last={index + 1 === projects.length} />
-	                )
-	              })}
-              </ContentPart>
-              <ContentPart bg={COLORS.LIGHT_BLACK} color="#fff" flex>
-		          	<ContentColumn width="30%" padding="5rem 0">
-		          		<Title color="#fff" lineBottom lineBg="#fff">Приступим к работе над вашим проектом?</Title>
-		          	</ContentColumn>
-		          	<ContentColumn width="70%">
-		          		<CallbackForm />
-		          	</ContentColumn>
-		          </ContentPart>
-		          <ContentPart bg="transparent">
-	              <Title fz="5rem" color={COLORS.BLACK}>Ведение личного <br/>блога</Title>
-	              {projectsBlog.map((item, index) => {
-	                return (
-	                  <PortfolioContent key={item.id} project={item} type="blog" last={index + 1 === projectsBlog.length} />
-	                )
-	              })}
-              </ContentPart>
-              <ContentPart bg="transparent" padding="5rem 24rem 7rem 24rem" flex>
-		          	<ContentColumn width="50rem" padding="0 10rem 0 0">
-		          		<Title color={COLORS.BLACK} lineBottom lineBg={COLORS.BLACK}>Приступим к работе над вашим проектом?</Title>
-		          	</ContentColumn>
-		          	<ContentColumn width="40rem">
-		          		<TextStyled color={COLORS.BLACK}>Заполните бриф — расскажите о вашем бизнесе, задачах и сроках — и мы свяжемся с вами для дальнейшего обсуждения сотрудничества. </TextStyled>
-		          	</ContentColumn>
-		          </ContentPart>
-              <ContentPartRequestForm padding="0 0 0 24rem">
-		          	<RequestForm inputStyle="horizontal icon-square" pos={["relative", "", "", "", ""]} />
-		          </ContentPartRequestForm>
-		        </Scroll>
+						<ContentPart bg="transparent" padding="10rem 24rem">
+		          <Title fz="5rem" color={COLORS.RED} lineBottom lineBg={COLORS.BLACK}>Контент-маркетинг</Title>
+		          <TextStyled color={COLORS.BLACK} width="18rem" margin="3.5rem 0">Позвольте клиенту найти то, что он ищет</TextStyled>
+			        <PortfolioSlogan>
+			        	<Title fz="8rem" outline outlineColor={COLORS.GREY} color={COLORS.BG_GREY}><span className="black no-outline">Наша задача – </span>убедить потенциального клиента в том, что ваш продукт решает его проблему. <br/>Мы делаем это с помощью <span className="red no-outline">контента</span></Title>
+			        	{/*<img src={contentText} alt="" />*/}
+			        </PortfolioSlogan>
+		        </ContentPart>
+			      <ArrowDown src={arrowDown} alt="" />
+		        <ContentPart bg="transparent" padding="5rem 24rem">
+			        <Title color={COLORS.BLACK} margin="0 0 7rem 0">Услуги</Title>
+			        <InfoBlocks padding="0 3rem" lineColor={COLORS.GREY}>
+			        	<div className="block" style={{"borderLeft" : "unset", "paddingLeft": 0}}>
+			        		<Title color={COLORS.BLACK} fz="1.7rem">Нейминг</Title>
+			        	</div>
+			        	<div className="block">
+			        		<Title color={COLORS.BLACK} fz="1.7rem">Контент-маркетинг</Title>
+			        	</div>
+			        	<div className="block">
+			        		<Title color={COLORS.BLACK} fz="1.7rem">Наполнение сайта</Title>
+			        	</div>
+			        	<div className="block">
+			        		<Title color={COLORS.BLACK} fz="1.7rem">Ведение корпоративного или авторского блога</Title>
+			        	</div>
+			        	<div className="block">
+			        		<Title color={COLORS.BLACK} fz="1.7rem">SEO-оптимизация</Title>
+			        	</div>
+			        	<div className="block">
+			        		<Title color={COLORS.BLACK} fz="1.7rem">Локализация</Title>
+			        	</div>
+			        	<div className="block">
+			        		<Title color={COLORS.BLACK} fz="1.7rem">Креативы для рекламы</Title>
+			        	</div>
+			        	<div className="block" style={{"borderRight" : "unset"}}>
+			        		<Title color={COLORS.BLACK} fz="1.7rem">Презентационные материалы</Title>
+			        	</div>
+			        </InfoBlocks>
+		        </ContentPart>
+		        <ContentPart bg="transparent" padding="5rem 24rem">
+			        <Title color={COLORS.BLACK} margin="0 0 7rem 0">Статистика</Title>
+			        <InfoBlocks itemsCount={5}>
+			        	<div className="block">
+			        		<Title margin="0 0 2.5rem 0">+280 <small>%</small></Title>
+			        		<TextStyled color={COLORS.BLACK}>Количество лидов</TextStyled>
+			        	</div>
+			        	<div className="block">
+			        		<Title margin="0 0 2.5rem 0">+145 <small>%</small></Title>
+			        		<TextStyled color={COLORS.BLACK}>Длина сессии</TextStyled>
+			        	</div>
+			        	<div className="block">
+			        		<Title margin="0 0 2.5rem 0">+60 <small>%</small></Title>
+			        		<TextStyled color={COLORS.BLACK}>Глубина просмотра</TextStyled>
+			        	</div>
+			        	<div className="block">
+			        		<img className="icon" alt="" src={teamIcon} />
+			        		<TextStyled color={COLORS.BLACK}>Новые источники трафика</TextStyled>
+			        	</div>
+			        	<div className="block">
+			        		<img className="icon" alt="" src={baloonIcon} />
+			        		<TextStyled color={COLORS.BLACK}>Увеличение доверия к бренду</TextStyled>
+			        	</div>
+			        </InfoBlocks>
+			        <TextStyled color={COLORS.BLACK}><span className="red">*</span> Средние показатели на основании существующих кейсов</TextStyled>
+		        </ContentPart>
+		        <ContentPart bg="transparent" padding="5rem 24rem">
+			        <Title color={COLORS.BLACK} margin="0 0 5rem 0">Портфолио</Title>
+			        {projects.map((item, index) => {
+			        	console.log(item);
+                return (
+                  <PortfolioContent key={item.id} project={item} type="all" last={index + 1 === projects.length} />
+                )
+              })}
+            </ContentPart>
+            <ContentPart bg={COLORS.LIGHT_BLACK} color="#fff" flex>
+	          	<ContentColumn width="30%" padding="5rem 0">
+	          		<Title color="#fff" lineBottom lineBg="#fff">Приступим к работе над вашим проектом?</Title>
+	          	</ContentColumn>
+	          	<ContentColumn width="70%">
+	          		<CallbackForm />
+	          	</ContentColumn>
+	          </ContentPart>
+	          <ContentPart bg="transparent">
+              <Title fz="5rem" color={COLORS.BLACK}>Ведение личного <br/>блога</Title>
+              {projectsBlog.map((item, index) => {
+                return (
+                  <PortfolioContent key={item.id} project={item} type="blog" last={index + 1 === projectsBlog.length} />
+                )
+              })}
+            </ContentPart>
+            <ContentPart bg="transparent" padding="5rem 24rem 7rem 24rem" flex>
+	          	<ContentColumn width="50rem" padding="0 10rem 0 0">
+	          		<Title color={COLORS.BLACK} lineBottom lineBg={COLORS.BLACK}>Приступим к работе над вашим проектом?</Title>
+	          	</ContentColumn>
+	          	<ContentColumn width="40rem">
+	          		<TextStyled color={COLORS.BLACK}>Заполните бриф — расскажите о вашем бизнесе, задачах и сроках — и мы свяжемся с вами для дальнейшего обсуждения сотрудничества. </TextStyled>
+	          	</ContentColumn>
+	          </ContentPart>
+            <ContentPartRequestForm padding="0 0 0 24rem">
+	          	<RequestForm inputStyle="horizontal icon-square" pos={["relative", "", "", "", ""]} />
+	          </ContentPartRequestForm>
 					</FrontLayer>
 				</Section>
 		</Layout>

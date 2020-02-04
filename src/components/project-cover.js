@@ -106,7 +106,7 @@ const animateUnload = keyframes`
 		left: 0;
 		top: 50%;
   }
-  40% {
+  50% {
   	opacity: 1;
 		width: 50%;
 		height: 50%;
@@ -133,7 +133,7 @@ const animateLoad = keyframes`
     left: 100%;
     transform: translate3d(-50%, -50%, 0);
   }
-  40% {
+  50% {
   	opacity: 1;
 		width: 50%;
 		height: 50%;
@@ -191,7 +191,7 @@ const ProjectStyled = styled.div`
 	}
 
 	&.animate-unload {
-		animation: 2.4s ${animateUnload} ease-out forwards;
+		animation: 1.8s ${animateUnload} ease-out forwards;
 
 		${ProjectInfo} {
     	opacity: 0;
@@ -199,7 +199,7 @@ const ProjectStyled = styled.div`
 	}
 
 	&.animate-load {
-		animation: 2.4s ${animateLoad} ease-out forwards;
+		animation: 1.8s ${animateLoad} ease-out forwards;
 
 		${ProjectInfo} {
     	opacity: 0;

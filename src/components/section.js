@@ -59,7 +59,7 @@ class Section extends React.Component {
 
   render() {
     return (
-    	<SectionStyled data-id={this.id} ref={this.sectionRef} className={"site-section" + (this.state.active? " active" : "") + " " + this.props.name}>
+    	<SectionStyled data-id={this.id} ref={this.sectionRef} className={"site-section" + (this.state.active? " active" : "") + " " + this.props.name} height={this.props.height}>
     		{this.children}
     	</SectionStyled>
     )
@@ -127,6 +127,7 @@ Section.propTypes = {
   id: PropTypes.number,
   headerStyle: PropTypes.string,
   footerStyle: PropTypes.string,
+  height: PropTypes.string,
   name: PropTypes.string,
   scrollControllerElements: PropTypes.object,
   onLoad: PropTypes.func,
@@ -137,6 +138,7 @@ Section.defaultProps = {
   id: 0,
   headerStyle: "white",
   footerStyle: "white",
+  height: "100vh",
   name: "",
   scrollControllerElements: null
 }

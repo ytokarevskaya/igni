@@ -11,7 +11,8 @@ import { applyStyles } from "../scroll-controller"
 
 import { COLORS, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, SectionScroll, PlusBtn } from "../styled"
 
-import fireSrc from "../../images/fire.svg"
+import aboutItemMask from "../../images/about-item-mask.svg"
+import aboutItemMaskHover from "../../images/about-item-mask-hover.svg"
 
 const SectionAbout = (props) => {
   const { edges } = useCategoriesData()
@@ -107,7 +108,6 @@ const SectionAbout = (props) => {
 class AboutItem extends React.Component {
   constructor(props) {
     super(props);
-    this.redBtn = React.createRef();
   }
 
   moveBtn(e) {
@@ -136,7 +136,6 @@ class AboutItem extends React.Component {
           <div>
             <TextStyled color={COLORS.BLACK} lh="1.15" className="is-ul-red" dangerouslySetInnerHTML={{__html: documentToHtmlString(this.props.content? this.props.content.json : "")}} />
           </div>
-          <PlusBtn ref={this.redBtn} />
         </AboutItemStyled>
       </a>
     )
@@ -163,13 +162,16 @@ const AboutItemStyled = styled.div`
   position: relative;
   color: ${COLORS.BLACK};
   width: 30rem;
-  padding: 5rem 3.5rem 6rem 3.5rem;
+  padding: 5rem 4rem;
   margin: 0 5rem 5rem 0;
-  border-radius: 3px;
+  // border-radius: 3px;
   cursor: none;
+  background-image: url(${aboutItemMask});
+  background-size: 100% 100%;
 
   &:hover {
-    box-shadow: 0 4px 15px -5px rgba(0, 0, 0, 0.35);
+    background-image: url(${aboutItemMaskHover});
+    // box-shadow: 0 4px 15px -5px rgba(0, 0, 0, 0.35);
   }
 
   .bg {
@@ -180,11 +182,11 @@ const AboutItemStyled = styled.div`
     height: 100%;
     pointer-events: none;
     z-index: 0;
-    background-color: #fff;
-    background-size: contain;
-    background-position: top right;
-    background-repeat: no-repeat;
-    background-image: ${props => "url(" + props.bgImg + ")" || "unset"};
+    // background-color: #fff;
+    // background-size: contain;
+    // background-position: top right;
+    // background-repeat: no-repeat;
+    // background-image: ${props => "url(" + props.bgImg + ")" || "unset"};
     border-radius: 3px;
   }
 

@@ -318,7 +318,7 @@ const MenuBtn = styled.div`
 
     div {
       width: 1.2rem;
-      height: 0.8px;
+      height: 1px;
       background: rgba(151, 151, 151, 0.6);
       position: absolute;
       left: 50%;

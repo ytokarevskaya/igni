@@ -180,7 +180,7 @@ const MoreProjects = (props) => {
 			<div className="carousel-content">
 				{props.projects.map((item, index) => {
 					return (
-						<MoreProjectsCarouselItem key={item.id} className={index === 0? "active transition-05s" : ""} bg={item.backgroundColor} bgImg={item.backgroundImg? item.backgroundImg.file.url : ""} bgSize={item.backgroundMode === "Contain"? item.backgroundSize : ""} theme={item.theme}>
+						<MoreProjectsCarouselItem key={item.id} className={index === 0? "active transition-05s" : ""} bg={item.backgroundColor} bgImg={(item.backgroundImg? item.backgroundImg.file.url : "")} bgSize={(item.backgroundMode === "Contain"? item.backgroundSize : "")} theme={item.theme}>
 							<a className="div_100" href={"/portfolio/" + item.category.slug + "/" + item.slug}>
 								<div className="info ff-bebas">
 									<div>{new Date(item.date).getFullYear()}</div>

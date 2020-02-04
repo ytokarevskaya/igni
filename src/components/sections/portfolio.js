@@ -123,6 +123,7 @@ class PortfolioCarousel extends React.Component {
     this.settings = {
       className: "slider variable-width",
       dots: false,
+      arrows: false,
       infinite: true,
       speed: 1200,
       slidesToShow: 1,
@@ -304,10 +305,10 @@ const PortfolioCarouselMenuStyled = styled.aside`
 
 const PortfolioCarouselStyled = styled.div`
   position: absolute;
-  left: 15rem;
+  left: 0;
   right: 0;
   top: 20rem;
-  padding-left: 5rem;
+  padding-left: 20rem;
 
   .carousel-content {
     height: 100%;

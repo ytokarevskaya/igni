@@ -160,7 +160,6 @@ const AboutItems = styled.div`
 
 const AboutItemStyled = styled.div`
   position: relative;
-  color: ${COLORS.BLACK};
   width: 30rem;
   padding: 5rem 4rem;
   margin: 0 5rem 5rem 0;
@@ -169,9 +168,26 @@ const AboutItemStyled = styled.div`
   background-image: url(${aboutItemMask});
   background-size: 100% 100%;
 
+  ${Title}, ${TextStyled} {
+    color: #fff;
+    transition: color 500ms ease;
+  }
+
+  .is-ul-red ul li::before {
+    background: #fff;
+    transition: background 500ms ease;
+  }
+
   &:hover {
     background-image: url(${aboutItemMaskHover});
-    // box-shadow: 0 4px 15px -5px rgba(0, 0, 0, 0.35);
+    
+    ${Title}, ${TextStyled} {
+      color: ${COLORS.BLACK};
+    }
+
+    .is-ul-red ul li::before {
+      background: ${COLORS.RED};
+    }
   }
 
   .bg {

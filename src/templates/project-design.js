@@ -107,7 +107,7 @@ const ProjectPage = ({ data }) => {
 		      	<ProjectCover index={0} project={project} />
 		      	<a href={"/portfolio/design/?active=" + project.slug}><PortfolioBackBtn className="icon-arrow-bold translate-y" /></a>
 		      	<ContentPart bg="transparent" padding="10rem 20%">
-		      		<ProjectContent theme={project.theme}>
+		      		<ProjectContent color={project.theme}>
 		      			<div dangerouslySetInnerHTML={{__html: project.description? documentToHtmlString(project.description.json, renderOptions) : ""}} />
 		      			{/*<ProjectContentRow>
 		      				project.descriptionBlocks?
@@ -155,7 +155,25 @@ const ProjectPage = ({ data }) => {
 		      		</ProjectContent>
 		      	</ContentPart>
 		      	<ContentPart bg="transparent" padding="10rem 0 10rem 25%">
-		      		<MoreProjects projects={projects} />
+		      		<MoreProjectsCarousel id="more-projects-carousel">
+								<div className="carousel-content">
+									{projects.map(function(item, index) {
+										return (
+											<MoreProjectsCarouselProject className={index === 0? "active transition-05s" : ""} bgColor={item.backgroundColor} bgImg={item.backgroundImg? item.backgroundImg.file.url : ""} bgSize={item.backgroundMode === "Contain"? item.backgroundSize : ""}>
+												<a className="div_100" href={"/portfolio/" + item.category.slug + "/" + item.slug}>
+													<div className="info ff-bebas">
+														<div>{new Date(item.date).getFullYear()}</div>
+														<div>{item.subcategory}</div>
+													</div>
+												</a>
+												<div className="title ff-bebas">{item.projectTitle}</div>
+												<div className="project-next icon-arrow-bold left" data-dir="-1" onClick={projectChange} />
+												<div className="project-next icon-arrow-bold right" data-dir="1" onClick={projectChange} />
+											</MoreProjectsCarouselProject>
+										)
+									})}
+								</div>
+							</MoreProjectsCarousel>
 		      	</ContentPart>
 		      	<ContentPart bg="transparent" flex>
 	          	<ContentColumn padding="0 6rem 0 0" width="45rem">
@@ -171,30 +189,6 @@ const ProjectPage = ({ data }) => {
 		      </FrontLayer>
 	      </Section>
 	  </Layout>
-	)
-}
-
-const MoreProjects = (props) => {
-	return (
-		<MoreProjectsCarousel id="more-projects-carousel">
-			<div className="carousel-content">
-				{props.projects.map((item, index) => {
-					return (
-						<MoreProjectsCarouselItem key={item.id} className={index === 0? "active transition-05s" : ""} bg={item.backgroundColor} bgImg={(item.backgroundImg? item.backgroundImg.file.url : "")} bgSize={(item.backgroundMode === "Contain"? item.backgroundSize : "")} theme={item.theme}>
-							<a className="div_100" href={"/portfolio/" + item.category.slug + "/" + item.slug}>
-								<div className="info ff-bebas">
-									<div>{new Date(item.date).getFullYear()}</div>
-									<div>{item.subcategory}</div>
-								</div>
-							</a>
-							<div className="title ff-bebas">{item.projectTitle}</div>
-							<div className="project-next icon-arrow-bold left" data-dir="-1" onClick={projectChange} />
-							<div className="project-next icon-arrow-bold right" data-dir="1" onClick={projectChange} />
-						</MoreProjectsCarouselItem>
-					)
-				})}
-			</div>
-		</MoreProjectsCarousel>
 	)
 }
 
@@ -216,14 +210,14 @@ function projectChange(e) {
 	}
 }
 
-const MoreProjectsCarouselItem = styled.div`
+const MoreProjectsCarouselProject = styled.div`
 	position: relative;
 	height: 100%;
 	width: 90rem;
-	color: ${props => props.theme === "Dark"? "#fff" : COLORS.BLACK};
-	background-color: ${props => props.bg || "#fff"};
-	background-image: ${props => props.bgImg? "url(" + props.bgImg + ")" : "unset"};
-	background-size: ${props => props.bgSize? props.bgSize : "cover"};
+	color: #fff;
+	background-color: ${props => props.bgColor || "#fff"};
+	background-image: ${props => props.bgImg? ("url(" + props.bgImg + ")") : "unset"};
+	background-size: ${props => props.bgSize || "cover"};
 	background-repeat: no-repeat;
 	background-position: center center;
 	flex-shrink: 0;
@@ -319,13 +313,13 @@ const ProjectContentColumn = styled.div`
 	flex-grow: 0;
 	width: ${props => props.width || "100%"};
 	padding: ${props => props.padding || "3rem"};
-`;
+`
 
 const ProjectContent = styled.div`
 	position: relative;
 	font-size: 1.6rem;
 	line-height: 1.5;
-	color: ${props => props.theme === "Dark"? "#fff" : COLORS.BLACK};
+	color: ${props => props.color === "Dark"? "#fff" : COLORS.BLACK};
 
 	h1, h2, h3, h4, h5, h6 {
 		font-family: "Bebas", sans-serif;

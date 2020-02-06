@@ -74,6 +74,8 @@ const ProjectPage = ({ data }) => {
 	  }
 	});
 
+	console.log(projects);
+
 	const renderOptions = {
 	  renderNode: {
 	    [BLOCKS.EMBEDDED_ASSET]: node => {
@@ -158,15 +160,16 @@ const ProjectPage = ({ data }) => {
 		      		<MoreProjectsCarousel id="more-projects-carousel">
 								<div className="carousel-content">
 									{projects.map(function(item, index) {
+										const projectItem = projects[index];
 										return (
-											<MoreProjectsCarouselProject className={index === 0? "active transition-05s" : ""} bgColor={item.backgroundColor} bgImg={item.backgroundImg? item.backgroundImg.file.url : ""} bgSize={item.backgroundMode === "Contain"? item.backgroundSize : ""}>
-												<a className="div_100" href={"/portfolio/" + item.category.slug + "/" + item.slug}>
+											<MoreProjectsCarouselProject className={index === 0? "active transition-05s" : ""} bgColor={projectItem.backgroundColor} bgImg={projectItem.backgroundImg? projectItem.backgroundImg.file.url : ""} bgSize={projectItem.backgroundMode === "Contain"? projectItem.backgroundSize : ""}>
+												<a className="div_100" href={"/portfolio/" + projectItem.category.slug + "/" + projectItem.slug}>
 													<div className="info ff-bebas">
-														<div>{new Date(item.date).getFullYear()}</div>
-														<div>{item.subcategory}</div>
+														<div>{new Date(projectItem.date).getFullYear()}</div>
+														<div>{projectItem.subcategory}</div>
 													</div>
 												</a>
-												<div className="title ff-bebas">{item.projectTitle}</div>
+												<div className="title ff-bebas">{projectItem.projectTitle}</div>
 												<div className="project-next icon-arrow-bold left" data-dir="-1" onClick={projectChange} />
 												<div className="project-next icon-arrow-bold right" data-dir="1" onClick={projectChange} />
 											</MoreProjectsCarouselProject>
@@ -215,7 +218,7 @@ const MoreProjectsCarouselProject = styled.div`
 	height: 100%;
 	width: 90rem;
 	color: #fff;
-	background-color: ${props => props.bgColor || "#fff"};
+	background-color: ${props => props.bgColor || COLORS.BLACK};
 	background-image: ${props => props.bgImg? ("url(" + props.bgImg + ")") : "unset"};
 	background-size: ${props => props.bgSize || "cover"};
 	background-repeat: no-repeat;

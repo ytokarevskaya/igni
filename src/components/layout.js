@@ -7,6 +7,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import Header from "./header"
 import Footer from "./footer"
 import { onWindowResize, onPageLoad } from "./functions"
+import { getURLParameter } from "./utils"
 import { CursorBtn } from "./styled"
 
 import * as preloaderData from "./preloader.json"
@@ -38,6 +39,7 @@ class Layout extends React.Component {
   componentDidMount() {
     this.setState({"loaded": true});
     document.body.classList.add(this.props.page);
+    checkScrollPos();
     setTimeout(() => {
       this.setState({"preloaderShow": false});
     }, 2000);
@@ -56,6 +58,21 @@ class Layout extends React.Component {
     cursor.style.top = e.clientY + "px";
   }
 
+  onWheel() {
+    const curPos = document.documentElement.scrollTop || window.pageYOffset;
+    const pageHeight = document.body.offsetHeight;
+    const footerScrollHelp = document.getElementById("footer-scroll-help");
+    const footerOrderBtn = document.getElementById("footer-callback-btn");
+
+    if (curPos >= pageHeight - window.innerHeight * 1.5) {
+      if (footerScrollHelp) footerScrollHelp.classList.add("is-hidden");
+      if (footerOrderBtn) footerOrderBtn.classList.add("is-hidden");
+    } else {
+      if (footerScrollHelp) footerScrollHelp.classList.remove("is-hidden");
+      if (footerOrderBtn) footerOrderBtn.classList.remove("is-hidden");
+    }
+  }
+
   render() {
     const preloaderDefaultOptions = {
       loop: true,
@@ -67,7 +84,7 @@ class Layout extends React.Component {
     }
 
     return (
-      <SiteMain onMouseMove={(e) => this.cursorFollow(e)} className={this.state.loaded? "loaded" : ""}>
+      <SiteMain onMouseMove={(e) => this.cursorFollow(e)} onWheel={this.onWheel} className={this.state.loaded? "loaded" : ""}>
         <PreloaderCover className={this.state.preloaderShow? "" : "hidden"}>
           <Lottie options={preloaderDefaultOptions} isStopped={false} isPaused={false} height="100vh" width="100vw" />
         </PreloaderCover>
@@ -79,6 +96,14 @@ class Layout extends React.Component {
         }
       </SiteMain>
     )
+  }
+}
+
+function checkScrollPos() {
+  const scrollTo = getURLParameter("scrollto");
+  if (scrollTo) {
+    const scrollToElement = document.getElementById("scrollTo-" + scrollTo);
+    if (scrollToElement) scrollToElement.scrollIntoView({behavior: "smooth", block: "start"});
   }
 }
 

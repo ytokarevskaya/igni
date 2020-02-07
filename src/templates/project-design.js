@@ -156,11 +156,13 @@ const ProjectPage = ({ data }) => {
 		      			<Title className="thankyou" color="#fff" width="24rem">Благодарим <br/>за внимание</Title>
 		      		</ProjectContent>
 		      	</ContentPart>
+		      	{/*<MoreProjectsCarouselProject className={index === 0? "active transition-05s" : ""} bgColor={projectItem.backgroundColor} bgImg={projectItem.backgroundImg? projectItem.backgroundImg.file.url : ""} bgSize={projectItem.backgroundMode === "Contain"? projectItem.backgroundSize : ""}>*/}
 		      	<ContentPart bg="transparent" padding="10rem 0 10rem 25%">
 		      		<MoreProjectsCarousel id="more-projects-carousel">
 								<div className="carousel-content">
-									{projects.map(function(item, index) {
-										const projectItem = projects[index];
+									{projects.map(function(projectItem, index) {
+										// const projectItem = projects[index];
+										// const bgImg = projectItem.backgroundImg? "url(" + projectItem.backgroundImg.file.url + ")" : "";
 										return (
 											<MoreProjectsCarouselProject className={index === 0? "active transition-05s" : ""} bgColor={projectItem.backgroundColor} bgImg={projectItem.backgroundImg? projectItem.backgroundImg.file.url : ""} bgSize={projectItem.backgroundMode === "Contain"? projectItem.backgroundSize : ""}>
 												<a className="div_100" href={"/portfolio/" + projectItem.category.slug + "/" + projectItem.slug}>
@@ -295,6 +297,73 @@ const MoreProjectsCarousel = styled.div`
 		display: flex;
 		flex-wrap: nowrap;
 		transition: all 1000ms ease;
+	}
+
+	.carousel-item {
+		position: relative;
+		height: 100%;
+		width: 90rem;
+		color: #fff;
+		background-repeat: no-repeat;
+		background-position: center center;
+		flex-shrink: 0;
+		margin-right: 10rem;
+		box-shadow: 3px 5px 19px -8px rgba(0, 0, 0, 0.35);
+
+		&.active {
+			.title {
+				font-weight: bold;
+			}
+		}
+
+		&:first-child {
+			.project-next.left {
+				display: none;
+			}
+		}
+
+		&:last-child {
+			.project-next.right {
+				display: none;
+			}
+		}
+
+		.title {
+			font-size: 5rem;
+	  	font-weight: 100;
+	  	text-transform: uppercase;
+	  	position: absolute;
+	  	bottom: -10rem;
+	  	left: 0;
+		}
+
+		.info {
+			font-size: 1.8rem;
+			position: absolute;
+			left: 3.5rem;
+			top: 3.5rem;
+			bottom: 3.5rem;
+			width: 20rem;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+
+		.project-next {
+			position: absolute;
+			top: 50%;
+			font-size: 2.2rem;
+			z-index: 1;
+
+			&.left {
+				left: 3.5rem;
+				transform: translateY(-50%);
+			}
+			&.right {
+				transform: rotate(180deg) translateY(50%);
+				right: 3.5rem;
+			}
+		}
 	}
 `
 

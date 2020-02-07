@@ -29,21 +29,13 @@ function checkScroll() {
     video.parentElement.classList.remove("is-blurred");
   }
 
-  const curPos = scrollTop;
-  if (curPos >= window.sectionObjects[4].top * 0.8) {
-    document.getElementById("footer-scroll-help").classList.add("is-hidden");
-    document.getElementById("footer-callback-btn").classList.add("is-hidden");
-  } else {
-    document.getElementById("footer-scroll-help").classList.remove("is-hidden");
-    document.getElementById("footer-callback-btn").classList.remove("is-hidden");
-  }
   const menu = document.getElementById("side-menu");
 
   if (menu) {
     let activeIndex = 0;
     for (let i = 0; i < 5; i++) {
       const section = window.sectionObjects[i];
-      if (section && curPos >= section.top * 0.9 && curPos < section.bottom) {
+      if (section && scrollTop >= section.top * 0.9 && scrollTop < section.bottom) {
         activeIndex = i;
       }
     };

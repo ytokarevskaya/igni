@@ -49,7 +49,7 @@ class Header extends React.Component {
             <img src={logoSrc} className="transition-05s" alt="IGNI Logo" />
           </Logo>
         </a>
-        <MainMenu className={this.state.menuOpened? "opened" : ""} onMouseMove={(e) => this.cursorFollow(e)}>
+        <MainMenu className={this.state.menuOpened? "opened" : ""}>
           <BgVideo>
             <video autoPlay={true} className="translate-xy" loop={true}>
               <source src={videoSrcWEBM} type='video/webm; codecs="vp8, vorbis"' />
@@ -66,30 +66,29 @@ class Header extends React.Component {
             </div>
             <div className="column transition-05s">
               <Title color="#fff" fz="5rem" lineBottom lineWidth="3.5rem">Дизайн</Title>
-              <a className="menu-link" href="/portfolio/design">Портфолио</a>
-              <div className="menu-link">Статистика</div>
-              <div className="menu-link">Контакты</div>
+              <a className="menu-link" href="/portfolio/design/">Портфолио</a>
+              <a className="menu-link" href="/portfolio/design/?scrollto=statistics">Статистика</a>
+              <a className="menu-link" href="/portfolio/design/?scrollto=contacts">Контакты</a>
             </div>
             <div className="column transition-05s">
               <Title color="#fff" fz="5rem" lineBottom lineWidth="3.5rem">Контент</Title>
-              <a className="menu-link" href="/portfolio/content">Портфолио</a>
-              <div className="menu-link">Статистика</div>
-              <div className="menu-link">Контакты</div>
+              <a className="menu-link" href="/portfolio/content/">Портфолио</a>
+              <a className="menu-link" href="/portfolio/content/?scrollto=statistics">Статистика</a>
+              <a className="menu-link" href="/portfolio/content/?scrollto=contacts">Контакты</a>
             </div>
             <div className="column transition-05s">
               <Title color="#fff" fz="5rem" lineBottom lineWidth="3.5rem">Маркетинг</Title>
-              <a className="menu-link" href="/portfolio/marketing">Портфолио</a>
+              <a className="menu-link" href="/portfolio/marketing/">Портфолио</a>
               <div className="menu-link">Статистика</div>
               <div className="menu-link">Контакты</div>
             </div>
             <div className="column transition-05s">
               <Title color="#fff" fz="5rem" lineBottom lineWidth="3.5rem">Продакшн</Title>
-              <a className="menu-link" href="/portfolio/digital">Портфолио</a>
-              <div className="menu-link">Статистика</div>
-              <div className="menu-link">Контакты</div>
+              <a className="menu-link" href="/portfolio/digital/">Портфолио</a>
+              <a className="menu-link" href="/portfolio/digital/?scrollto=statistics">Статистика</a>
+              <a className="menu-link" href="/portfolio/digital/?scrollto=contacts">Контакты</a>
             </div>
           </MenuList>
-          <CursorBtn ref={this.menuCursor} className={this.state.menuOpened? "visible" : ""} />
         </MainMenu>
         <MenuBtn onClick={(e) => this.menuToggle(e)} className={(this.state.menuOpened? "opened" : "") + " " + this.props.menuBtnStyle}>
           <div className="burger translate-x">

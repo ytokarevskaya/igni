@@ -45,7 +45,7 @@ const PortfolioContentPage = () => {
 			        </PortfolioSlogan>
 		        </ContentPart>
 			      <ArrowDown src={arrowDown} alt="" />
-		        <ContentPart bg="transparent" padding="5rem 24rem">
+		        <ContentPart bg="transparent" padding="5rem 24rem" id="scrollTo-statistics">
 			        <Title color={COLORS.BLACK} margin="0 0 7rem 0">Услуги</Title>
 			        <InfoBlocks padding="0 3rem" lineColor={COLORS.GREY}>
 			        	<div className="block" style={{"borderLeft" : "unset", "paddingLeft": 0}}>
@@ -103,7 +103,6 @@ const PortfolioContentPage = () => {
 		        <ContentPart bg="transparent" padding="5rem 24rem">
 			        <Title color={COLORS.BLACK} margin="0 0 5rem 0">Портфолио</Title>
 			        {projects.map((item, index) => {
-			        	console.log(item);
                 return (
                   <PortfolioContent key={item.id} project={item} type="all" last={index + 1 === projects.length} />
                 )
@@ -125,7 +124,7 @@ const PortfolioContentPage = () => {
                 )
               })}
             </ContentPart>
-            <ContentPart bg="transparent" padding="5rem 24rem 7rem 24rem" flex>
+            <ContentPart bg="transparent" padding="5rem 24rem 7rem 24rem" flex id="scrollTo-contacts">
 	          	<ContentColumn width="50rem" padding="0 10rem 0 0">
 	          		<Title color={COLORS.BLACK} lineBottom lineBg={COLORS.BLACK}>Приступим к работе над вашим проектом?</Title>
 	          	</ContentColumn>

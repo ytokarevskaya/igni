@@ -221,7 +221,7 @@ const CursorBtn = styled.div`
 	  border-radius: 50%;
 	  border: 1px solid #fff;
 	  pointer-events: none;
-	  z-index: 25;
+	  z-index: 50;
 
 	  &::after {
 	    content: '';

@@ -310,6 +310,10 @@ const PortfolioCarouselStyled = styled.div`
   top: 20rem;
   padding-left: 20rem;
 
+  .slick-list {
+    overflow: visible;
+  }
+
   .carousel-content {
     height: 100%;
     display: flex;

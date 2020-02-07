@@ -46,7 +46,7 @@ const PortfolioDigitalPage = (props) => {
 	          <Title fz="5rem" color="#fff" lineBottom lineBg="#fff" lineWidth="3.5rem" width="25rem">Фото и видео продакшн</Title>
 	          <TextStyled color="#fff" width="25rem" margin="3.5rem 0">Визуализируйте ваш бизнес</TextStyled>
           </PortfolioDesignTitle>
-          <ContentPart>
+          <ContentPart id="scrollTo-statistics">
           	<Title color={COLORS.BLACK}>Статистика</Title>
           	<InfoBlocks itemsCount={5}>
 		        	<div className="block">
@@ -72,7 +72,7 @@ const PortfolioDigitalPage = (props) => {
 		        </InfoBlocks>
 		        <TextStyled color={COLORS.BLACK}><span className="red">*</span> Средние показатели на основании существующих кейсов</TextStyled>
           </ContentPart>
-          <ContentPart flex>
+          <ContentPart flex id="scrollTo-contacts">
           	<ContentColumn padding="0 6rem 0 0" width="45rem">
           		<Title color={COLORS.BLACK} lineBottom lineBg={COLORS.BLACK} lineWidth="3.5rem">Приступим к работе над вашим проектом?</Title>
           	</ContentColumn>

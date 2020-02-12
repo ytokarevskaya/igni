@@ -77,15 +77,15 @@ function inputChange(e) {
 }
 
 function inputFocus(e) {
-  const inputFrame = e.currentTarget.parentElement;
-  inputFrame.querySelector("label").classList.add("is-focus");
+  const inputLabel = e.currentTarget.parentElement.querySelector("label");
+  if (inputLabel) inputLabel.classList.add("is-focus");
 }
 
 function inputBlur(e) {
   const input = e.currentTarget;
-  const inputFrame = input.parentElement;
-  if (!input.value) {
-    inputFrame.querySelector("label").classList.remove("is-focus");
+  const inputLabel = input.parentElement.querySelector("label");
+  if (!input.value && inputLabel) {
+    inputLabel.classList.remove("is-focus");
   }
 }
 

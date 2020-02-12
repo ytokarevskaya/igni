@@ -234,7 +234,7 @@ const ArrowDown = styled.img`
 const PortfolioContentStyled = styled.article`
   position: relative;
 	color: ${COLORS.BLACK};
-	padding: 5rem 0;
+	padding: 5rem 0 0 0;
 	border-bottom: 1px solid ${COLORS.BLACK};
 
 	&.last {
@@ -290,11 +290,11 @@ const PortfolioContentStyled = styled.article`
 	main {
 		display: flex;
 		align-items: flex-start;
-		padding: 5rem 0 0 0;
+		padding: 5rem 0;
 		border-top: 1px dashed ${COLORS.LINE_GREY_20};
 		max-height: 50rem;
 		overflow: hidden;
-		transition: all 800ms ease-in-out;
+		transition: all 500ms ease;
 
 		.title {
 			font-size: 1.6rem;

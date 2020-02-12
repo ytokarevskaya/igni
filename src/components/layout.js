@@ -8,7 +8,7 @@ import Header from "./header"
 import Footer from "./footer"
 import { onWindowResize, onPageLoad } from "./functions"
 import { getURLParameter } from "./utils"
-import { CursorBtn } from "./styled"
+import CursorBtn from "./cursor"
 
 import * as preloaderData from "./preloader.json"
 import "./layout.css"
@@ -30,7 +30,6 @@ class Layout extends React.Component {
     super(props);
     this.cursor = React.createRef();
     this.state = {
-      "cursorStyle": this.props.cursorStyle || "",
       "loaded": false,
       "preloaderShow": true
     }
@@ -43,19 +42,6 @@ class Layout extends React.Component {
     setTimeout(() => {
       this.setState({"preloaderShow": false});
     }, 2000);
-  }
-
-  cursorFollow(e) {
-    const cursor = this.cursor.current;
-    if (e.target.classList.contains("full-project-link")) {
-      this.setState({"cursorStyle": "cursor-plus"});
-    } else if (e.target.classList.contains("full-video-link")) {
-      this.setState({"cursorStyle": "cursor-play icon-play"});
-    } else {
-      this.setState({"cursorStyle": this.props.cursorStyle || ""});
-    }
-    cursor.style.left = e.clientX + "px";
-    cursor.style.top = e.clientY + "px";
   }
 
   onWheel() {
@@ -84,15 +70,15 @@ class Layout extends React.Component {
     }
 
     return (
-      <SiteMain onMouseMove={(e) => this.cursorFollow(e)} onWheel={this.onWheel} className={this.state.loaded? "loaded" : ""}>
+      <SiteMain onMouseMove={(e) => this.cursor.current.cursorMove(e)} onWheel={this.onWheel} className={this.state.loaded? "loaded" : ""}>
         <PreloaderCover className={this.state.preloaderShow? "" : "hidden"}>
-          <Lottie options={preloaderDefaultOptions} isStopped={false} isPaused={false} height="100vh" width="100vw" />
+          <Lottie options={preloaderDefaultOptions} isStopped={false} isPaused={false} height="50vh" width="50vw" />
         </PreloaderCover>
         <Header page={this.props.page} menuBtnStyle={this.props.menuBtnStyle} />
         <ContentLayout content={this.props.children} />
         <Footer page={this.props.page} orderBtnStyle={this.props.orderBtnStyle} />
         {this.props.noCursor? "" : 
-          <CursorBtn className={"cursor-btn translate-xy " + this.state.cursorStyle} ref={this.cursor} />
+          <CursorBtn cursorStyle={this.props.cursorStyle} ref={this.cursor} />
         }
       </SiteMain>
     )
@@ -130,7 +116,7 @@ const PreloaderCover = styled.div`
   height: 100vh;
   background: #fff;
   z-index: 200;
-  transition: all 800ms ease;
+  transition: all 1000ms ease 800ms;
   pointer-events: none;
   opacity: 1;
   visibility: visible;
@@ -138,6 +124,18 @@ const PreloaderCover = styled.div`
   &.hidden {
     opacity: 0;
     visibility: hidden;
+
+    > div {
+      opacity: 0;
+    }
+  }
+
+  > div {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 800ms ease;
   }
 `
 

@@ -89,14 +89,14 @@ const PortfolioDesignPage = (props) => {
 	          		<CallbackForm noFileInput buttonLabel="Готово!" />
 	          	</ContentColumn>
 	          </ContentPart>
-	          <ContentPart>
+	          {/*<ContentPart>
 	          	<ContentColumn width="30%">
 	          		<Title color={COLORS.BLACK} lineBottom lineBg={COLORS.BLACK} lineWidth="3.5rem">Почему дизайн имеет значение?</Title>
 	          		<TextStyled color={COLORS.BLACK} margin="3.5rem 0">В нашем блоге вы найдете серию статей, посвященных веб-дизайну. Вы узнаете, зачем делать редизайн, какие сайты дают наибольшую конверсию, какие тренды сейчас наиболее актуальны и многое другое.</TextStyled>
 	          		<RedButton>В блог</RedButton>
 	          	</ContentColumn>
-	          </ContentPart>
-	          <ContentPart flex  id="scrollTo-contacts">
+	          </ContentPart>*/}
+	          <ContentPart flex id="scrollTo-contacts">
 	          	<ContentColumn padding="0 6rem 0 0" width="45rem">
 	          		<Title color={COLORS.BLACK} lineBottom lineBg={COLORS.BLACK} lineWidth="3.5rem">Приступим к работе над вашим проектом?</Title>
 	          	</ContentColumn>

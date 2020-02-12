@@ -210,18 +210,16 @@ const PlusBtn = styled.div`
   // }
 `
 
-const CursorBtn = styled.div`
+const CursorBtnStyled = styled.div`
 	@media screen and (min-width: 1280px) and (pointer: fine) {
 	  position: fixed;
-	  left: 50%;
-	  top: 50%;
+	  left: 0;
+	  top: 0;
 	  width: 4rem;
 	  height: 4rem;
-	  background: rgba(255, 255, 255, 0.5);
-	  border-radius: 50%;
-	  border: 1px solid #fff;
 	  pointer-events: none;
-	  z-index: 50;
+	  z-index: 51;
+	  will-change: transform;
 
 	  &::after {
 	    content: '';
@@ -231,6 +229,20 @@ const CursorBtn = styled.div`
 	    left: 50%;
 	    top: 50%;
 	    transform: translate3d(-50%, -50%, 0);
+	  }
+
+	  & + .cursor-circle {
+	  	position: fixed;
+	  	left: 0;
+	  	top: 0;
+	  	width: 4rem;
+		  height: 4rem;
+		  background: rgba(255, 255, 255, 0.5);
+		  border-radius: 50%;
+		  border: 1px solid #fff;
+		  will-change: transform;
+		  pointer-events: none;
+	  	z-index: 50;
 	  }
 
 	  &::before {
@@ -519,4 +531,4 @@ const BgVideo = styled.div`
 `
 
 
-export { COLORS, SectionStyled, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, CursorBtn, PlusBtn, SectionScroll, ContentPart, InfoBlocks, InputFrame, FormStyled, ContentColumn, RedButton, PortfolioBackBtn, BgVideo }
+export { COLORS, SectionStyled, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, CursorBtnStyled, PlusBtn, SectionScroll, ContentPart, InfoBlocks, InputFrame, FormStyled, ContentColumn, RedButton, PortfolioBackBtn, BgVideo }

@@ -106,7 +106,7 @@ const animateUnload = keyframes`
 		left: 0;
 		top: 50%;
   }
-  50% {
+  30% {
   	opacity: 1;
 		width: 50%;
 		height: 50%;
@@ -133,7 +133,7 @@ const animateLoad = keyframes`
     left: 100%;
     transform: translate3d(-50%, -50%, 0);
   }
-  50% {
+  30% {
   	opacity: 1;
 		width: 50%;
 		height: 50%;

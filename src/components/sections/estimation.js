@@ -8,8 +8,8 @@ import CallbackForm from "../forms/callback-form"
 import { COLORS, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, InputFrame } from "../styled"
 import { applyStyles } from "../scroll-controller"
 
-import iconCircles from "../../images/circles.svg"
-import iconAnalyze from "../../images/analyse.svg"
+import iconAnalyze from "../../images/circles.svg"
+import iconCircles from "../../images/analyse.svg"
 import iconIdea from "../../images/idea.svg"
 
 const parallaxData_title = [
@@ -81,11 +81,11 @@ const SectionEstimation = (props) => (
       <Plx className="parallax-element" parallaxData={parallaxData_desc} animateWhenNotInViewport={true}>
         <EstimationDetails className="scrollController-details">
         	<div className="item">
-        		<img className="icon" src={iconCircles} alt="" />
+        		<img className="icon" src={iconAnalyze} alt="" />
         		<TextStyled margin="3.5rem 0" color="#fff">Анализ производительности, текущего дизайна и наполнения сайта</TextStyled>
         	</div>
         	<div className="item">
-        		<img className="icon" src={iconAnalyze} alt="" />
+        		<img className="icon" src={iconCircles} alt="" />
         		<TextStyled margin="3.5rem 0" color="#fff">Оценка эффективности текущей рекламной кампании</TextStyled>
         	</div>
         	<div className="item">

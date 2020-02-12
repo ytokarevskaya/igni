@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="65" height="61" viewBox="0 0 65 61">
-    <g fill="none" fill-rule="evenodd" transform="translate(3 1)">
-        <path stroke="#777474" stroke-dasharray="0,2" stroke-width="5.1" d="M19.667 57c10.861 0 19.666-8.834 19.666-19.73 0-10.898-8.805-19.732-19.666-19.732C8.805 17.538 0 26.372 0 37.27 0 48.166 8.805 57 19.667 57z"/>
-        <path stroke="#FFF" stroke-dasharray="0,4" stroke-linecap="round" stroke-width="4.1" d="M39.333 57C50.195 57 59 48.166 59 37.27c0-10.898-8.805-19.732-19.667-19.732-10.861 0-19.666 8.834-19.666 19.731C19.667 48.166 28.472 57 39.333 57z"/>
-        <ellipse cx="29.5" cy="19.731" stroke="#EF4042" stroke-width="2" rx="19.667" ry="19.731"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="51" height="60" viewBox="0 0 51 60">
+    <g fill="none" fill-rule="evenodd">
+        <path fill="#FFF" d="M30 0v6C16.745 6 6 16.745 6 30s10.745 24 24 24v6C13.431 60 0 46.569 0 30 0 13.431 13.431 0 30 0z"/>
+        <path stroke="#EF4042" stroke-dasharray="0.6,3" stroke-width="6" d="M48 30c0-9.941-8.059-18-18-18s-18 8.059-18 18 8.059 18 18 18"/>
+        <path stroke="#FFF" stroke-dasharray="4.2,3" stroke-width=".6" d="M30 18c-6.627 0-12 5.373-12 12s5.373 12 12 12"/>
     </g>
 </svg>

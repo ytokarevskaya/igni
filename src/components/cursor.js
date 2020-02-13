@@ -23,8 +23,9 @@ class CursorBtn extends React.Component {
     } else {
       this.setState({"cursorStyle": this.props.cursorStyle || ""});
     }
-    cursor.style.transform = "translate(" + e.clientX + "px, " + e.clientY + "px)";
-    setTimeout(() => { cursorCircle.style.transform = "translate(" + e.clientX + "px, " + e.clientY + "px)";}, 100);
+
+    cursor.style.transform = "translate(" + (e.clientX - cursor.offsetWidth / 2) + "px, " + (e.clientY - cursor.offsetHeight / 2) + "px)";
+    setTimeout(() => { cursorCircle.style.transform = "translate(" + (e.clientX - cursorCircle.offsetWidth / 2) + "px, " + (e.clientY - cursorCircle.offsetHeight / 2) + "px)";}, 150);
 	}
 
 	render() {

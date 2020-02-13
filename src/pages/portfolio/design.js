@@ -50,7 +50,7 @@ const PortfolioDesignPage = (props) => {
 						    <Slider />
 						  </ProjectsSlider>*/}
 						  {/*<ProjectsCarouselNavigation items={projects} activeProject={activeProject} />*/}
-						  <a href="/"><PortfolioBackBtn className="icon-arrow-bold translate-y" /></a>
+						  <a href="/"><PortfolioBackBtn className="translate-y" /></a>
 	          </ProjectsCarousel>
 						<PortfolioDesignTitle>
 		          <Title fz="5rem" color="#fff" lineBottom lineBg="#fff" lineWidth="3.3rem">Дизайн</Title>

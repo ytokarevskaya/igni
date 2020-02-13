@@ -10,7 +10,7 @@ import CallbackForm from "../../components/forms/callback-form"
 
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
 import { useProjectsData } from "../../components/queries/get-projects-data"
-import { SectionScroll, COLORS, Title, TextStyled, FrontLayer, InfoBlocks, ContentPart, ContentColumn } from "../../components/styled"
+import { SectionScroll, COLORS, Title, TextStyled, FrontLayer, InfoBlocks, ContentPart, ContentColumn, PortfolioBackBtn } from "../../components/styled"
 
 import teamIcon from "../../images/team.svg"
 import baloonIcon from "../../images/air-balloon.svg"
@@ -43,6 +43,7 @@ const PortfolioContentPage = () => {
 			        	<Title fz="8rem" outline outlineColor={COLORS.GREY} color={COLORS.BG_GREY}><span className="black no-outline">Наша задача – </span>убедить потенциального клиента в том, что ваш продукт решает его проблему. <br/>Мы делаем это с помощью <span className="red no-outline">контента</span></Title>
 			        	{/*<img src={contentText} alt="" />*/}
 			        </PortfolioSlogan>
+			        <a href="/"><PortfolioBackBtn className="translate-y" /></a>
 		        </ContentPart>
 			      <ArrowDown src={arrowDown} alt="" />
 		        <ContentPart bg="transparent" padding="5rem 24rem" id="scrollTo-statistics">

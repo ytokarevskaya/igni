@@ -1,6 +1,9 @@
 import styled from "styled-components"
 
 import redPlus from "../images/red-plus.svg"
+import backBtnRed from "../images/back-btn-red.svg"
+import backBtnWhite from "../images/back-btn-white.svg"
+import backBtnHover from "../images/back-btn-hover.svg"
 
 const COLORS = {
 	RED: '#d11e1e',
@@ -485,15 +488,19 @@ const FormStyled = styled.form`
 
 const PortfolioBackBtn = styled.div`
 	font-size: 1.7rem;
-	color: ${props => props.transparent? "#fff" : COLORS.RED};
-	background: ${props => props.transparent? "rgba(246, 247, 249, 0.1)" : "#fff"};
-	border: ${props => props.transparent? "solid 1px #cbd0d9" : "unset"};
-	border-top-right-radius: 4px;
-	border-bottom-right-radius: 4px;
+	background-image: ${props => props.transparent? "url(" + backBtnWhite + ")" : "url(" + backBtnRed + ")"};
+	background-size: contain;
+	background-repeat: no-repeat;
+	width: 7rem;
+	height: 5.3rem;
 	position: fixed;
 	left: -1px;
 	top: 50%;
-	padding: 1.8rem 2.5rem;
+	transition: background-image 500ms ease;
+
+	&:hover {
+		background-image: url(${backBtnHover});
+	}
 `
 
 const BgVideo = styled.div`

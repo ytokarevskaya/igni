@@ -10,7 +10,7 @@ import ProjectCover from "../../components/project-cover"
 
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
 import { useProjectsData } from "../../components/queries/get-projects-data"
-import { SectionScroll, COLORS, Title, TextStyled, FrontLayer, ContentPart, InfoBlocks, ContentColumn, RedButton } from "../../components/styled"
+import { SectionScroll, COLORS, Title, TextStyled, FrontLayer, ContentPart, InfoBlocks, ContentColumn, RedButton, PortfolioBackBtn } from "../../components/styled"
 
 import arrowDown from "../../images/arrow-down-white.svg"
 import teamIcon from "../../images/team.svg"
@@ -41,6 +41,7 @@ const PortfolioDigitalPage = (props) => {
               )
             })}
             <ArrowDown src={arrowDown} className="translate-y" />
+            <a href="/"><PortfolioBackBtn className="translate-y" /></a>
           </ProjectsCarousel>
 					<PortfolioDesignTitle>
 	          <Title fz="5rem" color="#fff" lineBottom lineBg="#fff" lineWidth="3.5rem" width="25rem">Фото и видео продакшн</Title>

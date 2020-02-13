@@ -72,7 +72,7 @@ class Layout extends React.Component {
     return (
       <SiteMain onMouseMove={(e) => this.cursor.current.cursorMove(e)} onWheel={this.onWheel} className={this.state.loaded? "loaded" : ""}>
         <PreloaderCover className={this.state.preloaderShow? "" : "hidden"}>
-          <Lottie options={preloaderDefaultOptions} isStopped={false} isPaused={false} height="50vh" width="50vw" />
+          <Lottie options={preloaderDefaultOptions} isStopped={false} isPaused={false} height="75px" width="75px" />
         </PreloaderCover>
         <Header page={this.props.page} menuBtnStyle={this.props.menuBtnStyle} />
         <ContentLayout content={this.props.children} />

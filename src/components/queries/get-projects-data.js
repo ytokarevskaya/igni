@@ -20,6 +20,10 @@ export const useProjectsData = () => {
                 slug
                 title
               }
+              city
+              clickPrice
+              clicksPerMonth
+              conversion
               date
               description {
                 json
@@ -37,6 +41,9 @@ export const useProjectsData = () => {
               }
               projectSubtitle
               projectTitle
+              result {
+                json
+              }
               slug
               subcategory
               theme

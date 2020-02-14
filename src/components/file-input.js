@@ -57,6 +57,7 @@ const FileInputCover = styled.div`
 
 	&.horizontal {
 		transform: none;
+		overflow: visible;
 	}
 
 	&.icon-square {

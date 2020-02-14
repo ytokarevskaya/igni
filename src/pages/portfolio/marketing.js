@@ -10,82 +10,68 @@ import CallbackForm from "../../components/forms/callback-form"
 
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
 import { useProjectsData } from "../../components/queries/get-projects-data"
-import { SectionScroll, COLORS, Title, TextStyled, FrontLayer, InfoBlocks, ContentPart, ContentColumn } from "../../components/styled"
+import { COLORS, Title, TextStyled, FrontLayer, BackLayer, InfoBlocks, ContentPart, ContentColumn, PortfolioBackBtn } from "../../components/styled"
 
+import bgImg from "../../images/fire_bg.jpg"
+import circlesIcon from "../../images/circles.svg"
 import teamIcon from "../../images/team.svg"
 import baloonIcon from "../../images/air-balloon.svg"
-import arrowDown from "../../images/arrow-down-black.svg"
-import contentText from "../../images/content-text.svg"
 
-const PortfolioContentPage = () => {
+const PortfolioMarketingPage = () => {
 	const { edges } = useProjectsData();
 	const projects = [];
 	const projectsBlog = [];
 	edges.map((item) => {
     const project = item.node;
-    if (project.subcategory === "Ведение личного блога") {
-    	projectsBlog.push(project);
-    } else if (project.category.title === "Контент") {
+    // if (project.subcategory === "Ведение личного блога") {
+    // 	projectsBlog.push(project);
+    // } else 
+    if (project.category.title === "Маркетинг и реклама") {
       projects.push(project);
     }
   });
 
 	return (
-		<Layout page="portfolio-content">
+		<Layout page="portfolio-marketing">
 			<SEO title="IGNI | Портфолио" />
-				<Section id={0} active={true} name="section-portfolio" headerStyle="dark" footerStyle="dark" height="auto">
-					<FrontLayer bg={COLORS.BG_GREY}>
-						<ContentPart bg="transparent" padding="10rem 24rem">
-		          <Title fz="5rem" color={COLORS.RED} lineBottom lineBg={COLORS.BLACK}>Контент-маркетинг</Title>
-		          <TextStyled color={COLORS.BLACK} width="18rem" margin="3.5rem 0">Позвольте клиенту найти то, что он ищет</TextStyled>
-			        <PortfolioSlogan>
-			        	<Title fz="8rem" outline outlineColor={COLORS.GREY} color={COLORS.BG_GREY}><span className="black no-outline">Наша задача – </span>убедить потенциального клиента в том, что ваш продукт решает его проблему. <br/>Мы делаем это с помощью <span className="red no-outline">контента</span></Title>
-			        </PortfolioSlogan>
+				<Section id={0} active={true} name="section-marketing" headerStyle="white" footerStyle="white" height="auto">
+					<BackLayer bg={"url(" + bgImg + ")"} fixed />
+					<FrontLayer>
+						<ContentPart bg="transparent" padding="10rem 24rem" pos="relative" height="100vh">
+							<MarketingTitle>
+								<Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem">Performance маркетинг</Title>
+			          <TextStyled width="18rem" margin="3.5rem 0">осветите маршрут вашего клиента</TextStyled>
+		          </MarketingTitle>
+			        <MarketingSlogan>
+			        	<Title fz="5rem" color="#fff" lineBottom lineBg="#fff" lineWidth="3.5rem">Интернет реклама – мощнейший инструмент продвижения вашего проекта.</Title>
+			        	<TextStyled margin="3.5rem 0">Работа начинается с подбора и анализа целевых аудиторий и формирования аватаров клиента. На основании собранных данных определяются ключевые посылы и форматы рекламы, а также наиболее перспективные рекламные площадки. В дальнейшем аналитика позволяет выделить самые эффективные инструменты продвижения конкретного продукта и снизить стоимость привлечения клиента.</TextStyled>
+			        </MarketingSlogan>
+			        <MarketingList>
+			        	<div>Разработка медиаплана</div>
+			        	<div>Контекстная реклама</div>
+			        	<div className="is-wide">Медийная реклама и программатик-закупки</div>
+			        	<div className="is-wide">Разработка стратегии мобильного продвижения</div>
+			        	<div>Таргетированная реклама</div>
+			        	<div>Реклама на маркетплейсах</div>
+			        	<div>Реклама приложений в сторах</div>
+			        	<div>Внедрение колл-трекинга</div>
+			        	<div>Email-маркетинг</div>
+			        </MarketingList>
 		        </ContentPart>
-			      <ArrowDown src={arrowDown} alt="" />
-		        <ContentPart bg="transparent" padding="5rem 24rem" id="scrollTo-statistics">
-			        <Title color={COLORS.BLACK} margin="0 0 7rem 0">Услуги</Title>
-			        <InfoBlocks padding="0 3rem" lineColor={COLORS.GREY}>
-			        	<div className="block" style={{"borderLeft" : "unset", "paddingLeft": 0}}>
-			        		<Title color={COLORS.BLACK} fz="1.7rem">Нейминг</Title>
-			        	</div>
-			        	<div className="block">
-			        		<Title color={COLORS.BLACK} fz="1.7rem">Контент-маркетинг</Title>
-			        	</div>
-			        	<div className="block">
-			        		<Title color={COLORS.BLACK} fz="1.7rem">Наполнение сайта</Title>
-			        	</div>
-			        	<div className="block">
-			        		<Title color={COLORS.BLACK} fz="1.7rem">Ведение корпоративного или авторского блога</Title>
-			        	</div>
-			        	<div className="block">
-			        		<Title color={COLORS.BLACK} fz="1.7rem">SEO-оптимизация</Title>
-			        	</div>
-			        	<div className="block">
-			        		<Title color={COLORS.BLACK} fz="1.7rem">Локализация</Title>
-			        	</div>
-			        	<div className="block">
-			        		<Title color={COLORS.BLACK} fz="1.7rem">Креативы для рекламы</Title>
-			        	</div>
-			        	<div className="block" style={{"borderRight" : "unset"}}>
-			        		<Title color={COLORS.BLACK} fz="1.7rem">Презентационные материалы</Title>
-			        	</div>
-			        </InfoBlocks>
-		        </ContentPart>
-		        <ContentPart bg="transparent" padding="5rem 24rem">
+		        <ContentPart bg="#fff" width="calc(100% - 24rem)" padding="10rem 0 10rem 24rem">
 			        <Title color={COLORS.BLACK} margin="0 0 7rem 0">Статистика</Title>
 			        <InfoBlocks itemsCount={5}>
 			        	<div className="block">
-			        		<Title margin="0 0 2.5rem 0">+280 <small>%</small></Title>
+			        		<Title margin="0 0 2.5rem 0">+2300 <small>%</small></Title>
 			        		<TextStyled color={COLORS.BLACK}>Количество лидов</TextStyled>
 			        	</div>
 			        	<div className="block">
-			        		<Title margin="0 0 2.5rem 0">+145 <small>%</small></Title>
-			        		<TextStyled color={COLORS.BLACK}>Длина сессии</TextStyled>
+			        		<Title margin="0 0 2.5rem 0">~6 <small>%</small></Title>
+			        		<TextStyled color={COLORS.BLACK}>Конверсия в действие</TextStyled>
 			        	</div>
 			        	<div className="block">
-			        		<Title margin="0 0 2.5rem 0">+60 <small>%</small></Title>
-			        		<TextStyled color={COLORS.BLACK}>Глубина просмотра</TextStyled>
+			        		<img className="icon" alt="" src={circlesIcon} />
+			        		<TextStyled color={COLORS.BLACK}>Охват наиболее релевантной аудитории</TextStyled>
 			        	</div>
 			        	<div className="block">
 			        		<img className="icon" alt="" src={teamIcon} />
@@ -98,8 +84,8 @@ const PortfolioContentPage = () => {
 			        </InfoBlocks>
 			        <TextStyled color={COLORS.BLACK}><span className="red">*</span> Средние показатели на основании существующих кейсов</TextStyled>
 		        </ContentPart>
-		        <ContentPart bg="transparent" padding="5rem 24rem">
-			        <Title color={COLORS.BLACK} margin="0 0 5rem 0">Портфолио</Title>
+		        <ContentPart bg="#fff" width="calc(100% - 24rem)" padding="10rem 0 10rem 0">
+			        <Title color={COLORS.BLACK} margin="0 0 0 24rem">Портфолио</Title>
 			        {projects.map((item, index) => {
                 return (
                   <PortfolioContent key={item.id} project={item} type="all" last={index + 1 === projects.length} />
@@ -114,25 +100,18 @@ const PortfolioContentPage = () => {
 	          		<CallbackForm />
 	          	</ContentColumn>
 	          </ContentPart>
-	          <ContentPart bg="transparent">
-              <Title fz="5rem" color={COLORS.BLACK}>Ведение личного <br/>блога</Title>
-              {projectsBlog.map((item, index) => {
-                return (
-                  <PortfolioContent key={item.id} project={item} type="blog" last={index + 1 === projectsBlog.length} />
-                )
-              })}
-            </ContentPart>
-            <ContentPart bg="transparent" padding="5rem 24rem 7rem 24rem" flex id="scrollTo-contacts">
+            <ContentPart bg="transparent" padding="10rem 24rem 7rem 24rem" flex id="scrollTo-contacts">
 	          	<ContentColumn width="50rem" padding="0 10rem 0 0">
-	          		<Title color={COLORS.BLACK} lineBottom lineBg={COLORS.BLACK}>Приступим к работе над вашим проектом?</Title>
+	          		<Title color="#fff" lineBottom lineBg="#fff">Приступим к работе над вашим проектом?</Title>
 	          	</ContentColumn>
 	          	<ContentColumn width="40rem">
-	          		<TextStyled color={COLORS.BLACK}>Заполните бриф — расскажите о вашем бизнесе, задачах и сроках — и мы свяжемся с вами для дальнейшего обсуждения сотрудничества. </TextStyled>
+	          		<TextStyled color="#fff">Заполните бриф — расскажите о вашем бизнесе, задачах и сроках — и мы свяжемся с вами для дальнейшего обсуждения сотрудничества. </TextStyled>
 	          	</ContentColumn>
 	          </ContentPart>
-            <ContentPartRequestForm padding="0 0 0 24rem">
+            <ContentPartRequestForm bg="transparent" padding="0 0 0 24rem">
 	          	<RequestForm inputStyle="horizontal icon-square" pos={["relative", "", "", "", ""]} />
 	          </ContentPartRequestForm>
+	          <a href="/"><PortfolioBackBtn className="translate-y" transparent /></a>
 					</FrontLayer>
 				</Section>
 		</Layout>
@@ -168,19 +147,37 @@ class PortfolioContent extends React.Component {
 		  			<div className="year ff-bebas">{new Date(this.props.project.date).getFullYear()}</div>
 		  			<div className={"title" + (this.props.type === "all"? " tt-uppercase" : "")}>{this.props.project.projectTitle}</div>
 		  		</div>
-		  		<TextStyled color={COLORS.BLACK}>
+		  		<TextStyled color={COLORS.BLACK} className="subtitle">
 		  			{this.props.project.projectSubtitle}
+		  		</TextStyled>
+		  		<TextStyled color={COLORS.BLACK} className="city">
+		  			{this.props.project.city}
 		  		</TextStyled>
 		  	</header>
 		  	{this.props.project.description?
 		  		<React.Fragment>
 				  	<main>
-				  		<div className="title">Перечень работ:</div>
 				  		<div className="content">
-				  			{this.props.project.description.json.content[0].nodeType === "unordered-list" && this.props.project.description.json.content[0].content.length > 1?
-				  			<TextStyled color={COLORS.BLACK} className="is-ul-red is-in-two-columns" dangerouslySetInnerHTML={{__html: documentToHtmlString(this.props.project.description.json)}} /> :
-				  			<TextStyled color={COLORS.BLACK} className="is-ul-red" dangerouslySetInnerHTML={{__html: documentToHtmlString(this.props.project.description.json)}} />
-				  			}
+				  			<div className="number">
+				  				<Title>{this.props.project.clicksPerMonth}</Title>
+				  				<p>Кликов в месяц</p>
+				  			</div>
+				  			<div className="number">
+				  				<Title>{this.props.project.clickPrice}</Title>
+				  				<p>Средняя цена клика, руб.</p>
+				  			</div>
+				  			<div className="number">
+				  				<Title>{this.props.project.conversion} <small>%</small></Title>
+				  				<p>Конверсия в действие</p>
+				  			</div>
+				  			<div className="description">
+				  				<div className="description-title">Перечень работ:</div>
+				  				<TextStyled color={COLORS.BLACK} dangerouslySetInnerHTML={{__html: documentToHtmlString(this.props.project.description.json)}} />
+				  			</div>
+				  			<div className="result">
+				  				<div className="result-title">Результат</div>
+				  				<TextStyled color="#fff" dangerouslySetInnerHTML={{__html: documentToHtmlString(this.props.project.result.json)}} />
+				  			</div>
 				  		</div>
 				  	</main>
 				  	<HideBtn onClick={(e) => this.projectToggle(e)} className={this.state.closed? "closed" : ""}>{this.state.closed? "Развернуть" : "Скрыть"}</HideBtn>
@@ -203,7 +200,7 @@ const ContentPartRequestForm = styled(ContentPart)`
 
 const HideBtn = styled.div`
 	position: absolute;
-  right: 0;
+  right: 5rem;
   top: 10.5rem;
   font-size: 1.6rem;
   font-weight: 600;
@@ -222,18 +219,11 @@ const HideBtn = styled.div`
   }
 `
 
-const ArrowDown = styled.img`
-  position: absolute;
-  right: 5rem;
-  bottom: 10rem;
-  height: 9rem;
-`
-
 const PortfolioContentStyled = styled.article`
   position: relative;
 	color: ${COLORS.BLACK};
-	padding: 5rem 0;
-	border-bottom: 1px solid ${COLORS.BLACK};
+	padding: 5rem 0 0 24rem;
+	border-bottom: 1px solid ${COLORS.LINE_GREY_20};
 
 	&.last {
 		border-bottom: none;
@@ -278,18 +268,21 @@ const PortfolioContentStyled = styled.article`
 			}
 		}
 
-		${TextStyled} {
+		.subtitle {
 			max-width: 33rem;
-			padding-left: 2.5rem;
-			align-self: flex-end;
+			padding: 0 2.5rem;
+		}
+
+		.city {
+			max-width: 23rem;
+			padding: 0 2.5rem 0 5rem;
 		}
 	}
 
 	main {
 		display: flex;
 		align-items: flex-start;
-		padding: 5rem 0 0 0;
-		border-top: 1px dashed ${COLORS.LINE_GREY_20};
+		border-top: 1px solid ${COLORS.LINE_GREY_20};
 		max-height: 50rem;
 		overflow: hidden;
 		transition: all 800ms ease-in-out;
@@ -303,15 +296,49 @@ const PortfolioContentStyled = styled.article`
 		}
 
 		.content {
-			width: 65%;
-
-			ul li:first-child {
-				margin-top: 0;
-			}
+			display: flex;
 
 			a {
 				color: ${COLORS.RED};
 				font-weight: bold;
+			}
+
+			.number {
+				width: 25rem;
+				padding: 5rem;
+				border-right: 1px solid ${COLORS.LINE_GREY_20};
+
+				&:first-child {
+					padding-left: 0;
+				}
+
+				p {
+					color: ${COLORS.BLACK};
+					font-size: 1.6rem;
+				}
+			}
+
+			.description {
+				padding: 5rem;
+				flex-grow: 1;
+
+				.description-title {
+					color: ${COLORS.BLACK_30};
+					margin-bottom: 5rem;
+					font-size: 1.6rem;
+				}
+			}
+
+			.result {
+				padding: 5rem;
+				background: ${COLORS.RED};
+				width: 50rem;
+
+				.result-title {
+					color: #fff;
+					margin-bottom: 5rem;
+					font-size: 1.6rem;
+				}
 			}
 		}
 	}
@@ -325,10 +352,45 @@ const PortfolioContentStyled = styled.article`
 	}
 `
 
-const PortfolioSlogan = styled.div`
-	margin: 10rem 0 0 0;
-	padding: 0 8rem 0 0;
-	line-height: 1.13;
+const MarketingList = styled.div`
+	position: absolute;
+	right: 24rem;
+	top: 50%;
+	transform: translateY(-50%);
+	display: flex;
+	width: 43rem;
+	flex-wrap: wrap;
+
+	div {
+		width: 50%;
+		text-align: center;
+		font-family: "Bebas", sans-serif;
+		font-size: 1.6rem;
+		color: #fff;
+		text-transform: uppercase;
+		background: ${COLORS.WHITE_10};
+		border: 1px solid #fff;
+		padding: 2rem 0;
+
+		&.is-wide {
+			width: 100%;
+		}
+	}
 `
 
-export default PortfolioContentPage
+const MarketingTitle = styled.div`
+	position: absolute;
+	top: 50%;
+	left: 24rem;
+	transform: translateY(-50%);
+`
+
+const MarketingSlogan = styled.div`
+	width: 48rem;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+`
+
+export default PortfolioMarketingPage

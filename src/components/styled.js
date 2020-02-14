@@ -15,6 +15,7 @@ const COLORS = {
   LINE_GREY: '#979797',
   LINE_GREY_20: 'rgba(151, 151, 151, 0.2)',
 	BG_GREY: '#f6f7f9',
+	WHITE_10: 'rgba(255, 255, 255, 0.1)',
 	WHITE_20: 'rgba(255, 255, 255, 0.2)'
 };
 
@@ -34,7 +35,7 @@ const SectionStyled = styled.section`
 `
 
 const BackLayer = styled.div`
-	position: absolute;
+	position: ${props => props.fixed? "fixed" : "absolute"};
 	left: 0;
 	top: 0;
 	width: 100%;
@@ -363,10 +364,13 @@ const InfoBlocks = styled.div`
 `
 
 const ContentPart = styled.div`
+	position: ${props => props.pos || "static"};
 	padding: ${props => props.mPadding || "2rem"};
 	background: ${props => props.bg || COLORS.BG_GREY};
 	color: ${props => props.color || COLORS.BLACK};
 	display: ${props => props.mFlex? "flex" : "block"};
+	width: ${props => props.width || "100%"};
+	height: ${props => props.height || "auto"};
 
 	@media screen and (min-width: 1280px) and (pointer: fine) {
 		padding: ${props => props.padding || "10rem 24rem"};

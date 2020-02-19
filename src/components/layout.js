@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import styled from "styled-components"
 import Lottie from "react-lottie"
 import { useStaticQuery, graphql } from "gatsby"
-import SmoothScroll from "smoothscroll-for-websites"
+import { Helmet } from "react-helmet"
 
 import Header from "./header"
 import Footer from "./footer"
@@ -19,6 +19,7 @@ class ContentLayout extends React.Component {
     if (typeof window === "undefined") return;
     onPageLoad();
     window.addEventListener("resize", onWindowResize);
+    window.SmoothScrollOptions = { stepSize: 80, animationTime: 1000 };
   }
 
   render() {
@@ -43,7 +44,6 @@ class Layout extends React.Component {
     setTimeout(() => {
       this.setState({"preloaderShow": false});
     }, 2000);
-    SmoothScroll({ stepSize: 80, animationTime: 800 });
   }
 
   onWheel() {
@@ -73,6 +73,9 @@ class Layout extends React.Component {
 
     return (
       <SiteMain onMouseMove={(e) => this.cursor.current.cursorMove(e)} onWheel={this.onWheel} className={this.state.loaded? "loaded" : ""}>
+        <Helmet defer={false}>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js" integrity="sha256-huW7yWl7tNfP7lGk46XE+Sp0nCotjzYodhVKlwaNeco=" crossorigin="anonymous"></script>
+        </Helmet>
         <PreloaderCover className={this.state.preloaderShow? "" : "hidden"}>
           <Lottie options={preloaderDefaultOptions} isStopped={false} isPaused={false} height="75px" width="75px" />
         </PreloaderCover>

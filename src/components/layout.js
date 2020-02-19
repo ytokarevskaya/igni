@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import styled from "styled-components"
 import Lottie from "react-lottie"
 import { useStaticQuery, graphql } from "gatsby"
+import SmoothScroll from "smoothscroll-for-websites"
 
 import Header from "./header"
 import Footer from "./footer"
@@ -42,6 +43,7 @@ class Layout extends React.Component {
     setTimeout(() => {
       this.setState({"preloaderShow": false});
     }, 2000);
+    SmoothScroll({ stepSize: 80, animationTime: 800 });
   }
 
   onWheel() {

@@ -19,7 +19,6 @@ class ContentLayout extends React.Component {
     if (typeof window === "undefined") return;
     onPageLoad();
     window.addEventListener("resize", onWindowResize);
-    window.SmoothScrollOptions = { stepSize: 80, animationTime: 1000 };
   }
 
   render() {
@@ -35,6 +34,10 @@ class Layout extends React.Component {
       "loaded": false,
       "preloaderShow": true
     }
+  }
+
+  componentWillMount() {
+    if (typeof window !== "undefined") window.SmoothScrollOptions = { stepSize: 80, animationTime: 1000 };
   }
 
   componentDidMount() {

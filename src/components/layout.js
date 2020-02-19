@@ -44,7 +44,7 @@ class Layout extends React.Component {
     checkScrollPos();
     setTimeout(() => {
       this.setState({"preloaderShow": false});
-      if (typeof SmoothScroll !== "undefined") SmoothScroll({ stepSize: 80, animationTime: 1000 });
+      if (typeof SmoothScroll !== "undefined") SmoothScroll({ stepSize: 80, animationTime: 800 });
     }, 2000);
   }
 

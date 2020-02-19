@@ -14,6 +14,8 @@ import CursorBtn from "./cursor"
 import * as preloaderData from "./preloader.json"
 import "./layout.css"
 
+if (typeof window !== "undefined") window.SmoothScrollOptions = { stepSize: 80, animationTime: 1000 };
+
 class ContentLayout extends React.Component {
   componentWillMount() {
     if (typeof window === "undefined") return;
@@ -37,7 +39,7 @@ class Layout extends React.Component {
   }
 
   componentWillMount() {
-    if (typeof window !== "undefined") window.SmoothScrollOptions = { stepSize: 80, animationTime: 1000 };
+
   }
 
   componentDidMount() {

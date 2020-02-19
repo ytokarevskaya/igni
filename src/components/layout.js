@@ -14,7 +14,7 @@ import CursorBtn from "./cursor"
 import * as preloaderData from "./preloader.json"
 import "./layout.css"
 
-if (typeof window !== "undefined") window.SmoothScrollOptions = { stepSize: 80, animationTime: 1000 };
+//let SmoothScroll;
 
 class ContentLayout extends React.Component {
   componentWillMount() {
@@ -38,16 +38,13 @@ class Layout extends React.Component {
     }
   }
 
-  componentWillMount() {
-
-  }
-
   componentDidMount() {
     this.setState({"loaded": true});
     document.body.classList.add(this.props.page);
     checkScrollPos();
     setTimeout(() => {
       this.setState({"preloaderShow": false});
+      if (typeof SmoothScroll !== "undefined") SmoothScroll({ stepSize: 80, animationTime: 1000 });
     }, 2000);
   }
 
@@ -76,11 +73,10 @@ class Layout extends React.Component {
       }
     }
 
+    // if (typeof window !== "undefined") window.SmoothScrollOptions = { stepSize: 80, animationTime: 1000 }
+
     return (
       <SiteMain onMouseMove={(e) => this.cursor.current.cursorMove(e)} onWheel={this.onWheel} className={this.state.loaded? "loaded" : ""}>
-        <Helmet defer={false}>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js" integrity="sha256-huW7yWl7tNfP7lGk46XE+Sp0nCotjzYodhVKlwaNeco=" crossorigin="anonymous"></script>
-        </Helmet>
         <PreloaderCover className={this.state.preloaderShow? "" : "hidden"}>
           <Lottie options={preloaderDefaultOptions} isStopped={false} isPaused={false} height="75px" width="75px" />
         </PreloaderCover>
@@ -90,6 +86,7 @@ class Layout extends React.Component {
         {this.props.noCursor? "" : 
           <CursorBtn cursorStyle={this.props.cursorStyle} ref={this.cursor} />
         }
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js" integrity="sha256-huW7yWl7tNfP7lGk46XE+Sp0nCotjzYodhVKlwaNeco=" crossOrigin="anonymous"></script>
       </SiteMain>
     )
   }

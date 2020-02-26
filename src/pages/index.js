@@ -45,7 +45,7 @@ function checkScroll() {
 }
 
 const IndexPage = () => (
-  <Layout page="home">
+  <Layout page="home" >
     <SEO title="IGNI | Веб-студия полного цикла" />
     <BackLayer>
       <BgVideo>

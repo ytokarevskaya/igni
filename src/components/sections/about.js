@@ -82,18 +82,20 @@ const SectionAbout = (props) => {
     }
   ]
 
+  const isMobile = typeof window !== "undefined" && window.mobile;
+
   return (
     <Section id={props.id} active={props.active} name="section-about" headerStyle="white" footerStyle="white">
       <FrontLayer>
-        <Plx className="parallax-element" parallaxData={parallaxData_title} animateWhenNotInViewport={true}>
-          <h2><Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "15rem", "", "", "20rem"]} className="scrollController-title">Наши услуги</Title></h2>
-          <AboutTitle className="scrollController-title">
-            <h3><Title fz="5rem" color="#fff" width="30rem" lineBottom>Проектируем, разрабатываем, продвигаем</Title></h3>
-            <TextStyled width="42rem" color="#fff" margin="3.5rem 0 0 0">Чтобы осветить темное пространство веба новыми проектами, мы собрали команду профессионалов с обширным опытом работы в сфере дизайна, разработки, маркетинга, рекламы и видео производства.</TextStyled>
+        <Plx className="parallax-element" parallaxData={parallaxData_title} animateWhenNotInViewport={true} disabled={isMobile}>
+          <h2><Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" mPos={["relative", "", "", "", ""]} pos={["absolute", "15rem", "", "", "20rem"]}>Наши услуги</Title></h2>
+          <AboutTitle>
+            <h3><Title fz="5rem" mFz="3rem" color="#fff" width="30rem" mWidth="18rem" lineBottom>Проектируем, разрабатываем, продвигаем</Title></h3>
+            <TextStyled width="42rem" color="#fff" margin="3.5rem 0 0 0" mMargin="3.5rem 0 0 0">Чтобы осветить темное пространство веба новыми проектами, мы собрали команду профессионалов с обширным опытом работы в сфере дизайна, разработки, маркетинга, рекламы и видео производства.</TextStyled>
           </AboutTitle>
         </Plx>
-        <Plx className="parallax-element" parallaxData={parallaxData_cards} animateWhenNotInViewport={true}>
-          <AboutItems className="scrollController-cards">
+        <Plx className="parallax-element" parallaxData={parallaxData_cards} animateWhenNotInViewport={true} disabled={isMobile}>
+          <AboutItems>
           {categories.map((node, index) => (
               <AboutItem key={node.id} id={index} title={node.title} content={node.description} bg={node.background.file.url} slug={node.slug} />
             ))
@@ -144,16 +146,20 @@ class AboutItem extends React.Component {
 
 const AboutItems = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
   align-items: center;
-  position: absolute;
-  top: 35rem;
-  right: 15vw;  
+  grid-template-columns: 1fr;
 
-  > * {
-    position: relative;
-    &:nth-child(even) {
-      top: 20rem;
+  @media screen and (min-width: 1280px) and (pointer: fine) {
+    grid-template-columns: 1fr 1fr;
+    position: absolute;
+    top: 35rem;
+    right: 15vw;  
+
+    > * {
+      position: relative;
+      &:nth-child(even) {
+        top: 20rem;
+      }
     }
   }
 `
@@ -225,10 +231,15 @@ const AboutItemStyled = styled.div`
 `
 
 const AboutTitle = styled.div`
-  position: absolute;
-  left: 20rem;
-  top: 35rem;
-  z-index: 1;
+  margin: 13rem 0 6rem 0;
+
+  @media screen and (min-width: 1280px) and (pointer: fine) {
+    position: absolute;
+    left: 20rem;
+    top: 35rem;
+    z-index: 1;
+    margin: 0;
+  }
 `
 
 export default SectionAbout

@@ -61,25 +61,26 @@ const parallaxData_form = [
   }
 ]
 
+const isMobile = typeof window !== "undefined" && window.mobile;
 
 const SectionEstimation = (props) => (
 	<Section id={props.id} active={props.active} name="section-estimation" headerStyle="white" footerStyle="white">
     <FrontLayer>
-      <Plx className="parallax-element" parallaxData={parallaxData_title} animateWhenNotInViewport={true}>
-      	<Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "15rem", "", "", "20rem"]} className="scrollController-title">Наше предложение</Title>
-        <EstimationTitle className="scrollController-title">
-          <Title fz="5rem" color="#fff" width="40rem" margin="0 0 3.5rem 0" lineBottom>Получите бесплатную оценку вашего сайта от команды igni</Title>
+      <Plx className="parallax-element" parallaxData={parallaxData_title} animateWhenNotInViewport={true} disabled={isMobile}>
+      	<Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "15rem", "", "", "20rem"]} mMargin="10rem 0 15rem 0" className="scrollController-title">Наше предложение</Title>
+        <EstimationTitle>
+          <Title fz="5rem" mFz="3.5rem" color="#fff" width="40rem" margin="0 0 3.5rem 0" mMargin="0 0 3.5rem 0" lineBottom>Получите бесплатную оценку вашего сайта от команды igni</Title>
           <TextStyled width="40rem" color="#fff">Перед началом сотрудничества мы бесплатно проведем краткий маркетинговый аудит вашего бизнеса и предложим комплекс мер по увеличению конверсии.</TextStyled>
         </EstimationTitle>
       </Plx>
-      <Plx className="parallax-element" parallaxData={parallaxData_form} animateWhenNotInViewport={true} style={{"bottom": 0, "position": "absolute"}}>
-        <EstimationCallbackFrame className="scrollController-form">
+      <Plx className="parallax-element" parallaxData={parallaxData_form} animateWhenNotInViewport={true} style={{"bottom": 0, "position": "absolute"}} disabled={isMobile}>
+        <EstimationCallbackFrame>
         	<Title color="#fff" fz="2.8rem" fw="normal" width="25rem">Оставьте свои контактные данные, и мы свяжемся с вами в ближайшее время</Title>
         	<CallbackForm buttonLabel="Готово!" theme="light" noFileInput/>
         </EstimationCallbackFrame>
       </Plx>
-      <Plx className="parallax-element" parallaxData={parallaxData_desc} animateWhenNotInViewport={true}>
-        <EstimationDetails className="scrollController-details">
+      <Plx className="parallax-element" parallaxData={parallaxData_desc} animateWhenNotInViewport={true} disabled={isMobile}>
+        <EstimationDetails>
         	<div className="item">
         		<img className="icon" src={iconAnalyze} alt="" />
         		<TextStyled margin="3.5rem 0" color="#fff">Анализ производительности, текущего дизайна и наполнения сайта</TextStyled>
@@ -123,16 +124,17 @@ const EstimationCallbackFrame = styled.div`
 `
 
 const EstimationDetails = styled.div`
-	position: absolute;
-	left: 60rem;
-	bottom: 6rem;
-  margin-left: 6vw;
-	width: 48rem;
+	position: relative;
+	margin: 15vh 0 0 -2.5rem;
 	background: ${COLORS.LIGHT_BLACK};
-	padding: 10rem 8.5rem;
+	padding: 5rem 2.5rem;
 	z-index: 1;
-	transform: translateY(100%);
 
+  .item {
+    width: 70%;
+    font-weight: 300;
+  }
+	
 	.item + .item {
 		margin: 6rem 0 0 0;
 	}
@@ -141,13 +143,25 @@ const EstimationDetails = styled.div`
 		max-height: 6rem;
 		max-width: 6.5rem;
 	}
+
+  @media screen and (min-width: 1280px) and (pointer: fine) {
+    position: absolute;
+    left: 60rem;
+    bottom: 6rem;
+    margin: 0 0 0 6vw;
+    padding: 10rem 8.5rem;
+    width: 48rem;
+    transform: translateY(100%);
+  }
 `
 
 const EstimationTitle = styled.div`
-	position: absolute;
-  left: 20rem;
-  top: 35rem;
-  z-index: 1;
+  @media screen and (min-width: 1280px) and (pointer: fine) {
+  	position: absolute;
+    left: 20rem;
+    top: 35rem;
+    z-index: 1;
+  }
 `
 
 export default SectionEstimation

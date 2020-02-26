@@ -28,7 +28,7 @@ class Footer extends React.Component {
 	render() {
 		return (
 			<FooterStyled className={this.state.footerStyle + " page-" + this.props.page}>
-				<Socials>
+				<Socials className="mobile-hidden">
 					<a href="" target="_blank" className="icon-linkedin" />
 					<a href="" target="_blank" className="icon-dribbble" />
 					<a href="" target="_blank" className="icon-instagram" />
@@ -44,7 +44,7 @@ class Footer extends React.Component {
 						+<span className="text">Удерживайте</span>
 					</PulseBtn>*/}
 				</BottomMenu>
-				{this.props.page === "home"? <ScrollHelp className="translate-x" id="footer-scroll-help">Скролл</ScrollHelp> : ""}
+				{this.props.page === "home"? <ScrollHelp className="translate-x mobile-hidden" id="footer-scroll-help">Скролл</ScrollHelp> : ""}
 				<OrderBtn href="/?active=4" onClick={(e) => this.orderBtnClick(e)} id="footer-callback-btn" className={this.props.orderBtnStyle}>
           <div className="icon icon-pen" />
           <div className="title">Оставить заявку</div>
@@ -143,20 +143,21 @@ const Socials = styled.div`
 `
 
 const OrderBtn = styled.a`
-  position: absolute;
-  right: 5rem;
-  bottom: -1px;
-  width: 13.5rem;
-  height: 22rem;
-  border: 1px solid #fff;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 5.5rem;
   cursor: pointer;
-  padding: 3.5rem 2.5rem;
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: ${COLORS.RED};
 
   .icon {
     position: relative;
-    width: 3.8rem;
-    height: 3.8rem;
+    width: 3.3rem;
+    height: 3.3rem;
     border-radius: 50%;
     background: ${COLORS.RED};
     color: #fff;
@@ -172,11 +173,11 @@ const OrderBtn = styled.a`
   }
 
   .title {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
 	  font-weight: 600;
     color: #fff;
 	  line-height: 1.5;
-	  margin-top: 2.5rem;
+	  margin: 0 0 0 1.5rem;
   }
 
   &.right-corner {
@@ -200,6 +201,28 @@ const OrderBtn = styled.a`
     .title {
     	margin: 0 0 0 1.5rem;
     }
+  }
+
+  @media screen and (min-width: 1280px) and (pointer: fine) {
+  	position: absolute;
+	  right: 5rem;
+	  bottom: -1px;
+	  width: 13.5rem;
+	  height: 22rem;
+	  border: 1px solid #fff;
+	  padding: 3.5rem 2.5rem;
+	  background: transparent;
+	  display: block;
+
+	  .title {
+	  	margin: 2.5rem 0 0 0;
+	  	font-size: 1.6rem;
+	  }
+
+	  .icon {
+	  	width: 3.8rem;
+    	height: 3.8rem;
+	  }
   }
 `
 

@@ -14,7 +14,7 @@ import CursorBtn from "./cursor"
 import * as preloaderData from "./preloader.json"
 import "./layout.css"
 
-//let SmoothScroll;
+let SmoothScroll;
 
 class ContentLayout extends React.Component {
   componentWillMount() {
@@ -72,8 +72,6 @@ class Layout extends React.Component {
         preserveAspectRatio: "xMidYMid meet"
       }
     }
-
-    // if (typeof window !== "undefined") window.SmoothScrollOptions = { stepSize: 80, animationTime: 1000 }
 
     return (
       <SiteMain onMouseMove={(e) => this.cursor.current.cursorMove(e)} onWheel={this.onWheel} className={this.state.loaded? "loaded" : ""}>

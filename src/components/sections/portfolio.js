@@ -120,17 +120,19 @@ class PortfolioCarousel extends React.Component {
     this.slickNext = this.slickNext.bind(this);
     this.slickPrev = this.slickPrev.bind(this);
     this.slickGoToSlide = this.slickGoToSlide.bind(this);
-    this.settings = {
-      className: "slider variable-width",
-      dots: false,
-      arrows: false,
-      infinite: true,
-      speed: 1200,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      variableWidth: true,
-      afterChange: onSlideChange
-    };
+    if (typeof window !== "undefined") {
+      this.settings = {
+        className: "slider variable-width",
+        dots: false,
+        arrows: false,
+        infinite: true,
+        speed: 1200,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        variableWidth: !window.mobile,
+        afterChange: onSlideChange
+      };
+    }
   }
 
   slickNext() {
@@ -146,13 +148,15 @@ class PortfolioCarousel extends React.Component {
   }
 
   render() {
+    const isMobile = typeof window !== "undefined" && window.mobile;
+
     return (
       <React.Fragment>
-        <Plx className="parallax-element" parallaxData={parallaxData_title} animateWhenNotInViewport={true}>
+        <Plx className="parallax-element" parallaxData={parallaxData_title} animateWhenNotInViewport={true} disabled={isMobile}>
           <h2><Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "12rem", "", "", "20rem"]}>Нашe портфолио</Title></h2>
           <PortfolioCarouselMenu id="portfolio-carousel-menu" items={["Дизайн", "Контент", "Маркетинг и реклама", "Диджитал продакшн"]} nextArrowClick={this.slickNext} prevArrowClick={this.slickPrev} gotoSlide={this.slickGoToSlide} />
         </Plx>
-        <Plx className="parallax-element" parallaxData={parallaxData_cards} animateWhenNotInViewport={true}>
+        <Plx className="parallax-element" parallaxData={parallaxData_cards} animateWhenNotInViewport={true} disabled={isMobile}>
           <PortfolioCarouselStyled id="portfolio-carousel" className="transition-05s">
             <Slider ref={slider => (this.slider = slider)} {...this.settings}>
               <PortfolioItem className="carousel-item active">
@@ -161,7 +165,7 @@ class PortfolioCarousel extends React.Component {
                   <h3><Title color="#fff">Дизайн</Title></h3>
                   <a className="all-projects" href="/portfolio/design"><span>Перейти</span></a>
                 </div>
-                <Plx className="parallax-element image" parallaxData={parallaxData_images} animateWhenNotInViewport={true} />
+                <Plx className="parallax-element image" parallaxData={parallaxData_images} animateWhenNotInViewport={true} disabled={isMobile} />
               </PortfolioItem>
               <PortfolioItem className="carousel-item">
                 <div className="header">
@@ -169,7 +173,7 @@ class PortfolioCarousel extends React.Component {
                   <h3><Title color="#fff">Контент</Title></h3>
                   <a className="all-projects" href="/portfolio/content"><span>Перейти</span></a>
                 </div>
-                <Plx className="parallax-element image" parallaxData={parallaxData_images} animateWhenNotInViewport={true} />
+                <Plx className="parallax-element image" parallaxData={parallaxData_images} animateWhenNotInViewport={true} disabled={isMobile} />
               </PortfolioItem>
               <PortfolioItem className="carousel-item">
                 <div className="header">
@@ -177,7 +181,7 @@ class PortfolioCarousel extends React.Component {
                   <h3><Title color="#fff">Маркетинг и реклама</Title></h3>
                   <a className="all-projects" href="/portfolio/marketing"><span>Перейти</span></a>
                 </div>
-                <Plx className="parallax-element image" parallaxData={parallaxData_images} animateWhenNotInViewport={true} />
+                <Plx className="parallax-element image" parallaxData={parallaxData_images} animateWhenNotInViewport={true} disabled={isMobile} />
               </PortfolioItem>
               <PortfolioItem className="carousel-item">
                 <div className="header">
@@ -185,7 +189,7 @@ class PortfolioCarousel extends React.Component {
                   <h3><Title color="#fff">Диджитал продакшн</Title></h3>
                   <a className="all-projects" href="/portfolio/digital"><span>Перейти</span></a>
                 </div>
-                <Plx className="parallax-element image" parallaxData={parallaxData_images} animateWhenNotInViewport={true} />
+                <Plx className="parallax-element image" parallaxData={parallaxData_images} animateWhenNotInViewport={true} disabled={isMobile} />
               </PortfolioItem>
             </Slider>
           </PortfolioCarouselStyled>
@@ -196,15 +200,21 @@ class PortfolioCarousel extends React.Component {
 }
 
 const PortfolioCarouselMenu = (props) => (
+  <React.Fragment>
   <PortfolioCarouselMenuStyled id="portfolio-carousel-menu">
     {props.items.map((item, index) => {
       return (
         <div key={index} className={"item" + (index === 0? " active" : "")} data-index={index} onClick={(e) => props.gotoSlide(e.target.dataset.index)}>{item}</div>
       )
     })}
-    <div onClick={props.prevArrowClick} className="arrow arrow-prev icon-prev transition-05s" />
-    <div onClick={props.nextArrowClick} className="arrow arrow-next icon-next transition-05s" />
+    <div onClick={props.prevArrowClick} className="arrow arrow-prev icon-prev transition-05s mobile-hidden" />
+    <div onClick={props.nextArrowClick} className="arrow arrow-next icon-next transition-05s mobile-hidden" />
   </PortfolioCarouselMenuStyled>
+  <PortfolioCarouselMobileArrows>
+    <div onClick={props.prevArrowClick} className="arrow arrow-prev icon-prev transition-05s desktop-hidden" />
+    <div onClick={props.nextArrowClick} className="arrow arrow-next icon-next transition-05s desktop-hidden" />
+  </PortfolioCarouselMobileArrows>
+  </React.Fragment>
 )
 
 function onSlideChange(index) {
@@ -265,12 +275,41 @@ function moveCarousel(moveTo) {
   }, 1300);
 }
 
-const PortfolioCarouselMenuStyled = styled.aside`
+const PortfolioCarouselMobileArrows = styled.div`
   position: absolute;
-  top: 12rem;
-  left: 40%;
+  right: 0;
+  top: 19.2rem;
+  display: flex;
+  z-index: 1;
+
+  .arrow {
+    position: relative;
+    font-size: 1.5rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    background: ${COLORS.WHITE_20};
+    border-radius: 50%;
+
+    &.arrow-prev {
+      margin-right: 3rem;
+    }
+
+    &::before {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin: -0.5em;
+    }
+  }
+`
+
+const PortfolioCarouselMenuStyled = styled.nav`
+  position: relative;
+  margin: 6rem 0;
   display: flex;
   align-items: flex-end;
+  overflow-x: scroll;
+  width: calc(100vw - 2.5rem);
 
   .item {
     font-size: 1.6rem;
@@ -278,6 +317,8 @@ const PortfolioCarouselMenuStyled = styled.aside`
     margin-right: 4.5rem;
     padding-bottom: 1.6rem;
     border-bottom: 1px solid transparent;
+    white-space: nowrap;
+
     &.active {
       border-bottom: 1px solid #fff;
     }
@@ -301,14 +342,25 @@ const PortfolioCarouselMenuStyled = styled.aside`
       background: ${COLORS.RED};
     }
   }
+
+  @media screen and (min-width: 1280px) and (pointer: fine) {
+    position: absolute;
+    top: 12rem;
+    left: 40%;
+    margin: 0;
+    overflow: visible;
+    width: auto;
+
+    .item {
+      white-space: normal;
+    }
+  }
 `
 
 const PortfolioCarouselStyled = styled.div`
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 20rem;
-  padding-left: 20rem;
+  position: relative;
+  left: -2.5rem;
+  width: calc(100vw + 5rem);
 
   .slick-list {
     overflow: visible;
@@ -324,14 +376,21 @@ const PortfolioCarouselStyled = styled.div`
       transition: transform 1200ms ease-in-out;
     }
   }
+
+  @media screen and (min-width: 1280px) and (pointer: fine) {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 20rem;
+    width: auto;
+    padding-left: 20rem;
+  }
 `
 
 const PortfolioItem = styled.div`
   display: inline-block;
   vertical-align: bottom;
-  // margin-right: 10vw;
   position: relative;
-  padding: 27rem 10vw 0 0;
 
   &:focus {
     outline: none;
@@ -339,8 +398,8 @@ const PortfolioItem = styled.div`
 
   .all-projects {
     position: absolute;
-    bottom: 6.3rem;
-    right: 8.6vw;
+    bottom: calc(100vw - 6rem);
+    left: 0;
 
     span {
       position: relative;
@@ -377,16 +436,10 @@ const PortfolioItem = styled.div`
   }
 
   .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    min-height: 20.5rem;
+    padding: 0 2.5rem;
 
     ${Title} {
+      margin: 10rem 0;
       font-size: 5rem;
       transition: font-size 1000ms ease;
     }
@@ -407,9 +460,8 @@ const PortfolioItem = styled.div`
   }
 
   .image {
-    width: 65vw;
-    height: 30vw;
-    margin: 0 0 0 -3rem;
+    width: 100vw;
+    height: 100vw;
     background-image: url(${mountainImg});
     background-size: cover;
     background-position: center center;
@@ -418,7 +470,8 @@ const PortfolioItem = styled.div`
   .slick-active & {
     .header {
       ${Title} {
-        font-size: 15rem;
+        margin: 4rem 0 7rem 0;
+        font-size: 7rem;
       }
     }
 
@@ -426,15 +479,54 @@ const PortfolioItem = styled.div`
       opacity: 1;
     }
   }
+
+  @media screen and (min-width: 1280px) and (pointer: fine) {
+    padding: 27rem 10vw 0 0;
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      min-height: 20.5rem;
+      padding: 0;
+    }
+
+    .image {
+      width: 65vw;
+      height: 30vw;
+      margin: 0 0 0 -3rem;
+    }
+
+    .all-projects {
+      left: auto;
+      bottom: 6.3rem;
+      right: 8.6vw;
+    }
+
+    .slick-active & {
+      .header {
+        ${Title} {
+          margin: inherit;
+          font-size: 15rem;
+        }
+      }
+    }
+  }
 `
 const PortfolioTitle = styled.div`
-  position: absolute;
-  left: 24rem;
-  top: 10rem;
-  z-index: 1;
+  @media screen and (min-width: 1280px) and (pointer: fine) {
+    position: absolute;
+    left: 24rem;
+    top: 10rem;
+    z-index: 1;
 
-  ${Title} {
-    position: relative;
+    ${Title} {
+      position: relative;
+    }
   }
 `
 

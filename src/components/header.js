@@ -302,8 +302,9 @@ const SideMenu = styled.aside`
 const MenuBtn = styled.div`
   position: absolute;
   top: 0;
-  width: 5rem;
-  height: 5rem;
+  right: 2.5rem;
+  width: 4rem;
+  height: 8rem;
   background: #fff;
   cursor: pointer;
   z-index: 1;
@@ -311,12 +312,12 @@ const MenuBtn = styled.div`
   .burger {
     position: absolute;
     left: 50%;
-    bottom: 2.6rem;
-    width: 2.3rem;
-    height: 2.3rem;
+    bottom: 1rem;
+    width: 1.8rem;
+    height: 1.8rem;
 
     div {
-      width: 1.2rem;
+      width: 1.8rem;
       height: 1px;
       background: rgba(151, 151, 151, 0.6);
       position: absolute;
@@ -324,23 +325,23 @@ const MenuBtn = styled.div`
       top: 50%;
 
       &.n1 {
-        margin-top: -0.4rem;
+        margin-top: -0.6rem;
       }
 
       &.n3 {
-        margin-top: 0.4rem;
+        margin-top: 0.6rem;
       }
     }
   }
 
   .title {
     position: absolute;
-    left: 100%;
-    bottom: 1.3rem;
-    margin-left: 3rem;
+    bottom: 0;
+    left: 50%;
+    margin: 0 0 -2.5rem -1.8rem;
     color: #fff;
-    font-size: 1.6rem;
     font-weight: 500;
+    font-size: 1.3rem;
   }
 
   &.opened {
@@ -375,7 +376,7 @@ const MenuBtn = styled.div`
 
   ${HeaderStyled}.white & {
     .burger div {
-      background: ${COLORS.BLACK};
+      // background: ${COLORS.BLACK};
     }
   }
 
@@ -398,17 +399,31 @@ const MenuBtn = styled.div`
   @media screen and (min-width: 1280px) and (pointer: fine) {
     width: 5.5rem;
     height: 10.5rem;
+    right: auto;
     left: 30%;
 
-    .burger div {
+    .burger {
+      bottom: 2.6rem;
       width: 2.3rem;
-      &.n1 {
-        margin-top: -0.9rem;
-      }
+      height: 2.3rem;
 
-      &.n3 {
-        margin-top: 0.85rem;
+      div {
+        width: 2.3rem;
+        &.n1 {
+          margin-top: -0.9rem;
+        }
+
+        &.n3 {
+          margin-top: 0.85rem;
+        }
       }
+    }
+
+    .title {
+      left: 100%;
+      bottom: 1.3rem;
+      font-size: 1.6rem;
+      margin: 0 0 0 3rem;
     }
   }
 `
@@ -423,8 +438,8 @@ const MenuFrame = styled.div`
 const Logo = styled.div`
   display: block;
   position: absolute;
-  left: 2rem;
-  top: 2rem;
+  left: 2.5rem;
+  top: 2.5rem;
   z-index: 30;
 
   img {

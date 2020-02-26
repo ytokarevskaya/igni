@@ -22,11 +22,14 @@ const COLORS = {
 const SectionStyled = styled.section`
 	position: relative;
 	width: 100%;
+	height: ${props => props.mHeight || "auto"};
+	padding: 2.5rem;
 
 	@media screen and (min-width: 1280px) and (pointer: fine) {
 		height: ${props => props.height || "100vh"};
 		transition: all 1000ms ease-in-out;
   	cursor: none;
+  	padding: 0;
 
 		.home &.section-portfolio {
 			height: 90vh;
@@ -51,24 +54,24 @@ const FrontLayer = styled.div`
 `
 
 const Title = styled.div`
-	position: ${props => props.pos? props.pos[0] : "relative"};
-  top: ${props => props.pos? props.pos[1] : "auto"};
-  right: ${props => props.pos? props.pos[2] : "auto"};
-  bottom: ${props => props.pos? props.pos[3] : "auto"};
-  left: ${props => props.pos? props.pos[4] : "auto"};
+	position: ${props => props.mPos? props.mPos[0] : "relative"};
+  top: ${props => props.mPos? props.mPos[1] : "auto"};
+  right: ${props => props.mPos? props.mPos[2] : "auto"};
+  bottom: ${props => props.mPos? props.mPos[3] : "auto"};
+  left: ${props => props.mPos? props.mPos[4] : "auto"};
 	font-family: ${props => props.ff || "Bebas"};
 	text-transform: uppercase;
 	text-align: ${props => props.mTa || "left"};
 	font-size: ${props => props.mFz || "5rem"};
   font-weight: ${props => props.fw || "bold"};
   line-height: ${props => props.lh || "1"};
-  color: ${props => props.mColor || COLORS.RED};
-  width: ${props => props.mWwidth || "auto"};
+  color: ${props => props.mColor || "#fff"};
+  width: ${props => props.mWidth || "auto"};
   margin: ${props => props.mMargin || "0"};
   ${props => props.lineBottom ? "padding-bottom: 3.3rem;" : ""};
   ${props => props.outline? "text-shadow: 1px 0 0px " + (props.outlineColor || COLORS.BLACK) + ", 0 1px 0px " + (props.outlineColor || COLORS.BLACK) + ", -1px 0 0px " + (props.outlineColor || COLORS.BLACK) + ", 0 -1px 0px " + (props.outlineColor || COLORS.BLACK) : ""};
 
-  ${props => props.lineBottom ? "&::before {content: ''; display: block; width: " + (props.lineWidth? props.lineWidth : "7rem") + "; height: 3px; background: " + (props.lineBg? props.lineBg : "#fff") + "; position: absolute; bottom: 0; left: 0;}" : ""};
+  ${props => props.lineBottom ? "&::before {content: ''; display: block; width: 35px; height: 3px; background: " + (props.lineBg? props.lineBg : "#fff") + "; position: absolute; bottom: 0; left: 0;}" : ""};
 
   .red {
   	color: ${COLORS.RED};
@@ -87,24 +90,30 @@ const Title = styled.div`
   }
 
   @media screen and (min-width: 1280px) and (pointer: fine) {
+  	position: ${props => props.pos? props.pos[0] : "relative"};
+	  top: ${props => props.pos? props.pos[1] : "auto"};
+	  right: ${props => props.pos? props.pos[2] : "auto"};
+	  bottom: ${props => props.pos? props.pos[3] : "auto"};
+	  left: ${props => props.pos? props.pos[4] : "auto"};
   	color: ${props => props.color || COLORS.RED};
 		font-size: ${props => props.fz || "5rem"};
   	text-align: ${props => props.ta || "left"};
   	width: ${props => props.width || "auto"};
   	margin: ${props => props.margin || "0"};
+  	${props => props.lineBottom ? "&::before {content: ''; display: block; width: " + (props.lineWidth? props.lineWidth : "7rem") + "; height: 3px; background: " + (props.lineBg? props.lineBg : "#fff") + "; position: absolute; bottom: 0; left: 0;}" : ""};
   }
 `
 
 const TextStyled = styled.div`
-	font-size: 1.6rem;
+	font-size: 1.4rem;
   font-weight: 500;
   font-stretch: normal;
   font-style: normal;
   line-height: ${props => props.lh || "1.5"};
   letter-spacing: 0.37px;
   color: ${props => props.color || "#ffffff"};
-  width: ${props => props.width || "auto"};
-  margin: ${props => props.margin || "0"};
+  width: ${props => props.mWidth || "auto"};
+  margin: ${props => props.mMargin || "0"};
 
   .red {
   	color: ${COLORS.RED};
@@ -143,6 +152,12 @@ const TextStyled = styled.div`
   &.is-in-two-columns {
   	column-count: 2;
   	column-gap: 3em;
+  }
+
+  @media screen and (min-width: 1280px) and (pointer: fine) {
+  	font-size: 1.6rem;
+  	width: ${props => props.width || "auto"};
+  	margin: ${props => props.margin || "0"};
   }
 `
 
@@ -191,8 +206,8 @@ const PulseBtn = styled.div`
 `
 
 const PlusBtn = styled.div`
-	width: ${props => props.size || "2.3rem"};
-  height: ${props => props.size || "2.3rem"};
+	width: ${props => props.mSize || "2.3rem"};
+  height: ${props => props.mSize || "2.3rem"};
   border-radius: 50%;
   background-color: ${props => props.bg || "unset"};
   background-image: ${props => props.bg? "unset" : "url(" + redPlus + ")"};
@@ -212,6 +227,11 @@ const PlusBtn = styled.div`
   // &:hover {
   // 	background: ${COLORS.RED_HOVER};
   // }
+
+  @media screen and (min-width: 1280px) and (pointer: fine) {
+  	width: ${props => props.size || "2.3rem"};
+  	height: ${props => props.size || "2.3rem"};
+  }
 `
 
 const CursorBtnStyled = styled.div`

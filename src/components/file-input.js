@@ -33,19 +33,14 @@ class FileInput extends React.Component {
 }
 
 const FileInputCover = styled.div`
-	position: ${props => props.pos? props.pos[0] : "absolute"};
-  top: ${props => props.pos? props.pos[1] : "16rem"};
-  right: ${props => props.pos? props.pos[2] : "10rem"};
-  bottom: ${props => props.pos? props.pos[3] : "auto"};
-  left: ${props => props.pos? props.pos[4] : "auto"};
+	position: relative;
   padding-left: 3.5rem;
   font-size: 1.5rem;
   max-width: 24rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-	transform: rotate(-90deg);
-	transform-origin: right top;
+	
 	&::before {
 		position: absolute;
 		left: 0;
@@ -81,6 +76,16 @@ const FileInputCover = styled.div`
 		top: 0;
 		width: 100%;
 		height: 100%;
+	}
+
+	@media screen and (min-width: 1280px) and (pointer: fine) {
+		position: ${props => props.pos? props.pos[0] : "absolute"};
+	  top: ${props => props.pos? props.pos[1] : "16rem"};
+	  right: ${props => props.pos? props.pos[2] : "10rem"};
+	  bottom: ${props => props.pos? props.pos[3] : "auto"};
+	  left: ${props => props.pos? props.pos[4] : "auto"};
+	  transform: rotate(-90deg);
+		transform-origin: right top;
 	}
 `
 

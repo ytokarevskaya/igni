@@ -25,6 +25,10 @@ const SectionStyled = styled.section`
 	height: ${props => props.mHeight || "auto"};
 	padding: 2.5rem;
 
+	&.section-contacts {
+		padding-bottom: 0;
+	}
+
 	@media screen and (min-width: 1280px) and (pointer: fine) {
 		height: ${props => props.height || "100vh"};
 		transition: all 1000ms ease-in-out;
@@ -405,8 +409,7 @@ const ContentColumn = styled.div`
 
 const InputFrame = styled.div`
 	position: relative;
-	width: ${props => props.width || "auto"};
-	height: ${props => props.height || "auto"};
+	width: 100%;
 
 	input, textarea {
 		font-size: 1.6rem;
@@ -460,12 +463,17 @@ const InputFrame = styled.div`
 			right: 0;
 		}
 	}
+
+	@media screen and (min-width: 1280px) and (pointer: fine) {
+		width: ${props => props.width || "auto"};
+		height: ${props => props.height || "auto"};
+	}
 `
 
 const FormStyled = styled.form`
 	position: relative;
 	background: ${COLORS.LIGHT_BLACK};
-	padding: 7rem 11rem;
+	padding: 5rem 2.5rem;
 
 	.form-inputs {
 		display: flex;
@@ -507,6 +515,10 @@ const FormStyled = styled.form`
 
 	&.light {
 		background: ${COLORS.WHITE_20};
+	}
+
+	@media screen and (min-width: 1280px) and (pointer: fine) {
+		padding: 7rem 11rem;
 	}
 `
 

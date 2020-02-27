@@ -208,9 +208,33 @@ const AboutItems = styled.div`
   }
 
   .slick-dots {
-    bottom: -6rem;
+    bottom: -7rem;
     width: auto;
-    display: none;
+
+    li {
+      width: auto;
+      
+      button {
+        display: inline-block;
+        vertical-align: middle;
+        width: 20px;
+        height: 1px;
+        background: #fff;
+        opacity: 0.3;
+        padding: 0;
+        transition: all 400ms ease;
+        &::before {
+          display: none;
+        }
+      }
+
+      &.slick-active {
+        button {
+          opacity: 1;
+          width: 80px;
+        }
+      }
+    }
   }
 
   @media screen and (min-width: 1280px) and (pointer: fine) {

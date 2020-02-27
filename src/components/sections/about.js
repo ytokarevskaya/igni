@@ -3,6 +3,7 @@ import styled from "styled-components"
 import { Link, StaticQuery, graphql } from "gatsby"
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
 import Plx from "react-plx"
+import Slider from "react-slick"
 
 import Section from "../section"
 import Scroll from "../scroll"
@@ -13,6 +14,8 @@ import { COLORS, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, SectionScro
 
 import aboutItemMask from "../../images/about-item-mask.svg"
 import aboutItemMaskHover from "../../images/about-item-mask-hover.svg"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
 
 const SectionAbout = (props) => {
   const { edges } = useCategoriesData()
@@ -84,6 +87,16 @@ const SectionAbout = (props) => {
 
   const isMobile = typeof window !== "undefined" && window.mobile;
 
+  const sliderSettings = {
+    className: "slider variable-width",
+    dots: true,
+    arrows: true,
+    infinite: true,
+    speed: 1200,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  };
+
   return (
     <Section id={props.id} active={props.active} name="section-about" headerStyle="white" footerStyle="white">
       <FrontLayer>
@@ -95,13 +108,21 @@ const SectionAbout = (props) => {
           </AboutTitle>
         </Plx>
         <Plx className="parallax-element" parallaxData={parallaxData_cards} animateWhenNotInViewport={true} disabled={isMobile}>
-          <AboutItems>
-          {categories.map((node, index) => (
-              <AboutItem key={node.id} id={index} title={node.title} content={node.description} bg={node.background.file.url} slug={node.slug} />
-            ))
-          }
+          <AboutItems className="mobile-hidden">
+            {categories.map((node, index) => (
+                <AboutItem key={node.id} id={index} title={node.title} content={node.description} bg={node.background.file.url} slug={node.slug} />
+              ))
+            }
           </AboutItems>
         </Plx>
+        <AboutItems className="desktop-hidden">
+          <Slider {...sliderSettings}>
+            {categories.map((node, index) => (
+                <AboutItem key={node.id} id={index} title={node.title} content={node.description} bg={node.background.file.url} slug={node.slug} />
+              ))
+            }
+          </Slider>
+        </AboutItems>
       </FrontLayer>
     </Section>
   )
@@ -145,15 +166,61 @@ class AboutItem extends React.Component {
 }
 
 const AboutItems = styled.div`
-  display: grid;
-  align-items: center;
-  grid-template-columns: 1fr;
+  padding: 5rem 0 10rem 0;
+  position: relative;
+
+  .slick-arrow {
+    position: absolute;
+    top: auto;
+    right: 0;
+    left: auto;
+    bottom: -8rem;
+    width: 3.3rem;
+    height: 3.3rem;
+    background: ${COLORS.WHITE_10};
+    border: 1px solid #fff;
+    border-radius: 50%;
+
+    &::before {
+      font-family: 'icons';
+      font-style: normal;
+      font-weight: normal;
+      line-height: 1;
+      font-size: 1rem;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin: -0.5em;
+    }
+
+    &.slick-next {
+      &::before {
+        content:'N';
+      }
+    }
+
+    &.slick-prev {
+      right: 6rem;
+      &::before {
+        content:'O';
+      }
+    }
+  }
+
+  .slick-dots {
+    bottom: -6rem;
+    width: auto;
+    display: none;
+  }
 
   @media screen and (min-width: 1280px) and (pointer: fine) {
+    display: grid;
+    align-items: center;
     grid-template-columns: 1fr 1fr;
     position: absolute;
     top: 35rem;
-    right: 15vw;  
+    right: 15vw;
+    padding: 0;
 
     > * {
       position: relative;
@@ -166,10 +233,9 @@ const AboutItems = styled.div`
 
 const AboutItemStyled = styled.div`
   position: relative;
-  width: 30rem;
+  width: 100%;
+  height: 41.2rem;
   padding: 5rem 4rem;
-  margin: 0 5rem 5rem 0;
-  // border-radius: 3px;
   cursor: none;
   background-image: url(${aboutItemMask});
   background-size: 100% 100%;
@@ -227,6 +293,12 @@ const AboutItemStyled = styled.div`
     ${Title} {
       width: 12rem;
     }
+  }
+
+  @media screen and (min-width: 1280px) and (pointer: fine) {
+    width: 30rem;
+    height: auto;
+    margin: 0 5rem 5rem 0;
   }
 `
 

@@ -42,13 +42,15 @@ const parallaxData_form = [
   }
 ]
 
+const isMobile = typeof window !== "undefined" && window.mobile;
+
 const SectionContacts = (props) => (
 	<Section id={props.id} active={props.active} name="section-contacts" headerStyle="white" footerStyle="white">
     <FrontLayer>
-    	<Plx className="parallax-element" parallaxData={parallaxData_title} animateWhenNotInViewport={true}>
+    	<Plx className="parallax-element" parallaxData={parallaxData_title} animateWhenNotInViewport={true} disabled={isMobile}>
 	    	<h2><Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" pos={["absolute", "25rem", "", "", "20rem"]} className="scrollController-title">Контакты</Title></h2>
 	      <ContactsTitle>
-	        <h3><Title fz="5rem" color="#fff" width="40rem" margin="0 0 3.5rem 0" lineBottom>Приступим к работе над вашим проектом?</Title></h3>
+	        <h3><Title fz="5rem" color="#fff" width="40rem" margin="0 0 3.5rem 0" mMargin="0 0 3.5rem 0" lineBottom>Приступим к работе над вашим проектом?</Title></h3>
 	        <TextStyled width="42rem" color="#fff">Заполните бриф: расскажите о вашем бизнесе, задачах и сроках — и мы свяжемся с вами для обсуждения дальнейшего сотрудничества.</TextStyled>
 	      </ContactsTitle>
 	      <ContactsBlocks>
@@ -65,7 +67,7 @@ const SectionContacts = (props) => (
 	      	</ContactsBlock>
 	      </ContactsBlocks>
       </Plx>
-      <Plx className="parallax-element" parallaxData={parallaxData_form} animateWhenNotInViewport={true} style={{"position": "absolute", "bottom": 0, "width": "100%"}}>
+      <Plx className="parallax-element" parallaxData={parallaxData_form} animateWhenNotInViewport={true} disabled={isMobile} style={{"position": "absolute", "bottom": 0, "width": "100%"}}>
 	      <ContactsForm>
 	      	<Copyright>
 	      		<p>Реквизиты</p>

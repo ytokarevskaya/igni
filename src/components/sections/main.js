@@ -42,10 +42,10 @@ const SectionMain = (props) => {
   	<Section id={props.id} active={props.active} name="section-main" headerStyle="white" footerStyle="white">
       <FrontLayer className="load-fadeIn">
         <Plx className="parallax-element div_100" parallaxData={parallaxData} animateWhenNotInViewport={true} disabled={isMobile}>
-          <Title fz="2rem" mFz="1.2rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" mWidth="10rem" pos={["absolute", "20rem", "", "", "20rem"]} mPos={["absolute", "7rem", "", "", "0"]}>
+          <Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" mWidth="13rem" pos={["absolute", "20rem", "", "", "20rem"]} mPos={["absolute", "7rem", "", "", "0"]}>
             Освещая темное пространство веба
           </Title>
-          <Title fz="2rem" mFz="1.2rem" mColor="#fff" color="#fff" lh="1.2" width="12rem" mWidth="8rem" pos={["absolute", "50%", "", "", "20rem"]} mPos={["absolute", "", "", "30rem", "0"]} margin="-12rem 0 0 0">
+          <Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="12rem" mWidth="10rem" pos={["absolute", "50%", "", "", "20rem"]} mPos={["absolute", "", "", "30rem", "0"]} margin="-12rem 0 0 0">
             <h1>Веб-студия полного цикла</h1>
           </Title>
           <Title fz="45rem" mFz="23rem" color="#fff" mColor="#fff" lh="0.8" pos={["absolute", "50%", "", "", "18rem"]} mPos={["absolute", "", "", "11rem", "-1rem"]}>

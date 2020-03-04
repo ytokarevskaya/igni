@@ -4,18 +4,16 @@ import styled from "styled-components"
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
 import Section from "../../components/section"
-import Scroll from "../../components/scroll"
 import RequestForm from "../../components/forms/request-form"
 import CallbackForm from "../../components/forms/callback-form"
 
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
 import { useProjectsData } from "../../components/queries/get-projects-data"
-import { SectionScroll, COLORS, Title, TextStyled, FrontLayer, InfoBlocks, ContentPart, ContentColumn, PortfolioBackBtn } from "../../components/styled"
+import { COLORS, Title, TextStyled, FrontLayer, InfoBlocks, ContentPart, ContentColumn, PortfolioBackBtn } from "../../components/styled"
 
 import teamIcon from "../../images/team.svg"
 import baloonIcon from "../../images/air-balloon.svg"
 import arrowDown from "../../images/arrow-down-black.svg"
-import contentText from "../../images/content-text.svg"
 
 const PortfolioContentPage = () => {
 	const { edges } = useProjectsData();

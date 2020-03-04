@@ -7,7 +7,6 @@ import SectionAbout from "../components/sections/about"
 import SectionPortfolio from "../components/sections/portfolio"
 import SectionEstimation from "../components/sections/estimation"
 import SectionContacts from "../components/sections/contacts"
-import ScrollController from "../components/scroll-controller"
 
 import { getURLParameter } from "../components/utils"
 import { BackLayer, FrontLayer, BgVideo } from "../components/styled"

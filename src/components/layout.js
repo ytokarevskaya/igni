@@ -2,8 +2,6 @@ import React from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
 import Lottie from "react-lottie"
-import { useStaticQuery, graphql } from "gatsby"
-import { Helmet } from "react-helmet"
 
 import Header from "./header"
 import Footer from "./footer"

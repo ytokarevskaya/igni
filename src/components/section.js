@@ -1,8 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
-import styled from "styled-components"
 
-import { SectionStyled, PulseBtn } from "./styled"
+import { SectionStyled } from "./styled"
 import { applyStyles } from "./scroll-controller"
 import { checkScroll } from "../pages/index"
 
@@ -90,39 +89,6 @@ const changeSection = (curId, newId, callback) => {
   }
 }
 
-const animateLoad = (section) => {
-  section.querySelectorAll(".load-ani").forEach(element => {
-    const delay = +element.dataset.loaddelay || 500;
-    setTimeout(() => {
-      element.classList.add("loaded");
-    }, delay);
-  })
-}
-
-const animateUnload = (section, callback) => {
-  const unloadElements = section.querySelectorAll(".unload-ani");
-  if (unloadElements.length) {
-    unloadElements.forEach((element, index) => {
-      const delay = +element.dataset.unloaddelay || 500;
-      setTimeout(() => {
-        element.classList.add("unloaded");
-        if (index + 1 === unloadElements.length) {
-          setTimeout(() => {
-            callback();
-            unloadElements.forEach(el => {
-              el.classList.remove("unloaded");
-            });
-          }, 1000);
-        }
-      }, delay);
-    })
-  } else {
-    callback();
-  }
-}
-
-let mouseDownTimer;
-
 Section.propTypes = {
   id: PropTypes.number,
   headerStyle: PropTypes.string,
@@ -145,4 +111,4 @@ Section.defaultProps = {
 
 export default Section
 
-export { changeSection, animateLoad }
+export { changeSection }

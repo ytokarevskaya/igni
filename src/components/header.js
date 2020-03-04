@@ -1,10 +1,8 @@
 import PropTypes from "prop-types"
 import React from "react"
 import styled from "styled-components"
-import { Link } from "gatsby"
 
-import { COLORS, CursorBtn, Title } from "./styled"
-import { changeSection } from "./section"
+import { COLORS, Title } from "./styled"
 import { checkScroll } from "../pages/index"
 
 import logoLight from "../images/logo-light.svg"
@@ -426,13 +424,6 @@ const MenuBtn = styled.div`
       margin: 0 0 0 3rem;
     }
   }
-`
-
-const MenuFrame = styled.div`
-  position: absolute;
-  right: 0;
-  top: 0;
-  display: flex;
 `
 
 const Logo = styled.div`

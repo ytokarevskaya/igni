@@ -5,8 +5,7 @@ import Plx from "react-plx"
 import Section from "../section"
 import RequestForm from "../forms/request-form"
 
-import { COLORS, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, InputFrame } from "../styled"
-import { applyStyles } from "../scroll-controller"
+import { COLORS, FrontLayer, Title, TextStyled, InputFrame } from "../styled"
 
 const parallaxData_title = [
   {
@@ -122,14 +121,12 @@ const ContactsBlocks = styled.div`
 	background: #000;
 	position: relative;
   left: -2.5rem;
-	margin-top: -18rem;
   width: 100vw;
-  padding: 18rem 0 10rem 0;
-  z-index: -1;
+  padding: 5rem 0 10rem 0;
 
 	@media screen and (min-width: 1280px) and (pointer: fine) {
 		position: absolute;
-		top: 30%;
+		top: 25%;
 		left: 70rem;
 		width: 100rem;
 		display: flex;
@@ -137,7 +134,6 @@ const ContactsBlocks = styled.div`
 		background: transparent;
 		margin: 0;
 		padding: 0;
-		z-index: 0;
 	}
 `
 

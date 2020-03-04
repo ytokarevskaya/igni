@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import styled, { keyframes } from "styled-components"
 
-import { COLORS, Title, TextStyled, BgVideo, PortfolioBackBtn } from "./styled"
+import { COLORS, Title, TextStyled, BgVideo } from "./styled"
 
 const ProjectCover = (props) => {
 	const isCarousel = props.prevSlide && props.nextSlide;

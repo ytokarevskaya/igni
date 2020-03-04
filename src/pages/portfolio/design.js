@@ -4,15 +4,13 @@ import styled from "styled-components"
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
 import Section from "../../components/section"
-import Scroll from "../../components/scroll"
 import RequestForm from "../../components/forms/request-form"
 import CallbackForm from "../../components/forms/callback-form"
 import ProjectCover from "../../components/project-cover"
 
-import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
 import { useProjectsData } from "../../components/queries/get-projects-data"
 import { getURLParameter } from "../../components/utils"
-import { SectionScroll, COLORS, Title, TextStyled, FrontLayer, ContentPart, InfoBlocks, ContentColumn, RedButton, PortfolioBackBtn } from "../../components/styled"
+import { COLORS, Title, TextStyled, FrontLayer, ContentPart, InfoBlocks, ContentColumn, PortfolioBackBtn } from "../../components/styled"
 
 import arrowDown from "../../images/arrow-down-white.svg"
 

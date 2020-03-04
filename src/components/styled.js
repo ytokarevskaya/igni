@@ -346,12 +346,16 @@ const RedButton = styled.div`
 	display: ${props => props.display || "inline-block"};
 	background: ${COLORS.RED};
 	color: #fff;
-	font-size: 1.6rem;
+	font-size: 1.4rem;
 	padding: ${props => props.padding || "1.2rem 2.4rem"};
 	transition: background 300ms ease;
 	border-radius: 2px;
 	&:hover {
 		background: ${COLORS.RED_HOVER};
+	}
+
+	@media screen and (min-width: 1280px) and (pointer: fine) {
+		font-size: 1.6rem;
 	}
 `
 

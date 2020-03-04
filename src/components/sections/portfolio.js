@@ -1,16 +1,13 @@
 import React from "react"
 import styled from "styled-components"
-import { Link } from "gatsby"
 import Plx from "react-plx"
 import Slider from "react-slick"
 
 import Section from "../section"
-import Scroll from "../scroll"
 
 import { useProjectsData } from "../queries/get-projects-data"
-import { applyStyles } from "../scroll-controller"
 import { wordEnd } from "../utils"
-import { COLORS, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, SectionScroll } from "../styled"
+import { COLORS, FrontLayer, Title } from "../styled"
 
 import mountainImg from "../../images/mountain.jpg"
 import "slick-carousel/slick/slick.css"
@@ -222,57 +219,6 @@ function onSlideChange(index) {
   const curItem = menuFrame.querySelector(".active");
   curItem.classList.remove("active");
   menuFrame.children[index].classList.add("active");
-}
-
-function carouselArrowClick(e) {
-  const arrow = e.target;
-  const menuFrame = arrow.parentElement;
-  const carouselContent = document.getElementById("portfolio-carousel").querySelector(".carousel-content");
-  const curItem = menuFrame.querySelector(".active");
-  const dir = (arrow.classList.contains("arrow-prev")? -1 : 1);
-  let nextItem;
-  let nextIndex;
-  if (dir === 1) {
-    nextItem = curItem.nextElementSibling;
-  } else if (dir === -1) {
-    nextItem = curItem.previousElementSibling;
-  }
-  if (nextItem && !nextItem.classList.contains("arrow")) {
-    nextIndex = +nextItem.dataset.index;
-  } else if (dir === 1) {
-    nextIndex = 0;
-    nextItem = menuFrame.children[nextIndex];
-  } else if (dir === -1) {
-    nextIndex = menuFrame.children.length - 3;
-    nextItem = menuFrame.children[nextIndex];
-  }
-  curItem.classList.remove("active");
-  nextItem.classList.add("active");
-  moveCarousel(nextIndex);
-}
-
-function carouselItemClick(e) {
-  const target = e.target;
-  const menuFrame = target.parentElement;
-  menuFrame.querySelector(".active").classList.remove("active");
-  target.classList.add("active");
-  moveCarousel(+target.dataset.index);
-}
-
-function moveCarousel(moveTo) {
-  const carousel = document.getElementById("portfolio-carousel");
-  const carouselContent = carousel.querySelector(".carousel-content");
-  const curItem = carousel.querySelector(".active");
-  const nextItem = carousel.querySelectorAll(".carousel-item")[moveTo];
-  carouselContent.classList.add("is-animated");
-  carouselContent.style.transform = "translateX(-" + nextItem.offsetLeft + "px)";
-  curItem.classList.remove("active");
-  nextItem.classList.add("active");
-  setTimeout(() => {
-    // const clone = carouselContent.children[0].cloneNode(true);
-    // carouselContent.classList.remove("is-animated");
-    // carouselContent.append(clone);
-  }, 1300);
 }
 
 const PortfolioCarouselMobileArrows = styled.div`
@@ -514,18 +460,6 @@ const PortfolioItem = styled.div`
           font-size: 15rem;
         }
       }
-    }
-  }
-`
-const PortfolioTitle = styled.div`
-  @media screen and (min-width: 1280px) and (pointer: fine) {
-    position: absolute;
-    left: 24rem;
-    top: 10rem;
-    z-index: 1;
-
-    ${Title} {
-      position: relative;
     }
   }
 `

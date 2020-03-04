@@ -1,15 +1,13 @@
 import React from "react"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 import styled from "styled-components"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import Scroll from "../components/scroll"
 import Section from "../components/section"
 import RequestForm from "../components/forms/request-form"
 import ProjectCover from "../components/project-cover"
 
-import { getURLParameter } from "../components/utils"
 import { useProjectsData } from "../components/queries/get-projects-data"
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
 import { BLOCKS } from "@contentful/rich-text-types"

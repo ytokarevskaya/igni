@@ -1,25 +1,10 @@
 import React from "react"
 import styled from "styled-components"
-import { Link } from "gatsby"
 import Plx from "react-plx"
 
 import Section from "../section"
-import { applyStyles } from "../scroll-controller"
 
 import { COLORS, FrontLayer, Title, TextStyled, PlusBtn, RedButton } from "../styled"
-
-const onSectionUnload = (section) => {
-  const video = document.getElementById("bg-video");
-  video.pause();
-  video.parentElement.classList.add("is-blurred");
-}
-
-const onSectionLoad = (section) => {
-  const video = document.getElementById("bg-video");
-  video.play();
-  video.parentElement.classList.remove("is-blurred");
-}
-
 
 const SectionMain = (props) => {
   const parallaxData = [
@@ -87,7 +72,7 @@ class HomeTitlePopup extends React.Component {
         <HomeTitle className={this.state.active? " active" : ""}>
           <h2><Title fz="5rem" mFz="2rem" width="40rem" color="#fff" margin="0 0 3.5rem 0" mMargin="0 0 3.5rem 0" lineBottom lineWidth="0">Комплексные <br/>услуги по созданию <br/>и продвижению <br/>сайтов</Title></h2>
           <div className="hidden-content">
-            <TextStyled width="40rem">
+            <TextStyled width="40rem" mFz="1.2rem">
               <p>Главная задача команды igni — обеспечить эффективное взаимодействие клиента и бизнеса в вебе. Чтобы достичь максимальных показателей, мы предлагаем не только маркетинговое сопровождение, но и конкретные действия по улучшению продукта.</p>
             </TextStyled>
             <a href="/portfolio/"><RedButton>Портфолио</RedButton></a>
@@ -104,7 +89,7 @@ const HomeTitle = styled.div`
   position: absolute;
   top: 20%;
   left: 0;
-  z-index: 6;
+  z-index: 31;
   transition: all 1000ms ease;
 
   ${Title} {
@@ -114,7 +99,8 @@ const HomeTitle = styled.div`
   }
 
   ${RedButton} {
-    margin: 3rem 0 4rem 0;
+    margin: 1rem 0 2rem 0;
+    font-size: 1.4rem;
   }
 
   .hidden-content {
@@ -148,6 +134,12 @@ const HomeTitle = styled.div`
     top: 55%;
     left: 55%;
     margin-top: -4.5rem;
+    z-index: 6;
+
+    ${RedButton} {
+      font-size: 1.6rem;
+      margin: 3rem 0 4rem 0;
+    }
   }
 `
 
@@ -155,11 +147,12 @@ const HomeTitlePopupBg = styled.div`
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 55%;
-  margin-left: -8rem;
-  width: 56rem;
+  left: 0;
+  margin: -2.5rem 0 0 -2.5rem;
+  width: 100vw;
+  height: 100vh;
   background: rgba(5, 11, 31, 0.25);
-  z-index: 5;
+  z-index: 30;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -171,45 +164,13 @@ const HomeTitlePopupBg = styled.div`
     pointer-events: all;
     transition-delay: 800ms;
   }
-`
 
-const HomeTitlePopupStyled = styled.div`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 55%;
-  margin-left: -8rem;
-  width: 56rem;
-  background: rgba(5, 11, 31, 0.25);
-  z-index: 5;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: all 800ms ease;
-
-  &.active {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: all;
-    transition-delay: 1000ms;
-  }
-
-  .content {
-    position: absolute;
-    top: 55%;
-    left: 0;
-    width: 100%;
-    padding: 0 8rem;
-    transform: translateY(-50%);
-    margin-top: -10rem;
-  }
-
-  ${PlusBtn} {
-    transform: rotate(45deg);
-    &::before {
-      font-size: 2.8rem;
-      font-weight: 200;
-    }
+  @media screen and (min-width: 1280px) and (pointer: fine) {
+    left: 55%;
+    margin: 0 0 0 -8rem;
+    width: 56rem;
+    height: auto;
+    z-index: 5;
   }
 `
 

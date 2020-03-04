@@ -24,7 +24,7 @@ class FileInput extends React.Component {
 
 	render() {
 		return (
-			<FileInputCover className={"icon-attach" + " " + this.props.inputStyle} pos={this.props.pos || ""}>
+			<FileInputCover className={"icon-attach " + this.props.inputStyle} pos={this.props.pos || ""}>
 				<div>{this.state.inputText}</div>
 				<input type="file" accept="application/msword,application/pdf,application/x-iwork-pages-sffpages,text/plain,application/rtf,text/richtext" onChange={(e) => this.inputChange(e)} />
 			</FileInputCover>

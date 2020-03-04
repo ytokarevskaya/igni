@@ -1,16 +1,13 @@
 import React from "react"
 import styled from "styled-components"
-import { Link, StaticQuery, graphql } from "gatsby"
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
 import Plx from "react-plx"
 import Slider from "react-slick"
 
 import Section from "../section"
-import Scroll from "../scroll"
 import { useCategoriesData } from "../queries/get-categories-data"
-import { applyStyles } from "../scroll-controller"
 
-import { COLORS, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, SectionScroll, PlusBtn } from "../styled"
+import { COLORS, FrontLayer, Title, TextStyled, PlusBtn } from "../styled"
 
 import aboutItemMask from "../../images/about-item-mask.svg"
 import aboutItemMaskHover from "../../images/about-item-mask-hover.svg"
@@ -129,10 +126,6 @@ const SectionAbout = (props) => {
 }
 
 class AboutItem extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   moveBtn(e) {
     const btn = this.redBtn.current;
     const parent = btn.parentElement;

@@ -1,14 +1,12 @@
 import React from "react"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 import styled from "styled-components"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import Scroll from "../components/scroll"
 import Section from "../components/section"
 
-import { useProjectsData } from "../components/queries/get-projects-data"
-import { COLORS, BackLayer, FrontLayer, BgVideo, PortfolioBackBtn } from "../components/styled"
+import { BackLayer, FrontLayer, BgVideo, PortfolioBackBtn } from "../components/styled"
 
 export const query = graphql`
   query($id: String!) {

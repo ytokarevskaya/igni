@@ -1,7 +1,5 @@
 import React from "react"
-import axios from "axios";
 import PropTypes from "prop-types"
-import styled from "styled-components"
 import Cookies from "js-cookie"
 
 import { FormStyled } from "./styled"
@@ -182,13 +180,6 @@ function isEmailSent(value) {
   const cookieString = Cookies.get("email_sent");
   const cookieArr = cookieString? cookieString.split(',') : [];
   return cookieArr.indexOf(value) !== -1;
-}
-
-function writeCookieEmail(value) {
-  const cookieString = Cookies.get("email_sent");
-  const cookieArr = cookieString? cookieString.split(',') : [];
-  if (cookieArr.indexOf(value) === -1) cookieArr.push(value);
-  Cookies.set("email_sent", cookieArr.join(","), { expires: 365 });
 }
 
 function checkboxChange(e) {

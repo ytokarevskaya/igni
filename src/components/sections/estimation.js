@@ -5,8 +5,7 @@ import Plx from "react-plx"
 import Section from "../section"
 import CallbackForm from "../forms/callback-form"
 
-import { COLORS, BackLayer, FrontLayer, Title, TextStyled, PulseBtn, InputFrame } from "../styled"
-import { applyStyles } from "../scroll-controller"
+import { COLORS, FrontLayer, Title, TextStyled, InputFrame } from "../styled"
 
 import iconAnalyze from "../../images/circles.svg"
 import iconCircles from "../../images/analyse.svg"

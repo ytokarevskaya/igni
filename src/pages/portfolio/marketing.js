@@ -4,7 +4,6 @@ import styled from "styled-components"
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
 import Section from "../../components/section"
-import Scroll from "../../components/scroll"
 import RequestForm from "../../components/forms/request-form"
 import CallbackForm from "../../components/forms/callback-form"
 
@@ -20,12 +19,8 @@ import baloonIcon from "../../images/air-balloon.svg"
 const PortfolioMarketingPage = () => {
 	const { edges } = useProjectsData();
 	const projects = [];
-	const projectsBlog = [];
 	edges.map((item) => {
     const project = item.node;
-    // if (project.subcategory === "Ведение личного блога") {
-    // 	projectsBlog.push(project);
-    // } else 
     if (project.category.title === "Маркетинг и реклама") {
       projects.push(project);
     }
@@ -140,7 +135,7 @@ class PortfolioContent extends React.Component {
 		  	<header>
 		  		{this.props.project.logo?
 			  		<div className="logo">
-			  			<img className="translate-y" src={this.props.project.logo.file.url} />
+			  			<img className="translate-y" alt="" src={this.props.project.logo.file.url} />
 			  		</div>
 		  			: ""}
 		  		<div className="info">

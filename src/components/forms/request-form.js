@@ -3,7 +3,7 @@ import MaskedInput from "react-maskedinput"
 
 import Form from "../form"
 import FileInput from "../file-input"
-import { COLORS, InputFrame } from "../styled"
+import { InputFrame } from "../styled"
 
 class RequestForm extends React.Component {
   constructor(props) {

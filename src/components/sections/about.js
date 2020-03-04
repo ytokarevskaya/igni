@@ -200,7 +200,7 @@ const AboutItems = styled.div`
     }
 
     &.slick-prev {
-      right: 6rem;
+      right: 5rem;
       &::before {
         content:'O';
       }

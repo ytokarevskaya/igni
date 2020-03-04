@@ -42,13 +42,13 @@ const SectionMain = (props) => {
   	<Section id={props.id} active={props.active} name="section-main" headerStyle="white" footerStyle="white">
       <FrontLayer className="load-fadeIn">
         <Plx className="parallax-element div_100" parallaxData={parallaxData} animateWhenNotInViewport={true} disabled={isMobile}>
-          <Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" mWidth="13rem" pos={["absolute", "20rem", "", "", "20rem"]} mPos={["absolute", "7rem", "", "", "0"]}>
+          <Title fz="2rem" mFz="1.4rem" mColor="#fff" color="#fff" lh="1.2" width="15rem" mWidth="13rem" pos={["absolute", "20rem", "", "", "20rem"]} mPos={["absolute", "7rem", "", "", "0"]}>
             Освещая темное пространство веба
           </Title>
-          <Title fz="2rem" mFz="1.8rem" mColor="#fff" color="#fff" lh="1.2" width="12rem" mWidth="10rem" pos={["absolute", "50%", "", "", "20rem"]} mPos={["absolute", "", "", "30rem", "0"]} margin="-12rem 0 0 0">
+          <Title fz="2rem" mFz="1.4rem" mColor="#fff" color="#fff" lh="1.2" width="12rem" mWidth="10rem" pos={["absolute", "50%", "", "", "20rem"]} mPos={["absolute", "", "", "23rem", "0"]} margin="-12rem 0 0 0">
             <h1>Веб-студия полного цикла</h1>
           </Title>
-          <Title fz="45rem" mFz="23rem" color="#fff" mColor="#fff" lh="0.8" pos={["absolute", "50%", "", "", "18rem"]} mPos={["absolute", "", "", "11rem", "-1rem"]}>
+          <Title fz="45rem" mFz="18rem" color="#fff" mColor="#fff" lh="0.8" pos={["absolute", "50%", "", "", "18rem"]} mPos={["absolute", "", "", "8.5rem", "-1rem"]}>
             IGNI
           </Title>
           <HomeTitlePopup />
@@ -85,7 +85,7 @@ class HomeTitlePopup extends React.Component {
     return(
       <React.Fragment>
         <HomeTitle className={this.state.active? " active" : ""}>
-          <h2><Title fz="5rem" mFz="3rem" width="40rem" color="#fff" margin="0 0 3.5rem 0" mMargin="0 0 3.5rem 0" lineBottom lineWidth="0">Комплексные <br/>услуги по созданию <br/>и продвижению <br/>сайтов</Title></h2>
+          <h2><Title fz="5rem" mFz="2rem" width="40rem" color="#fff" margin="0 0 3.5rem 0" mMargin="0 0 3.5rem 0" lineBottom lineWidth="0">Комплексные <br/>услуги по созданию <br/>и продвижению <br/>сайтов</Title></h2>
           <div className="hidden-content">
             <TextStyled width="40rem">
               <p>Главная задача команды igni — обеспечить эффективное взаимодействие клиента и бизнеса в вебе. Чтобы достичь максимальных показателей, мы предлагаем не только маркетинговое сопровождение, но и конкретные действия по улучшению продукта.</p>
